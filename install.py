@@ -18,15 +18,15 @@ def get_torch_cuda_version():
     Detect PyTorch and CUDA versions.
 
     Returns:
-        tuple: (torch_version, cuda_version) e.g., ("2.9", "128")
+        tuple: (torch_version, cuda_version) e.g., ("2.8.0", "128")
                or (None, None) if detection fails
     """
     try:
         import torch
 
-        # Get torch version: "2.9.0+cu128" -> "2.9"
+        # Get torch version: "2.8.0+cu128" -> "2.8.0"
+        # PyG wheel repo requires full version (major.minor.patch)
         torch_version = torch.__version__.split('+')[0]
-        torch_major_minor = '.'.join(torch_version.split('.')[:2])
 
         # Get CUDA version: "12.8" -> "128"
         if torch.version.cuda:
@@ -34,7 +34,7 @@ def get_torch_cuda_version():
         else:
             cuda_version = None
 
-        return torch_major_minor, cuda_version
+        return torch_version, cuda_version
 
     except Exception as e:
         print(f"⚠️  Could not detect torch/CUDA version: {e}")
@@ -216,7 +216,23 @@ def install_requirements():
         return False
 
     print(f"  📥 Installing from {req_file}...")
-    success = run_pip_install(f"-r {req_file}", timeout=600)
+
+    # Use direct subprocess call with correct argument format
+    cmd = [sys.executable, "-m", "pip", "install", "-r", str(req_file)]
+    try:
+        result = subprocess.run(
+            cmd,
+            timeout=600,
+            capture_output=True,
+            text=True
+        )
+        success = result.returncode == 0
+    except subprocess.TimeoutExpired:
+        print(f"  ⏱️  Installation timed out after 600s")
+        success = False
+    except Exception as e:
+        print(f"  ❌ Installation error: {e}")
+        success = False
 
     if success:
         print("  ✅ Requirements installed successfully")
