@@ -24,8 +24,12 @@ from numba import njit
 from ..models import sonata
 
 #################################
-sys.path.append("../P3-SAM")
-from model import build_P3SAM, load_state_dict
+# Import P3-SAM model - add parent package to path since p3sam and xpart are siblings
+_parent_dir = Path(__file__).resolve().parent.parent.parent.parent
+if str(_parent_dir) not in sys.path:
+    sys.path.insert(0, str(_parent_dir))
+
+from p3sam.model import build_P3SAM, load_state_dict
 
 
 class YSAM(nn.Module):
@@ -622,13 +626,13 @@ def do_post_process(
 
     unique_ids = np.unique(face_ids)
     if show_info:
-        print(f"连通区域数量：{len(parts)}")
-        print(f"ID数量：{len(unique_ids)}")
+        print(f"Connected region count: {len(parts)}")
+        print(f"ID count: {len(unique_ids)}")
 
     # face_areas = calculate_face_areas(mesh)
     total_area = np.sum(face_areas)
     if show_info:
-        print(f"总面积：{total_area}")
+        print(f"Total area: {total_area}")
     part_areas = []
     for i, part in enumerate(parts):
         part_area = np.sum(face_areas[part])
@@ -656,7 +660,7 @@ def do_post_process(
                         max_part = j
                 if max_part != -1:
                     if show_info:
-                        print(f"合并mesh：{i} {max_part}")
+                        print(f"Merge mesh: {i} {max_part}")
                     parts[max_part].extend(part)
                     parts[i] = []
                     target_face_id = face_ids[parts[max_part][0]]
@@ -764,7 +768,7 @@ class Timer:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.end_time = time.time()
         self.elapsed_time = self.end_time - self.start_time
-        print(f">>>>>>代码{self.name} 运行时间: {self.elapsed_time:.4f} 秒")
+        print(f">>>>>> {self.name} runtime: {self.elapsed_time:.4f} seconds")
 
 
 ###################### NUMBA 加速 ######################
@@ -821,7 +825,7 @@ def mesh_sam(
             mesh = clean_mesh(mesh)
         mesh = trimesh.Trimesh(vertices=mesh.vertices, faces=mesh.faces, process=False)
     if show_info:
-        print(f"点数：{mesh.vertices.shape[0]} 面片数：{mesh.faces.shape[0]}")
+        print(f"Vertices: {mesh.vertices.shape[0]} Faces: {mesh.faces.shape[0]}")
 
     point_num = 100000
     prompt_num = 400
@@ -846,12 +850,12 @@ def mesh_sam(
         # _points = _points + np.random.normal(0, 1, size=_points.shape) * 0.01
         # normals = normals * 0. # debug no normal
     if show_info:
-        print(f"点数：{point_num} 面片数：{mesh.faces.shape[0]}")
+        print(f"Vertices: {point_num} Faces: {mesh.faces.shape[0]}")
 
     with Timer("获取特征"):
         _feats = get_feat(model, _points, normals)
     if show_info:
-        print("预处理特征")
+        print("Preprocessing features")
 
     if save_mid_res:
         feat_save = _feats.float().detach().cpu().numpy()
@@ -866,7 +870,7 @@ def mesh_sam(
         pc_save.export(os.path.join(save_path, "point_pca.glb"))
         pc_save.export(os.path.join(save_path, "point_pca.ply"))
         if show_info:
-            print("PCA获取特征颜色")
+            print("PCA feature colors extracted")
 
     with Timer("FPS采样提示点"):
         fps_idx = fpsample.fps_sampling(_points, prompt_num)
@@ -879,7 +883,7 @@ def mesh_sam(
             os.path.join(save_path, "point_prompts_pca.ply")
         )
     if show_info:
-        print("采样完成")
+        print("Sampling completed")
 
     with Timer("推理"):
         bs = 64
@@ -910,7 +914,7 @@ def mesh_sam(
                 iou_res.append(pred_iou[j, max_idx[j]])
     mask_res = np.stack(mask_res, axis=-1)  # [N, K]
     if show_info:
-        print("prmopt 推理完成")
+        print("Prompt inference completed")
 
     with Timer("根据IOU排序"):
         iou_res = np.array(iou_res).tolist()
@@ -948,7 +952,7 @@ def mesh_sam(
 
     # print(clusters)
     if show_info:
-        print(f"NMS完成，mask数量：{len(clusters)}")
+        print(f"NMS completed, mask count: {len(clusters)}")
 
     if save_mid_res:
         part_mask_save_path = os.path.join(save_path, "part_mask")
@@ -1013,7 +1017,7 @@ def mesh_sam(
                     cluster2[cur_cluster].append(tar_cluster)
                     is_union[j] = True
     if show_info:
-        print(f"再次合并，合并数量：{len(cluster2.keys())}")
+        print(f"Merged again, merged count: {len(cluster2.keys())}")
 
     with Timer("计算没有mask的点"):
         no_mask = np.ones(point_num)
@@ -1054,7 +1058,7 @@ def mesh_sam(
     # print(cluster2)
     # print(len(cluster2.keys()))
     if show_info:
-        print(f"修补遗漏mask：{len(cluster2.keys())}")
+        print(f"Patched missing masks: {len(cluster2.keys())}")
 
     with Timer("计算点云最终mask"):
         final_mask = list(cluster2.keys())
@@ -1074,7 +1078,7 @@ def mesh_sam(
     # print(final_mask_sorted)
     # print(final_mask_area_sorted)
     if show_info:
-        print(f"最终mask数量：{len(final_mask_sorted)}")
+        print(f"Final mask count: {len(final_mask_sorted)}")
 
     with Timer("点云上色"):
         # 生成color map
@@ -1102,7 +1106,7 @@ def mesh_sam(
             os.path.join(save_path, "auto_mask_cluster.ply")
         )
         if show_info:
-            print("保存点云完成")
+            print("Point cloud saved")
 
     with Timer("投影Mesh并统计label"):
         # 保存mesh结果
@@ -1129,7 +1133,7 @@ def mesh_sam(
             face_ids[i] = _max_id
         face_ids_org = face_ids.copy()
     if show_info:
-        print("生成face_ids完成")
+        print("face_ids generation completed")
 
     # 获取邻接面片
     # face_adjacency = mesh.face_adjacency
@@ -1148,7 +1152,7 @@ def mesh_sam(
         face_ids = fix_label(face_ids, adjacent_faces, mesh=mesh, show_info=show_info)
         face_ids -= 1
     if show_info:
-        print("修复face_ids完成")
+        print("face_ids fix completed")
 
     color_map[-1] = np.array([255, 0, 0], dtype=np.uint8)
 
@@ -1163,7 +1167,7 @@ def mesh_sam(
             color_map,
         )
         if show_info:
-            print("保存mesh结果完成")
+            print("Mesh result saved")
 
     with Timer("计算连通区域"):
         face_areas = calculate_face_areas(mesh)
@@ -1199,7 +1203,7 @@ def mesh_sam(
             else:
                 other_parts.append(i)
     if show_info:
-        print(f"保留{len(filtered_parts)}个mesh, 其他{len(other_parts)}个mesh")
+        print(f"Kept {len(filtered_parts)} meshes, filtered {len(other_parts)} meshes")
 
     with Timer("去除面积过小区域的label"):
         face_ids_2 = face_ids.copy()
@@ -1224,7 +1228,7 @@ def mesh_sam(
             color_map,
         )
         if show_info:
-            print("保存mesh结果完成")
+            print("Mesh result saved")
 
     with Timer("第二次计算连通区域"):
         parts_2 = get_connected_region(face_ids_3, adjacent_faces)
@@ -1244,7 +1248,7 @@ def mesh_sam(
                     max_id += 1
                     color_map_2[max_id] = np.random.rand(3) * 255
                     if show_info:
-                        print(f"新增part {max_id}")
+                        print(f"Added new part {max_id}")
             # else:
             #     parts_ids_2[i] = -1
 

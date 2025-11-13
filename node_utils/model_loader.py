@@ -82,13 +82,13 @@ class ModelCache:
         return cls._p3sam_model
 
     @classmethod
-    def get_xpart_pipeline(cls, device: str = "cuda", dtype: torch.dtype = torch.bfloat16):
+    def get_xpart_pipeline(cls, device: str = "cuda", dtype: torch.dtype = torch.float32):
         """
         Get or create X-Part PartFormerPipeline.
 
         Args:
             device: Device to load model on
-            dtype: Data type for model (bfloat16 saves ~9GB VRAM vs float32)
+            dtype: Data type for model (float32 for RTX 5090/CUDA 12.8 spconv compatibility)
 
         Returns:
             PartFormerPipeline instance
@@ -114,7 +114,7 @@ class ModelCache:
                 )
 
             print(f"[Hunyuan3D] Loading X-Part pipeline...")
-            print(f"[Hunyuan3D] Using bfloat16 precision (native model dtype, saves ~9GB VRAM vs float32)")
+            print(f"[Hunyuan3D] Using float32 precision (RTX 5090/CUDA 12.8 spconv workaround)")
 
             # Load config (now from internal xpart/partgen/)
             config_path = XPART_PARTGEN_PATH / "config" / "infer.yaml"

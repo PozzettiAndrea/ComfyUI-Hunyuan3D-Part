@@ -130,7 +130,7 @@ class PartFormerPipeline(TokenAllocMixin):
         conditioner,
         bbox_predictor=None,
         device="cuda",
-        dtype=torch.bfloat16,
+        dtype=torch.float32,
         verbose=False,
         **kwargs,
     ):
@@ -151,7 +151,7 @@ class PartFormerPipeline(TokenAllocMixin):
         ckpt_path=None,
         config=None,
         device="cuda",
-        dtype=torch.bfloat16,
+        dtype=torch.float32,
         use_safetensors=None,
         ignore_keys=(),
         **kwargs,
@@ -226,7 +226,7 @@ class PartFormerPipeline(TokenAllocMixin):
     def from_pretrained(
         cls,
         config=None,
-        dtype=torch.bfloat16,
+        dtype=torch.float32,
         ignore_keys=(),
         device="cuda",
         **kwargs,
@@ -333,11 +333,11 @@ class PartFormerPipeline(TokenAllocMixin):
         print(f"[X-Part] ✓ Models in eval mode")
 
         # Ensure models are on correct device and dtype
-        print(f"[X-Part] Moving models to {device} with bfloat16 precision...")
+        print(f"[X-Part] Moving models to {device} with float32 precision...")
         model = model.to(device=device, dtype=dtype)
         vae = vae.to(device=device, dtype=dtype)
         conditioner = conditioner.to(device=device, dtype=dtype)
-        print(f"[X-Part] ✓ Models ready on {device} in bfloat16")
+        print(f"[X-Part] ✓ Models ready on {device} in float32")
 
         model_kwargs = dict(
             vae=vae,
@@ -636,7 +636,7 @@ class PartFormerPipeline(TokenAllocMixin):
         return outputs
 
     @torch.no_grad()
-    @torch.autocast("cuda", dtype=torch.bfloat16)
+    @torch.autocast("cuda", dtype=torch.float32)
     def __call__(
         self,
         obj_surface=None,
