@@ -1,0 +1,245 @@
+{
+  "id": "5a72861b-5dc8-4e00-8190-bff2a61962a7",
+  "revision": 0,
+  "last_node_id": 13,
+  "last_link_id": 13,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "LoadBoundingBoxes",
+      "pos": [
+        245.01088213556193,
+        390.3133938235449
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "bounding_boxes",
+          "type": "BBOXES_3D",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hunyuan3d-part",
+        "ver": "85449b6adb6931b7463c06249a5516bd3ca44f9f",
+        "Node name for S&R": "LoadBoundingBoxes"
+      },
+      "widgets_values": [
+        "/workspace/hunyuanpart_node/ComfyUI/output/bboxes.json"
+      ]
+    },
+    {
+      "id": 13,
+      "type": "Preview3D",
+      "pos": [
+        900.8173774703894,
+        251.0065800650532
+      ],
+      "size": [
+        400,
+        550
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "camera_info",
+          "shape": 7,
+          "type": "LOAD3D_CAMERA",
+          "link": null
+        },
+        {
+          "name": "model_file",
+          "type": "STRING",
+          "widget": {
+            "name": "model_file"
+          },
+          "link": 13
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.68",
+        "Node name for S&R": "Preview3D",
+        "Last Time Model File": "/workspace/hunyuanpart_node/ComfyUI/output/xpart_bbox_698362848729546.glb",
+        "Resource Folder": "hunyuanpart_node/ComfyUI/output",
+        "Camera Info": {
+          "position": {
+            "x": -2.0937949730305414,
+            "y": -6.346470058851711,
+            "z": 3.2294457184229923
+          },
+          "target": {
+            "x": 0,
+            "y": 2.0338951403836028,
+            "z": 0
+          },
+          "zoom": 1,
+          "cameraType": "perspective"
+        }
+      },
+      "widgets_values": [
+        "/workspace/hunyuanpart_node/ComfyUI/output/xpart_bbox_698362848729546.glb",
+        ""
+      ]
+    },
+    {
+      "id": 11,
+      "type": "Hunyuan3D_XPart_Generation",
+      "pos": [
+        569.4430297923819,
+        258.87440675573214
+      ],
+      "size": [
+        291.140625,
+        302
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "link": 12
+        },
+        {
+          "name": "bounding_boxes",
+          "type": "BBOXES_3D",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "part_meshes",
+          "type": "TRIMESH",
+          "links": null
+        },
+        {
+          "name": "exploded_view",
+          "type": "TRIMESH",
+          "links": null
+        },
+        {
+          "name": "bbox_visualization",
+          "type": "TRIMESH",
+          "links": null
+        },
+        {
+          "name": "parts_path",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "exploded_path",
+          "type": "STRING",
+          "links": null
+        },
+        {
+          "name": "bbox_path",
+          "type": "STRING",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hunyuan3d-part",
+        "ver": "85449b6adb6931b7463c06249a5516bd3ca44f9f",
+        "Node name for S&R": "Hunyuan3D_XPart_Generation"
+      },
+      "widgets_values": [
+        256,
+        50,
+        -1,
+        521388047216178,
+        "randomize",
+        10000,
+        false
+      ]
+    },
+    {
+      "id": 9,
+      "type": "GeomPackLoadMesh",
+      "pos": [
+        260.283722182174,
+        268.59348678539425
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "links": [
+            12
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-geometrypack",
+        "ver": "dce18ad9e4087b4c90d268c4d36262d364bb9586",
+        "Node name for S&R": "GeomPackLoadMesh"
+      },
+      "widgets_values": [
+        "/workspace/hunyuanpart_node/ComfyUI/output/p3seg.glb"
+      ]
+    }
+  ],
+  "links": [
+    [
+      11,
+      10,
+      0,
+      11,
+      1,
+      "BBOXES_3D"
+    ],
+    [
+      12,
+      9,
+      0,
+      11,
+      0,
+      "TRIMESH"
+    ],
+    [
+      13,
+      11,
+      5,
+      13,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.080349165554191,
+      "offset": [
+        7.685198635656265,
+        -96.88973959469475
+      ]
+    },
+    "frontendVersion": "1.28.8"
+  },
+  "version": 0.4
+}
