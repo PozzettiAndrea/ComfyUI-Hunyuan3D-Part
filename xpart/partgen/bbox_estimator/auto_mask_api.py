@@ -44,7 +44,7 @@ class YSAM(nn.Module):
     ):
         load_state_dict(
             self,
-            state_dict,
+            state_dict=state_dict,
             strict=strict,
             assign=assign,
             ignore_seg_mlp=ignore_seg_mlp,
@@ -1362,9 +1362,14 @@ class AutoMask:
         post_process: bool, 是否后处理
         """
         self.model = YSAM()
-        self.model.load_state_dict(
-            torch.load(ckpt_path, map_location="cpu")["state_dict"]
-        )
+        # Load checkpoint - handle both safetensors and pytorch formats
+        if ckpt_path.endswith('.safetensors'):
+            from safetensors.torch import load_file
+            state_dict = load_file(ckpt_path, device="cuda")
+        else:
+            checkpoint = torch.load(ckpt_path, map_location="cuda", weights_only=False)
+            state_dict = checkpoint["state_dict"] if "state_dict" in checkpoint else checkpoint
+        self.model.load_state_dict(state_dict=state_dict)
         self.model.eval()
         self.model_parallel = torch.nn.DataParallel(self.model)
         self.model.cuda()

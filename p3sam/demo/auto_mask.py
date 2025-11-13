@@ -776,8 +776,8 @@ def mesh_sam(
     if show_info:
         print(f"点数：{mesh.vertices.shape[0]} 面片数：{mesh.faces.shape[0]}")
 
-    point_num = 100000
-    prompt_num = 400
+    # Use the point_num and prompt_num passed as function parameters
+    # (removed hardcoded values that were overriding parameters)
     with Timer("获取邻接面片"):
         face_adjacency = mesh.face_adjacency
     with Timer("处理邻接面片"):
@@ -1293,6 +1293,18 @@ class AutoMask:
             seed=seed,
             prompt_bs=prompt_bs,
         )
+
+    def to_cpu(self):
+        """Move model to CPU to free VRAM."""
+        self.model.cpu()
+        self.model_parallel.cpu()
+
+    def to_cuda(self):
+        """Move model to CUDA (in case it was offloaded to CPU)."""
+        if not next(self.model.parameters()).is_cuda:
+            print("[P3-SAM] Reloading model to GPU...")
+            self.model.cuda()
+            self.model_parallel.cuda()
 
 def set_seed(seed):
     random.seed(seed)

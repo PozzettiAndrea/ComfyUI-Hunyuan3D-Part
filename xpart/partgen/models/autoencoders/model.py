@@ -163,9 +163,9 @@ class VectsetVAE(nn.Module):
         if use_safetensors:
             import safetensors.torch
 
-            ckpt = safetensors.torch.load_file(ckpt_path, device="cpu")
+            ckpt = safetensors.torch.load_file(ckpt_path, device="cuda")
         else:
-            ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=True)
+            ckpt = torch.load(ckpt_path, map_location="cuda", weights_only=False)
 
         model_kwargs = config["params"]
         model_kwargs.update(kwargs)
@@ -203,7 +203,7 @@ class VectsetVAE(nn.Module):
         )
 
     def init_from_ckpt(self, path, ignore_keys=()):
-        state_dict = torch.load(path, map_location="cpu")
+        state_dict = torch.load(path, map_location="cuda", weights_only=False)
         state_dict = state_dict.get("state_dict", state_dict)
         keys = list(state_dict.keys())
         for k in keys:

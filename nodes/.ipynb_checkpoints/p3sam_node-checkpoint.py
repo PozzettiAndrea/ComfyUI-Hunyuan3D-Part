@@ -36,48 +36,38 @@ class Hunyuan3D_P3SAM_Segmentation:
                     "min": 0,
                     "max": 0xffffffff,  # 2^32 - 1 (numpy random seed limit)
                     "step": 1,
-                    "control_after_generate": "fixed",
-                    "tooltip": "Random seed for reproducibility. Same seed = same results."
+                    "control_after_generate": "fixed"
                 }),
                 "point_num": ("INT", {
                     "default": 100000,
                     "min": 1000,
                     "max": 500000,
                     "step": 1000,
-                    "display": "number",
-                    "tooltip": "Number of points sampled from mesh surface. Higher = better quality but slower. Official default: 100k"
+                    "display": "number"
                 }),
                 "prompt_num": ("INT", {
                     "default": 400,
                     "min": 50,
                     "max": 1000,
                     "step": 10,
-                    "display": "number",
-                    "tooltip": "Number of prompt points for segmentation. Higher = better part separation, especially for organic shapes. Official default: 400"
+                    "display": "number"
                 }),
                 "prompt_bs": ("INT", {
                     "default": 32,
                     "min": 8,
                     "max": 128,
                     "step": 8,
-                    "display": "number",
-                    "tooltip": "Prompt batch size. Higher = MORE VRAM usage but faster inference. Lower = less VRAM. Official default: 32"
+                    "display": "number"
                 }),
                 "threshold": ("FLOAT", {
                     "default": 0.95,
                     "min": 0.7,
                     "max": 0.999,
                     "step": 0.01,
-                    "display": "slider",
-                    "tooltip": "Post-processing merge threshold. Higher = fewer but larger parts (more merging). Lower = more but smaller parts."
+                    "display": "slider"
                 }),
                 "post_process": ("BOOLEAN", {
-                    "default": True,
-                    "tooltip": "Enable connectivity-based post-processing. Recommended: True for cleaner results."
-                }),
-                "cache_model": ("BOOLEAN", {
-                    "default": True,
-                    "tooltip": "Keep model in VRAM after inference. False = move to CPU and clear VRAM (saves ~14GB). True = keep on GPU for faster subsequent runs."
+                    "default": True
                 }),
             },
         }
@@ -87,7 +77,7 @@ class Hunyuan3D_P3SAM_Segmentation:
     FUNCTION = "segment_mesh"
     CATEGORY = "Hunyuan3D"
 
-    def segment_mesh(self, mesh, seed, point_num, prompt_num, prompt_bs, threshold, post_process, cache_model):
+    def segment_mesh(self, mesh, seed, point_num, prompt_num, prompt_bs, threshold, post_process):
         """
         Segment a 3D mesh into parts using P3-SAM.
 
@@ -132,9 +122,6 @@ class Hunyuan3D_P3SAM_Segmentation:
                 post_process=post_process
             )
 
-            # Ensure model is on GPU (reload if it was offloaded)
-            automask.to_cuda()
-
             # Run segmentation
             print(f"[P3-SAM] Running segmentation with seed={seed}...")
             aabb, face_ids, processed_mesh = automask.predict_aabb(
@@ -145,17 +132,6 @@ class Hunyuan3D_P3SAM_Segmentation:
             )
 
             print(f"[P3-SAM] Segmentation complete: found {len(aabb)} parts")
-
-            # VRAM management: offload model if cache_model=False
-            if not cache_model:
-                print(f"[P3-SAM] Offloading model to CPU and clearing VRAM...")
-                automask.to_cpu()
-                import gc
-                gc.collect()
-                torch.cuda.empty_cache()
-                print(f"[P3-SAM] Model offloaded. VRAM freed.")
-            else:
-                print(f"[P3-SAM] Keeping model on GPU for faster subsequent runs.")
 
             # Add face_ids as a field on the trimesh object
             processed_mesh.metadata['face_part_ids'] = face_ids

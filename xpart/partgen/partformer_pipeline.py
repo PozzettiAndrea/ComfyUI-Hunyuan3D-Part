@@ -189,8 +189,8 @@ class PartFormerPipeline(TokenAllocMixin):
                     ckpt[model_name] = {}
                 ckpt[model_name][new_key] = value
         else:
-            # ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=True)
-            ckpt = torch.load(ckpt_path, map_location="cpu")
+            # ckpt = torch.load(ckpt_path, map_location="cuda", weights_only=True)
+            ckpt = torch.load(ckpt_path, map_location="cuda", weights_only=False)
         # load model
         model = instantiate_from_config(config["model"])
         # model.load_state_dict(ckpt["model"])
@@ -239,25 +239,52 @@ class PartFormerPipeline(TokenAllocMixin):
         ckpt_path = smart_load_model(
             model_path="tencent/Hunyuan3D-Part",
         )
-        ckpt = torch.load(os.path.join(ckpt_path, "xpart.pt"), map_location="cpu")
-        # load model
-        model = instantiate_from_config(config["model"])
-        # model.load_state_dict(ckpt["model"])
-        init_from_ckpt(model, ckpt, prefix="model", ignore_keys=ignore_keys)
-        vae = instantiate_from_config(config["shapevae"])
-        # vae.load_state_dict(ckpt["shapevae"], strict=False)
-        init_from_ckpt(vae, ckpt, prefix="shapevae", ignore_keys=ignore_keys)
-        if config.get("conditioner", None) is not None:
-            conditioner = instantiate_from_config(config["conditioner"])
-            init_from_ckpt(
-                conditioner, ckpt, prefix="conditioner", ignore_keys=ignore_keys
-            )
+
+        # Check if using old monolithic checkpoint or new safetensors format
+        old_ckpt_file = os.path.join(ckpt_path, "xpart.pt")
+        if os.path.exists(old_ckpt_file):
+            # Old format: load monolithic checkpoint
+            ckpt = torch.load(old_ckpt_file, map_location="cuda", weights_only=False)
+            # load model
+            model = instantiate_from_config(config["model"])
+            init_from_ckpt(model, ckpt, prefix="model", ignore_keys=ignore_keys)
+            vae = instantiate_from_config(config["shapevae"])
+            init_from_ckpt(vae, ckpt, prefix="shapevae", ignore_keys=ignore_keys)
+            if config.get("conditioner", None) is not None:
+                conditioner = instantiate_from_config(config["conditioner"])
+                init_from_ckpt(
+                    conditioner, ckpt, prefix="conditioner", ignore_keys=ignore_keys
+                )
+            else:
+                conditioner = vae
+            p3sam_ckpt_path = os.path.join(ckpt_path, "p3sam.ckpt")
         else:
-            conditioner = vae
+            # New format: load from individual safetensors files
+            from safetensors.torch import load_file
+
+            # Load model
+            model = instantiate_from_config(config["model"])
+            model_state = load_file(os.path.join(ckpt_path, "model", "model.safetensors"), device="cuda")
+            model.load_state_dict(model_state, strict=False)
+
+            # Load shapevae
+            vae = instantiate_from_config(config["shapevae"])
+            vae_state = load_file(os.path.join(ckpt_path, "shapevae", "shapevae.safetensors"), device="cuda")
+            vae.load_state_dict(vae_state, strict=False)
+
+            # Load conditioner
+            if config.get("conditioner", None) is not None:
+                conditioner = instantiate_from_config(config["conditioner"])
+                conditioner_state = load_file(os.path.join(ckpt_path, "conditioner", "conditioner.safetensors"), device="cuda")
+                conditioner.load_state_dict(conditioner_state, strict=False)
+            else:
+                conditioner = vae
+
+            # Path to p3sam checkpoint (safetensors format)
+            p3sam_ckpt_path = os.path.join(ckpt_path, "p3sam", "p3sam.safetensors")
+
         scheduler = instantiate_from_config(config["scheduler"])
-        config["bbox_predictor"]["params"]["ckpt_path"] = os.path.join(
-            ckpt_path, "p3sam.ckpt"
-        )
+        config["bbox_predictor"]["params"]["ckpt_path"] = p3sam_ckpt_path
         bbox_predictor = instantiate_from_config(config.get("bbox_predictor", None))
         model_kwargs = dict(
             vae=vae,
@@ -420,6 +447,12 @@ class PartFormerPipeline(TokenAllocMixin):
             assert aabb.shape[0] == part_surface_inbbox.shape[0], "Batch size mismatch."
         center = np.zeros(3)
         scale = 1.0
+        # Load config values (used throughout this function)
+        config_pc_size = self.vae.pc_size
+        config_pc_sharpedge_size = self.vae.pc_sharpedge_size
+        config_total_points = config_pc_size + config_pc_sharpedge_size
+        print(f"[X-Part] DEBUG: Config values - pc_size={config_pc_size}, pc_sharpedge_size={config_pc_sharpedge_size}, total={config_total_points}")
+
         # 1. Load object surface and sample
         if obj_surface is None:
             if obj_surface_raw is None:
@@ -437,16 +470,18 @@ class PartFormerPipeline(TokenAllocMixin):
                 else:
                     raise ValueError("obj_surface or mesh_path/mesh must be provided.")
             rng = np.random.default_rng(seed=seed)
+            print(f"[X-Part] DEBUG: Loading object surface with {config_total_points} total points")
             obj_surface, _ = load_surface_points(
                 rng,
                 obj_surface_raw["random_surface"],
                 obj_surface_raw["sharp_surface"],
-                pc_size=81920,
-                pc_sharpedge_size=0,
+                pc_size=config_pc_size,
+                pc_sharpedge_size=config_pc_sharpedge_size,
                 return_sharpedge_label=True,
                 return_normal=True,
             )
             obj_surface = obj_surface.unsqueeze(0)
+            print(f"[X-Part] DEBUG: Object surface loaded, shape={obj_surface.shape} (expected: [1, {config_total_points}, 7])")
         # 2. load aabb
         if aabb is None:
             aabb = self.predict_bbox(mesh, seed=seed)
@@ -456,12 +491,14 @@ class PartFormerPipeline(TokenAllocMixin):
                 aabb = torch.from_numpy(aabb)
             # normalize aabb by mesh scale and center
             aabb = aabb.float()
-            aabb = (aabb - torch.from_numpy(center).float()) / scale
+            aabb = (aabb - torch.from_numpy(center).float().cuda()) / scale
 
         # 3. load part surface in bbox
         if part_surface_inbbox is None:
+            # Use config values instead of hardcoded (already defined above)
+            print(f"[X-Part] DEBUG: Sampling bbox points with num_points={config_total_points}")
             part_surface_inbbox, valid_parts_mask = sample_bbox_points_from_trimesh(
-                mesh, aabb, num_points=81920, seed=seed
+                mesh, aabb, num_points=config_total_points, seed=seed
             )
             aabb = aabb[valid_parts_mask]
             aabb = aabb.unsqueeze(0)

@@ -845,9 +845,9 @@ def load(
         raise RuntimeError(f"Model {name} not found; available models = {MODELS}")
 
     if version.parse(torch.__version__) >= version.parse("2.4"):
-        ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=True)
+        ckpt = torch.load(ckpt_path, map_location="cuda", weights_only=False)
     else:
-        ckpt = torch.load(ckpt_path, map_location="cpu")
+        ckpt = torch.load(ckpt_path, map_location="cuda", weights_only=False)
     if custom_config is not None:
         for key, value in custom_config.items():
             ckpt["config"][key] = value

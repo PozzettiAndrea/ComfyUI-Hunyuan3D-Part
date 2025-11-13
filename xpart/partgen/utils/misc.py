@@ -148,11 +148,18 @@ def smart_load_model(
     model_path,
 ):
     original_model_path = model_path
-    # try local path
-    base_dir = os.environ.get("HY3DGEN_MODELS", "~/.cache/xpart")
+    # try local path - use ComfyUI's models folder if available
+    try:
+        import folder_paths
+        comfyui_models = folder_paths.models_dir
+        default_base = os.path.join(comfyui_models, "hunyuan3d-part")
+    except:
+        default_base = "~/.cache/xpart"
+
+    base_dir = os.environ.get("HY3DGEN_MODELS", default_base)
     model_fld = os.path.expanduser(os.path.join(base_dir, model_path))
     logger.info(f"Try to load model from local path: {model_path}")
-    if not os.path.exists(model_path):
+    if not os.path.exists(model_fld):
         logger.info("Model path not exists, try to download from huggingface")
         try:
             from huggingface_hub import snapshot_download
@@ -168,9 +175,11 @@ def smart_load_model(
             logger.warning(
                 "You need to install HuggingFace Hub to load models from the hub."
             )
-            raise RuntimeError(f"Model path {model_path} not found")
+            raise RuntimeError(f"Model path {model_fld} not found")
         except Exception as e:
             raise e
+    else:
+        model_path = model_fld
 
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"Model path {original_model_path} not found")

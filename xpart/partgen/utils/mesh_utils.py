@@ -169,13 +169,13 @@ def sample_bbox_points_from_trimesh(mesh, aabb, num_points, seed=42):
     _vertices = mesh.vertices
     _faces = np.reshape(_faces, (-1))
     num_parts = aabb.shape[0]
-    _points = _points = torch.from_numpy(_vertices[_faces])
+    _points = torch.from_numpy(_vertices[_faces]).cuda()
     _part_mask = torch.all(
         (_points[None, :, :3] >= aabb[:, :1]) & (_points[None, :, :3] <= aabb[:, 1:]),
         dim=-1,
     )
     _part_mask = torch.any(torch.reshape(_part_mask, (num_parts, -1, 3)), dim=-1)
-    faces_idx_in_bbox = [torch.nonzero(x).squeeze(-1).numpy() for x in _part_mask]
+    faces_idx_in_bbox = [torch.nonzero(x).squeeze(-1).cpu().numpy() for x in _part_mask]
     # in case some parts are empty(inside surface)
     valid_parts_mask = torch.tensor(
         [len(x) > 0 for x in faces_idx_in_bbox], dtype=torch.bool, device=_points.device

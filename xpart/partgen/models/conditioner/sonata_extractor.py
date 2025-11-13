@@ -44,15 +44,20 @@ class SonataFeatureExtractor(nn.Module):
 
     def load_checkpoint(self, checkpoint_path: str):
         """Load model weights from checkpoint."""
-        checkpoint = torch.load(checkpoint_path, map_location="cpu")
-
-        # Extract state dict from Lightning checkpoint
-        if "state_dict" in checkpoint:
-            state_dict = checkpoint["state_dict"]
-            # Remove 'model.' prefix if present from Lightning
-            state_dict = {k.replace("model.", ""): v for k, v in state_dict.items()}
-        else:
+        # Check if using safetensors or pytorch format
+        if checkpoint_path.endswith('.safetensors'):
+            from safetensors.torch import load_file
+            checkpoint = load_file(checkpoint_path, device="cuda")
             state_dict = checkpoint
+        else:
+            checkpoint = torch.load(checkpoint_path, map_location="cuda", weights_only=False)
+            # Extract state dict from Lightning checkpoint
+            if "state_dict" in checkpoint:
+                state_dict = checkpoint["state_dict"]
+                # Remove 'model.' prefix if present from Lightning
+                state_dict = {k.replace("model.", ""): v for k, v in state_dict.items()}
+            else:
+                state_dict = checkpoint
 
         # Debug: Show all keys in checkpoint
         print("\n=== Checkpoint Keys ===")

@@ -117,24 +117,40 @@ If ckpt_path is not None, load the checkpoint from the given path.
 If state_dict is not None, load the state_dict from the given state_dict.
 If both ckpt_path and state_dict are None, download the model from huggingface and load the checkpoint.
 '''
-def load_state_dict(self, 
-                    ckpt_path=None, 
-                    state_dict=None, 
-                    strict=True, 
-                    assign=False, 
-                    ignore_seg_mlp=False, 
-                    ignore_seg_s2_mlp=False, 
+def load_state_dict(self,
+                    ckpt_path=None,
+                    state_dict=None,
+                    strict=True,
+                    assign=False,
+                    ignore_seg_mlp=False,
+                    ignore_seg_s2_mlp=False,
                     ignore_iou_mlp=False):   # load checkpoint
     if ckpt_path is not None:
-        state_dict = torch.load(ckpt_path, map_location="cpu")["state_dict"]
+        state_dict = torch.load(ckpt_path, map_location="cuda", weights_only=False)["state_dict"]
     elif state_dict is None:
-        # download from huggingface
-        print(f'trying to download model from huggingface...')
-        from huggingface_hub import hf_hub_download
         from safetensors.torch import load_file
-        ckpt_path = hf_hub_download(repo_id="tencent/Hunyuan3D-Part", filename="p3sam/p3sam.safetensors", local_dir='weights')
-        print(f'download model from huggingface to: {ckpt_path}')
-        state_dict = load_file(ckpt_path)
+        import os
+
+        # Use absolute path relative to custom node directory
+        custom_node_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        weights_dir = os.path.join(custom_node_dir, 'weights')
+        ckpt_path = os.path.join(weights_dir, 'p3sam', 'p3sam.safetensors')
+
+        # Check if model already exists locally
+        if os.path.exists(ckpt_path):
+            print(f'Loading existing model from: {ckpt_path}')
+        else:
+            # Download from HuggingFace if not found locally
+            print(f'Model not found locally, downloading from HuggingFace...')
+            from huggingface_hub import hf_hub_download
+            ckpt_path = hf_hub_download(
+                repo_id="tencent/Hunyuan3D-Part",
+                filename="p3sam/p3sam.safetensors",
+                local_dir=weights_dir
+            )
+            print(f'Downloaded model to: {ckpt_path}')
+
+        state_dict = load_file(ckpt_path, device="cuda")
 
     local_state_dict = self.state_dict()
     seen_keys = {k: False for k in local_state_dict.keys()}

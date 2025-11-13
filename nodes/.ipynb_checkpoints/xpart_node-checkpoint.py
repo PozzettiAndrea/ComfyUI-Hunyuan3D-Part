@@ -35,44 +35,31 @@ class Hunyuan3D_XPart_Generation:
                 "mesh": ("TRIMESH",),  # Accept TRIMESH objects from GeometryPack or other nodes
                 "bounding_boxes": ("BBOXES_3D",),  # Accept BBOXES_3D from P3-SAM
                 "octree_resolution": ("INT", {
-                    "default": 256,
+                    "default": 512,
                     "min": 256,
                     "max": 1024,
                     "step": 64,
-                    "display": "number",
-                    "tooltip": "Mesh extraction quality. Higher = MORE detail but MUCH more VRAM. 256=~8GB, 512=~12-16GB, 1024=~24GB+"
+                    "display": "number"
                 }),
                 "num_inference_steps": ("INT", {
                     "default": 50,
                     "min": 10,
                     "max": 100,
                     "step": 5,
-                    "display": "number",
-                    "tooltip": "Diffusion denoising steps. Higher = better quality but slower. 20=fast preview, 50=balanced (official), 100=max quality"
+                    "display": "number"
                 }),
                 "guidance_scale": ("FLOAT", {
                     "default": -1.0,
                     "min": -1.0,
                     "max": 10.0,
-                    "step": 0.5,
-                    "display": "number",
-                    "tooltip": "Classifier-free guidance strength. -1.0 = disabled (fastest, official default). 0-10 = enabled (slower, doubles compute)."
+                    "step": 0.1,
+                    "display": "number"
                 }),
                 "seed": ("INT", {
                     "default": 42,
                     "min": 0,
                     "max": 0xffffffffffffffff,
-                    "step": 1,
-                    "control_after_generate": "fixed",
-                    "tooltip": "Random seed for reproducibility. Same seed = same results."
-                }),
-                "num_chunks": ("INT", {
-                    "default": 400000,
-                    "min": 10000,
-                    "max": 500000,
-                    "step": 50000,
-                    "display": "number",
-                    "tooltip": "Mesh extraction batch size. Higher = MORE VRAM but faster processing. Lower = less VRAM but slower. Official default: 400k"
+                    "step": 1
                 }),
             },
         }
@@ -83,7 +70,7 @@ class Hunyuan3D_XPart_Generation:
     CATEGORY = "Hunyuan3D"
 
     def generate_parts(self, mesh, bounding_boxes, octree_resolution,
-                      num_inference_steps, guidance_scale, seed, num_chunks):
+                      num_inference_steps, guidance_scale, seed):
         """
         Generate high-quality part meshes using X-Part.
 
@@ -94,7 +81,6 @@ class Hunyuan3D_XPart_Generation:
             num_inference_steps: Number of diffusion steps
             guidance_scale: Classifier-free guidance scale
             seed: Random seed for reproducibility
-            num_chunks: Batch size for mesh extraction (affects memory usage)
 
         Returns:
             Tuple of (part_meshes, exploded_view, bbox_viz, parts_path, exploded_path, bbox_path)
@@ -166,7 +152,6 @@ class Hunyuan3D_XPart_Generation:
                 num_inference_steps=num_inference_steps,
                 guidance_scale=guidance_scale,
                 seed=seed,
-                num_chunks=num_chunks,
                 output_type="trimesh"
             )
 
@@ -229,23 +214,19 @@ class Hunyuan3D_FullPipeline:
                     "default": 42,
                     "min": 0,
                     "max": 0xffffffffffffffff,
-                    "step": 1,
-                    "control_after_generate": "fixed",
-                    "tooltip": "Random seed for reproducibility. Same seed = same results."
+                    "step": 1
                 }),
                 "octree_resolution": ("INT", {
                     "default": 512,
                     "min": 256,
                     "max": 1024,
-                    "step": 64,
-                    "tooltip": "Mesh extraction quality. Higher = MORE detail but MUCH more VRAM. 256=~8GB, 512=~12-16GB, 1024=~24GB+"
+                    "step": 64
                 }),
                 "num_inference_steps": ("INT", {
                     "default": 50,
                     "min": 10,
                     "max": 100,
-                    "step": 5,
-                    "tooltip": "Diffusion denoising steps. Higher = better quality but slower. 20=fast preview, 50=balanced, 100=max quality"
+                    "step": 5
                 }),
             },
         }
@@ -278,9 +259,8 @@ class Hunyuan3D_FullPipeline:
             bboxes_output, face_ids, mesh_output, seg_path = p3sam.segment_mesh(
                 mesh=mesh,
                 seed=seed,
-                point_num=100000,
-                prompt_num=400,
-                prompt_bs=32,
+                point_num=30000,
+                prompt_num=200,
                 threshold=0.95,
                 post_process=True
             )
@@ -296,8 +276,7 @@ class Hunyuan3D_FullPipeline:
                 octree_resolution=octree_resolution,
                 num_inference_steps=num_inference_steps,
                 guidance_scale=-1.0,
-                seed=seed,
-                num_chunks=400000
+                seed=seed
             )
 
             print(f"[Full Pipeline] X-Part complete, generated parts saved to {parts_path}")

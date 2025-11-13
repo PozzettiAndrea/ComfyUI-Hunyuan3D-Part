@@ -20,7 +20,7 @@ shapevae:
     geo_decoder_downsample_ratio: 1
     geo_decoder_ln_post: true
     point_feats: 4
-    pc_size: &pc_size 81920 
+    pc_size: &pc_size 40960
     pc_sharpedge_size: &pc_sharpedge_size 0
 
 bbox_predictor:
@@ -39,7 +39,7 @@ conditioner:
       params:
         use_local: true
         local_feat_type: latents_shape # [latents,miche-point-query-structural-vae]
-        num_tokens_cond: &num_tokens_cond 4096 # num_tokens :2048 for holopart conditioner
+        num_tokens_cond: &num_tokens_cond 2048 # num_tokens :2048 for holopart conditioner
         local_geo_cfg:
           target: partgen.models.autoencoders.VolumeDecoderShapeVAE
           params:
@@ -58,7 +58,7 @@ conditioner:
             geo_decoder_downsample_ratio: 1
             geo_decoder_ln_post: true
             point_feats: 4
-            pc_size:  &pc_size_bbox 81920 
+            pc_size:  &pc_size_bbox 40960
             pc_sharpedge_size: &pc_sharpedge_size_bbox 0
 
     obj_encoder_cfg:

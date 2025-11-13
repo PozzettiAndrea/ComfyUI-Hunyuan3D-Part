@@ -19,12 +19,13 @@ torch>=2.0.0              # PyTorch (should already be installed by ComfyUI)
 torchvision               # Vision utilities
 diffusers                 # Required for X-Part diffusion models
 timm                      # PyTorch Image Models (required for Sonata backbone)
-flash-attn                # Flash Attention for Sonata model (CUDA extension)
+# flash-attn is handled separately by install.py (optional, requires prebuilt wheels)
 
 # Numerical Computing
 numpy>=1.20.0             # Array operations
 scipy                     # Scientific computing
 scikit-learn              # Machine learning utilities
+scikit-image              # Image processing (required for X-Part mesh utilities)
 
 # Point Cloud Processing
 fpsample                  # Farthest point sampling
@@ -33,6 +34,7 @@ fpsample                  # Farthest point sampling
 addict                    # Dict utilities
 omegaconf                 # YAML configuration
 huggingface-hub           # Model downloading
+hf-transfer               # Fast HuggingFace downloads (optional but recommended)
 
 # Optimization
 numba                     # JIT compilation for performance
