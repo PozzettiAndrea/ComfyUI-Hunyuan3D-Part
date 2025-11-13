@@ -13,16 +13,20 @@ from .nodes import (
     P3SAM_DISPLAY_MAPPINGS,
     XPART_MAPPINGS,
     XPART_DISPLAY_MAPPINGS,
+    BBOX_IO_MAPPINGS,
+    BBOX_IO_DISPLAY_MAPPINGS,
 )
 
 # Combine all node mappings
 NODE_CLASS_MAPPINGS = {}
 NODE_CLASS_MAPPINGS.update(P3SAM_MAPPINGS)
 NODE_CLASS_MAPPINGS.update(XPART_MAPPINGS)
+NODE_CLASS_MAPPINGS.update(BBOX_IO_MAPPINGS)
 
 NODE_DISPLAY_NAME_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS.update(P3SAM_DISPLAY_MAPPINGS)
 NODE_DISPLAY_NAME_MAPPINGS.update(XPART_DISPLAY_MAPPINGS)
+NODE_DISPLAY_NAME_MAPPINGS.update(BBOX_IO_DISPLAY_MAPPINGS)
 
 # Web directory for custom UI (optional)
 WEB_DIRECTORY = "./web"
@@ -38,6 +42,8 @@ print("  💾 Save 3D Mesh - Save mesh objects to files")
 print("  🔍 P3-SAM Segmentation - Segment meshes into parts")
 print("  ✨ X-Part Generation - Generate high-quality part meshes")
 print("  🔄 Hunyuan3D Full Pipeline - Complete pipeline in one node")
+print("  💾 Save Bounding Boxes - Save bboxes to JSON")
+print("  📂 Load Bounding Boxes - Load bboxes from JSON")
 print("="*60)
 print("Total nodes registered:", len(NODE_CLASS_MAPPINGS))
 print("="*60 + "\n")

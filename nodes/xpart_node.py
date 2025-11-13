@@ -26,7 +26,7 @@ class Hunyuan3D_XPart_Generation:
 
     def __init__(self):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        # Models are natively bfloat16 - no need to store as instance variable
+        # Models use float32 for RTX 5090/CUDA 12.8 spconv compatibility
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -67,12 +67,18 @@ class Hunyuan3D_XPart_Generation:
                     "tooltip": "Random seed for reproducibility. Same seed = same results."
                 }),
                 "num_chunks": ("INT", {
-                    "default": 400000,
+                    "default": 10000,
                     "min": 10000,
                     "max": 500000,
                     "step": 50000,
                     "display": "number",
                     "tooltip": "Mesh extraction batch size. Higher = MORE VRAM but faster processing. Lower = less VRAM but slower. Official default: 400k"
+                }),
+            },
+            "optional": {
+                "enable_torch_compile": ("BOOLEAN", {
+                    "default": False,
+                    "tooltip": "Enable torch.compile() optimization. First run will be slower (~30-60s compilation), but subsequent runs are ~20-30% faster. Requires PyTorch 2.0+. Best for production workflows."
                 }),
             },
         }
@@ -83,7 +89,8 @@ class Hunyuan3D_XPart_Generation:
     CATEGORY = "Hunyuan3D"
 
     def generate_parts(self, mesh, bounding_boxes, octree_resolution,
-                      num_inference_steps, guidance_scale, seed, num_chunks):
+                      num_inference_steps, guidance_scale, seed, num_chunks,
+                      enable_torch_compile=False):
         """
         Generate high-quality part meshes using X-Part.
 
@@ -95,14 +102,15 @@ class Hunyuan3D_XPart_Generation:
             guidance_scale: Classifier-free guidance scale
             seed: Random seed for reproducibility
             num_chunks: Batch size for mesh extraction (affects memory usage)
+            enable_torch_compile: Enable torch.compile() optimization for faster inference
 
         Returns:
             Tuple of (part_meshes, exploded_view, bbox_viz, parts_path, exploded_path, bbox_path)
         """
         try:
-            # Models are natively stored as bfloat16, use that for optimal memory usage
-            dtype = torch.bfloat16
-            print(f"[X-Part] Using bfloat16 precision (native model dtype, saves ~9GB vs float32)")
+            # Use float32 - RTX 5090/CUDA 12.8 has spconv fp16 algorithm issues
+            dtype = torch.float32
+            print(f"[X-Part] Using float32 precision (full precision, workaround for RTX 5090/spconv compatibility)")
 
             # Load mesh - handles file paths, trimesh objects, and custom types
             mesh_path = None
@@ -149,6 +157,22 @@ class Hunyuan3D_XPart_Generation:
                 device=self.device,
                 dtype=dtype
             )
+
+            # Apply torch.compile() optimization if requested
+            if enable_torch_compile and not getattr(pipeline, '_is_compiled', False):
+                try:
+                    import time
+                    print("[X-Part] Compiling models with torch.compile() - first run will be slower...")
+                    t0 = time.time()
+                    pipeline.compile()
+                    pipeline._is_compiled = True
+                    compile_time = time.time() - t0
+                    print(f"[X-Part] ✓ Compilation complete ({compile_time:.1f}s). Subsequent runs will be ~20-30% faster.")
+                except Exception as e:
+                    print(f"[X-Part] Warning: torch.compile() failed: {e}")
+                    print("[X-Part] Continuing without compilation...")
+            elif enable_torch_compile and getattr(pipeline, '_is_compiled', False):
+                print("[X-Part] Using pre-compiled models (already compiled in cache)")
 
             # Convert aabb to torch tensor if provided
             if aabb is not None:

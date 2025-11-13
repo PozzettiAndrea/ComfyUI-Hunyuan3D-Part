@@ -303,7 +303,7 @@ class Timer:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.end_time = time.time()
         self.elapsed_time = self.end_time - self.start_time
-        print(f">>>>>>代码{self.name} 运行时间: {self.elapsed_time:.4f} 秒")
+        print(f">>>>>> {self.name} runtime: {self.elapsed_time:.4f} seconds")
 
 
 def sample_points_pre_face(vertices, faces, n_point_per_face=2000):
@@ -443,7 +443,7 @@ def mesh_sam(
             mesh = clean_mesh(mesh)
         mesh = trimesh.Trimesh(vertices=mesh.vertices, faces=mesh.faces, process=False)
     if show_info:
-        print(f"点数：{mesh.vertices.shape[0]} 面片数：{mesh.faces.shape[0]}")
+        print(f"Vertices: {mesh.vertices.shape[0]} Faces: {mesh.faces.shape[0]}")
 
     # Use the point_num and prompt_num passed as function parameters
     # (removed hardcoded values that were overriding parameters)
@@ -456,12 +456,12 @@ def mesh_sam(
         # _points = _points + np.random.normal(0, 1, size=_points.shape) * 0.01
         # normals = normals * 0. # debug no normal
     if show_info:
-        print(f"点数：{point_num} 面片数：{mesh.faces.shape[0]}")
+        print(f"Vertices: {point_num} Faces: {mesh.faces.shape[0]}")
 
     with Timer("获取特征"):
         _feats = get_feat(model, _points, normals)
     if show_info:
-        print("预处理特征")
+        print("Preprocessing features")
 
     if save_mid_res:
         feat_save = _feats.float().detach().cpu().numpy()
@@ -476,7 +476,7 @@ def mesh_sam(
         pc_save.export(os.path.join(save_path, "point_pca.glb"))
         pc_save.export(os.path.join(save_path, "point_pca.ply"))
         if show_info:
-            print("PCA获取特征颜色")
+            print("PCA feature colors extracted")
 
     with Timer("FPS采样提示点"):
         fps_idx = fpsample.fps_sampling(_points, prompt_num)
@@ -489,7 +489,7 @@ def mesh_sam(
             os.path.join(save_path, "point_prompts_pca.ply")
         )
     if show_info:
-        print("采样完成")
+        print("Sampling completed")
 
     with Timer("推理"):
         bs = prompt_bs
@@ -510,7 +510,7 @@ def mesh_sam(
                 iou_res.append(pred_iou[j, max_idx[j]])
     mask_res = np.stack(mask_res, axis=-1)  # [N, K]
     if show_info:
-        print("prmopt 推理完成")
+        print("Prompt inference completed")
 
     with Timer("根据IOU排序"):
         iou_res = np.array(iou_res).tolist()
@@ -548,7 +548,7 @@ def mesh_sam(
 
     # print(clusters)
     if show_info:
-        print(f"NMS完成，mask数量：{len(clusters)}")
+        print(f"NMS completed, mask count: {len(clusters)}")
 
     if save_mid_res:
         part_mask_save_path = os.path.join(save_path, "part_mask")
@@ -613,7 +613,7 @@ def mesh_sam(
                     cluster2[cur_cluster].append(tar_cluster)
                     is_union[j] = True
     if show_info:
-        print(f"再次合并，合并数量：{len(cluster2.keys())}")
+        print(f"Merged again, merged count: {len(cluster2.keys())}")
 
     with Timer("计算没有mask的点"):
         no_mask = np.ones(point_num)
@@ -654,7 +654,7 @@ def mesh_sam(
     # print(cluster2)
     # print(len(cluster2.keys()))
     if show_info:
-        print(f"修补遗漏mask：{len(cluster2.keys())}")
+        print(f"Patched missing masks: {len(cluster2.keys())}")
 
     with Timer("计算点云最终mask"):
         final_mask = list(cluster2.keys())
@@ -674,7 +674,7 @@ def mesh_sam(
     # print(final_mask_sorted)
     # print(final_mask_area_sorted)
     if show_info:
-        print(f"最终mask数量：{len(final_mask_sorted)}")
+        print(f"Final mask count: {len(final_mask_sorted)}")
 
     with Timer("点云上色"):
         # 生成color map
@@ -702,7 +702,7 @@ def mesh_sam(
             os.path.join(save_path, "auto_mask_cluster.ply")
         )
         if show_info:
-            print("保存点云完成")
+            print("Point cloud saved")
 
     with Timer("后处理"):
         valid_mask = result_mask >= 0
