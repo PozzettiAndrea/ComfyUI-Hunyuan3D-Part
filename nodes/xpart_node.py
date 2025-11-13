@@ -26,7 +26,7 @@ class Hunyuan3D_XPart_Generation:
 
     def __init__(self):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.dtype = torch.float32
+        # Models are natively bfloat16 - no need to store as instance variable
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -100,6 +100,10 @@ class Hunyuan3D_XPart_Generation:
             Tuple of (part_meshes, exploded_view, bbox_viz, parts_path, exploded_path, bbox_path)
         """
         try:
+            # Models are natively stored as bfloat16, use that for optimal memory usage
+            dtype = torch.bfloat16
+            print(f"[X-Part] Using bfloat16 precision (native model dtype, saves ~9GB vs float32)")
+
             # Load mesh - handles file paths, trimesh objects, and custom types
             mesh_path = None
             if isinstance(mesh, dict) and 'trimesh' in mesh:
@@ -143,7 +147,7 @@ class Hunyuan3D_XPart_Generation:
             print(f"[X-Part] Initializing pipeline on {self.device}...")
             pipeline = ModelCache.get_xpart_pipeline(
                 device=self.device,
-                dtype=self.dtype
+                dtype=dtype
             )
 
             # Convert aabb to torch tensor if provided

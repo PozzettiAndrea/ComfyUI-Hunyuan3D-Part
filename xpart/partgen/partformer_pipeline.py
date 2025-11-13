@@ -129,6 +129,8 @@ class PartFormerPipeline(TokenAllocMixin):
         scheduler,
         conditioner,
         bbox_predictor=None,
+        device="cuda",
+        dtype=torch.bfloat16,
         verbose=False,
         **kwargs,
     ):
@@ -136,8 +138,9 @@ class PartFormerPipeline(TokenAllocMixin):
         self.model = model
         self.scheduler = scheduler
         self.conditioner = conditioner
-        self.kwargs = kwargs
         self.bbox_predictor = bbox_predictor
+        self.device = torch.device(device) if isinstance(device, str) else device
+        self.dtype = dtype
         self.verbose = verbose
         self.kwargs = kwargs
 
@@ -148,7 +151,7 @@ class PartFormerPipeline(TokenAllocMixin):
         ckpt_path=None,
         config=None,
         device="cuda",
-        dtype=torch.float32,
+        dtype=torch.bfloat16,
         use_safetensors=None,
         ignore_keys=(),
         **kwargs,
@@ -223,7 +226,7 @@ class PartFormerPipeline(TokenAllocMixin):
     def from_pretrained(
         cls,
         config=None,
-        dtype=torch.float32,
+        dtype=torch.bfloat16,
         ignore_keys=(),
         device="cuda",
         **kwargs,
@@ -243,40 +246,75 @@ class PartFormerPipeline(TokenAllocMixin):
         # Check if using old monolithic checkpoint or new safetensors format
         old_ckpt_file = os.path.join(ckpt_path, "xpart.pt")
         if os.path.exists(old_ckpt_file):
+            print(f"[X-Part] Loading from old format (monolithic): {old_ckpt_file}")
             # Old format: load monolithic checkpoint
+            import time
+            t0 = time.time()
             ckpt = torch.load(old_ckpt_file, map_location="cuda", weights_only=False)
+            print(f"[X-Part] ✓ Loaded checkpoint ({time.time()-t0:.2f}s)")
+
             # load model
+            print(f"[X-Part] Loading model...")
+            t0 = time.time()
             model = instantiate_from_config(config["model"])
             init_from_ckpt(model, ckpt, prefix="model", ignore_keys=ignore_keys)
+            print(f"[X-Part] ✓ Model loaded ({time.time()-t0:.2f}s)")
+
+            print(f"[X-Part] Loading VAE...")
+            t0 = time.time()
             vae = instantiate_from_config(config["shapevae"])
             init_from_ckpt(vae, ckpt, prefix="shapevae", ignore_keys=ignore_keys)
+            print(f"[X-Part] ✓ VAE loaded ({time.time()-t0:.2f}s)")
+
             if config.get("conditioner", None) is not None:
+                print(f"[X-Part] Loading conditioner...")
+                t0 = time.time()
                 conditioner = instantiate_from_config(config["conditioner"])
                 init_from_ckpt(
                     conditioner, ckpt, prefix="conditioner", ignore_keys=ignore_keys
                 )
+                print(f"[X-Part] ✓ Conditioner loaded ({time.time()-t0:.2f}s)")
             else:
                 conditioner = vae
             p3sam_ckpt_path = os.path.join(ckpt_path, "p3sam.ckpt")
         else:
+            print(f"[X-Part] Loading from new format (safetensors): {ckpt_path}")
             # New format: load from individual safetensors files
             from safetensors.torch import load_file
+            import time
 
             # Load model
+            print(f"[X-Part] Loading model...")
+            t0 = time.time()
             model = instantiate_from_config(config["model"])
-            model_state = load_file(os.path.join(ckpt_path, "model", "model.safetensors"), device="cuda")
+            model_path = os.path.join(ckpt_path, "model", "model.safetensors")
+            print(f"[X-Part]   Reading {model_path}")
+            model_state = load_file(model_path, device="cuda")
             model.load_state_dict(model_state, strict=False)
+            print(f"[X-Part] ✓ Model loaded ({time.time()-t0:.2f}s)")
 
             # Load shapevae
+            print(f"[X-Part] Loading VAE...")
+            t0 = time.time()
             vae = instantiate_from_config(config["shapevae"])
-            vae_state = load_file(os.path.join(ckpt_path, "shapevae", "shapevae.safetensors"), device="cuda")
+            vae_path = os.path.join(ckpt_path, "shapevae", "shapevae.safetensors")
+            print(f"[X-Part]   Reading {vae_path}")
+            vae_state = load_file(vae_path, device="cuda")
             vae.load_state_dict(vae_state, strict=False)
+            print(f"[X-Part] ✓ VAE loaded ({time.time()-t0:.2f}s)")
 
             # Load conditioner
             if config.get("conditioner", None) is not None:
+                print(f"[X-Part] Loading conditioner...")
+                t0 = time.time()
                 conditioner = instantiate_from_config(config["conditioner"])
-                conditioner_state = load_file(os.path.join(ckpt_path, "conditioner", "conditioner.safetensors"), device="cuda")
+                print(f"[X-Part] DEBUG: After instantiate_from_config, obj_encoder.encoder.pc_size = {conditioner.obj_encoder.encoder.pc_size}")
+                conditioner_path = os.path.join(ckpt_path, "conditioner", "conditioner.safetensors")
+                print(f"[X-Part]   Reading {conditioner_path}")
+                conditioner_state = load_file(conditioner_path, device="cuda")
                 conditioner.load_state_dict(conditioner_state, strict=False)
+                print(f"[X-Part] DEBUG: After load_state_dict, obj_encoder.encoder.pc_size = {conditioner.obj_encoder.encoder.pc_size}")
+                print(f"[X-Part] ✓ Conditioner loaded ({time.time()-t0:.2f}s)")
             else:
                 conditioner = vae
 
@@ -286,6 +324,21 @@ class PartFormerPipeline(TokenAllocMixin):
         scheduler = instantiate_from_config(config["scheduler"])
         config["bbox_predictor"]["params"]["ckpt_path"] = p3sam_ckpt_path
         bbox_predictor = instantiate_from_config(config.get("bbox_predictor", None))
+
+        # Set all models to eval mode for inference
+        print(f"[X-Part] Setting models to eval mode...")
+        model.eval()
+        vae.eval()
+        conditioner.eval()
+        print(f"[X-Part] ✓ Models in eval mode")
+
+        # Ensure models are on correct device and dtype
+        print(f"[X-Part] Moving models to {device} with bfloat16 precision...")
+        model = model.to(device=device, dtype=dtype)
+        vae = vae.to(device=device, dtype=dtype)
+        conditioner = conditioner.to(device=device, dtype=dtype)
+        print(f"[X-Part] ✓ Models ready on {device} in bfloat16")
+
         model_kwargs = dict(
             vae=vae,
             model=model,
@@ -309,11 +362,15 @@ class PartFormerPipeline(TokenAllocMixin):
             self.vae.to(dtype=dtype)
             self.model.to(dtype=dtype)
             self.conditioner.to(dtype=dtype)
+            if self.bbox_predictor is not None:
+                self.bbox_predictor.to(dtype=dtype)
         if device is not None:
             self.device = torch.device(device)
             self.vae.to(device)
             self.model.to(device)
             self.conditioner.to(device)
+            if self.bbox_predictor is not None:
+                self.bbox_predictor.to(device)
 
     def prepare_extra_step_kwargs(self, generator, eta):
         # prepare extra kwargs for the scheduler step, since not all schedulers have the same signature
@@ -352,7 +409,7 @@ class PartFormerPipeline(TokenAllocMixin):
             mesh, post_process=True, seed=seed
         )
         # aabb, face_ids, mesh = self.bbox_predictor.predict_aabb(mesh, post_process=False)
-        aabb = torch.from_numpy(aabb)
+        aabb = torch.from_numpy(aabb).cuda()
         return aabb
 
     def prepare_latents(
@@ -448,10 +505,13 @@ class PartFormerPipeline(TokenAllocMixin):
         center = np.zeros(3)
         scale = 1.0
         # Load config values (used throughout this function)
-        config_pc_size = self.vae.pc_size
-        config_pc_sharpedge_size = self.vae.pc_sharpedge_size
+        # pc_size is stored in the encoder, not directly on VAE
+        config_pc_size = self.vae.encoder.pc_size
+        config_pc_sharpedge_size = self.vae.encoder.pc_sharpedge_size
         config_total_points = config_pc_size + config_pc_sharpedge_size
-        print(f"[X-Part] DEBUG: Config values - pc_size={config_pc_size}, pc_sharpedge_size={config_pc_sharpedge_size}, total={config_total_points}")
+        print(f"[X-Part] DEBUG: Config values from vae.encoder - pc_size={config_pc_size}, pc_sharpedge_size={config_pc_sharpedge_size}, total={config_total_points}")
+        print(f"[X-Part] DEBUG: obj_encoder.encoder.pc_size = {self.conditioner.obj_encoder.encoder.pc_size}")
+        print(f"[X-Part] DEBUG: geo_encoder local_encoder.encoder.pc_size = {self.conditioner.geo_encoder.local_encoder.encoder.pc_size}")
 
         # 1. Load object surface and sample
         if obj_surface is None:
@@ -488,7 +548,7 @@ class PartFormerPipeline(TokenAllocMixin):
             print(f"Get bbox from bbox_predictor: {aabb.shape}")
         else:
             if isinstance(aabb, np.ndarray):
-                aabb = torch.from_numpy(aabb)
+                aabb = torch.from_numpy(aabb).cuda()
             # normalize aabb by mesh scale and center
             aabb = aabb.float()
             aabb = (aabb - torch.from_numpy(center).float().cuda()) / scale
@@ -531,9 +591,9 @@ class PartFormerPipeline(TokenAllocMixin):
         w = w * 1000.0
 
         half_dim = embedding_dim // 2
-        emb = torch.log(torch.tensor(10000.0)) / (half_dim - 1)
-        emb = torch.exp(torch.arange(half_dim, dtype=dtype) * -emb)
-        emb = w.to(dtype)[:, None] * emb[None, :]
+        emb = torch.log(torch.tensor(10000.0, device=self.device)) / (half_dim - 1)
+        emb = torch.exp(torch.arange(half_dim, dtype=dtype, device=self.device) * -emb)
+        emb = w.to(device=self.device, dtype=dtype)[:, None] * emb[None, :]
         emb = torch.cat([torch.sin(emb), torch.cos(emb)], dim=1)
         if embedding_dim % 2 == 1:  # zero pad
             emb = torch.nn.functional.pad(emb, (0, 1))
@@ -673,7 +733,7 @@ class PartFormerPipeline(TokenAllocMixin):
         guidance_cond = None
         if getattr(self.model, "guidance_cond_proj_dim", None) is not None:
             logger.info("Using lcm guidance scale")
-            guidance_scale_tensor = torch.tensor(guidance_scale - 1).repeat(batch_size)
+            guidance_scale_tensor = torch.tensor(guidance_scale - 1, device=device).repeat(batch_size)
             guidance_cond = self.get_guidance_scale_embedding(
                 guidance_scale_tensor, embedding_dim=self.model.guidance_cond_proj_dim
             ).to(device=device, dtype=latents.dtype)
@@ -690,6 +750,9 @@ class PartFormerPipeline(TokenAllocMixin):
 
         torch.cuda.empty_cache()
 
+        # Save original aabb for reuse in loop (to avoid exponential growth with CFG)
+        aabb_orig = aabb
+
         # 6. Denoising loop
         with synchronize_timer("Diffusion Sampling"):
             for i, t in enumerate(
@@ -698,9 +761,10 @@ class PartFormerPipeline(TokenAllocMixin):
                 # expand the latents if we are doing classifier free guidance
                 if do_classifier_free_guidance:
                     latent_model_input = torch.cat([latents] * 2)
-                    aabb = torch.repeat_interleave(aabb, 2, dim=0)
+                    aabb_input = torch.repeat_interleave(aabb_orig, 2, dim=0)
                 else:
                     latent_model_input = latents
+                    aabb_input = aabb_orig
 
                 # NOTE: we assume model get timesteps ranged from 0 to 1
                 timestep = t.expand(latent_model_input.shape[0]).to(latents.dtype)
@@ -709,7 +773,7 @@ class PartFormerPipeline(TokenAllocMixin):
                     latent_model_input,
                     timestep,
                     cond,
-                    aabb=aabb,
+                    aabb=aabb_input,
                     num_tokens=num_tokens,
                     guidance_cond=guidance_cond,
                 )
@@ -723,6 +787,11 @@ class PartFormerPipeline(TokenAllocMixin):
                 # compute the previous noisy sample x_t -> x_t-1
                 outputs = self.scheduler.step(noise_pred, t, latents)
                 latents = outputs.prev_sample
+
+                # Free intermediate tensors to reduce memory pressure
+                del noise_pred
+                if do_classifier_free_guidance:
+                    del latent_model_input, aabb_input
 
                 if callback is not None and i % callback_steps == 0:
                     step_idx = i // getattr(self.scheduler, "order", 1)

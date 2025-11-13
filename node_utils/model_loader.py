@@ -82,18 +82,22 @@ class ModelCache:
         return cls._p3sam_model
 
     @classmethod
-    def get_xpart_pipeline(cls, device: str = "cuda", dtype: torch.dtype = torch.float32):
+    def get_xpart_pipeline(cls, device: str = "cuda", dtype: torch.dtype = torch.bfloat16):
         """
         Get or create X-Part PartFormerPipeline.
 
         Args:
             device: Device to load model on
-            dtype: Data type for model
+            dtype: Data type for model (bfloat16 saves ~9GB VRAM vs float32)
 
         Returns:
             PartFormerPipeline instance
         """
         if cls._xpart_pipeline is None:
+            print(f"[Hunyuan3D] X-Part pipeline not cached, loading from disk...")
+            import time
+            pipeline_load_start = time.time()
+
             try:
                 # Add XPart partgen to path for import
                 if str(XPART_PARTGEN_PATH.parent) not in sys.path:
@@ -110,24 +114,29 @@ class ModelCache:
                 )
 
             print(f"[Hunyuan3D] Loading X-Part pipeline...")
+            print(f"[Hunyuan3D] Using bfloat16 precision (native model dtype, saves ~9GB VRAM vs float32)")
 
             # Load config (now from internal xpart/partgen/)
             config_path = XPART_PARTGEN_PATH / "config" / "infer.yaml"
             if not config_path.exists():
                 raise FileNotFoundError(f"Config file not found: {config_path}")
 
+            print(f"[Hunyuan3D] Loading config from: {config_path}")
             config = OmegaConf.load(str(config_path))
 
-            # Load pipeline
+            # Load pipeline (models are already loaded to CUDA directly)
+            print(f"[Hunyuan3D] Initializing pipeline components...")
             cls._xpart_pipeline = PartFormerPipeline.from_pretrained(
                 config=config,
                 verbose=True,
-                ignore_keys=[]
+                ignore_keys=[],
+                device=device,
+                dtype=dtype
             )
 
-            # Move to device
-            cls._xpart_pipeline.to(device=device, dtype=dtype)
-            print(f"[Hunyuan3D] X-Part pipeline loaded successfully on {device}")
+            print(f"[Hunyuan3D] ✓ X-Part pipeline loaded successfully (total: {time.time()-pipeline_load_start:.2f}s)")
+        else:
+            print(f"[Hunyuan3D] ✓ Using cached X-Part pipeline")
 
         return cls._xpart_pipeline
 

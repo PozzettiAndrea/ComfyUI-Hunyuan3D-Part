@@ -1,0 +1,180 @@
+{
+  "id": "5a72861b-5dc8-4e00-8190-bff2a61962a7",
+  "revision": 0,
+  "last_node_id": 6,
+  "last_link_id": 6,
+  "nodes": [
+    {
+      "id": 2,
+      "type": "GeomPackLoadMesh",
+      "pos": [
+        270.26953125,
+        183.07421875
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-geometrypack",
+        "ver": "e0d26b95c8e0b72fccc40f27912c41f31f4c2d5d",
+        "Node name for S&R": "GeomPackLoadMesh"
+      },
+      "widgets_values": [
+        "Stanford_Bunny.stl"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "Hunyuan3D_P3SAM_Segmentation",
+      "pos": [
+        585.37109375,
+        181.56640625
+      ],
+      "size": [
+        284.443359375,
+        286
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "bounding_boxes",
+          "type": "BBOXES_3D",
+          "links": [
+            2
+          ]
+        },
+        {
+          "name": "face_ids",
+          "type": "FACE_IDS",
+          "links": null
+        },
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "links": [
+            3
+          ]
+        },
+        {
+          "name": "segmentation_preview_path",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "aux_id": "PozzettiAndrea/ComfyUI-Hunyuan3D-Part",
+        "ver": "2987c517179dfa35ad26c036bd387105fae63f31",
+        "Node name for S&R": "Hunyuan3D_P3SAM_Segmentation"
+      },
+      "widgets_values": [
+        2697069851,
+        "randomize",
+        100000,
+        400,
+        8,
+        0.95,
+        true,
+        false
+      ]
+    },
+    {
+      "id": 3,
+      "type": "GeomPackPreviewBoundingBoxesVTK",
+      "pos": [
+        925.653606442591,
+        152.87850461578446
+      ],
+      "size": [
+        512,
+        722
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "trimesh",
+          "type": "TRIMESH",
+          "link": 3
+        },
+        {
+          "name": "bboxes",
+          "type": "BBOXES_3D",
+          "link": 2
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfyui-geometrypack",
+        "ver": "e0d26b95c8e0b72fccc40f27912c41f31f4c2d5d",
+        "Node name for S&R": "GeomPackPreviewBoundingBoxesVTK"
+      },
+      "widgets_values": [
+        2,
+        ""
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      1,
+      0,
+      "TRIMESH"
+    ],
+    [
+      2,
+      1,
+      0,
+      3,
+      1,
+      "BBOXES_3D"
+    ],
+    [
+      3,
+      1,
+      2,
+      3,
+      0,
+      "TRIMESH"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.080349165554191,
+      "offset": [
+        -160.44259239829617,
+        39.18461227893197
+      ]
+    },
+    "frontendVersion": "1.28.8"
+  },
+  "version": 0.4
+}

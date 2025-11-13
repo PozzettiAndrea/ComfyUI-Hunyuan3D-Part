@@ -830,14 +830,22 @@ def load(
     ckpt_only: bool = False,
 ):
     if name in MODELS:
-        print(f"Loading checkpoint from HuggingFace: {name} ...")
-        ckpt_path = hf_hub_download(
-            repo_id=repo_id,
-            filename=f"{name}.pth",
-            repo_type="model",
-            revision="main",
-            local_dir=download_root or os.path.expanduser("~/.cache/sonata/ckpt"),
-        )
+        cache_dir = download_root or os.path.expanduser("~/.cache/sonata/ckpt")
+        cached_file = os.path.join(cache_dir, f"{name}.pth")
+
+        if os.path.exists(cached_file):
+            print(f"Loading {name} from cache: {cached_file}")
+            ckpt_path = cached_file
+        else:
+            print(f"Downloading {name} from HuggingFace (first time)...")
+            ckpt_path = hf_hub_download(
+                repo_id=repo_id,
+                filename=f"{name}.pth",
+                repo_type="model",
+                revision="main",
+                local_dir=cache_dir,
+            )
+            print(f"Downloaded to: {ckpt_path}")
     elif os.path.isfile(name):
         print(f"Loading checkpoint in local path: {name} ...")
         ckpt_path = name

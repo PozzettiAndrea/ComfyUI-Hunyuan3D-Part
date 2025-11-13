@@ -620,6 +620,11 @@ class PointCrossAttentionEncoder(nn.Module):
 
         # Randomly select random surface points and random query points
         input_random_pc_size = int(num_random_query * self.downsample_ratio)
+        # Clamp to available points (checkpoint may have different num_latents than config)
+        original_size = input_random_pc_size
+        input_random_pc_size = min(input_random_pc_size, random_pc.shape[1])
+        if original_size != input_random_pc_size:
+            print(f"[X-Part] DEBUG: Clamped input_random_pc_size from {original_size} to {input_random_pc_size} (available: {random_pc.shape[1]})")
         random_query_ratio = num_random_query / input_random_pc_size
         idx_random_pc = torch.randperm(random_pc.shape[1], device=random_pc.device)[
             :input_random_pc_size
@@ -636,6 +641,11 @@ class PointCrossAttentionEncoder(nn.Module):
 
         # Randomly select sharpedge surface points and sharpedge query points
         input_sharpedge_pc_size = int(num_sharpedge_query * self.downsample_ratio)
+        # Clamp to available points (checkpoint may have different num_latents than config)
+        original_sharpedge_size = input_sharpedge_pc_size
+        input_sharpedge_pc_size = min(input_sharpedge_pc_size, sharpedge_pc.shape[1])
+        if original_sharpedge_size != input_sharpedge_pc_size and input_sharpedge_pc_size > 0:
+            print(f"[X-Part] DEBUG: Clamped input_sharpedge_pc_size from {original_sharpedge_size} to {input_sharpedge_pc_size} (available: {sharpedge_pc.shape[1]})")
         if input_sharpedge_pc_size == 0:
             input_sharpedge_pc = torch.zeros(B, 0, D, dtype=input_random_pc.dtype).to(
                 pc.device
