@@ -49,7 +49,7 @@
   "shuffle_orders": true,
   "pre_norm": true,
   "enable_rpe": false,
-  "enable_flash": true,
+  "enable_flash": false,
   "upcast_attention": false,
   "upcast_softmax": false,
   "traceable": true,

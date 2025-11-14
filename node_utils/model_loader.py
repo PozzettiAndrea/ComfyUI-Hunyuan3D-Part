@@ -66,6 +66,30 @@ class ModelCache:
                     f"Missing dependency? Check requirements.txt"
                 )
 
+            # Check if flash_attn is installed and update sonata config if needed
+            try:
+                import flash_attn
+                flash_attn_available = True
+            except ImportError:
+                flash_attn_available = False
+                print("[Hunyuan3D] flash_attn not installed, will use standard attention (10-20% slower)")
+
+                # Disable flash attention in sonata config
+                sonata_config_path = XPART_PARTGEN_PATH / "config" / "sonata.json"
+                if sonata_config_path.exists():
+                    import json
+                    try:
+                        with open(sonata_config_path, 'r') as f:
+                            sonata_config = json.load(f)
+
+                        if sonata_config.get('enable_flash', False):
+                            sonata_config['enable_flash'] = False
+                            with open(sonata_config_path, 'w') as f:
+                                json.dump(sonata_config, f, indent=2)
+                            print("[Hunyuan3D] Disabled flash attention in sonata config")
+                    except Exception as e:
+                        print(f"[Hunyuan3D] Warning: Could not modify sonata config: {e}")
+
             print(f"[Hunyuan3D] Loading P3-SAM model...")
             if ckpt_path is None:
                 print("[Hunyuan3D] No checkpoint path provided, will auto-download from HuggingFace")
