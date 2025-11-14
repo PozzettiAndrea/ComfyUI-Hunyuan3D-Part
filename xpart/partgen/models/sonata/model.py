@@ -863,8 +863,13 @@ def load(
     if ckpt_only:
         return ckpt
 
-    # 关闭flash attention
-    # ckpt["config"]['enable_flash'] = False
+    # Disable flash attention if not available
+    try:
+        import flash_attn
+    except ImportError:
+        if ckpt["config"].get('enable_flash', False):
+            print("[Sonata] flash_attn not installed, disabling flash attention")
+            ckpt["config"]['enable_flash'] = False
 
     model = PointTransformerV3(**ckpt["config"])
     model.load_state_dict(ckpt["state_dict"])

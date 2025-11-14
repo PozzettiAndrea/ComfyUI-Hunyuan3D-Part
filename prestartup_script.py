@@ -7,6 +7,7 @@ Must be FAST (<2 seconds) - no heavy imports!
 Purpose:
 - Setup LD_LIBRARY_PATH for CUDA extensions
 - Quick validation checks
+- Copy example workflows to user directory with H3DPART- prefix
 - One-time first-run setup
 
 Based on ComfyUI-HunyuanX pre-startup pattern.
@@ -17,6 +18,8 @@ import sys
 import site
 from pathlib import Path
 import importlib.util
+import shutil
+import json
 
 
 def get_node_dir():
@@ -118,6 +121,125 @@ def check_dependencies():
     return True
 
 
+def copy_workflows_to_user():
+    """
+    Copy example workflows to user workflows directory with H3DPART- prefix.
+
+    Copies all .json files from workflows/ to ComfyUI/user/default/workflows/
+    with the prefix "H3DPART-". Only copies if file doesn't exist or has changed.
+    """
+    try:
+        node_dir = get_node_dir()
+        workflows_source = node_dir / "workflows"
+
+        # Find ComfyUI root (3 levels up from custom_nodes/ComfyUI-Hunyuan3D-Part)
+        comfyui_root = node_dir.parent.parent
+        workflows_target = comfyui_root / "user" / "default" / "workflows"
+
+        # Check if source workflows directory exists
+        if not workflows_source.exists():
+            return
+
+        # Create target directory if it doesn't exist
+        workflows_target.mkdir(parents=True, exist_ok=True)
+
+        # Copy all .json workflow files
+        workflow_files = list(workflows_source.glob("*.json"))
+
+        if not workflow_files:
+            return
+
+        copied_count = 0
+        for src_file in workflow_files:
+            # Create target filename with H3DPART- prefix
+            target_file = workflows_target / f"H3DPART-{src_file.name}"
+
+            # Check if we should copy (file doesn't exist or content differs)
+            should_copy = False
+
+            if not target_file.exists():
+                should_copy = True
+            else:
+                # Compare file contents to avoid overwriting user modifications
+                try:
+                    with open(src_file, 'r') as f1, open(target_file, 'r') as f2:
+                        # Parse as JSON to compare (handles formatting differences)
+                        src_json = json.load(f1)
+                        target_json = json.load(f2)
+                        if src_json != target_json:
+                            should_copy = True
+                except:
+                    # If JSON parse fails, compare raw content
+                    should_copy = (src_file.read_bytes() != target_file.read_bytes())
+
+            if should_copy:
+                shutil.copy2(src_file, target_file)
+                copied_count += 1
+
+        if copied_count > 0:
+            print(f"[Hunyuan3D] Copied {copied_count} workflow(s) to user directory")
+
+    except Exception as e:
+        # Silent fail - not critical for node functionality
+        print(f"[Hunyuan3D] Warning: Could not copy workflows: {e}")
+        pass
+
+
+def copy_assets_to_input():
+    """
+    Copy asset files to ComfyUI input/3d directory.
+
+    Copies all files from assets/ to ComfyUI/input/3d/
+    Only copies if file doesn't exist or has changed.
+    """
+    try:
+        node_dir = get_node_dir()
+        assets_source = node_dir / "assets"
+
+        # Find ComfyUI root (2 levels up from custom_nodes/ComfyUI-Hunyuan3D-Part)
+        comfyui_root = node_dir.parent.parent
+        assets_target = comfyui_root / "input" / "3d"
+
+        # Check if source assets directory exists
+        if not assets_source.exists():
+            return
+
+        # Create target directory if it doesn't exist
+        assets_target.mkdir(parents=True, exist_ok=True)
+
+        # Get all files from assets directory
+        asset_files = [f for f in assets_source.iterdir() if f.is_file()]
+
+        if not asset_files:
+            return
+
+        copied_count = 0
+        for src_file in asset_files:
+            # Create target filename (no prefix for assets)
+            target_file = assets_target / src_file.name
+
+            # Check if we should copy (file doesn't exist or content differs)
+            should_copy = False
+
+            if not target_file.exists():
+                should_copy = True
+            else:
+                # Compare file contents (byte comparison for binary files)
+                should_copy = (src_file.read_bytes() != target_file.read_bytes())
+
+            if should_copy:
+                shutil.copy2(src_file, target_file)
+                copied_count += 1
+
+        if copied_count > 0:
+            print(f"[Hunyuan3D] Copied {copied_count} asset(s) to input/3d directory")
+
+    except Exception as e:
+        # Silent fail - not critical for node functionality
+        print(f"[Hunyuan3D] Warning: Could not copy assets: {e}")
+        pass
+
+
 def main():
     """
     Main pre-startup routine.
@@ -131,6 +253,12 @@ def main():
     # Quick validation (don't block startup if validation fails)
     repo_ok = check_hunyuan_installation()
     deps_ok = check_dependencies()
+
+    # Copy example workflows to user directory
+    copy_workflows_to_user()
+
+    # Copy asset files to input/3d directory
+    copy_assets_to_input()
 
     # Only print if everything is OK (reduce console spam)
     if repo_ok and deps_ok:

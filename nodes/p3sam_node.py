@@ -201,11 +201,33 @@ class LoadMesh:
 
     @classmethod
     def INPUT_TYPES(cls):
+        # Get input directory
+        input_dir = folder_paths.get_input_directory()
+
+        # Recursively scan for mesh files
+        mesh_extensions = {".obj", ".glb", ".gltf", ".ply", ".stl", ".fbx"}
+        mesh_files = []
+
+        # Walk through input directory recursively
+        for root, dirs, files in os.walk(input_dir):
+            for file in files:
+                if any(file.lower().endswith(ext) for ext in mesh_extensions):
+                    # Get relative path from input directory
+                    full_path = os.path.join(root, file)
+                    rel_path = os.path.relpath(full_path, input_dir)
+                    mesh_files.append(rel_path)
+
+        # Sort mesh files
+        mesh_files.sort()
+
+        # If no files found, provide empty string as default
+        if not mesh_files:
+            mesh_files = [""]
+
         return {
             "required": {
-                "mesh_path": ("STRING", {
-                    "default": "",
-                    "multiline": False
+                "mesh": (mesh_files, {
+                    "default": mesh_files[0] if mesh_files else ""
                 }),
             },
         }
@@ -215,15 +237,44 @@ class LoadMesh:
     FUNCTION = "load"
     CATEGORY = "Hunyuan3D"
 
-    def load(self, mesh_path):
+    @classmethod
+    def VALIDATE_INPUTS(cls, mesh):
+        """Validate mesh input - accept both relative and absolute paths for backward compatibility."""
+        # Allow empty string
+        if not mesh:
+            return True
+
+        # If it's an absolute path, check if file exists
+        if os.path.isabs(mesh):
+            if os.path.exists(mesh):
+                return True
+            return f"Mesh file not found: {mesh}"
+
+        # If it's a relative path, check in input directory
+        input_dir = folder_paths.get_input_directory()
+        full_path = os.path.join(input_dir, mesh)
+        if os.path.exists(full_path):
+            return True
+
+        return f"Mesh file not found: {mesh}"
+
+    def load(self, mesh):
         """Load a mesh file and return as TRIMESH type."""
         try:
-            print(f"[LoadMesh] Loading mesh from: {mesh_path}")
-            mesh = load_mesh(mesh_path)
+            # Handle both absolute and relative paths for backward compatibility
+            if os.path.isabs(mesh):
+                # Absolute path from old workflows - use directly
+                mesh_path = mesh
+            else:
+                # Relative path - resolve using ComfyUI's annotation system
+                mesh_path = folder_paths.get_annotated_filepath(mesh)
 
-            print(f"[LoadMesh] Loaded mesh with {len(mesh.vertices)} vertices, {len(mesh.faces)} faces")
+            print(f"[LoadMesh] Loading mesh from: {mesh_path}")
+            mesh_obj = load_mesh(mesh_path)
+
+            print(f"[LoadMesh] Loaded mesh with {len(mesh_obj.vertices)} vertices, {len(mesh_obj.faces)} faces")
             # Return raw trimesh object for compatibility with GeometryPack
-            return (mesh,)
+            return (mesh_obj,)
 
         except Exception as e:
             print(f"[LoadMesh] Error loading mesh: {str(e)}")
