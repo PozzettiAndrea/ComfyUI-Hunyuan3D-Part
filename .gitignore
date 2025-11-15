@@ -19,6 +19,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+*.ipynb_checkpoints
 
 # Virtual environments
 venv/
@@ -39,23 +40,11 @@ weights/
 *.safetensors
 *.pt
 
-# Output files
-output/
-*.glb
-*.obj
-*.ply
-*.stl
-
 # Temporary files
 *.tmp
 *.log
 .DS_Store
 test_model_loading.py
-
-# ComfyUI specific
-*.png
-*.jpg
-*.jpeg
 
 # CUDA compilation
 *.o

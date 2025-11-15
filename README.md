@@ -1,6 +1,7 @@
 # ComfyUI-Hunyuan3D-Part
 
-**⚠️ Work in Progress**
+![segment](docs/segmentation.png)
+![segment_and_remesh](docs/segmentation_and_partgen.png)
 
 ComfyUI custom nodes for Hunyuan3D-Part: 3D part segmentation and generation.
 
