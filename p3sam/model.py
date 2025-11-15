@@ -28,7 +28,14 @@ The model is composed of three parts:
 '''
 def build_P3SAM(self): #build p3sam
     ######################## Sonata ########################
-    self.sonata = sonata.load("sonata", repo_id="facebook/sonata", download_root='/root/sonata')
+    # Use ComfyUI's models folder for Sonata model
+    try:
+        import folder_paths
+        sonata_cache = os.path.join(folder_paths.models_dir, "sonata")
+    except:
+        sonata_cache = os.path.expanduser("~/.cache/sonata/ckpt")
+
+    self.sonata = sonata.load("sonata", repo_id="facebook/sonata", download_root=sonata_cache)
     self.mlp = nn.Sequential(
             nn.Linear(1232, 512),
             nn.GELU(),

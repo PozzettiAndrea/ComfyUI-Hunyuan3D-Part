@@ -22,8 +22,7 @@ from collections import defaultdict
 import numba 
 from numba import njit
 
-sys.path.append('..')
-from model import build_P3SAM, load_state_dict
+from ...p3sam.model import build_P3SAM, load_state_dict
 
 class P3SAM(nn.Module):
     def __init__(self):
