@@ -207,9 +207,9 @@ class LoadXPartDiTModel:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "precision": (["float32", "float16"], {
-                    "default": "float32",
-                    "tooltip": "Model precision. float32 = compatibility (RTX 5090). float16 = faster but may not work on all GPUs."
+                "precision": (["bfloat16", "float16"], {
+                    "default": "bfloat16",
+                    "tooltip": "Model precision. bfloat16 = native format (recommended). float16 = alternative half-precision."
                 }),
                 "cache_model": ("BOOLEAN", {
                     "default": True,
@@ -268,7 +268,7 @@ class LoadXPartDiTModel:
             model.load_state_dict(state_dict, strict=False)
 
             # Set precision and eval mode
-            dtype = torch.float32 if precision == "float32" else torch.float16
+            dtype = torch.float16 if precision == "float16" else torch.bfloat16
             model = model.to(device=self.device, dtype=dtype).eval()
 
             print(f"[Load DiT] ✓ DiT model loaded ({time.time()-t0:.2f}s)")
@@ -299,9 +299,9 @@ class LoadXPartVAE:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "precision": (["float32", "float16"], {
-                    "default": "float32",
-                    "tooltip": "Model precision. float32 = compatibility. float16 = faster but may not work on all GPUs."
+                "precision": (["bfloat16", "float16"], {
+                    "default": "bfloat16",
+                    "tooltip": "Model precision. bfloat16 = native format (recommended). float16 = alternative half-precision."
                 }),
                 "cache_model": ("BOOLEAN", {
                     "default": True,
@@ -359,7 +359,7 @@ class LoadXPartVAE:
             vae.load_state_dict(state_dict, strict=False)
 
             # Set precision and eval mode
-            dtype = torch.float32 if precision == "float32" else torch.float16
+            dtype = torch.float16 if precision == "float16" else torch.bfloat16
             vae = vae.to(device=self.device, dtype=dtype).eval()
 
             print(f"[Load VAE] ✓ VAE loaded ({time.time()-t0:.2f}s)")
@@ -391,9 +391,9 @@ class LoadXPartConditioner:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "precision": (["float32", "float16"], {
-                    "default": "float32",
-                    "tooltip": "Model precision. float32 = compatibility. float16 = faster but may not work on all GPUs."
+                "precision": (["bfloat16", "float16"], {
+                    "default": "bfloat16",
+                    "tooltip": "Model precision. bfloat16 = native format (recommended). float16 = alternative half-precision."
                 }),
                 "cache_model": ("BOOLEAN", {
                     "default": True,
@@ -466,7 +466,7 @@ class LoadXPartConditioner:
             conditioner.load_state_dict(state_dict, strict=False)
 
             # Set precision and eval mode
-            dtype = torch.float32 if precision == "float32" else torch.float16
+            dtype = torch.float16 if precision == "float16" else torch.bfloat16
             conditioner = conditioner.to(device=self.device, dtype=dtype).eval()
 
             print(f"[Load Conditioner] ✓ Conditioner loaded ({time.time()-t0:.2f}s)")

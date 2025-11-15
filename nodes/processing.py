@@ -58,7 +58,7 @@ class P3SAMSegmentMesh:
                     "tooltip": "Number of prompt points for segmentation. Higher = better separation."
                 }),
                 "prompt_bs": ("INT", {
-                    "default": 32,
+                    "default": 4,
                     "min": 8,
                     "max": 128,
                     "step": 8,
@@ -78,8 +78,8 @@ class P3SAMSegmentMesh:
             },
         }
 
-    RETURN_TYPES = ("BBOXES_3D", "FACE_IDS", "TRIMESH", "STRING")
-    RETURN_NAMES = ("bounding_boxes", "face_ids", "mesh", "preview_path")
+    RETURN_TYPES = ("TRIMESH", "BBOXES_3D", "FACE_IDS", "STRING")
+    RETURN_NAMES = ("mesh", "bounding_boxes", "face_ids", "preview_path")
     FUNCTION = "segment"
     CATEGORY = "Hunyuan3D/Processing"
 
@@ -155,7 +155,7 @@ class P3SAMSegmentMesh:
                 'num_parts': len(np.unique(face_ids))
             }
 
-            return (bboxes_output, face_ids_output, processed_mesh, preview_path)
+            return (processed_mesh, bboxes_output, face_ids_output, preview_path)
 
         except Exception as e:
             print(f"[P3-SAM Segment] Error: {e}")
