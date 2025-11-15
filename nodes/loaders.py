@@ -465,9 +465,28 @@ class LoadXPartConditioner:
             state_dict = load_file(conditioner_file, device=self.device)
             conditioner.load_state_dict(state_dict, strict=False)
 
-            # Set precision and eval mode
+            # Set precision with selective dtype conversion
+            # IMPORTANT: Keep seg_feat_encoder (Sonata) in float32 for spconv compatibility
             dtype = torch.float16 if precision == "float16" else torch.bfloat16
-            conditioner = conditioner.to(device=self.device, dtype=dtype).eval()
+
+            # Convert sub-modules selectively to fp16/bf16
+            if hasattr(conditioner, 'geo_encoder') and conditioner.geo_encoder is not None:
+                conditioner.geo_encoder = conditioner.geo_encoder.to(dtype=dtype)
+            if hasattr(conditioner, 'obj_encoder') and conditioner.obj_encoder is not None:
+                conditioner.obj_encoder = conditioner.obj_encoder.to(dtype=dtype)
+            if hasattr(conditioner, 'geo_out_proj') and conditioner.geo_out_proj is not None:
+                conditioner.geo_out_proj = conditioner.geo_out_proj.to(dtype=dtype)
+            if hasattr(conditioner, 'obj_out_proj') and conditioner.obj_out_proj is not None:
+                conditioner.obj_out_proj = conditioner.obj_out_proj.to(dtype=dtype)
+            if hasattr(conditioner, 'seg_feat_outproj') and conditioner.seg_feat_outproj is not None:
+                conditioner.seg_feat_outproj = conditioner.seg_feat_outproj.to(dtype=dtype)
+
+            # Keep seg_feat_encoder (Sonata) in float32 for numerical stability and spconv compatibility
+            if hasattr(conditioner, 'seg_feat_encoder') and conditioner.seg_feat_encoder is not None:
+                conditioner.seg_feat_encoder = conditioner.seg_feat_encoder.to(dtype=torch.float32)
+
+            # Move to device and set eval mode
+            conditioner = conditioner.to(device=self.device).eval()
 
             print(f"[Load Conditioner] ✓ Conditioner loaded ({time.time()-t0:.2f}s)")
 

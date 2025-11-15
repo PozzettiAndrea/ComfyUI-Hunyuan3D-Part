@@ -292,7 +292,8 @@ class XPartGenerateParts:
                 conditioner=conditioner,
                 bbox_predictor=None,  # Not used when aabb is provided
                 device=self.device,
-                dtype=dtype
+                dtype=dtype,
+                verbose=True  # Required to return full tuple format
             )
 
             print(f"[X-Part Generate] Running generation...")
