@@ -1,0 +1,271 @@
+{
+  "id": "5a72861b-5dc8-4e00-8190-bff2a61962a7",
+  "revision": 0,
+  "last_node_id": 16,
+  "last_link_id": 20,
+  "nodes": [
+    {
+      "id": 9,
+      "type": "LoadSonataModel",
+      "pos": [
+        392.13302219707236,
+        351.89073924482244
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "sonata_model",
+          "type": "MODEL",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hunyuan3d-part",
+        "ver": "3225ee8fe61e3616a5485dc3466dc3e16e64198c",
+        "Node name for S&R": "LoadSonataModel"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 11,
+      "type": "LoadP3SAMSegmentor",
+      "pos": [
+        388.1211175733699,
+        464.0709425778168
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "p3sam_model",
+          "type": "MODEL",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hunyuan3d-part",
+        "ver": "3225ee8fe61e3616a5485dc3466dc3e16e64198c",
+        "Node name for S&R": "LoadP3SAMSegmentor"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 2,
+      "type": "GeomPackLoadMesh",
+      "pos": [
+        103.96580327161442,
+        186.44736865716973
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-geometrypack",
+        "ver": "e0d26b95c8e0b72fccc40f27912c41f31f4c2d5d",
+        "Node name for S&R": "GeomPackLoadMesh"
+      },
+      "widgets_values": [
+        "3d/utah_teapot.stl"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "GeomPackPreviewBoundingBoxesVTK",
+      "pos": [
+        745.1179290012046,
+        399.8215899061392
+      ],
+      "size": [
+        512,
+        722
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "trimesh",
+          "type": "TRIMESH",
+          "link": 13
+        },
+        {
+          "name": "bboxes",
+          "type": "BBOXES_3D",
+          "link": 14
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfyui-geometrypack",
+        "ver": "e0d26b95c8e0b72fccc40f27912c41f31f4c2d5d",
+        "Node name for S&R": "GeomPackPreviewBoundingBoxesVTK"
+      },
+      "widgets_values": [
+        2,
+        ""
+      ]
+    },
+    {
+      "id": 7,
+      "type": "P3SAMSegmentMesh",
+      "pos": [
+        444.5546592758111,
+        -78.78744086125654
+      ],
+      "size": [
+        270,
+        262
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "link": 10
+        },
+        {
+          "name": "sonata_model",
+          "type": "MODEL",
+          "link": 8
+        },
+        {
+          "name": "p3sam_model",
+          "type": "MODEL",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "links": [
+            13
+          ]
+        },
+        {
+          "name": "bounding_boxes",
+          "type": "BBOXES_3D",
+          "links": [
+            14
+          ]
+        },
+        {
+          "name": "face_ids",
+          "type": "FACE_IDS",
+          "links": []
+        },
+        {
+          "name": "preview_path",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hunyuan3d-part",
+        "ver": "3225ee8fe61e3616a5485dc3466dc3e16e64198c",
+        "Node name for S&R": "P3SAMSegmentMesh"
+      },
+      "widgets_values": [
+        81555406,
+        "randomize",
+        100000,
+        400,
+        8,
+        0.95,
+        true
+      ]
+    }
+  ],
+  "links": [
+    [
+      8,
+      9,
+      0,
+      7,
+      1,
+      "MODEL"
+    ],
+    [
+      9,
+      11,
+      0,
+      7,
+      2,
+      "MODEL"
+    ],
+    [
+      10,
+      2,
+      0,
+      7,
+      0,
+      "TRIMESH"
+    ],
+    [
+      13,
+      7,
+      0,
+      3,
+      0,
+      "TRIMESH"
+    ],
+    [
+      14,
+      7,
+      1,
+      3,
+      1,
+      "BBOXES_3D"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9983067682399266,
+      "offset": [
+        2.5888736453225363,
+        -78.60199136048064
+      ]
+    },
+    "frontendVersion": "1.28.8"
+  },
+  "version": 0.4
+}
