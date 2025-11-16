@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-hunyuan3d-part"
 description = "Hunyuan3D-Part nodes for ComfyUI: 3D part segmentation with P3-SAM and high-fidelity part generation with X-Part diffusion."
-version = "0.1.1"
+version = "0.1.2"
 license = {file = "LICENSE"}
 requires-python = ">=3.10"
 
@@ -52,21 +52,3 @@ Documentation = "https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part#readme
 PublisherId = "pznodes"
 DisplayName = "Hunyuan3D-Part"
 Icon = ""
-
-# IMPORTANT: Update these values before publishing:
-# 1. Replace YOUR_USERNAME with your GitHub username in [project.urls]
-# 2. Replace YOUR_PUBLISHER_ID with your ComfyUI registry publisher ID
-# 3. Get your publisher ID by registering at https://comfyregistry.org
-# 4. Add REGISTRY_ACCESS_TOKEN to your GitHub repository secrets
-#
-# Installation notes:
-# - This node requires CUDA-specific dependencies (spconv, torch-scatter, torch-cluster)
-# - These are automatically installed by install.py during first run
-# - Manual installation: Run `python install.py` in the node directory
-
-[tool.comfy.classifiers]
-# GPU Support
-"Accelerator :: NVIDIA CUDA" = true
-
-# Operating System
-"Operating System :: OS Independent" = true
