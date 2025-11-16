@@ -41,11 +41,8 @@ def test_import_loaders(project_root):
 
         # Check expected classes exist
         expected_classes = [
-            'LoadSonataModel',
             'LoadP3SAMSegmentor',
-            'LoadXPartDiTModel',
-            'LoadXPartVAE',
-            'LoadXPartConditioner',
+            'LoadXPartModels',
         ]
 
         for class_name in expected_classes:
@@ -67,7 +64,6 @@ def test_import_processing(project_root):
         from nodes import processing
 
         expected_classes = [
-            'P3SAMSegmentMesh',
             'XPartGenerateParts',
         ]
 
@@ -106,8 +102,8 @@ def test_import_cache(project_root):
         from nodes import cache
 
         expected_classes = [
-            'CacheMeshFeatures',
-            'P3SAMSegmentMeshCached',
+            'ComputeMeshFeatures',
+            'P3SAMSegmentMesh',
         ]
 
         for class_name in expected_classes:
@@ -294,7 +290,28 @@ def test_all_nodes_registered(project_root):
     sys.path.insert(0, str(project_root))
 
     try:
-        import __init__ as main_module
+        # Import node mappings directly from modules (not __init__.py which skips in pytest mode)
+        from nodes import (
+            LOADER_MAPPINGS,
+            PROCESSING_MAPPINGS,
+            MEMORY_MAPPINGS,
+            CACHE_MAPPINGS,
+            BBOX_IO_MAPPINGS,
+            VIEWER_MAPPINGS,
+            BBOX_VIZ_MAPPINGS,
+            MESH_IO_MAPPINGS,
+        )
+
+        # Aggregate all mappings like __init__.py does
+        registered = {}
+        registered.update(LOADER_MAPPINGS)
+        registered.update(PROCESSING_MAPPINGS)
+        registered.update(MEMORY_MAPPINGS)
+        registered.update(CACHE_MAPPINGS)
+        registered.update(BBOX_IO_MAPPINGS)
+        registered.update(VIEWER_MAPPINGS)
+        registered.update(BBOX_VIZ_MAPPINGS)
+        registered.update(MESH_IO_MAPPINGS)
 
         # Expected node categories based on our analysis
         expected_nodes = [
@@ -319,8 +336,8 @@ def test_all_nodes_registered(project_root):
             'Hunyuan3DPreviewBoundingBoxes',
         ]
 
-        registered = set(main_module.NODE_CLASS_MAPPINGS.keys())
-        missing = set(expected_nodes) - registered
+        registered_keys = set(registered.keys())
+        missing = set(expected_nodes) - registered_keys
 
         assert not missing, f"Missing registered nodes: {missing}"
 
