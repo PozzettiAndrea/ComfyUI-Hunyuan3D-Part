@@ -13,7 +13,29 @@ import numpy as np
 import trimesh
 import tempfile
 import os
+import sys
 from pathlib import Path
+
+# =============================================================================
+# Mock ComfyUI modules BEFORE any test imports
+# This must happen at module load time, not in fixtures
+# =============================================================================
+if 'folder_paths' not in sys.modules:
+    # Create mock folder_paths module
+    _mock_folder_paths = type(sys)('folder_paths')
+    _tmp_base = Path(tempfile.gettempdir()) / "comfyui_test"
+    _tmp_base.mkdir(exist_ok=True)
+    (_tmp_base / "output").mkdir(exist_ok=True)
+    (_tmp_base / "input").mkdir(exist_ok=True)
+    (_tmp_base / "models").mkdir(exist_ok=True)
+    (_tmp_base / "input" / "3d").mkdir(exist_ok=True)
+
+    _mock_folder_paths.get_output_directory = lambda: str(_tmp_base / "output")
+    _mock_folder_paths.get_input_directory = lambda: str(_tmp_base / "input")
+    _mock_folder_paths.models_dir = str(_tmp_base / "models")
+    _mock_folder_paths.get_folder_paths = lambda x: [str(_tmp_base / x)]
+
+    sys.modules['folder_paths'] = _mock_folder_paths
 
 
 @pytest.fixture
@@ -258,3 +280,5 @@ def mock_hf_hub(monkeypatch, tmp_path):
             monkeypatch.setattr(huggingface_hub, "snapshot_download", mock_snapshot_download)
         except ImportError:
             pass  # huggingface_hub not installed yet
+
+
