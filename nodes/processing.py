@@ -1,7 +1,7 @@
 """
 Processing Nodes for Hunyuan3D-Part.
 
-Refactored P3-SAM and X-Part nodes that accept model inputs
+X-Part generation node that accepts model inputs
 instead of loading models internally.
 """
 
@@ -17,158 +17,12 @@ from .core.mesh_utils import load_mesh, save_mesh, colorize_segmentation, get_te
 from .core.models.diffusion.schedulers import FlowMatchEulerDiscreteScheduler
 
 
-class P3SAMSegmentMesh:
-    """
-    Segment a 3D mesh using P3-SAM.
-
-    Takes mesh and P3-SAM model as inputs, outputs bounding boxes and segmentation.
-    Requires Sonata model for feature extraction.
-    """
-
-    def __init__(self):
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
-
-    @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "mesh": ("TRIMESH",),
-                "sonata_model": ("MODEL",),
-                "p3sam_model": ("MODEL",),
-                "seed": ("INT", {
-                    "default": 42,
-                    "min": 0,
-                    "max": 0xffffffff,
-                    "step": 1,
-                    "control_after_generate": "fixed",
-                    "tooltip": "Random seed for reproducibility."
-                }),
-                "point_num": ("INT", {
-                    "default": 100000,
-                    "min": 1000,
-                    "max": 500000,
-                    "step": 1000,
-                    "tooltip": "Number of points sampled from mesh. Higher = better quality but slower."
-                }),
-                "prompt_num": ("INT", {
-                    "default": 400,
-                    "min": 50,
-                    "max": 1000,
-                    "step": 10,
-                    "tooltip": "Number of prompt points for segmentation. Higher = better separation."
-                }),
-                "prompt_bs": ("INT", {
-                    "default": 4,
-                    "min": 8,
-                    "max": 128,
-                    "step": 8,
-                    "tooltip": "Prompt batch size. Higher = more VRAM but faster."
-                }),
-                "threshold": ("FLOAT", {
-                    "default": 0.95,
-                    "min": 0.7,
-                    "max": 0.999,
-                    "step": 0.01,
-                    "tooltip": "Merge threshold. Higher = fewer but larger parts."
-                }),
-                "post_process": ("BOOLEAN", {
-                    "default": True,
-                    "tooltip": "Enable connectivity-based post-processing."
-                }),
-            },
-        }
-
-    RETURN_TYPES = ("TRIMESH", "BBOXES_3D", "FACE_IDS", "STRING")
-    RETURN_NAMES = ("mesh", "bounding_boxes", "face_ids", "preview_path")
-    FUNCTION = "segment"
-    CATEGORY = "Hunyuan3D/Processing"
-
-    def segment(self, mesh, sonata_model, p3sam_model, seed, point_num, prompt_num, prompt_bs, threshold, post_process):
-        """Segment mesh into parts."""
-        try:
-            # Load mesh if needed
-            if isinstance(mesh, dict) and 'trimesh' in mesh:
-                mesh_obj = mesh['trimesh']
-            elif isinstance(mesh, str):
-                mesh_obj = load_mesh(mesh)
-            elif isinstance(mesh, trimesh.Trimesh):
-                mesh_obj = mesh
-            else:
-                mesh_obj = load_mesh(mesh)
-
-            # Extract models from MODEL dicts
-            sonata = sonata_model["model"]
-            p3sam = p3sam_model["model"]
-
-            # Ensure models are on GPU and in eval mode
-            sonata = sonata.to(self.device).eval()
-            p3sam = p3sam.to(self.device).eval()
-
-            # Import mesh_sam from core
-            from .core.p3sam_processing import mesh_sam
-
-            print(f"[P3-SAM Segment] Running segmentation with seed={seed}...")
-
-            # Run segmentation using the mesh_sam function
-            # We need to wrap models similar to AutoMask
-            p3sam_parallel = torch.nn.DataParallel(p3sam)
-
-            aabb, face_ids, processed_mesh = mesh_sam(
-                [p3sam, p3sam_parallel],
-                mesh_obj,
-                save_path=None,
-                point_num=point_num,
-                prompt_num=prompt_num,
-                threshold=threshold,
-                post_process=post_process,
-                show_info=True,
-                save_mid_res=False,
-                clean_mesh_flag=True,
-                seed=seed,
-                prompt_bs=prompt_bs,
-            )
-
-            print(f"[P3-SAM Segment] Segmentation complete: found {len(aabb)} parts")
-
-            # Add metadata
-            processed_mesh.metadata['face_part_ids'] = face_ids
-            processed_mesh.metadata['part_bboxes'] = aabb
-            processed_mesh.metadata['num_parts'] = len(aabb)
-
-            # Create colored visualization
-            colored_mesh = colorize_segmentation(processed_mesh, face_ids, seed=seed)
-
-            # Save preview
-            output_dir = folder_paths.get_output_directory()
-            preview_path = os.path.join(output_dir, f"p3sam_segmentation_{seed}.glb")
-            save_mesh(colored_mesh, preview_path)
-            print(f"[P3-SAM Segment] Saved preview to: {preview_path}")
-
-            # Prepare outputs
-            bboxes_output = {
-                'bboxes': aabb,
-                'num_parts': len(aabb)
-            }
-
-            face_ids_output = {
-                'face_ids': face_ids,
-                'num_parts': len(np.unique(face_ids))
-            }
-
-            return (processed_mesh, bboxes_output, face_ids_output, preview_path)
-
-        except Exception as e:
-            print(f"[P3-SAM Segment] Error: {e}")
-            import traceback
-            traceback.print_exc()
-            raise
-
-
 class XPartGenerateParts:
     """
     Generate high-quality part meshes using X-Part.
 
-    Takes mesh, bounding boxes, and all X-Part model components as inputs.
+    Takes mesh_with_features (from ComputeMeshFeatures with all_points=True),
+    bounding boxes, and combined X-Part models as inputs.
     """
 
     def __init__(self):
@@ -178,11 +32,9 @@ class XPartGenerateParts:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "mesh": ("TRIMESH",),
+                "mesh_with_features": ("MESH_FEATURES",),  # REQUIRED - use ComputeMeshFeatures with all_points=True
                 "bounding_boxes": ("BBOXES_3D",),
-                "dit_model": ("MODEL",),
-                "vae_model": ("MODEL",),
-                "conditioner_model": ("MODEL",),
+                "xpart_models": ("XPART_MODELS",),
                 "octree_resolution": ("INT", {
                     "default": 256,
                     "min": 256,
@@ -219,6 +71,10 @@ class XPartGenerateParts:
                     "step": 50000,
                     "tooltip": "Extraction batch size. Higher = more VRAM but faster."
                 }),
+                "output_coordinate_system": (["Y-up (default)", "Z-up"], {
+                    "default": "Y-up (default)",
+                    "tooltip": "Output coordinate system. Use Z-up if your input mesh is Z-up (CAD convention like STL)."
+                }),
             },
         }
 
@@ -227,27 +83,26 @@ class XPartGenerateParts:
     FUNCTION = "generate"
     CATEGORY = "Hunyuan3D/Processing"
 
-    def generate(self, mesh, bounding_boxes, dit_model, vae_model, conditioner_model,
-                octree_resolution, num_inference_steps, guidance_scale, seed, num_chunks):
+    def generate(self, mesh_with_features, bounding_boxes, xpart_models, octree_resolution, num_inference_steps,
+                guidance_scale, seed, num_chunks, output_coordinate_system):
         """Generate part meshes."""
         try:
-            # Load mesh if needed
-            mesh_path = None
-            if isinstance(mesh, dict) and 'trimesh' in mesh:
-                mesh_obj = mesh['trimesh']
-                mesh_path = get_temp_mesh_path(prefix="xpart_input_", suffix=".glb")
-                save_mesh(mesh_obj, mesh_path)
-            elif isinstance(mesh, str):
-                mesh_obj = load_mesh(mesh)
-                mesh_path = mesh
-            elif isinstance(mesh, trimesh.Trimesh):
-                mesh_obj = mesh
-                mesh_path = get_temp_mesh_path(prefix="xpart_input_", suffix=".glb")
-                save_mesh(mesh_obj, mesh_path)
-            else:
-                mesh_obj = load_mesh(mesh)
-                mesh_path = get_temp_mesh_path(prefix="xpart_input_", suffix=".glb")
-                save_mesh(mesh_obj, mesh_path)
+            # Extract mesh and Sonata features from mesh_with_features cache
+            mesh_obj = mesh_with_features['mesh']
+            sonata_features = mesh_with_features['features']  # Pre-computed Sonata features
+            sonata_points = mesh_with_features['points']
+            sonata_normals = mesh_with_features['normals']
+            all_points_mode = mesh_with_features.get('all_points', False)
+
+            if not all_points_mode:
+                print(f"[X-Part Generate] WARNING: mesh_with_features was computed with all_points=False. "
+                      f"For best results, use ComputeMeshFeatures with all_points=True for X-Part generation.")
+
+            print(f"[X-Part Generate] Using pre-computed Sonata features ({len(sonata_features)} points)")
+
+            # Save mesh to temp file for pipeline
+            mesh_path = get_temp_mesh_path(prefix="xpart_input_", suffix=".glb")
+            save_mesh(mesh_obj, mesh_path)
 
             # Extract bounding boxes
             if isinstance(bounding_boxes, dict) and 'bboxes' in bounding_boxes:
@@ -257,11 +112,13 @@ class XPartGenerateParts:
                 aabb = None
                 print(f"[X-Part Generate] No bounding boxes, will auto-detect")
 
-            # Extract models
-            dit = dit_model["model"]
-            vae = vae_model["model"]
-            conditioner = conditioner_model["model"]
-            dtype_str = dit_model.get("dtype", "float32")
+            # Extract models from combined input
+            dit = xpart_models["dit"]
+            vae = xpart_models["vae"]
+            conditioner = xpart_models["conditioner"]
+            dtype_str = xpart_models.get("dtype", "float32")
+            cache_on_gpu = xpart_models.get("cache_on_gpu", True)
+
             dtype = torch.float32 if dtype_str == "float32" else torch.float16
 
             print(f"[X-Part Generate] Using {dtype_str} precision")
@@ -308,7 +165,14 @@ class XPartGenerateParts:
             else:
                 aabb_tensor = None
 
-            # Run generation
+            # Prepare precomputed Sonata features for conditioner
+            precomputed_sonata = {
+                'features': torch.as_tensor(sonata_features).to(self.device).float(),
+                'points': torch.as_tensor(sonata_points).to(self.device).float(),
+                'normals': torch.as_tensor(sonata_normals).to(self.device).float(),
+            }
+
+            # Run generation with precomputed Sonata features
             obj_mesh, (out_bbox, mesh_gt_bbox, explode_object) = pipeline(
                 mesh_path=mesh_path,
                 aabb=aabb_tensor,
@@ -317,10 +181,36 @@ class XPartGenerateParts:
                 guidance_scale=guidance_scale,
                 seed=seed,
                 num_chunks=num_chunks,
-                output_type="trimesh"
+                output_type="trimesh",
+                precomputed_sonata_features=precomputed_sonata  # Pass pre-computed features
             )
 
             print(f"[X-Part Generate] Generation complete!")
+
+            # Apply coordinate system transformation if requested
+            if output_coordinate_system == "Z-up":
+                print("[X-Part Generate] Converting output to Z-up coordinate system...")
+                # Y-up to Z-up: rotate -90° around X axis (trimesh row-major convention)
+                # This transforms: x' = x, y' = z, z' = -y
+                rotation_matrix = np.array([
+                    [1,  0,  0, 0],
+                    [0,  0,  1, 0],
+                    [0, -1,  0, 0],
+                    [0,  0,  0, 1]
+                ])
+                # Apply to scene meshes
+                if hasattr(obj_mesh, 'geometry'):  # It's a Scene
+                    for key in obj_mesh.geometry.keys():
+                        obj_mesh.geometry[key].apply_transform(rotation_matrix)
+                else:  # Single Trimesh
+                    obj_mesh.apply_transform(rotation_matrix)
+
+                if hasattr(out_bbox, 'geometry'):
+                    for key in out_bbox.geometry.keys():
+                        out_bbox.geometry[key].apply_transform(rotation_matrix)
+                else:
+                    out_bbox.apply_transform(rotation_matrix)
+                print("[X-Part Generate] ✓ Converted to Z-up")
 
             # Save outputs
             output_dir = folder_paths.get_output_directory()
@@ -340,6 +230,15 @@ class XPartGenerateParts:
                 except:
                     pass
 
+            # Auto-unload models if cache_on_gpu is False
+            if not cache_on_gpu:
+                print("[X-Part Generate] Auto-unloading models from GPU...")
+                dit.to("cpu")
+                vae.to("cpu")
+                conditioner.to("cpu")
+                torch.cuda.empty_cache()
+                print("[X-Part Generate] ✓ Models unloaded, VRAM freed")
+
             return (obj_mesh, out_bbox, parts_path, bbox_path)
 
         except Exception as e:
@@ -351,11 +250,9 @@ class XPartGenerateParts:
 
 # Node mappings
 NODE_CLASS_MAPPINGS = {
-    "P3SAMSegmentMesh": P3SAMSegmentMesh,
     "XPartGenerateParts": XPartGenerateParts,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "P3SAMSegmentMesh": "P3-SAM Segment Mesh",
     "XPartGenerateParts": "X-Part Generate Parts",
 }

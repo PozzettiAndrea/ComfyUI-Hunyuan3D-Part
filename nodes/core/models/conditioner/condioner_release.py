@@ -100,7 +100,7 @@ class Conditioner(torch.nn.Module):
             if hasattr(seg_feat_cfg, "output_dim"):
                 self.seg_feat_outproj = torch.nn.Linear(512, seg_feat_cfg.output_dim)
 
-    def forward(self, part_surface_inbbox, object_surface):
+    def forward(self, part_surface_inbbox, object_surface, precomputed_sonata_features=None):
         bz = part_surface_inbbox.shape[0]
         context = {}
         # geo_cond
@@ -122,14 +122,33 @@ class Conditioner(torch.nn.Module):
             # TODO: batchsize must be One
             num_parts = part_surface_inbbox.shape[0]
             with torch.autocast(device_type="cuda", dtype=torch.float32):
-                # encode sonata feature
-                # with torch.cuda.amp.autocast(enabled=False):
-                with torch.no_grad():
-                    point, normal = (
-                        object_surface[:1, ..., :3].float(),
-                        object_surface[:1, ..., 3:6].float(),
-                    )
-                    point_feat = self.seg_feat_encoder(point, normal)
+                # Use precomputed Sonata features if provided, otherwise compute
+                if precomputed_sonata_features is not None:
+                    # Map precomputed features to object_surface points via nearest-neighbor
+                    precomputed_points = precomputed_sonata_features['points']  # [N_pre, 3]
+                    precomputed_feats = precomputed_sonata_features['features']  # [N_pre, 512]
+
+                    # Get object surface points
+                    obj_points = object_surface[:1, ..., :3].float()  # [1, N_obj, 3]
+
+                    # Find nearest precomputed point for each object surface point
+                    with torch.no_grad():
+                        # Compute distances: [N_obj, N_pre]
+                        dists = torch.cdist(obj_points[0], precomputed_points.unsqueeze(0)[0])
+                        nearest_indices = torch.argmin(dists, dim=-1)  # [N_obj]
+
+                        # Gather features for each object surface point
+                        point_feat = precomputed_feats[nearest_indices].unsqueeze(0)  # [1, N_obj, 512]
+
+                    print(f"[Conditioner] Using precomputed Sonata features ({precomputed_feats.shape[0]} -> {point_feat.shape[1]} points)")
+                else:
+                    # Original: encode sonata feature
+                    with torch.no_grad():
+                        point, normal = (
+                            object_surface[:1, ..., :3].float(),
+                            object_surface[:1, ..., 3:6].float(),
+                        )
+                        point_feat = self.seg_feat_encoder(point, normal)
             # local feat
             if self.use_obj:
                 nearest_global_matches = torch.argmin(
