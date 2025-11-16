@@ -17,6 +17,8 @@ from .bbox_io_nodes import NODE_CLASS_MAPPINGS as BBOX_IO_MAPPINGS
 from .bbox_io_nodes import NODE_DISPLAY_NAME_MAPPINGS as BBOX_IO_DISPLAY_MAPPINGS
 from .exploded_viewer import NODE_CLASS_MAPPINGS as VIEWER_MAPPINGS
 from .exploded_viewer import NODE_DISPLAY_NAME_MAPPINGS as VIEWER_DISPLAY_MAPPINGS
+from .bbox_visualization import NODE_CLASS_MAPPINGS as BBOX_VIZ_MAPPINGS
+from .bbox_visualization import NODE_DISPLAY_NAME_MAPPINGS as BBOX_VIZ_DISPLAY_MAPPINGS
 
 __all__ = [
     "LOADER_MAPPINGS",
@@ -31,4 +33,6 @@ __all__ = [
     "BBOX_IO_DISPLAY_MAPPINGS",
     "VIEWER_MAPPINGS",
     "VIEWER_DISPLAY_MAPPINGS",
+    "BBOX_VIZ_MAPPINGS",
+    "BBOX_VIZ_DISPLAY_MAPPINGS",
 ]

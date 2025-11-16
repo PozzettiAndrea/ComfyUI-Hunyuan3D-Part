@@ -1,8 +1,8 @@
 {
   "id": "5a72861b-5dc8-4e00-8190-bff2a61962a7",
   "revision": 0,
-  "last_node_id": 19,
-  "last_link_id": 27,
+  "last_node_id": 20,
+  "last_link_id": 29,
   "nodes": [
     {
       "id": 9,
@@ -104,43 +104,6 @@
       ]
     },
     {
-      "id": 3,
-      "type": "GeomPackPreviewBoundingBoxesVTK",
-      "pos": [
-        745.1179290012046,
-        399.8215899061392
-      ],
-      "size": [
-        512,
-        722
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "trimesh",
-          "type": "TRIMESH",
-          "link": 13
-        },
-        {
-          "name": "bboxes",
-          "type": "BBOXES_3D",
-          "link": 14
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "cnr_id": "comfyui-geometrypack",
-        "ver": "e0d26b95c8e0b72fccc40f27912c41f31f4c2d5d",
-        "Node name for S&R": "GeomPackPreviewBoundingBoxesVTK"
-      },
-      "widgets_values": [
-        2,
-        ""
-      ]
-    },
-    {
       "id": 13,
       "type": "LoadXPartDiTModel",
       "pos": [
@@ -171,80 +134,6 @@
       },
       "widgets_values": [
         "float16",
-        true
-      ]
-    },
-    {
-      "id": 7,
-      "type": "P3SAMSegmentMesh",
-      "pos": [
-        444.5546592758111,
-        -78.78744086125654
-      ],
-      "size": [
-        270,
-        262
-      ],
-      "flags": {},
-      "order": 6,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "mesh",
-          "type": "TRIMESH",
-          "link": 10
-        },
-        {
-          "name": "sonata_model",
-          "type": "MODEL",
-          "link": 8
-        },
-        {
-          "name": "p3sam_model",
-          "type": "MODEL",
-          "link": 9
-        }
-      ],
-      "outputs": [
-        {
-          "name": "mesh",
-          "type": "TRIMESH",
-          "links": [
-            13,
-            21
-          ]
-        },
-        {
-          "name": "bounding_boxes",
-          "type": "BBOXES_3D",
-          "links": [
-            14,
-            22
-          ]
-        },
-        {
-          "name": "face_ids",
-          "type": "FACE_IDS",
-          "links": []
-        },
-        {
-          "name": "preview_path",
-          "type": "STRING",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfyui-hunyuan3d-part",
-        "ver": "3225ee8fe61e3616a5485dc3466dc3e16e64198c",
-        "Node name for S&R": "P3SAMSegmentMesh"
-      },
-      "widgets_values": [
-        1209614169,
-        "randomize",
-        100000,
-        400,
-        8,
-        0.95,
         true
       ]
     },
@@ -365,7 +254,7 @@
         258
       ],
       "flags": {},
-      "order": 8,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
@@ -429,7 +318,7 @@
         256,
         25,
         -1,
-        508061336831201,
+        35949164236874,
         "randomize",
         10000
       ]
@@ -469,11 +358,122 @@
         "cnr_id": "comfy-core",
         "ver": "0.3.68",
         "Node name for S&R": "Preview3D",
-        "Last Time Model File": "/home/shadeform/hpart_node/ComfyUI/output/xpart_parts_42.glb",
+        "Last Time Model File": "/home/shadeform/hpart_node/ComfyUI/output/xpart_parts_918821666635966.glb",
         "Resource Folder": "shadeform/hpart_node/ComfyUI/output"
       },
       "widgets_values": [
-        "/home/shadeform/hpart_node/ComfyUI/output/xpart_parts_42.glb",
+        "/home/shadeform/hpart_node/ComfyUI/output/xpart_parts_918821666635966.glb",
+        ""
+      ]
+    },
+    {
+      "id": 7,
+      "type": "P3SAMSegmentMesh",
+      "pos": [
+        444.5546592758111,
+        -78.78744086125654
+      ],
+      "size": [
+        270,
+        262
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "link": 10
+        },
+        {
+          "name": "sonata_model",
+          "type": "MODEL",
+          "link": 8
+        },
+        {
+          "name": "p3sam_model",
+          "type": "MODEL",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "links": [
+            21,
+            29
+          ]
+        },
+        {
+          "name": "bounding_boxes",
+          "type": "BBOXES_3D",
+          "links": [
+            22,
+            28
+          ]
+        },
+        {
+          "name": "face_ids",
+          "type": "FACE_IDS",
+          "links": []
+        },
+        {
+          "name": "preview_path",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hunyuan3d-part",
+        "ver": "3225ee8fe61e3616a5485dc3466dc3e16e64198c",
+        "Node name for S&R": "P3SAMSegmentMesh"
+      },
+      "widgets_values": [
+        774389686,
+        "randomize",
+        100000,
+        400,
+        8,
+        0.95,
+        true
+      ]
+    },
+    {
+      "id": 20,
+      "type": "Hunyuan3DPreviewBoundingBoxes",
+      "pos": [
+        781.97213263822,
+        329.8876230255323
+      ],
+      "size": [
+        512,
+        714
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "trimesh",
+          "type": "TRIMESH",
+          "link": 29
+        },
+        {
+          "name": "bboxes",
+          "type": "BBOXES_3D",
+          "link": 28
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfyui-hunyuan3d-part",
+        "ver": "0f07788d9eef3387c24edde1698d06e4c5d3c0d3",
+        "Node name for S&R": "Hunyuan3DPreviewBoundingBoxes"
+      },
+      "widgets_values": [
+        2,
         ""
       ]
     }
@@ -502,22 +502,6 @@
       7,
       0,
       "TRIMESH"
-    ],
-    [
-      13,
-      7,
-      0,
-      3,
-      0,
-      "TRIMESH"
-    ],
-    [
-      14,
-      7,
-      1,
-      3,
-      1,
-      "BBOXES_3D"
     ],
     [
       21,
@@ -574,6 +558,22 @@
       19,
       1,
       "STRING"
+    ],
+    [
+      28,
+      7,
+      1,
+      20,
+      1,
+      "BBOXES_3D"
+    ],
+    [
+      29,
+      7,
+      0,
+      20,
+      0,
+      "TRIMESH"
     ]
   ],
   "groups": [],
@@ -582,8 +582,8 @@
     "ds": {
       "scale": 0.7230991700746933,
       "offset": [
-        -363.7743943269406,
-        488.1893513801984
+        -93.0322256147605,
+        594.4269404678263
       ]
     },
     "frontendVersion": "1.28.8"

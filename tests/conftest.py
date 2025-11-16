@@ -43,7 +43,7 @@ def tiny_test_mesh():
     return trimesh.Trimesh(vertices=vertices, faces=faces)
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def small_test_mesh():
     """Create a small test mesh (sphere with ~500 faces)."""
     mesh = trimesh.creation.icosphere(subdivisions=3)
@@ -203,7 +203,7 @@ def mock_segmentation_result(tiny_test_mesh):
     }
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def project_root():
     """Get the project root directory."""
     return Path(__file__).parent.parent

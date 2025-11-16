@@ -26,6 +26,8 @@ if 'pytest' not in sys.modules:
         BBOX_IO_DISPLAY_MAPPINGS,
         VIEWER_MAPPINGS,
         VIEWER_DISPLAY_MAPPINGS,
+        BBOX_VIZ_MAPPINGS,
+        BBOX_VIZ_DISPLAY_MAPPINGS,
     )
 
     # Combine all node mappings
@@ -36,6 +38,7 @@ if 'pytest' not in sys.modules:
     NODE_CLASS_MAPPINGS.update(CACHE_MAPPINGS)
     NODE_CLASS_MAPPINGS.update(BBOX_IO_MAPPINGS)
     NODE_CLASS_MAPPINGS.update(VIEWER_MAPPINGS)
+    NODE_CLASS_MAPPINGS.update(BBOX_VIZ_MAPPINGS)
 
     NODE_DISPLAY_NAME_MAPPINGS = {}
     NODE_DISPLAY_NAME_MAPPINGS.update(LOADER_DISPLAY_MAPPINGS)
@@ -44,6 +47,7 @@ if 'pytest' not in sys.modules:
     NODE_DISPLAY_NAME_MAPPINGS.update(CACHE_DISPLAY_MAPPINGS)
     NODE_DISPLAY_NAME_MAPPINGS.update(BBOX_IO_DISPLAY_MAPPINGS)
     NODE_DISPLAY_NAME_MAPPINGS.update(VIEWER_DISPLAY_MAPPINGS)
+    NODE_DISPLAY_NAME_MAPPINGS.update(BBOX_VIZ_DISPLAY_MAPPINGS)
 
     # Web directory for custom UI (optional)
     WEB_DIRECTORY = "./web"
@@ -78,6 +82,7 @@ if 'pytest' not in sys.modules:
     print("")
     print("Visualization:")
     print("  Exploded Mesh Viewer - Interactive 3D viewer with explosion slider")
+    print("  Preview Bounding Boxes - View mesh with segmentation bboxes")
     print("="*60)
     print("Total nodes registered:", len(NODE_CLASS_MAPPINGS))
     print("Default inference steps: 25 (50% faster than original 50)")
