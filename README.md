@@ -1,7 +1,7 @@
 # ComfyUI-Hunyuan3D-Part
 
-![segment](docs/segmentation.png)
-![segment_and_remesh](docs/segmentation_and_partgen.png)
+![segment](docs/teapot_partgen.png)
+![segment_and_remesh](docs/teapot_segmentation.png)
 
 ComfyUI custom nodes for Hunyuan3D-Part: 3D part segmentation and generation.
 
@@ -9,16 +9,6 @@ ComfyUI custom nodes for Hunyuan3D-Part: 3D part segmentation and generation.
 
 - **P3-SAM Segmentation**: Segment 3D meshes into parts
 - **X-Part Generation**: Generate high-quality part meshes using diffusion
-- **Full Pipeline**: Combined node for complete workflow
-
-## Installation
-
-```bash
-cd ComfyUI/custom_nodes
-git clone [your-repo-url]
-cd ComfyUI-Hunyuan3D-Part
-python install.py
-```
 
 ## Credits
 
