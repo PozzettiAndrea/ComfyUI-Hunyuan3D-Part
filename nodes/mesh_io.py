@@ -13,7 +13,7 @@ try:
     import folder_paths
     COMFYUI_INPUT_FOLDER = folder_paths.get_input_directory()
     COMFYUI_OUTPUT_FOLDER = folder_paths.get_output_directory()
-except:
+except ImportError:
     # Fallback if folder_paths not available (e.g., during testing)
     COMFYUI_INPUT_FOLDER = None
     COMFYUI_OUTPUT_FOLDER = None

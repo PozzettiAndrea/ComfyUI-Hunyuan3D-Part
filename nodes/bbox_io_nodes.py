@@ -31,7 +31,7 @@ class SaveBoundingBoxes:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("file_path",)
     FUNCTION = "save"
-    CATEGORY = "Hunyuan3D"
+    CATEGORY = "Hunyuan3D/IO"
     OUTPUT_NODE = True
 
     def save(self, bounding_boxes, filename):
@@ -70,7 +70,7 @@ class SaveBoundingBoxes:
             print(f"[SaveBoundingBoxes] Error saving bounding boxes: {str(e)}")
             import traceback
             traceback.print_exc()
-            raise e
+            raise
 
 
 class LoadBoundingBoxes:
@@ -93,7 +93,7 @@ class LoadBoundingBoxes:
     RETURN_TYPES = ("BBOXES_3D",)
     RETURN_NAMES = ("bounding_boxes",)
     FUNCTION = "load"
-    CATEGORY = "Hunyuan3D"
+    CATEGORY = "Hunyuan3D/IO"
 
     def load(self, file_path):
         """Load bounding boxes from JSON file."""
@@ -138,7 +138,7 @@ class LoadBoundingBoxes:
             print(f"[LoadBoundingBoxes] Error loading bounding boxes: {str(e)}")
             import traceback
             traceback.print_exc()
-            raise e
+            raise
 
 
 # Node mappings for ComfyUI

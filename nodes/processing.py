@@ -227,8 +227,8 @@ class XPartGenerateParts:
             if mesh_path and mesh_path.startswith(tempfile.gettempdir()):
                 try:
                     os.remove(mesh_path)
-                except:
-                    pass
+                except (OSError, IOError) as cleanup_err:
+                    print(f"[X-Part Generate] Warning: Failed to clean temp file: {cleanup_err}")
 
             # Auto-unload models if cache_on_gpu is False
             if not cache_on_gpu:

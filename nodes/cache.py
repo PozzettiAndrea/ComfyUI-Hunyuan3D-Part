@@ -9,8 +9,12 @@ import torch
 import numpy as np
 import trimesh
 import hashlib
+from collections import OrderedDict
 
 from .core.mesh_utils import load_mesh
+
+# Maximum number of cached feature sets (to prevent unbounded memory growth)
+MAX_CACHE_SIZE = 10
 
 
 class ComputeMeshFeatures:
@@ -61,8 +65,8 @@ class ComputeMeshFeatures:
     FUNCTION = "compute_features"
     CATEGORY = "Hunyuan3D/Processing"
 
-    # Global cache storage
-    _feature_cache = {}
+    # Global cache storage with LRU eviction
+    _feature_cache = OrderedDict()
 
     def compute_features(self, mesh, p3sam_model, all_points, point_num, seed):
         """Compute mesh features using P3-SAM's internal Sonata encoder."""
@@ -83,6 +87,8 @@ class ComputeMeshFeatures:
             # Check if already cached
             if cache_key in ComputeMeshFeatures._feature_cache:
                 print(f"[Compute Features] ✓ Using cached features")
+                # Move to end to mark as recently used (LRU)
+                ComputeMeshFeatures._feature_cache.move_to_end(cache_key)
                 cached_data = ComputeMeshFeatures._feature_cache[cache_key]
                 return (cached_data,)
 
@@ -158,8 +164,13 @@ class ComputeMeshFeatures:
                 'seed': seed,
             }
 
-            # Store in cache
+            # Store in cache with LRU eviction
             ComputeMeshFeatures._feature_cache[cache_key] = cache_data
+
+            # Evict oldest entries if cache exceeds max size
+            while len(ComputeMeshFeatures._feature_cache) > MAX_CACHE_SIZE:
+                evicted_key, _ = ComputeMeshFeatures._feature_cache.popitem(last=False)
+                print(f"[Compute Features] Cache full, evicted oldest entry: {evicted_key[:32]}...")
 
             return (cache_data,)
 

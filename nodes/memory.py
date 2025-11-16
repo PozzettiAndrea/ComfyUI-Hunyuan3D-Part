@@ -141,20 +141,13 @@ class ClearAllModelCaches:
             print("[Clear Caches] Clearing all model caches...")
 
             # Import loader classes
-            from .loaders import (
-                LoadSonataModel,
-                LoadP3SAMSegmentor,
-                LoadXPartDiTModel,
-                LoadXPartVAE,
-                LoadXPartConditioner
-            )
+            from .loaders import LoadP3SAMSegmentor, LoadXPartModels
 
             # Clear cached models
-            LoadSonataModel._cached_model = None
             LoadP3SAMSegmentor._cached_model = None
-            LoadXPartDiTModel._cached_models = {}
-            LoadXPartVAE._cached_models = {}
-            LoadXPartConditioner._cached_models = {}
+            LoadXPartModels._cached_dit = {}
+            LoadXPartModels._cached_vae = {}
+            LoadXPartModels._cached_cond = {}
 
             print("[Clear Caches] ✓ Cleared model caches")
 
@@ -164,8 +157,8 @@ class ClearAllModelCaches:
                 ModelCache._p3sam_model = None
                 ModelCache._xpart_pipeline = None
                 print("[Clear Caches] ✓ Cleared legacy model cache")
-            except:
-                pass
+            except (ImportError, AttributeError):
+                pass  # Legacy cache module not present
 
             # Clear CUDA cache
             if torch.cuda.is_available():
