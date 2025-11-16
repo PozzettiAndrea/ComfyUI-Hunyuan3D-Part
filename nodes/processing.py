@@ -222,8 +222,8 @@ class XPartGenerateParts:
             },
         }
 
-    RETURN_TYPES = ("TRIMESH", "TRIMESH", "TRIMESH", "STRING", "STRING", "STRING")
-    RETURN_NAMES = ("part_meshes", "exploded_view", "bbox_viz", "parts_path", "exploded_path", "bbox_path")
+    RETURN_TYPES = ("TRIMESH", "TRIMESH", "STRING", "STRING")
+    RETURN_NAMES = ("part_meshes", "bbox_viz", "parts_path", "bbox_path")
     FUNCTION = "generate"
     CATEGORY = "Hunyuan3D/Processing"
 
@@ -329,10 +329,6 @@ class XPartGenerateParts:
             save_mesh(obj_mesh, parts_path)
             print(f"[X-Part Generate] Saved parts to: {parts_path}")
 
-            exploded_path = os.path.join(output_dir, f"xpart_exploded_{seed}.glb")
-            save_mesh(explode_object, exploded_path)
-            print(f"[X-Part Generate] Saved exploded view to: {exploded_path}")
-
             bbox_path = os.path.join(output_dir, f"xpart_bbox_{seed}.glb")
             save_mesh(out_bbox, bbox_path)
             print(f"[X-Part Generate] Saved bbox viz to: {bbox_path}")
@@ -344,7 +340,7 @@ class XPartGenerateParts:
                 except:
                     pass
 
-            return (obj_mesh, explode_object, out_bbox, parts_path, exploded_path, bbox_path)
+            return (obj_mesh, out_bbox, parts_path, bbox_path)
 
         except Exception as e:
             print(f"[X-Part Generate] Error: {e}")

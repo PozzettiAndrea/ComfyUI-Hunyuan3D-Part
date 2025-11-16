@@ -76,17 +76,20 @@ def check_hunyuan_installation():
     """
     node_dir = get_node_dir()
 
-    # Check internal p3sam directory
-    p3sam_path = node_dir / "p3sam"
-    xpart_path = node_dir / "xpart" / "partgen"
+    # Check for P3-SAM code in nodes/core/
+    p3sam_models = node_dir / "nodes" / "core" / "p3sam_models.py"
+    p3sam_processing = node_dir / "nodes" / "core" / "p3sam_processing.py"
 
-    if not p3sam_path.exists():
-        print(f"\n⚠️  WARNING: P3-SAM code not found at {p3sam_path}")
+    if not p3sam_models.exists() or not p3sam_processing.exists():
+        print(f"\n⚠️  WARNING: P3-SAM code not found at {node_dir / 'nodes' / 'core'}")
         print(f"   The package may be corrupted. Try reinstalling.")
         return False
 
-    if not xpart_path.exists():
-        print(f"\n⚠️  WARNING: X-Part code not found at {xpart_path}")
+    # Check for XPart code in nodes/core/
+    xpart_code = node_dir / "nodes" / "core" / "xpart_pipeline.py"
+
+    if not xpart_code.exists():
+        print(f"\n⚠️  WARNING: X-Part code not found at {xpart_code}")
         print(f"   The package may be corrupted. Try reinstalling.")
         return False
 

@@ -1,8 +1,8 @@
 {
   "id": "5a72861b-5dc8-4e00-8190-bff2a61962a7",
   "revision": 0,
-  "last_node_id": 16,
-  "last_link_id": 20,
+  "last_node_id": 19,
+  "last_link_id": 27,
   "nodes": [
     {
       "id": 9,
@@ -141,6 +141,40 @@
       ]
     },
     {
+      "id": 13,
+      "type": "LoadXPartDiTModel",
+      "pos": [
+        686.7469034882185,
+        -393.03190362299034
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "dit_model",
+          "type": "MODEL",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hunyuan3d-part",
+        "ver": "29be470ff906d0317efb8223918862ed497784f9",
+        "Node name for S&R": "LoadXPartDiTModel"
+      },
+      "widgets_values": [
+        "float16",
+        true
+      ]
+    },
+    {
       "id": 7,
       "type": "P3SAMSegmentMesh",
       "pos": [
@@ -177,7 +211,7 @@
           "type": "TRIMESH",
           "links": [
             13,
-            15
+            21
           ]
         },
         {
@@ -185,7 +219,7 @@
           "type": "BBOXES_3D",
           "links": [
             14,
-            16
+            22
           ]
         },
         {
@@ -205,226 +239,12 @@
         "Node name for S&R": "P3SAMSegmentMesh"
       },
       "widgets_values": [
-        81555406,
+        1209614169,
         "randomize",
         100000,
         400,
         8,
         0.95,
-        true
-      ]
-    },
-    {
-      "id": 12,
-      "type": "XPartGenerateParts",
-      "pos": [
-        857.8181847824399,
-        -55.005476012841875
-      ],
-      "size": [
-        282.451171875,
-        278
-      ],
-      "flags": {},
-      "order": 8,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "mesh",
-          "type": "TRIMESH",
-          "link": 15
-        },
-        {
-          "name": "bounding_boxes",
-          "type": "BBOXES_3D",
-          "link": 16
-        },
-        {
-          "name": "dit_model",
-          "type": "MODEL",
-          "link": 17
-        },
-        {
-          "name": "vae_model",
-          "type": "MODEL",
-          "link": 18
-        },
-        {
-          "name": "conditioner_model",
-          "type": "MODEL",
-          "link": 19
-        }
-      ],
-      "outputs": [
-        {
-          "name": "part_meshes",
-          "type": "TRIMESH",
-          "links": null
-        },
-        {
-          "name": "exploded_view",
-          "type": "TRIMESH",
-          "links": null
-        },
-        {
-          "name": "bbox_viz",
-          "type": "TRIMESH",
-          "links": null
-        },
-        {
-          "name": "parts_path",
-          "type": "STRING",
-          "links": [
-            20
-          ]
-        },
-        {
-          "name": "exploded_path",
-          "type": "STRING",
-          "links": null
-        },
-        {
-          "name": "bbox_path",
-          "type": "STRING",
-          "links": null
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfyui-hunyuan3d-part",
-        "ver": "29be470ff906d0317efb8223918862ed497784f9",
-        "Node name for S&R": "XPartGenerateParts"
-      },
-      "widgets_values": [
-        256,
-        25,
-        -1,
-        385190741827091,
-        "randomize",
-        10000
-      ]
-    },
-    {
-      "id": 16,
-      "type": "Preview3D",
-      "pos": [
-        1331.59178383069,
-        -28.418720183761756
-      ],
-      "size": [
-        400,
-        550
-      ],
-      "flags": {},
-      "order": 9,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "camera_info",
-          "shape": 7,
-          "type": "LOAD3D_CAMERA",
-          "link": null
-        },
-        {
-          "name": "model_file",
-          "type": "STRING",
-          "widget": {
-            "name": "model_file"
-          },
-          "link": 20
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "cnr_id": "comfy-core",
-        "ver": "0.3.68",
-        "Node name for S&R": "Preview3D",
-        "Last Time Model File": "/home/shadeform/hpart_node8/ComfyUI/output/xpart_parts_604891611405314.glb",
-        "Resource Folder": "shadeform/hpart_node8/ComfyUI/output",
-        "Camera Info": {
-          "position": {
-            "x": 6.968344450461529,
-            "y": 10.846587976259766,
-            "z": 9.328201112490344
-          },
-          "target": {
-            "x": 0,
-            "y": 1.5581019040144177,
-            "z": 0
-          },
-          "zoom": 1,
-          "cameraType": "perspective"
-        }
-      },
-      "widgets_values": [
-        "/home/shadeform/hpart_node8/ComfyUI/output/xpart_parts_604891611405314.glb",
-        ""
-      ]
-    },
-    {
-      "id": 14,
-      "type": "LoadXPartConditioner",
-      "pos": [
-        733.2122902113033,
-        -269.2138824819332
-      ],
-      "size": [
-        270,
-        82
-      ],
-      "flags": {},
-      "order": 3,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "conditioner_model",
-          "type": "MODEL",
-          "links": [
-            19
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfyui-hunyuan3d-part",
-        "ver": "29be470ff906d0317efb8223918862ed497784f9",
-        "Node name for S&R": "LoadXPartConditioner"
-      },
-      "widgets_values": [
-        "float16",
-        true
-      ]
-    },
-    {
-      "id": 13,
-      "type": "LoadXPartDiTModel",
-      "pos": [
-        686.7469034882185,
-        -393.03190362299034
-      ],
-      "size": [
-        270,
-        82
-      ],
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "dit_model",
-          "type": "MODEL",
-          "links": [
-            17
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfyui-hunyuan3d-part",
-        "ver": "29be470ff906d0317efb8223918862ed497784f9",
-        "Node name for S&R": "LoadXPartDiTModel"
-      },
-      "widgets_values": [
-        "float16",
         true
       ]
     },
@@ -440,7 +260,7 @@
         82
       ],
       "flags": {},
-      "order": 5,
+      "order": 4,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -448,7 +268,7 @@
           "name": "vae_model",
           "type": "MODEL",
           "links": [
-            18
+            24
           ]
         }
       ],
@@ -460,6 +280,201 @@
       "widgets_values": [
         "float16",
         true
+      ]
+    },
+    {
+      "id": 14,
+      "type": "LoadXPartConditioner",
+      "pos": [
+        733.2122902113033,
+        -269.2138824819332
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "conditioner_model",
+          "type": "MODEL",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hunyuan3d-part",
+        "ver": "29be470ff906d0317efb8223918862ed497784f9",
+        "Node name for S&R": "LoadXPartConditioner"
+      },
+      "widgets_values": [
+        "float16",
+        true
+      ]
+    },
+    {
+      "id": 18,
+      "type": "ExplodedMeshViewer",
+      "pos": [
+        1420.5321069945783,
+        -610.1470352631582
+      ],
+      "size": [
+        500.90938184509514,
+        650
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "link": 26
+        },
+        {
+          "name": "face_ids",
+          "shape": 7,
+          "type": "FACE_IDS",
+          "link": null
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfyui-hunyuan3d-part",
+        "ver": "9025ae9e4684d07e2edd8fa8038238d61a72b1f5",
+        "Node name for S&R": "ExplodedMeshViewer"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 17,
+      "type": "XPartGenerateParts",
+      "pos": [
+        875.1798699573462,
+        -37.81133654115507
+      ],
+      "size": [
+        278.73828125,
+        258
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "link": 21
+        },
+        {
+          "name": "bounding_boxes",
+          "type": "BBOXES_3D",
+          "link": 22
+        },
+        {
+          "name": "dit_model",
+          "type": "MODEL",
+          "link": 23
+        },
+        {
+          "name": "vae_model",
+          "type": "MODEL",
+          "link": 24
+        },
+        {
+          "name": "conditioner_model",
+          "type": "MODEL",
+          "link": 25
+        }
+      ],
+      "outputs": [
+        {
+          "name": "part_meshes",
+          "type": "TRIMESH",
+          "links": [
+            26
+          ]
+        },
+        {
+          "name": "bbox_viz",
+          "type": "TRIMESH",
+          "links": null
+        },
+        {
+          "name": "parts_path",
+          "type": "STRING",
+          "links": [
+            27
+          ]
+        },
+        {
+          "name": "bbox_path",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hunyuan3d-part",
+        "ver": "9025ae9e4684d07e2edd8fa8038238d61a72b1f5",
+        "Node name for S&R": "XPartGenerateParts"
+      },
+      "widgets_values": [
+        256,
+        25,
+        -1,
+        508061336831201,
+        "randomize",
+        10000
+      ]
+    },
+    {
+      "id": 19,
+      "type": "Preview3D",
+      "pos": [
+        1397.5569993778954,
+        139.17208121989754
+      ],
+      "size": [
+        400,
+        550
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "camera_info",
+          "shape": 7,
+          "type": "LOAD3D_CAMERA",
+          "link": null
+        },
+        {
+          "name": "model_file",
+          "type": "STRING",
+          "widget": {
+            "name": "model_file"
+          },
+          "link": 27
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "cnr_id": "comfy-core",
+        "ver": "0.3.68",
+        "Node name for S&R": "Preview3D",
+        "Last Time Model File": "/home/shadeform/hpart_node/ComfyUI/output/xpart_parts_42.glb",
+        "Resource Folder": "shadeform/hpart_node/ComfyUI/output"
+      },
+      "widgets_values": [
+        "/home/shadeform/hpart_node/ComfyUI/output/xpart_parts_42.glb",
+        ""
       ]
     }
   ],
@@ -505,50 +520,58 @@
       "BBOXES_3D"
     ],
     [
-      15,
+      21,
       7,
       0,
-      12,
+      17,
       0,
       "TRIMESH"
     ],
     [
-      16,
+      22,
       7,
       1,
-      12,
+      17,
       1,
       "BBOXES_3D"
     ],
     [
-      17,
+      23,
       13,
       0,
-      12,
+      17,
       2,
       "MODEL"
     ],
     [
-      18,
+      24,
       15,
       0,
-      12,
+      17,
       3,
       "MODEL"
     ],
     [
-      19,
+      25,
       14,
       0,
-      12,
+      17,
       4,
       "MODEL"
     ],
     [
-      20,
-      12,
-      3,
-      16,
+      26,
+      17,
+      0,
+      18,
+      0,
+      "TRIMESH"
+    ],
+    [
+      27,
+      17,
+      2,
+      19,
       1,
       "STRING"
     ]
@@ -557,10 +580,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.9983067682399266,
+      "scale": 0.7230991700746933,
       "offset": [
-        -136.7955740283388,
-        236.5762096295184
+        -363.7743943269406,
+        488.1893513801984
       ]
     },
     "frontendVersion": "1.28.8"
