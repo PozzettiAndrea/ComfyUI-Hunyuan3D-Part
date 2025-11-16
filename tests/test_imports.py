@@ -158,9 +158,9 @@ def test_import_core_modules(project_root):
         from nodes.core import misc_utils
 
         # Check for essential utility functions
-        assert hasattr(misc_utils, 'sample_point_cloud') or \
-               hasattr(misc_utils, 'normalize_mesh') or \
-               callable(getattr(misc_utils, 'colorize_mesh', None))
+        assert hasattr(misc_utils, 'instantiate_from_config') or \
+               hasattr(misc_utils, 'get_obj_from_str') or \
+               callable(getattr(misc_utils, 'synchronize_timer', None))
 
     finally:
         sys.path.remove(str(project_root))
@@ -298,21 +298,25 @@ def test_all_nodes_registered(project_root):
 
         # Expected node categories based on our analysis
         expected_nodes = [
-            'LoadSonataModel',
+            # Loaders
             'LoadP3SAMSegmentor',
-            'LoadXPartDiTModel',
-            'LoadXPartVAE',
-            'LoadXPartConditioner',
-            'P3SAMSegmentMesh',
+            'LoadXPartModels',
+            # Processing
             'XPartGenerateParts',
+            'ComputeMeshFeatures',
+            'P3SAMSegmentMesh',
+            # Memory Management
             'OffloadModelToCPU',
             'ReloadModelToGPU',
             'ClearAllModelCaches',
-            'CacheMeshFeatures',
-            'P3SAMSegmentMeshCached',
+            # I/O
+            'Hunyuan3DLoadMesh',
+            'Hunyuan3DSaveMesh',
             'SaveBoundingBoxes',
             'LoadBoundingBoxes',
+            # Visualization
             'ExplodedMeshViewer',
+            'Hunyuan3DPreviewBoundingBoxes',
         ]
 
         registered = set(main_module.NODE_CLASS_MAPPINGS.keys())
