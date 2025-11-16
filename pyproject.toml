@@ -19,6 +19,9 @@ dependencies = [
     # Deep Learning
     "diffusers",
     "timm",
+    "einops",
+    "safetensors",
+    "torchdiffeq",
 
     # Numerical Computing
     "numpy>=1.20.0",

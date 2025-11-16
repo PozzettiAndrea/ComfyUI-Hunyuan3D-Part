@@ -6,7 +6,6 @@ Each model component can be loaded separately for better memory management.
 """
 
 import torch
-from typing import Optional
 import os
 import concurrent.futures
 import time

@@ -16,7 +16,7 @@ from .core.mesh_utils import create_bbox_visualization, export_scene_to_vtp
 try:
     import folder_paths
     COMFYUI_OUTPUT_FOLDER = folder_paths.get_output_directory()
-except:
+except ImportError:
     COMFYUI_OUTPUT_FOLDER = None
 
 
