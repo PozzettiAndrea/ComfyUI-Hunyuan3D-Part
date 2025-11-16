@@ -1,8 +1,8 @@
 {
   "id": "5a72861b-5dc8-4e00-8190-bff2a61962a7",
   "revision": 0,
-  "last_node_id": 20,
-  "last_link_id": 29,
+  "last_node_id": 21,
+  "last_link_id": 30,
   "nodes": [
     {
       "id": 9,
@@ -71,39 +71,6 @@
       ]
     },
     {
-      "id": 2,
-      "type": "GeomPackLoadMesh",
-      "pos": [
-        103.96580327161442,
-        186.44736865716973
-      ],
-      "size": [
-        270,
-        58
-      ],
-      "flags": {},
-      "order": 2,
-      "mode": 0,
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "mesh",
-          "type": "TRIMESH",
-          "links": [
-            10
-          ]
-        }
-      ],
-      "properties": {
-        "cnr_id": "comfyui-geometrypack",
-        "ver": "e0d26b95c8e0b72fccc40f27912c41f31f4c2d5d",
-        "Node name for S&R": "GeomPackLoadMesh"
-      },
-      "widgets_values": [
-        "3d/utah_teapot.stl"
-      ]
-    },
-    {
       "id": 13,
       "type": "LoadXPartDiTModel",
       "pos": [
@@ -115,7 +82,7 @@
         82
       ],
       "flags": {},
-      "order": 3,
+      "order": 2,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -149,7 +116,7 @@
         82
       ],
       "flags": {},
-      "order": 4,
+      "order": 3,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -183,7 +150,7 @@
         82
       ],
       "flags": {},
-      "order": 5,
+      "order": 4,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -318,7 +285,7 @@
         256,
         25,
         -1,
-        35949164236874,
+        105120189446259,
         "randomize",
         10000
       ]
@@ -384,7 +351,7 @@
         {
           "name": "mesh",
           "type": "TRIMESH",
-          "link": 10
+          "link": 30
         },
         {
           "name": "sonata_model",
@@ -431,7 +398,7 @@
         "Node name for S&R": "P3SAMSegmentMesh"
       },
       "widgets_values": [
-        774389686,
+        3904229587,
         "randomize",
         100000,
         400,
@@ -449,7 +416,7 @@
       ],
       "size": [
         512,
-        714
+        722
       ],
       "flags": {},
       "order": 8,
@@ -476,6 +443,39 @@
         2,
         ""
       ]
+    },
+    {
+      "id": 21,
+      "type": "Hunyuan3DLoadMesh",
+      "pos": [
+        73.7899652501653,
+        153.41740423546125
+      ],
+      "size": [
+        270,
+        58
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "mesh",
+          "type": "TRIMESH",
+          "links": [
+            30
+          ]
+        }
+      ],
+      "properties": {
+        "cnr_id": "comfyui-hunyuan3d-part",
+        "ver": "8e3542185d34c3d9937e0f4caa87ab1e0e6f84de",
+        "Node name for S&R": "Hunyuan3DLoadMesh"
+      },
+      "widgets_values": [
+        "3d/utah_teapot.stl"
+      ]
     }
   ],
   "links": [
@@ -494,14 +494,6 @@
       7,
       2,
       "MODEL"
-    ],
-    [
-      10,
-      2,
-      0,
-      7,
-      0,
-      "TRIMESH"
     ],
     [
       21,
@@ -574,6 +566,14 @@
       20,
       0,
       "TRIMESH"
+    ],
+    [
+      30,
+      21,
+      0,
+      7,
+      0,
+      "TRIMESH"
     ]
   ],
   "groups": [],
@@ -582,8 +582,8 @@
     "ds": {
       "scale": 0.7230991700746933,
       "offset": [
-        -93.0322256147605,
-        594.4269404678263
+        288.0315155751751,
+        174.0089413452472
       ]
     },
     "frontendVersion": "1.28.8"
