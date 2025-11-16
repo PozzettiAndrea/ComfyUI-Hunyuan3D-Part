@@ -441,9 +441,10 @@ class PartFormerPipeline(TokenAllocMixin):
         part_surface_inbbox,
         object_surface,
         do_classifier_free_guidance,
+        precomputed_sonata_features=None,
     ):
         bsz = object_surface.shape[0]
-        cond = self.conditioner(part_surface_inbbox, object_surface)
+        cond = self.conditioner(part_surface_inbbox, object_surface, precomputed_sonata_features=precomputed_sonata_features)
 
         if do_classifier_free_guidance:
             # TODO: do_classifier_free_guidance, un_cond
@@ -675,6 +676,7 @@ class PartFormerPipeline(TokenAllocMixin):
         """
         callback = kwargs.pop("callback", None)
         callback_steps = kwargs.pop("callback_steps", None)
+        precomputed_sonata_features = kwargs.pop("precomputed_sonata_features", None)
         do_classifier_free_guidance = guidance_scale >= 0 and not (
             hasattr(self.model, "guidance_embed") and self.model.guidance_embed is True
         )
@@ -728,6 +730,7 @@ class PartFormerPipeline(TokenAllocMixin):
             part_surface_inbbox.reshape(batch_size * num_parts, N, dim),
             obj_surface.expand(batch_size * num_parts, -1, -1),
             do_classifier_free_guidance,
+            precomputed_sonata_features=precomputed_sonata_features,
         )
         # 4. guidance_cond for controling sampling
         guidance_cond = None

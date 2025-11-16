@@ -13,15 +13,17 @@ import hashlib
 from .core.mesh_utils import load_mesh
 
 
-class CacheMeshFeatures:
+class ComputeMeshFeatures:
     """
-    Cache mesh preprocessing results for faster subsequent runs.
+    Compute mesh features for P3-SAM segmentation.
 
-    Caches:
-    - Adjacent faces computation (~3.4s)
-    - Sonata feature extraction (~15s)
+    Performs:
+    - Mesh cleaning and adjacent faces computation (~1.4s)
+    - Point cloud sampling (~0.03s)
+    - Sonata feature extraction (~0.5s)
 
-    Total savings: ~18 seconds on cache hit.
+    Uses the Sonata encoder built into P3-SAM model.
+    Features are cached internally for identical mesh+params combinations.
     """
 
     def __init__(self):
@@ -32,34 +34,38 @@ class CacheMeshFeatures:
         return {
             "required": {
                 "mesh": ("TRIMESH",),
-                "sonata_model": ("MODEL",),
+                "p3sam_model": ("MODEL",),
+                "all_points": ("BOOLEAN", {
+                    "default": False,
+                    "tooltip": "Use ALL mesh vertices instead of sampling. Enable for X-Part generation."
+                }),
                 "point_num": ("INT", {
                     "default": 100000,
                     "min": 1000,
                     "max": 500000,
                     "step": 1000,
-                    "tooltip": "Number of points to sample. Must match segmentation settings."
+                    "tooltip": "Number of points to sample (ignored if all_points=True)."
                 }),
                 "seed": ("INT", {
                     "default": 42,
                     "min": 0,
                     "max": 0xffffffff,
                     "step": 1,
-                    "tooltip": "Random seed for point sampling. Must match segmentation settings."
+                    "tooltip": "Random seed for point sampling (ignored if all_points=True)."
                 }),
             },
         }
 
-    RETURN_TYPES = ("FEATURE_CACHE",)
-    RETURN_NAMES = ("feature_cache",)
-    FUNCTION = "cache_features"
-    CATEGORY = "Hunyuan3D/Optimization"
+    RETURN_TYPES = ("MESH_FEATURES",)
+    RETURN_NAMES = ("mesh_with_features",)
+    FUNCTION = "compute_features"
+    CATEGORY = "Hunyuan3D/Processing"
 
     # Global cache storage
     _feature_cache = {}
 
-    def cache_features(self, mesh, sonata_model, point_num, seed):
-        """Cache mesh features."""
+    def compute_features(self, mesh, p3sam_model, all_points, point_num, seed):
+        """Compute mesh features using P3-SAM's internal Sonata encoder."""
         try:
             # Load mesh if needed
             if isinstance(mesh, dict) and 'trimesh' in mesh:
@@ -72,47 +78,72 @@ class CacheMeshFeatures:
                 mesh_obj = load_mesh(mesh)
 
             # Generate cache key based on mesh + parameters
-            cache_key = self._generate_cache_key(mesh_obj, point_num, seed)
+            cache_key = self._generate_cache_key(mesh_obj, all_points, point_num, seed)
 
             # Check if already cached
-            if cache_key in CacheMeshFeatures._feature_cache:
-                print(f"[Cache Features] ✓ Using cached features (saves ~18s)")
-                cached_data = CacheMeshFeatures._feature_cache[cache_key]
+            if cache_key in ComputeMeshFeatures._feature_cache:
+                print(f"[Compute Features] ✓ Using cached features")
+                cached_data = ComputeMeshFeatures._feature_cache[cache_key]
                 return (cached_data,)
 
-            print(f"[Cache Features] Computing features (first time for this mesh+params)...")
+            print(f"[Compute Features] Computing mesh features...")
 
-            # Extract Sonata model
-            sonata = sonata_model["model"]
-            sonata = sonata.to(self.device).eval()
+            # Extract P3-SAM model (contains Sonata internally)
+            p3sam = p3sam_model["model"]
+            p3sam_cache_on_gpu = p3sam_model.get("cache_on_gpu", True)
+            p3sam = p3sam.to(self.device).eval()
 
             # Import required functions from core
             from .core.p3sam_processing import (
-                load_mesh_file,
                 build_adjacent_faces_numba,
-                sample_point_cloud,
-                get_feat
+                get_feat,
+                clean_mesh,
+                normalize_pc
             )
 
-            # Load and process mesh (includes adjacent faces computation)
-            print(f"[Cache Features] Loading mesh and computing adjacent faces...")
-            mesh_loaded, adjacent_faces = load_mesh_file(mesh_obj, clean_mesh_flag=True)
+            # Clean mesh if needed
+            print(f"[Compute Features] Cleaning mesh...")
+            mesh_loaded = clean_mesh(mesh_obj)
+            mesh_loaded = trimesh.Trimesh(vertices=mesh_loaded.vertices, faces=mesh_loaded.faces)
 
-            # Sample point cloud
-            print(f"[Cache Features] Sampling {point_num} points...")
-            sampled_mesh = sample_point_cloud(mesh_loaded, point_num, seed)
+            # Build adjacent faces
+            print(f"[Compute Features] Building adjacent faces...")
+            face_adjacency = mesh_loaded.face_adjacency
+            adjacent_faces = build_adjacent_faces_numba(face_adjacency)
 
-            # Extract features using Sonata
-            print(f"[Cache Features] Extracting features with Sonata...")
-            points = np.asarray(sampled_mesh.vertices, dtype=np.float32)
-            normals = np.asarray(sampled_mesh.vertex_normals, dtype=np.float32)
+            # Get points: either sample or use ALL vertices
+            if all_points:
+                # Use ALL mesh vertices
+                print(f"[Compute Features] Using ALL {len(mesh_loaded.vertices)} mesh vertices...")
+                _points = mesh_loaded.vertices
+                normals = mesh_loaded.vertex_normals
+                face_idx = None  # No face mapping when using vertices
+                sampled_mesh = trimesh.PointCloud(_points)
+                sampled_mesh.metadata['face_idx'] = None
+                sampled_mesh.metadata['all_points'] = True
+            else:
+                # Sample point cloud
+                print(f"[Compute Features] Sampling {point_num} points...")
+                _points, face_idx = trimesh.sample.sample_surface(mesh_loaded, point_num, seed=seed)
+                normals = mesh_loaded.face_normals[face_idx]
+                # Create sampled mesh for later use
+                sampled_mesh = trimesh.PointCloud(_points)
+                sampled_mesh.metadata['face_idx'] = face_idx
+                sampled_mesh.metadata['all_points'] = False
 
-            # Get features
+            _points_normalized = normalize_pc(_points)
+
+            # Extract features using P3-SAM's internal Sonata
+            print(f"[Compute Features] Extracting Sonata features...")
+            points = _points_normalized.astype(np.float32)
+            normals = normals.astype(np.float32)
+
+            # Get features (p3sam has .sonata and .transform attributes)
             import time
             t0 = time.time()
-            feats = get_feat(sonata, points, normals)
+            feats = get_feat(p3sam, points, normals)
             feat_time = time.time() - t0
-            print(f"[Cache Features] ✓ Feature extraction complete ({feat_time:.2f}s)")
+            print(f"[Compute Features] ✓ Features computed ({feat_time:.2f}s)")
 
             # Prepare cache data
             cache_data = {
@@ -122,38 +153,40 @@ class CacheMeshFeatures:
                 'features': feats,
                 'points': points,
                 'normals': normals,
-                'point_num': point_num,
+                'all_points': all_points,
+                'point_num': point_num if not all_points else len(_points),
                 'seed': seed,
             }
 
             # Store in cache
-            CacheMeshFeatures._feature_cache[cache_key] = cache_data
-            print(f"[Cache Features] ✓ Features cached for future use")
+            ComputeMeshFeatures._feature_cache[cache_key] = cache_data
 
             return (cache_data,)
 
         except Exception as e:
-            print(f"[Cache Features] Error: {e}")
+            print(f"[Compute Features] Error: {e}")
             import traceback
             traceback.print_exc()
             raise
 
     @staticmethod
-    def _generate_cache_key(mesh, point_num, seed):
+    def _generate_cache_key(mesh, all_points, point_num, seed):
         """Generate unique cache key for mesh + parameters."""
         # Hash mesh vertices and faces
         vertices_hash = hashlib.md5(mesh.vertices.tobytes()).hexdigest()[:16]
         faces_hash = hashlib.md5(mesh.faces.tobytes()).hexdigest()[:16]
-        params_hash = f"{point_num}_{seed}"
+        if all_points:
+            params_hash = "all_points"
+        else:
+            params_hash = f"{point_num}_{seed}"
         return f"{vertices_hash}_{faces_hash}_{params_hash}"
 
 
-class P3SAMSegmentMeshCached:
+class P3SAMSegmentMesh:
     """
-    P3-SAM segmentation that uses cached features.
+    Segment mesh into semantic parts using P3-SAM.
 
-    Requires feature cache from CacheMeshFeatures node.
-    Significantly faster than regular segmentation on cache hit (~18s savings).
+    Takes pre-computed mesh features and runs P3-SAM inference.
     """
 
     def __init__(self):
@@ -163,7 +196,7 @@ class P3SAMSegmentMeshCached:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "feature_cache": ("FEATURE_CACHE",),
+                "mesh_with_features": ("MESH_FEATURES",),
                 "p3sam_model": ("MODEL",),
                 "prompt_num": ("INT", {
                     "default": 400,
@@ -174,10 +207,10 @@ class P3SAMSegmentMeshCached:
                 }),
                 "prompt_bs": ("INT", {
                     "default": 4,
-                    "min": 8,
+                    "min": 1,
                     "max": 128,
-                    "step": 8,
-                    "tooltip": "Prompt batch size."
+                    "step": 1,
+                    "tooltip": "Prompt batch size. Higher = more VRAM but faster."
                 }),
                 "threshold": ("FLOAT", {
                     "default": 0.95,
@@ -195,174 +228,131 @@ class P3SAMSegmentMeshCached:
 
     RETURN_TYPES = ("TRIMESH", "BBOXES_3D", "FACE_IDS", "STRING")
     RETURN_NAMES = ("mesh", "bounding_boxes", "face_ids", "preview_path")
-    FUNCTION = "segment_cached"
-    CATEGORY = "Hunyuan3D/Optimization"
+    FUNCTION = "segment"
+    CATEGORY = "Hunyuan3D/Processing"
 
-    def segment_cached(self, feature_cache, p3sam_model, prompt_num, prompt_bs, threshold, post_process):
-        """Segment using cached features."""
+    def segment(self, mesh_with_features, p3sam_model, prompt_num, prompt_bs, threshold, post_process):
+        """Segment mesh into parts using P3-SAM."""
         try:
             import folder_paths
             import os
+            import fpsample
+            from tqdm import tqdm
+            from collections import defaultdict
+            from concurrent.futures import ThreadPoolExecutor
 
-            # Extract cached data
-            mesh_loaded = feature_cache['mesh']
-            sampled_mesh = feature_cache['sampled_mesh']
-            adjacent_faces = feature_cache['adjacent_faces']
-            feats = feature_cache['features']
-            points = feature_cache['points']
-            normals = feature_cache['normals']
-            point_num = feature_cache['point_num']
-            seed = feature_cache['seed']
+            # Extract feature data
+            mesh_loaded = mesh_with_features['mesh']
+            sampled_mesh = mesh_with_features['sampled_mesh']
+            adjacent_faces = mesh_with_features['adjacent_faces']
+            feats = mesh_with_features['features']
+            points = mesh_with_features['points']
+            seed = mesh_with_features['seed']
 
-            print(f"[P3-SAM Cached] Using cached features (saved ~18s)")
-            print(f"[P3-SAM Cached] Running segmentation with {prompt_num} prompts...")
+            print(f"[P3-SAM Segment] Running segmentation with {prompt_num} prompts...")
 
             # Extract P3-SAM model
             p3sam = p3sam_model["model"]
+            p3sam_cache_on_gpu = p3sam_model.get("cache_on_gpu", True)
             p3sam = p3sam.to(self.device).eval()
             p3sam_parallel = torch.nn.DataParallel(p3sam)
 
-            # Import segmentation functions from core
+            # Import functions from core
             from .core.p3sam_processing import (
-                fps_sample_prompt_points,
                 get_mask,
-                sort_by_iou,
-                nms,
-                filter_single_mask_clusters,
-                merge_again,
-                calculate_points_without_mask,
-                missed_masks,
-                calculate_final_point_cloud_masks,
-                color_point_cloud,
-                project_mesh_and_count_labels,
-                merge_mesh,
-                fix_face_ids,
-                calculate_connected_regions,
-                sort_connected_regions,
-                remove_small_area_regions,
-                remove_labels_from_small_areas,
-                add_large_missing_parts,
-                assign_new_face_ids,
-                calculate_part_and_label_aabb,
-                calculate_part_neighbors,
-                merge_no_mask_regions,
-                calculate_final_aabb
+                cal_iou,
+                fix_label,
+                get_aabb_from_face_ids,
+                do_post_process
             )
             from .core.mesh_utils import colorize_segmentation, save_mesh
 
             # FPS sample prompt points
-            prompt_points_indices = fps_sample_prompt_points(points, prompt_num, seed)
+            fps_idx = fpsample.fps_sampling(points, prompt_num)
+            _point_prompts = points[fps_idx]
 
             # Get masks (inference step)
-            all_masks, all_ious = get_mask(
-                [p3sam, p3sam_parallel],
-                feats,
-                points,
-                prompt_points_indices,
-                prompt_bs=prompt_bs
-            )
-
-            # Post-process masks
-            sorted_indices = sort_by_iou(all_ious)
-            nms_masks = nms(all_masks, sorted_indices, threshold=threshold)
-
-            # Continue with full post-processing pipeline
-            nms_masks = filter_single_mask_clusters(nms_masks)
-            nms_masks = merge_again(nms_masks, threshold=threshold)
-
-            points_without_mask = calculate_points_without_mask(nms_masks, points)
-            if len(points_without_mask) > 0:
-                nms_masks = missed_masks(
-                    nms_masks,
-                    all_masks,
-                    sorted_indices,
-                    points_without_mask,
-                    threshold=threshold
+            bs = prompt_bs
+            step_num = prompt_num // bs + 1
+            mask_res = []
+            iou_res = []
+            for i in tqdm(range(step_num), desc="P3-SAM Inference"):
+                cur_prompt = _point_prompts[bs * i : bs * (i + 1)]
+                if len(cur_prompt) == 0:
+                    continue
+                pred_mask_1, pred_mask_2, pred_mask_3, pred_iou = get_mask(
+                    p3sam_parallel, feats, points, cur_prompt
                 )
+                pred_mask = np.stack([pred_mask_1, pred_mask_2, pred_mask_3], axis=-1)
+                max_idx = np.argmax(pred_iou, axis=-1)
+                for j in range(max_idx.shape[0]):
+                    mask_res.append(pred_mask[:, j, max_idx[j]])
+                    iou_res.append(pred_iou[j, max_idx[j]])
 
-            point_labels = calculate_final_point_cloud_masks(nms_masks, len(points))
-            colored_pc = color_point_cloud(sampled_mesh, point_labels, seed)
+            mask_res = np.stack(mask_res, axis=-1)
 
-            # Project to mesh
-            face_ids = project_mesh_and_count_labels(
-                mesh_loaded,
-                adjacent_faces,
-                colored_pc,
-                point_labels
-            )
+            # Sort by IOU
+            mask_iou = [[mask_res[:, i], iou_res[i]] for i in range(len(iou_res))]
+            mask_iou_sorted = sorted(mask_iou, key=lambda x: x[1], reverse=True)
+            mask_sorted = [mask_iou_sorted[i][0] for i in range(len(iou_res))]
+            iou_sorted = [mask_iou_sorted[i][1] for i in range(len(iou_res))]
 
+            # NMS
+            clusters = defaultdict(list)
+            with ThreadPoolExecutor(max_workers=20) as executor:
+                for i in tqdm(range(len(mask_sorted)), desc="NMS"):
+                    _mask = mask_sorted[i]
+                    futures = []
+                    for j in clusters.keys():
+                        futures.append(executor.submit(cal_iou, _mask, mask_sorted[j]))
+
+                    for j, future in zip(clusters.keys(), futures):
+                        if future.result() > 0.9:
+                            clusters[j].append(i)
+                            break
+                    else:
+                        clusters[i].append(i)
+
+            print(f"[P3-SAM Segment] NMS complete: {len(clusters)} clusters")
+
+            # Filter single mask clusters
+            filtered_clusters = [i for i in clusters.keys() if len(clusters[i]) > 2]
+
+            # Merge similar clusters
+            merged_clusters = []
+            for i in filtered_clusters:
+                merged = False
+                for j in range(len(merged_clusters)):
+                    if cal_iou(mask_sorted[i], mask_sorted[merged_clusters[j]]) > threshold:
+                        merged = True
+                        break
+                if not merged:
+                    merged_clusters.append(i)
+
+            # Calculate point labels
+            point_labels = np.zeros(len(points), dtype=np.int32) - 1
+            for idx, cluster_id in enumerate(merged_clusters):
+                mask = mask_sorted[cluster_id] > 0.5
+                point_labels[mask] = idx
+
+            # Project to mesh faces
+            face_labels = np.zeros(len(mesh_loaded.faces), dtype=np.int32) - 1
+            face_idx = sampled_mesh.metadata.get('face_idx', None)
+            if face_idx is not None:
+                for i, fid in enumerate(face_idx):
+                    if point_labels[i] >= 0 and face_labels[fid] < 0:
+                        face_labels[fid] = point_labels[i]
+
+            # Fix unlabeled faces
             if post_process:
-                # Full post-processing
-                merged_mesh, merged_labels = merge_mesh(mesh_loaded, face_ids)
-                face_ids = fix_face_ids(merged_mesh, merged_labels, mesh_loaded)
-
-                # Calculate connected regions
-                connected_meshes, connected_labels = calculate_connected_regions(
-                    mesh_loaded,
-                    face_ids
-                )
-
-                # Sort and filter
-                connected_meshes, connected_labels = sort_connected_regions(
-                    connected_meshes,
-                    connected_labels
-                )
-                connected_meshes, connected_labels = remove_small_area_regions(
-                    connected_meshes,
-                    connected_labels,
-                    min_area_ratio=0.005
-                )
-
-                face_ids = remove_labels_from_small_areas(
-                    mesh_loaded,
-                    face_ids,
-                    connected_labels
-                )
-
-                # Second merge
-                merged_mesh, merged_labels = merge_mesh(mesh_loaded, face_ids)
-                face_ids = fix_face_ids(merged_mesh, merged_labels, mesh_loaded)
-
-                # Recalculate connected regions
-                connected_meshes, connected_labels = calculate_connected_regions(
-                    mesh_loaded,
-                    face_ids
-                )
-
-                # Add missing parts
-                face_ids = add_large_missing_parts(
-                    mesh_loaded,
-                    face_ids,
-                    connected_labels
-                )
-
-                # Assign final IDs
-                face_ids = assign_new_face_ids(face_ids, connected_labels)
-
-                # Calculate AABBs
-                part_aabb, label_aabb = calculate_part_and_label_aabb(
-                    mesh_loaded,
-                    face_ids
-                )
-
-                # Calculate neighbors
-                neighbors = calculate_part_neighbors(
-                    mesh_loaded,
-                    face_ids,
-                    part_aabb
-                )
-
-                # Final merge of no-mask regions
-                face_ids = merge_no_mask_regions(face_ids, neighbors)
-                face_ids = assign_new_face_ids(face_ids, connected_labels)
-
-                # Final AABB
-                aabb = calculate_final_aabb(mesh_loaded, face_ids)
+                face_ids = fix_label(face_labels, adjacent_faces, use_aabb=True, mesh=mesh_loaded, show_info=True)
             else:
-                # Simple AABB without post-processing
-                aabb = calculate_part_and_label_aabb(mesh_loaded, face_ids)[0]
+                face_ids = face_labels
 
-            print(f"[P3-SAM Cached] Segmentation complete: found {len(aabb)} parts")
+            # Get AABBs
+            aabb = get_aabb_from_face_ids(mesh_loaded, face_ids)
+
+            print(f"[P3-SAM Segment] Segmentation complete: found {len(aabb)} parts")
 
             # Add metadata
             processed_mesh = mesh_loaded
@@ -375,9 +365,15 @@ class P3SAMSegmentMeshCached:
 
             # Save preview
             output_dir = folder_paths.get_output_directory()
-            preview_path = os.path.join(output_dir, f"p3sam_cached_{seed}.glb")
+            preview_path = os.path.join(output_dir, f"p3sam_segmentation_{seed}.glb")
             save_mesh(colored_mesh, preview_path)
-            print(f"[P3-SAM Cached] Saved preview to: {preview_path}")
+            print(f"[P3-SAM Segment] Saved preview to: {preview_path}")
+
+            # Auto-unload P3-SAM if cache_on_gpu is False
+            if not p3sam_cache_on_gpu:
+                print("[P3-SAM Segment] Auto-unloading P3-SAM model from GPU...")
+                p3sam.to("cpu")
+                torch.cuda.empty_cache()
 
             # Prepare outputs
             bboxes_output = {
@@ -387,13 +383,13 @@ class P3SAMSegmentMeshCached:
 
             face_ids_output = {
                 'face_ids': face_ids,
-                'num_parts': len(np.unique(face_ids))
+                'num_parts': len(np.unique(face_ids[face_ids >= 0]))
             }
 
             return (processed_mesh, bboxes_output, face_ids_output, preview_path)
 
         except Exception as e:
-            print(f"[P3-SAM Cached] Error: {e}")
+            print(f"[P3-SAM Segment] Error: {e}")
             import traceback
             traceback.print_exc()
             raise
@@ -401,11 +397,11 @@ class P3SAMSegmentMeshCached:
 
 # Node mappings
 NODE_CLASS_MAPPINGS = {
-    "CacheMeshFeatures": CacheMeshFeatures,
-    "P3SAMSegmentMeshCached": P3SAMSegmentMeshCached,
+    "ComputeMeshFeatures": ComputeMeshFeatures,
+    "P3SAMSegmentMesh": P3SAMSegmentMesh,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "CacheMeshFeatures": "Cache Mesh Features",
-    "P3SAMSegmentMeshCached": "P3-SAM Segment (Cached)",
+    "ComputeMeshFeatures": "Compute Mesh Features",
+    "P3SAMSegmentMesh": "P3-SAM Segment Mesh",
 }
