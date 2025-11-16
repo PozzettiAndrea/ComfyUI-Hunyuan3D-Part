@@ -28,6 +28,8 @@ if 'pytest' not in sys.modules:
         VIEWER_DISPLAY_MAPPINGS,
         BBOX_VIZ_MAPPINGS,
         BBOX_VIZ_DISPLAY_MAPPINGS,
+        MESH_IO_MAPPINGS,
+        MESH_IO_DISPLAY_MAPPINGS,
     )
 
     # Combine all node mappings
@@ -39,6 +41,7 @@ if 'pytest' not in sys.modules:
     NODE_CLASS_MAPPINGS.update(BBOX_IO_MAPPINGS)
     NODE_CLASS_MAPPINGS.update(VIEWER_MAPPINGS)
     NODE_CLASS_MAPPINGS.update(BBOX_VIZ_MAPPINGS)
+    NODE_CLASS_MAPPINGS.update(MESH_IO_MAPPINGS)
 
     NODE_DISPLAY_NAME_MAPPINGS = {}
     NODE_DISPLAY_NAME_MAPPINGS.update(LOADER_DISPLAY_MAPPINGS)
@@ -48,6 +51,7 @@ if 'pytest' not in sys.modules:
     NODE_DISPLAY_NAME_MAPPINGS.update(BBOX_IO_DISPLAY_MAPPINGS)
     NODE_DISPLAY_NAME_MAPPINGS.update(VIEWER_DISPLAY_MAPPINGS)
     NODE_DISPLAY_NAME_MAPPINGS.update(BBOX_VIZ_DISPLAY_MAPPINGS)
+    NODE_DISPLAY_NAME_MAPPINGS.update(MESH_IO_DISPLAY_MAPPINGS)
 
     # Web directory for custom UI (optional)
     WEB_DIRECTORY = "./web"
