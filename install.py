@@ -175,6 +175,224 @@ def get_spconv_fallback_versions(cuda_ver):
     return fallback_list
 
 
+def check_nvcc():
+    """
+    Check if nvcc (NVIDIA CUDA Compiler) is available.
+
+    Returns:
+        tuple: (available: bool, cuda_version: str or None)
+               e.g., (True, "12.8") or (False, None)
+    """
+    try:
+        result = subprocess.run(
+            ["nvcc", "--version"],
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+
+        if result.returncode == 0:
+            # Parse CUDA version from nvcc output
+            # Example output: "Cuda compilation tools, release 12.8, V12.8.89"
+            output = result.stdout
+            for line in output.split('\n'):
+                if 'release' in line.lower():
+                    # Extract version like "12.8"
+                    import re
+                    match = re.search(r'release\s+(\d+\.\d+)', line, re.IGNORECASE)
+                    if match:
+                        return True, match.group(1)
+            return True, None
+        return False, None
+    except (FileNotFoundError, subprocess.TimeoutExpired, Exception):
+        return False, None
+
+
+def install_cuda_toolkit_conda(cuda_version="12.8"):
+    """
+    Automatically install CUDA toolkit via conda.
+
+    Args:
+        cuda_version: CUDA version to install (e.g., "12.8")
+
+    Returns:
+        bool: True if installed successfully
+    """
+    print(f"\n🔧 Installing CUDA toolkit {cuda_version} via conda...")
+
+    # Check if conda is available
+    try:
+        subprocess.run(["conda", "--version"], capture_output=True, check=True)
+    except (FileNotFoundError, subprocess.CalledProcessError):
+        print("  ❌ conda not found - cannot auto-install CUDA toolkit")
+        print("  💡 Please install CUDA toolkit manually from: https://developer.nvidia.com/cuda-downloads")
+        return False
+
+    # Install CUDA toolkit via conda-forge (no sudo needed)
+    # Using cudatoolkit package which includes nvcc
+    cuda_major_minor = cuda_version.replace('.', '')[:3]  # "128" -> "12.8"
+
+    print(f"  📥 Installing cudatoolkit={cuda_version} from conda-forge...")
+    print("  ⏱️  This may take several minutes (downloading ~2GB)...")
+
+    try:
+        result = subprocess.run(
+            ["conda", "install", "-y", "-c", "conda-forge", f"cudatoolkit={cuda_version}", "cuda-nvcc"],
+            timeout=900,  # 15 minutes
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode != 0:
+            # Try without exact version
+            print(f"  ⚠️  Exact version {cuda_version} not found, trying cuda-toolkit (latest 12.x)...")
+            result = subprocess.run(
+                ["conda", "install", "-y", "-c", "nvidia", "cuda-toolkit"],
+                timeout=900,
+                capture_output=True,
+                text=True
+            )
+
+        if result.returncode == 0:
+            print("  ✅ CUDA toolkit installed successfully")
+
+            # Set environment variables for current session
+            conda_prefix = os.environ.get('CONDA_PREFIX', os.path.expanduser('~/miniconda3/envs/' + os.environ.get('CONDA_DEFAULT_ENV', 'base')))
+            cuda_home = os.path.join(conda_prefix, 'pkgs', 'cuda-toolkit')
+
+            # Try to find actual CUDA installation
+            if not os.path.exists(cuda_home):
+                cuda_home = conda_prefix
+
+            os.environ['CUDA_HOME'] = cuda_home
+            os.environ['CUDA_PATH'] = cuda_home
+
+            # Add to PATH
+            cuda_bin = os.path.join(cuda_home, 'bin')
+            if os.path.exists(cuda_bin):
+                os.environ['PATH'] = cuda_bin + os.pathsep + os.environ.get('PATH', '')
+
+            # Add to LD_LIBRARY_PATH (Linux)
+            cuda_lib = os.path.join(cuda_home, 'lib64')
+            if os.path.exists(cuda_lib):
+                os.environ['LD_LIBRARY_PATH'] = cuda_lib + os.pathsep + os.environ.get('LD_LIBRARY_PATH', '')
+
+            print(f"  💡 CUDA_HOME set to: {cuda_home}")
+            return True
+        else:
+            print(f"  ❌ CUDA toolkit installation failed")
+            print(f"  Output: {result.stderr}")
+            return False
+
+    except subprocess.TimeoutExpired:
+        print("  ⏱️  Installation timed out (may still be running in background)")
+        return False
+    except Exception as e:
+        print(f"  ❌ Installation error: {e}")
+        return False
+
+
+def build_spconv_from_source(cuda_version="12.8"):
+    """
+    Build and install spconv from source for exact CUDA version match.
+
+    Args:
+        cuda_version: CUDA version (e.g., "12.8")
+
+    Returns:
+        bool: True if built and installed successfully
+    """
+    print(f"\n🔨 Building spconv from source for CUDA {cuda_version}...")
+
+    import tempfile
+    import shutil
+
+    # Check CUDA_HOME is set
+    cuda_home = os.environ.get('CUDA_HOME') or os.environ.get('CUDA_PATH')
+    if not cuda_home:
+        print("  ❌ CUDA_HOME not set - cannot build from source")
+        return False
+
+    print(f"  🔍 Using CUDA_HOME: {cuda_home}")
+
+    # Create temporary directory for build
+    with tempfile.TemporaryDirectory() as tmpdir:
+        repo_dir = os.path.join(tmpdir, 'spconv')
+
+        try:
+            # Clone spconv repository
+            print("  📥 Cloning spconv repository...")
+            result = subprocess.run(
+                ["git", "clone", "--depth=1", "--branch=v2.3.6", "https://github.com/traveller59/spconv.git", repo_dir],
+                capture_output=True,
+                text=True,
+                timeout=300
+            )
+
+            if result.returncode != 0:
+                print(f"  ❌ Failed to clone repository: {result.stderr}")
+                return False
+
+            print("  ✅ Repository cloned")
+
+            # Set environment variables for build
+            env = os.environ.copy()
+            env['CUDA_HOME'] = cuda_home
+            env['TORCH_CUDA_ARCH_LIST'] = "7.0 7.5 8.0 8.6 8.9 9.0"  # Common GPU architectures
+
+            # Build and install
+            print("  🔨 Building spconv (this may take 5-10 minutes)...")
+            print("  ⏱️  Please wait...")
+
+            result = subprocess.run(
+                [sys.executable, "setup.py", "bdist_wheel"],
+                cwd=repo_dir,
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=900  # 15 minutes
+            )
+
+            if result.returncode != 0:
+                print(f"  ❌ Build failed: {result.stderr}")
+                return False
+
+            print("  ✅ Build completed")
+
+            # Find the built wheel
+            dist_dir = os.path.join(repo_dir, 'dist')
+            wheels = [f for f in os.listdir(dist_dir) if f.endswith('.whl')]
+
+            if not wheels:
+                print("  ❌ No wheel file found after build")
+                return False
+
+            wheel_path = os.path.join(dist_dir, wheels[0])
+            print(f"  📦 Installing {wheels[0]}...")
+
+            # Install the wheel
+            result = subprocess.run(
+                [sys.executable, "-m", "pip", "install", wheel_path],
+                capture_output=True,
+                text=True,
+                timeout=60
+            )
+
+            if result.returncode == 0:
+                print("  ✅ spconv installed successfully from source!")
+                return True
+            else:
+                print(f"  ❌ Installation failed: {result.stderr}")
+                return False
+
+        except subprocess.TimeoutExpired:
+            print("  ⏱️  Build timed out")
+            return False
+        except Exception as e:
+            print(f"  ❌ Build error: {e}")
+            return False
+
+
 def install_spconv():
     """
     Install spconv (sparse convolution library) with CUDA support.
@@ -259,12 +477,44 @@ def install_spconv():
 
     print(f"  ⚠️  No prebuilt CUDA wheels found for CUDA {cuda_ver}")
 
+    # Step 3: Try building from source
+    print(f"  📥 Step 3: Attempting to build spconv from source for exact CUDA match...")
+
+    # Check if nvcc is available
+    nvcc_available, nvcc_cuda_ver = check_nvcc()
+
+    if nvcc_available:
+        print(f"  ✅ nvcc detected (CUDA {nvcc_cuda_ver or 'version unknown'})")
+    else:
+        print("  ⚠️  nvcc not found - CUDA toolkit required for source build")
+
+        # Try to auto-install CUDA toolkit
+        # Convert cuda_ver "128" to "12.8"
+        cuda_ver_dotted = f"{cuda_ver[:-1]}.{cuda_ver[-1]}" if len(cuda_ver) >= 2 else cuda_ver
+
+        if install_cuda_toolkit_conda(cuda_ver_dotted):
+            # Re-check nvcc after installation
+            nvcc_available, nvcc_cuda_ver = check_nvcc()
+            if nvcc_available:
+                print(f"  ✅ nvcc now available after CUDA installation")
+            else:
+                print("  ⚠️  CUDA toolkit installed but nvcc still not found")
+
+    # Try building from source if nvcc is available
+    if nvcc_available:
+        cuda_ver_dotted = f"{cuda_ver[:-1]}.{cuda_ver[-1]}" if len(cuda_ver) >= 2 else cuda_ver
+        if build_spconv_from_source(cuda_ver_dotted):
+            print(f"  ✅ spconv built from source successfully!")
+            return True
+        else:
+            print("  ⚠️  Source build failed")
+
     # Last resort: generic spconv (CPU-only)
-    print("  ⚠️  No prebuilt CUDA wheels found, trying generic spconv (CPU-only)")
+    print("  ⚠️  All CUDA installation methods failed, falling back to CPU-only spconv")
     success, _ = run_pip_install("spconv")
     if success:
         print("  ⚠️  Installed CPU-only spconv (GPU acceleration not available)")
-        print("  💡 Consider building spconv from source for CUDA support")
+        print("  💡 For CUDA support, ensure CUDA toolkit is installed and try again")
 
     return success
 

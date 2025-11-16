@@ -19,6 +19,7 @@ torch>=2.0.0              # PyTorch (should already be installed by ComfyUI)
 torchvision               # Vision utilities
 diffusers                 # Required for X-Part diffusion models
 timm                      # PyTorch Image Models (required for Sonata backbone)
+einops                    # Tensor operations (required for DiT models)
 # flash-attn is handled separately by install.py (optional, requires prebuilt wheels)
 
 # Numerical Computing
@@ -42,6 +43,10 @@ numba                     # JIT compilation for performance
 # Additional Utilities
 Pillow                    # Image processing
 tqdm                      # Progress bars
+
+# Testing (Development)
+pytest>=6.0.0             # Testing framework
+pytest-timeout            # Timeout support for tests
 
 # ============================================================================
 # CUDA-Specific Dependencies (Installed via install.py)

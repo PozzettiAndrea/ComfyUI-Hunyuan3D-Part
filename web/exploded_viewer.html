@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Hunyuan3D Exploded Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #1a1a1a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #aaa;
+            font-size: 14px;
+            text-align: center;
+        }
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(40, 40, 40, 0.9);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            min-width: 300px;
+        }
+        #controls label {
+            color: #fff;
+            font-size: 12px;
+            display: block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        #explosion-value {
+            color: #4CAF50;
+            font-weight: bold;
+            float: right;
+        }
+        #explosion-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            outline: none;
+            background: linear-gradient(to right, #555, #888);
+            -webkit-appearance: none;
+        }
+        #explosion-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        #explosion-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #4CAF50;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        #reset-btn {
+            margin-top: 10px;
+            width: 100%;
+            padding: 8px;
+            background: #555;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+        #reset-btn:hover {
+            background: #666;
+        }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #aaa;
+            font-size: 11px;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div id="loading">Ready to load exploded view</div>
+    <div id="info">Parts: <span id="part-count">0</span></div>
+    <div id="controls">
+        <label>
+            Explosion
+            <span id="explosion-value">0%</span>
+        </label>
+        <input type="range" id="explosion-slider" min="0" max="4" step="0.01" value="0">
+        <button id="reset-btn">Reset View</button>
+    </div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+        console.log('[Hunyuan3D Viewer] Initializing exploded viewer...');
+
+        const canvas = document.getElementById('canvas');
+        const loading = document.getElementById('loading');
+        const explosionSlider = document.getElementById('explosion-slider');
+        const explosionValue = document.getElementById('explosion-value');
+        const resetBtn = document.getElementById('reset-btn');
+        const partCountEl = document.getElementById('part-count');
+
+        // Scene
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1a1a1a);
+
+        // Camera
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(3, 3, 3);
+
+        // Renderer
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+
+        // Controls
+        const controls = new OrbitControls(camera, canvas);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.7);
+        dirLight1.position.set(5, 10, 7);
+        scene.add(dirLight1);
+
+        const dirLight2 = new THREE.DirectionalLight(0xffffff, 0.3);
+        dirLight2.position.set(-5, -5, -7);
+        scene.add(dirLight2);
+
+        // Grid
+        const grid = new THREE.GridHelper(10, 10, 0x333333, 0x1a1a1a);
+        scene.add(grid);
+
+        // Axes
+        const axes = new THREE.AxesHelper(1);
+        scene.add(axes);
+
+        // Explosion state
+        let parts = [];  // Array of {mesh, center, originalPosition, direction}
+        let globalCenter = new THREE.Vector3(0, 0, 0);
+        let currentExplosion = 0;
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Calculate bounding box center for an object
+        function calculateCenter(obj) {
+            const box = new THREE.Box3().setFromObject(obj);
+            return box.getCenter(new THREE.Vector3());
+        }
+
+        // Update explosion based on slider value
+        function updateExplosion(scale) {
+            currentExplosion = scale;
+            explosionValue.textContent = Math.round(scale * 100) + '%';
+
+            parts.forEach(part => {
+                // Calculate new position based on direction and scale
+                const offset = part.direction.clone().multiplyScalar(scale);
+                part.mesh.position.copy(part.originalPosition).add(offset);
+            });
+        }
+
+        // Load exploded scene
+        function loadScene(filepath, metadata) {
+            console.log('[Hunyuan3D Viewer] Loading scene:', filepath);
+            console.log('[Hunyuan3D Viewer] Metadata:', metadata);
+            loading.textContent = 'Loading scene...';
+            loading.style.display = 'block';
+
+            // Clear previous scene
+            parts.forEach(part => scene.remove(part.mesh));
+            parts = [];
+
+            const loader = new GLTFLoader();
+
+            loader.load(
+                filepath,
+                (gltf) => {
+                    console.log('[Hunyuan3D Viewer] Scene loaded successfully');
+                    const loadedScene = gltf.scene;
+
+                    // Calculate scene bounding box for centering
+                    const sceneBox = new THREE.Box3().setFromObject(loadedScene);
+                    const sceneCenter = sceneBox.getCenter(new THREE.Vector3());
+
+                    // Collect all mesh parts and calculate their centers
+                    const meshParts = [];
+                    loadedScene.traverse((child) => {
+                        if (child.isMesh) {
+                            // Calculate center in world coordinates
+                            child.updateMatrixWorld(true);
+                            const center = calculateCenter(child);
+                            meshParts.push({ mesh: child, center });
+                        }
+                    });
+
+                    console.log(`[Hunyuan3D Viewer] Found ${meshParts.length} mesh parts`);
+                    partCountEl.textContent = meshParts.length;
+
+                    // Calculate global center (mean of all part centers)
+                    globalCenter.set(0, 0, 0);
+                    meshParts.forEach(part => {
+                        globalCenter.add(part.center);
+                    });
+                    if (meshParts.length > 0) {
+                        globalCenter.divideScalar(meshParts.length);
+                    }
+
+                    console.log('[Hunyuan3D Viewer] Global center:', globalCenter);
+
+                    // Center the entire scene
+                    loadedScene.position.sub(sceneCenter);
+
+                    // Recalculate centers after centering
+                    meshParts.forEach(part => {
+                        part.mesh.updateMatrixWorld(true);
+                        part.center = calculateCenter(part.mesh);
+                    });
+
+                    // Recalculate global center
+                    globalCenter.set(0, 0, 0);
+                    meshParts.forEach(part => {
+                        globalCenter.add(part.center);
+                    });
+                    if (meshParts.length > 0) {
+                        globalCenter.divideScalar(meshParts.length);
+                    }
+
+                    // Calculate explosion directions for each part
+                    meshParts.forEach(partData => {
+                        // Direction from global center to part center
+                        const direction = new THREE.Vector3()
+                            .copy(partData.center)
+                            .sub(globalCenter)
+                            .normalize();
+
+                        // If direction is zero (part at global center), use random direction
+                        if (direction.length() < 0.001) {
+                            direction.set(
+                                Math.random() - 0.5,
+                                Math.random() - 0.5,
+                                Math.random() - 0.5
+                            ).normalize();
+                        }
+
+                        // Store part info
+                        parts.push({
+                            mesh: partData.mesh,
+                            center: partData.center.clone(),
+                            originalPosition: partData.mesh.position.clone(),
+                            direction: direction
+                        });
+
+                        // Add mesh to scene
+                        scene.add(partData.mesh);
+
+                        // Ensure mesh has proper material
+                        if (!partData.mesh.material) {
+                            partData.mesh.material = new THREE.MeshPhongMaterial({
+                                color: 0xcccccc,
+                                side: THREE.DoubleSide
+                            });
+                        }
+                    });
+
+                    // Adjust camera to fit scene
+                    const size = sceneBox.getSize(new THREE.Vector3());
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    const fov = camera.fov * (Math.PI / 180);
+                    let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+                    cameraZ *= 1.5; // Add some margin
+
+                    camera.position.set(cameraZ, cameraZ, cameraZ);
+                    controls.target.copy(globalCenter);
+                    controls.update();
+
+                    loading.style.display = 'none';
+                    console.log('[Hunyuan3D Viewer] Scene setup complete');
+
+                    // Reset explosion
+                    explosionSlider.value = 0;
+                    updateExplosion(0);
+                },
+                (progress) => {
+                    const percent = (progress.loaded / progress.total * 100).toFixed(0);
+                    loading.textContent = `Loading... ${percent}%`;
+                },
+                (error) => {
+                    console.error('[Hunyuan3D Viewer] Load error:', error);
+                    loading.textContent = 'Error loading scene';
+                }
+            );
+        }
+
+        // Slider event
+        explosionSlider.addEventListener('input', (e) => {
+            updateExplosion(parseFloat(e.target.value));
+        });
+
+        // Reset button
+        resetBtn.addEventListener('click', () => {
+            explosionSlider.value = 0;
+            updateExplosion(0);
+        });
+
+        // Listen for messages from parent widget
+        window.addEventListener('message', (event) => {
+            console.log('[Hunyuan3D Viewer] Received message:', event.data);
+
+            if (event.data.type === 'LOAD_EXPLODED_SCENE') {
+                loadScene(event.data.filepath, {
+                    numParts: event.data.numParts,
+                    globalCenter: event.data.globalCenter,
+                    maxExtent: event.data.maxExtent
+                });
+            }
+        });
+
+        console.log('[Hunyuan3D Viewer] Ready');
+    </script>
+</body>
+</html>
