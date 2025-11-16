@@ -43,6 +43,10 @@ numba                     # JIT compilation for performance
 Pillow                    # Image processing
 tqdm                      # Progress bars
 
+# Testing (Development)
+pytest>=6.0.0             # Testing framework
+pytest-timeout            # Timeout support for tests
+
 # ============================================================================
 # CUDA-Specific Dependencies (Installed via install.py)
 # ============================================================================
