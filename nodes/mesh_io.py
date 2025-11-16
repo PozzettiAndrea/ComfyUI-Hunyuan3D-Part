@@ -146,6 +146,13 @@ class Hunyuan3DLoadMesh:
             "required": {
                 "file_path": (mesh_files, ),
             },
+            "optional": {
+                "mesh_path": ("STRING", {
+                    "default": "",
+                    "multiline": False,
+                    "forceInput": True,
+                }),
+            },
         }
 
     RETURN_TYPES = ("TRIMESH",)
@@ -176,13 +183,16 @@ class Hunyuan3DLoadMesh:
         return sorted(mesh_files)
 
     @classmethod
-    def IS_CHANGED(cls, file_path):
+    def IS_CHANGED(cls, file_path, mesh_path=None):
         """Force re-execution when file changes."""
+        # Use mesh_path if provided (from Load 3D connection), otherwise use file_path
+        actual_path = mesh_path if mesh_path else file_path
+
         if COMFYUI_INPUT_FOLDER is not None:
             # Check file modification time
             full_path = None
-            input_3d_path = os.path.join(COMFYUI_INPUT_FOLDER, "3d", file_path)
-            input_path = os.path.join(COMFYUI_INPUT_FOLDER, file_path)
+            input_3d_path = os.path.join(COMFYUI_INPUT_FOLDER, "3d", actual_path)
+            input_path = os.path.join(COMFYUI_INPUT_FOLDER, actual_path)
 
             if os.path.exists(input_3d_path):
                 full_path = input_3d_path
@@ -192,9 +202,9 @@ class Hunyuan3DLoadMesh:
             if full_path and os.path.exists(full_path):
                 return os.path.getmtime(full_path)
 
-        return file_path
+        return actual_path
 
-    def load_mesh(self, file_path):
+    def load_mesh(self, file_path, mesh_path=None):
         """
         Load mesh from file.
 
@@ -202,11 +212,15 @@ class Hunyuan3DLoadMesh:
 
         Args:
             file_path: Path to mesh file (relative to input folder or absolute)
+            mesh_path: Optional path from Load 3D node connection (overrides file_path when provided)
 
         Returns:
             tuple: (trimesh.Trimesh,)
         """
-        if not file_path or file_path.strip() == "":
+        # Use mesh_path if provided (from Load 3D connection), otherwise use file_path
+        actual_path = mesh_path if mesh_path else file_path
+
+        if not actual_path or actual_path.strip() == "":
             raise ValueError("File path cannot be empty")
 
         # Try to find the file
@@ -215,29 +229,29 @@ class Hunyuan3DLoadMesh:
 
         if COMFYUI_INPUT_FOLDER is not None:
             # First, try in ComfyUI input/3d folder
-            input_3d_path = os.path.join(COMFYUI_INPUT_FOLDER, "3d", file_path)
+            input_3d_path = os.path.join(COMFYUI_INPUT_FOLDER, "3d", actual_path)
             searched_paths.append(input_3d_path)
             if os.path.exists(input_3d_path):
                 full_path = input_3d_path
-                print(f"[Hunyuan3DLoadMesh] Found mesh in input/3d folder: {file_path}")
+                print(f"[Hunyuan3DLoadMesh] Found mesh in input/3d folder: {actual_path}")
 
             # Second, try in ComfyUI input folder (for backward compatibility)
             if full_path is None:
-                input_path = os.path.join(COMFYUI_INPUT_FOLDER, file_path)
+                input_path = os.path.join(COMFYUI_INPUT_FOLDER, actual_path)
                 searched_paths.append(input_path)
                 if os.path.exists(input_path):
                     full_path = input_path
-                    print(f"[Hunyuan3DLoadMesh] Found mesh in input folder: {file_path}")
+                    print(f"[Hunyuan3DLoadMesh] Found mesh in input folder: {actual_path}")
 
         # If not found in input folders, try as absolute path
         if full_path is None:
-            searched_paths.append(file_path)
-            if os.path.exists(file_path):
-                full_path = file_path
-                print(f"[Hunyuan3DLoadMesh] Loading from absolute path: {file_path}")
+            searched_paths.append(actual_path)
+            if os.path.exists(actual_path):
+                full_path = actual_path
+                print(f"[Hunyuan3DLoadMesh] Loading from absolute path: {actual_path}")
             else:
                 # Generate error message with all searched paths
-                error_msg = f"File not found: '{file_path}'\nSearched in:"
+                error_msg = f"File not found: '{actual_path}'\nSearched in:"
                 for path in searched_paths:
                     error_msg += f"\n  - {path}"
                 raise ValueError(error_msg)
