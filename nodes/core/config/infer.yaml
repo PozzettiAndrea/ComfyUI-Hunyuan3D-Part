@@ -19,6 +19,10 @@ shapevae:
     geo_decoder_downsample_ratio: 1
     geo_decoder_ln_post: true
     point_feats: 4
+    # pc_size: Number of points sampled per object/part (affects VRAM usage)
+    # Default: 40960. Lower values = less memory, potential quality loss
+    # Common values: 40960 (default), 20480 (half), 10240 (quarter)
+    # After changing, restart ComfyUI to apply
     pc_size: &pc_size 40960
     pc_sharpedge_size: &pc_sharpedge_size 0
 
@@ -53,6 +57,8 @@ conditioner:
             geo_decoder_downsample_ratio: 1
             geo_decoder_ln_post: true
             point_feats: 4
+            # pc_size_bbox: Points sampled for bounding box conditioning
+            # Should match pc_size above for consistency
             pc_size:  &pc_size_bbox 40960
             pc_sharpedge_size: &pc_sharpedge_size_bbox 0
 

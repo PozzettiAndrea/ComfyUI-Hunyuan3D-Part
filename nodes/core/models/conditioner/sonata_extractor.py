@@ -15,12 +15,15 @@ class SonataFeatureExtractor(nn.Module):
     def __init__(
         self,
         ckpt_path: Optional[str] = "",
+        enable_flash: bool = True,
     ):
         super().__init__()
 
-        # Load Sonata model
+        # Load Sonata model with enable_flash override
+        custom_config = {"enable_flash": enable_flash}
         self.sonata = sonata.load_by_config(
-            str(Path(__file__).parent.parent.parent / "config" / "sonata.json")
+            str(Path(__file__).parent.parent.parent / "config" / "sonata.json"),
+            custom_config=custom_config
         )
 
         # Store original dtype for later reference

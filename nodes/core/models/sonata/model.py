@@ -878,9 +878,23 @@ def load(
     return model
 
 
-def load_by_config(config_path: str):
+def load_by_config(config_path: str, custom_config: dict = None):
     with open(config_path, "r") as f:
         config = json.load(f)
+
+    # Apply custom config overrides
+    if custom_config is not None:
+        for key, value in custom_config.items():
+            config[key] = value
+
+    # Disable flash attention if not available
+    try:
+        import flash_attn
+    except ImportError:
+        if config.get('enable_flash', False):
+            print("[Sonata] flash_attn not installed, disabling flash attention")
+            config['enable_flash'] = False
+
     model = PointTransformerV3(**config)
     n_parameters = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"Model params: {n_parameters / 1e6:.2f}M {n_parameters}")
