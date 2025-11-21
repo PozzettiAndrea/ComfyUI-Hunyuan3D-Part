@@ -35,6 +35,10 @@ class LoadP3SAMSegmentor:
                     "default": True,
                     "tooltip": "Keep model on GPU. True = faster subsequent runs. False = auto-unload after use to free VRAM."
                 }),
+                "enable_flash": ("BOOLEAN", {
+                    "default": True,
+                    "tooltip": "Enable Flash Attention for ~10-20% speedup. Requires flash-attn package. Model reloads on change."
+                }),
             },
         }
 
@@ -43,16 +47,19 @@ class LoadP3SAMSegmentor:
     FUNCTION = "load_model"
     CATEGORY = "Hunyuan3D/Models"
 
-    _cached_model = None
+    _cached_models = {}
 
-    def load_model(self, cache_on_gpu):
+    def load_model(self, cache_on_gpu, enable_flash):
         """Load or return cached P3-SAM segmentor model."""
-        if LoadP3SAMSegmentor._cached_model is not None and cache_on_gpu:
-            print("[Load P3-SAM] Using cached model")
+        cache_key = f"{cache_on_gpu}_{enable_flash}"
+
+        if cache_key in LoadP3SAMSegmentor._cached_models and cache_on_gpu:
+            print(f"[Load P3-SAM] Using cached model (flash={enable_flash})")
+            model = LoadP3SAMSegmentor._cached_models[cache_key]
             # Ensure model is on GPU
-            if hasattr(LoadP3SAMSegmentor._cached_model, 'to'):
-                LoadP3SAMSegmentor._cached_model.to(self.device)
-            return ({"model": LoadP3SAMSegmentor._cached_model, "type": "p3sam", "device": self.device, "cache_on_gpu": cache_on_gpu},)
+            if hasattr(model, 'to'):
+                model.to(self.device)
+            return ({"model": model, "type": "p3sam", "device": self.device, "cache_on_gpu": cache_on_gpu, "enable_flash": enable_flash},)
 
         try:
             from .core.misc_utils import smart_load_model
@@ -67,10 +74,12 @@ class LoadP3SAMSegmentor:
                 raise FileNotFoundError(f"P3-SAM checkpoint not found: {p3sam_ckpt_path}")
 
             # Create model (MultiHeadSegment is imported at module level)
+            print(f"[Load P3-SAM] Building model with enable_flash={enable_flash}...")
             model = MultiHeadSegment(
                 in_channel=512,  # Sonata feature dimension
                 head_num=3,
-                ignore_label=-100
+                ignore_label=-100,
+                enable_flash=enable_flash
             )
 
             # Load weights
@@ -83,9 +92,9 @@ class LoadP3SAMSegmentor:
             print(f"[Load P3-SAM] ✓ P3-SAM model loaded on {self.device}")
 
             if cache_on_gpu:
-                LoadP3SAMSegmentor._cached_model = model
+                LoadP3SAMSegmentor._cached_models[cache_key] = model
 
-            return ({"model": model, "type": "p3sam", "device": self.device, "cache_on_gpu": cache_on_gpu},)
+            return ({"model": model, "type": "p3sam", "device": self.device, "cache_on_gpu": cache_on_gpu, "enable_flash": enable_flash},)
 
         except Exception as e:
             print(f"[Load P3-SAM] Error: {e}")
@@ -117,6 +126,17 @@ class LoadXPartModels:
                     "default": True,
                     "tooltip": "Keep models on GPU. True = faster subsequent runs. False = auto-unload after use to free VRAM."
                 }),
+                "enable_flash": ("BOOLEAN", {
+                    "default": True,
+                    "tooltip": "Enable Flash Attention for ~10-20% speedup. Requires flash-attn package. Model reloads on change."
+                }),
+                "pc_size": ("INT", {
+                    "default": 40960,
+                    "min": 1024,
+                    "max": 81920,
+                    "step": 1024,
+                    "tooltip": "Points per object/part. 40960=trained default, <20480=quality loss, <5120=very poor. Model reloads on change."
+                }),
             },
         }
 
@@ -130,11 +150,17 @@ class LoadXPartModels:
     _cached_vae = {}
     _cached_cond = {}
 
-    def load_models(self, precision, cache_on_gpu):
+    def load_models(self, precision, cache_on_gpu, enable_flash, pc_size):
         """Load all three X-Part models in parallel."""
 
+        # Print warnings for non-default pc_size values
+        if pc_size < 20480:
+            print(f"[Load X-Part Models] ⚠️  WARNING: Using reduced point count ({pc_size}) - quality may degrade")
+        if pc_size < 5120:
+            print(f"[Load X-Part Models] ⚠️  WARNING: Very low point count ({pc_size}) - expect poor quality")
+
         # Check if all models are cached
-        cache_key = precision
+        cache_key = f"{precision}_{enable_flash}_{pc_size}"
 
         all_cached = (
             cache_key in LoadXPartModels._cached_dit and
@@ -144,7 +170,7 @@ class LoadXPartModels:
         )
 
         if all_cached:
-            print(f"[Load X-Part Models] Using all cached models ({precision})")
+            print(f"[Load X-Part Models] Using all cached models ({precision}, flash={enable_flash}, pc_size={pc_size})")
             dit = LoadXPartModels._cached_dit[cache_key]
             vae = LoadXPartModels._cached_vae[cache_key]
             cond = LoadXPartModels._cached_cond[cache_key]
@@ -161,6 +187,8 @@ class LoadXPartModels:
                 "device": self.device,
                 "dtype": precision,
                 "cache_on_gpu": cache_on_gpu,
+                "enable_flash": enable_flash,
+                "pc_size": pc_size,
                 "type": "xpart_models"
             }
             return (combined,)
@@ -176,6 +204,35 @@ class LoadXPartModels:
         # Load shared config
         config_path = Path(__file__).parent / "core" / "config" / "infer.yaml"
         config = OmegaConf.load(str(config_path))
+
+        # Override pc_size values with user-specified value
+        print(f"[Load X-Part Models] Overriding pc_size in config: {pc_size}")
+        config["shapevae"]["params"]["pc_size"] = pc_size
+        config["shapevae"]["params"]["pc_sharpedge_size"] = 0
+
+        # Override in conditioner geo_cfg (local_geo_cfg)
+        if "conditioner" in config and "params" in config["conditioner"]:
+            if "geo_cfg" in config["conditioner"]["params"]:
+                if "params" in config["conditioner"]["params"]["geo_cfg"]:
+                    if "local_geo_cfg" in config["conditioner"]["params"]["geo_cfg"]["params"]:
+                        if "params" in config["conditioner"]["params"]["geo_cfg"]["params"]["local_geo_cfg"]:
+                            config["conditioner"]["params"]["geo_cfg"]["params"]["local_geo_cfg"]["params"]["pc_size"] = pc_size
+                            config["conditioner"]["params"]["geo_cfg"]["params"]["local_geo_cfg"]["params"]["pc_sharpedge_size"] = 0
+
+            # Override in obj_encoder_cfg
+            if "obj_encoder_cfg" in config["conditioner"]["params"]:
+                if "params" in config["conditioner"]["params"]["obj_encoder_cfg"]:
+                    config["conditioner"]["params"]["obj_encoder_cfg"]["params"]["pc_size"] = pc_size
+                    config["conditioner"]["params"]["obj_encoder_cfg"]["params"]["pc_sharpedge_size"] = 0
+
+            # Override enable_flash in seg_feat_cfg (Sonata)
+            if "seg_feat_cfg" in config["conditioner"]["params"]:
+                if "params" not in config["conditioner"]["params"]["seg_feat_cfg"]:
+                    config["conditioner"]["params"]["seg_feat_cfg"]["params"] = {}
+                config["conditioner"]["params"]["seg_feat_cfg"]["params"]["enable_flash"] = enable_flash
+
+        print(f"[Load X-Part Models] Using enable_flash={enable_flash} for Sonata in conditioner")
+
         ckpt_path = smart_load_model(model_path="tencent/Hunyuan3D-Part")
 
         dtype = torch.float16 if precision == "float16" else torch.bfloat16
@@ -264,6 +321,8 @@ class LoadXPartModels:
             "device": self.device,
             "dtype": precision,
             "cache_on_gpu": cache_on_gpu,
+            "enable_flash": enable_flash,
+            "pc_size": pc_size,
             "type": "xpart_models"
         }
         return (combined,)

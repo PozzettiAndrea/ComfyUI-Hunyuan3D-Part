@@ -16,11 +16,12 @@ class MultiHeadSegment(nn.Module):
     3. IoU prediction: an IoU predictor
     '''
 
-    def __init__(self, in_channel=512, head_num=3, ignore_label=-100):
+    def __init__(self, in_channel=512, head_num=3, ignore_label=-100, enable_flash=True):
         super().__init__()
         self.in_channel = in_channel
         self.head_num = head_num
         self.ignore_label = ignore_label
+        self.enable_flash = enable_flash
         self.build_P3SAM()
 
     def build_P3SAM(self): #build p3sam
@@ -32,7 +33,9 @@ class MultiHeadSegment(nn.Module):
         except:
             sonata_cache = os.path.expanduser("~/.cache/sonata/ckpt")
 
-        self.sonata = sonata.load("sonata", repo_id="facebook/sonata", download_root=sonata_cache)
+        # Pass enable_flash to Sonata via custom_config
+        custom_config = {"enable_flash": self.enable_flash}
+        self.sonata = sonata.load("sonata", repo_id="facebook/sonata", download_root=sonata_cache, custom_config=custom_config)
         self.mlp = nn.Sequential(
                 nn.Linear(1232, 512),
                 nn.GELU(),
