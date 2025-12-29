@@ -32,6 +32,12 @@ Current default: **40,960 points** per object/part
 
 See **[MEMORY_OPTIMIZATION.md](MEMORY_OPTIMIZATION.md)** for complete tuning guide.
 
+## Community
+
+Questions or feature requests? Open a [Discussion](https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part/discussions) on GitHub.
+
+Join the [Comfy3D Discord](https://discord.gg/PN743tE5) for help, updates, and chat about 3D workflows in ComfyUI.
+
 ## Credits
 
 Based on [Hunyuan3D-Part](https://github.com/tencent/Hunyuan3D-Part) by Tencent.
