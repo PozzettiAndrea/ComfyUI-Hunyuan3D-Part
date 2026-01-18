@@ -7,43 +7,7 @@ requires-python = ">=3.10"
 
 # Standard dependencies that can be installed via pip
 # CUDA-specific packages (spconv, torch-scatter, torch-cluster) are handled by install.py
-dependencies = [
-    # PyTorch (should already be installed by ComfyUI)
-    "torch>=2.0.0",
-    "torchvision",
-
-    # 3D Mesh Processing
-    "trimesh",
-    "pymeshlab==2023.12.post3",
-
-    # Deep Learning
-    "diffusers",
-    "timm",
-    "einops",
-    "safetensors",
-    "torchdiffeq",
-
-    # Numerical Computing
-    "numpy>=1.20.0",
-    "scipy",
-    "scikit-learn",
-    "scikit-image",
-
-    # Point Cloud Processing
-    "fpsample",
-
-    # Configuration & Utilities
-    "addict",
-    "omegaconf",
-    "huggingface-hub",
-
-    # Optimization
-    "numba",
-
-    # Additional Utilities
-    "Pillow",
-    "tqdm",
-]
+dynamic = ["dependencies"]
 
 [project.urls]
 Repository = "https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part"
@@ -51,6 +15,13 @@ Documentation = "https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part#readme
 "Bug Tracker" = "https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part/issues"
 
 # ComfyUI Registry configuration
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
 [tool.comfy]
 PublisherId = "pznodes"
 DisplayName = "Hunyuan3D-Part"
