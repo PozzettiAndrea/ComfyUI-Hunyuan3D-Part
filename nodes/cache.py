@@ -2,7 +2,8 @@
 Feature Caching Nodes for Hunyuan3D-Part.
 
 Implements caching for expensive preprocessing operations to speed up
-repeated runs on the same mesh.
+repeated runs on the same mesh. Handles model loading internally
+from config dicts passed by loader nodes.
 """
 
 import torch
@@ -15,6 +16,44 @@ from .core.mesh_utils import load_mesh
 
 # Maximum number of cached feature sets (to prevent unbounded memory growth)
 MAX_CACHE_SIZE = 10
+
+# Worker-process model cache (shared across all node instances)
+_p3sam_model_cache = {}
+
+
+def _get_p3sam_model(config):
+    """Load or return cached P3-SAM model within the worker process."""
+    cache_key = f"{config['enable_flash']}"
+
+    if cache_key in _p3sam_model_cache:
+        model = _p3sam_model_cache[cache_key]
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        model.to(device)
+        return model
+
+    from .core.p3sam_models import MultiHeadSegment
+    from safetensors.torch import load_file
+
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+
+    print(f"[P3-SAM] Building model with enable_flash={config['enable_flash']}...")
+    model = MultiHeadSegment(
+        in_channel=512,
+        head_num=3,
+        ignore_label=-100,
+        enable_flash=config['enable_flash']
+    )
+
+    state_dict = load_file(config['ckpt_path'], device=device)
+    model.load_state_dict(state_dict=state_dict, strict=False)
+    model = model.to(device).eval()
+
+    print(f"[P3-SAM] Model loaded on {device}")
+
+    if config.get('cache_on_gpu', True):
+        _p3sam_model_cache[cache_key] = model
+
+    return model
 
 
 class ComputeMeshFeatures:
@@ -30,15 +69,12 @@ class ComputeMeshFeatures:
     Features are cached internally for identical mesh+params combinations.
     """
 
-    def __init__(self):
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
-
     @classmethod
     def INPUT_TYPES(cls):
         return {
             "required": {
                 "mesh": ("TRIMESH",),
-                "p3sam_model": ("MODEL",),
+                "p3sam_config": ("P3SAM_CONFIG",),
                 "all_points": ("BOOLEAN", {
                     "default": False,
                     "tooltip": "Use ALL mesh vertices instead of sampling. Enable for X-Part generation."
@@ -68,7 +104,7 @@ class ComputeMeshFeatures:
     # Global cache storage with LRU eviction
     _feature_cache = OrderedDict()
 
-    def compute_features(self, mesh, p3sam_model, all_points, point_num, seed):
+    def compute_features(self, mesh, p3sam_config, all_points, point_num, seed):
         """Compute mesh features using P3-SAM's internal Sonata encoder."""
         try:
             # Load mesh if needed
@@ -86,18 +122,15 @@ class ComputeMeshFeatures:
 
             # Check if already cached
             if cache_key in ComputeMeshFeatures._feature_cache:
-                print(f"[Compute Features] ✓ Using cached features")
-                # Move to end to mark as recently used (LRU)
+                print(f"[Compute Features] Using cached features")
                 ComputeMeshFeatures._feature_cache.move_to_end(cache_key)
                 cached_data = ComputeMeshFeatures._feature_cache[cache_key]
                 return (cached_data,)
 
             print(f"[Compute Features] Computing mesh features...")
 
-            # Extract P3-SAM model (contains Sonata internally)
-            p3sam = p3sam_model["model"]
-            p3sam_cache_on_gpu = p3sam_model.get("cache_on_gpu", True)
-            p3sam = p3sam.to(self.device).eval()
+            # Load model from config
+            p3sam = _get_p3sam_model(p3sam_config)
 
             # Import required functions from core
             from .core.p3sam_processing import (
@@ -124,18 +157,11 @@ class ComputeMeshFeatures:
                 _points = mesh_loaded.vertices
                 normals = mesh_loaded.vertex_normals
                 face_idx = None  # No face mapping when using vertices
-                sampled_mesh = trimesh.PointCloud(_points)
-                sampled_mesh.metadata['face_idx'] = None
-                sampled_mesh.metadata['all_points'] = True
             else:
                 # Sample point cloud
                 print(f"[Compute Features] Sampling {point_num} points...")
                 _points, face_idx = trimesh.sample.sample_surface(mesh_loaded, point_num, seed=seed)
                 normals = mesh_loaded.face_normals[face_idx]
-                # Create sampled mesh for later use
-                sampled_mesh = trimesh.PointCloud(_points)
-                sampled_mesh.metadata['face_idx'] = face_idx
-                sampled_mesh.metadata['all_points'] = False
 
             _points_normalized = normalize_pc(_points)
 
@@ -149,16 +175,22 @@ class ComputeMeshFeatures:
             t0 = time.time()
             feats = get_feat(p3sam, points, normals)
             feat_time = time.time() - t0
-            print(f"[Compute Features] ✓ Features computed ({feat_time:.2f}s)")
+            print(f"[Compute Features] Features computed ({feat_time:.2f}s)")
+
+            # Auto-unload if not caching
+            if not p3sam_config.get('cache_on_gpu', True):
+                p3sam.to("cpu")
+                torch.cuda.empty_cache()
 
             # Prepare cache data
+            # np.asarray() strips trimesh TrackedArray wrappers so comfy_env can serialize
             cache_data = {
                 'mesh': mesh_loaded,
-                'sampled_mesh': sampled_mesh,
-                'adjacent_faces': adjacent_faces,
+                'face_idx': np.asarray(face_idx) if face_idx is not None else None,
+                'adjacent_faces': np.asarray(adjacent_faces),
                 'features': feats,
-                'points': points,
-                'normals': normals,
+                'points': np.asarray(points),
+                'normals': np.asarray(normals),
                 'all_points': all_points,
                 'point_num': point_num if not all_points else len(_points),
                 'seed': seed,
@@ -200,15 +232,12 @@ class P3SAMSegmentMesh:
     Takes pre-computed mesh features and runs P3-SAM inference.
     """
 
-    def __init__(self):
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
-
     @classmethod
     def INPUT_TYPES(cls):
         return {
             "required": {
                 "mesh_with_features": ("MESH_FEATURES",),
-                "p3sam_model": ("MODEL",),
+                "p3sam_config": ("P3SAM_CONFIG",),
                 "prompt_num": ("INT", {
                     "default": 400,
                     "min": 50,
@@ -242,7 +271,7 @@ class P3SAMSegmentMesh:
     FUNCTION = "segment"
     CATEGORY = "Hunyuan3D/Processing"
 
-    def segment(self, mesh_with_features, p3sam_model, prompt_num, prompt_bs, threshold, post_process):
+    def segment(self, mesh_with_features, p3sam_config, prompt_num, prompt_bs, threshold, post_process):
         """Segment mesh into parts using P3-SAM."""
         try:
             import folder_paths
@@ -254,7 +283,7 @@ class P3SAMSegmentMesh:
 
             # Extract feature data
             mesh_loaded = mesh_with_features['mesh']
-            sampled_mesh = mesh_with_features['sampled_mesh']
+            face_idx = mesh_with_features['face_idx']
             adjacent_faces = mesh_with_features['adjacent_faces']
             feats = mesh_with_features['features']
             points = mesh_with_features['points']
@@ -262,11 +291,10 @@ class P3SAMSegmentMesh:
 
             print(f"[P3-SAM Segment] Running segmentation with {prompt_num} prompts...")
 
-            # Extract P3-SAM model
-            p3sam = p3sam_model["model"]
-            p3sam_cache_on_gpu = p3sam_model.get("cache_on_gpu", True)
-            p3sam = p3sam.to(self.device).eval()
-            p3sam_parallel = torch.nn.DataParallel(p3sam)
+            # Load model from config
+            p3sam = _get_p3sam_model(p3sam_config)
+            device = "cuda" if torch.cuda.is_available() else "cpu"
+            p3sam = p3sam.to(device).eval()
 
             # Import functions from core
             from .core.p3sam_processing import (
@@ -292,7 +320,7 @@ class P3SAMSegmentMesh:
                 if len(cur_prompt) == 0:
                     continue
                 pred_mask_1, pred_mask_2, pred_mask_3, pred_iou = get_mask(
-                    p3sam_parallel, feats, points, cur_prompt
+                    p3sam, feats, points, cur_prompt
                 )
                 pred_mask = np.stack([pred_mask_1, pred_mask_2, pred_mask_3], axis=-1)
                 max_idx = np.argmax(pred_iou, axis=-1)
@@ -348,7 +376,6 @@ class P3SAMSegmentMesh:
 
             # Project to mesh faces
             face_labels = np.zeros(len(mesh_loaded.faces), dtype=np.int32) - 1
-            face_idx = sampled_mesh.metadata.get('face_idx', None)
             if face_idx is not None:
                 for i, fid in enumerate(face_idx):
                     if point_labels[i] >= 0 and face_labels[fid] < 0:
@@ -381,7 +408,7 @@ class P3SAMSegmentMesh:
             print(f"[P3-SAM Segment] Saved preview to: {preview_path}")
 
             # Auto-unload P3-SAM if cache_on_gpu is False
-            if not p3sam_cache_on_gpu:
+            if not p3sam_config.get('cache_on_gpu', True):
                 print("[P3-SAM Segment] Auto-unloading P3-SAM model from GPU...")
                 p3sam.to("cpu")
                 torch.cuda.empty_cache()

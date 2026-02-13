@@ -800,9 +800,8 @@ class PartFormerPipeline(TokenAllocMixin):
                     step_idx = i // getattr(self.scheduler, "order", 1)
                     callback(step_idx, t, outputs)
 
-        # latents2mesh
-        # part_latents = torch.split(latents, num_tokens[0].tolist(), dim=1)
-        out = trimesh.Scene()
+        # latents2mesh — build list of Trimesh (not Scene) for comfy_env serialization
+        parts = []
         for i, part_latent in enumerate(latents):
             try:
                 part_mesh = self._export(
@@ -815,29 +814,31 @@ class PartFormerPipeline(TokenAllocMixin):
                     mc_algo=mc_algo,
                     enable_pbar=enable_pbar,
                 )[0]
-                out.add_geometry(part_mesh)
                 random_color = np.random.randint(0, 255, size=3)
                 part_mesh.visual.face_colors = random_color
+                parts.append(part_mesh)
             except Exception as e:
                 logger.error(f"Failed to export part {i} with error {e}")
+
+        # Denormalize directly on list
         print(f"Denormalize mesh: {center}, {scale}")
-        for key in out.geometry.keys():
-            _v = out.geometry[key].vertices
-            _v = _v * scale + center
-            out.geometry[key].vertices = _v
+        for part_mesh in parts:
+            part_mesh.vertices = part_mesh.vertices * scale + center
 
         if self.verbose:
-            explode_object = explode_mesh(copy.deepcopy(out), explosion_scale=0.2)
-            # add bbox into out
+            # Build temp Scene only for explode_mesh + bbox viz (internal file saving)
+            temp_scene = trimesh.Scene()
+            for p in parts:
+                temp_scene.add_geometry(p)
+            explode_object = explode_mesh(copy.deepcopy(temp_scene), explosion_scale=0.2)
             out_bbox = trimesh.Scene()
-            out_bbox.add_geometry(out)
+            out_bbox.add_geometry(temp_scene)
             for bbox in aabb[0]:
                 box = trimesh.path.creation.box_outline()
                 box.vertices *= (bbox[1] - bbox[0]).float().cpu().numpy()
                 box.vertices += (bbox[0] + bbox[1]).float().cpu().numpy() / 2
                 box.vertices = box.vertices * scale + center
                 out_bbox.add_geometry(box)
-            return out, (out_bbox, mesh_bbox, explode_object)
+            return parts, (out_bbox, mesh_bbox, explode_object)
         else:
-            # return only the generated mesh
-            return out, None
+            return parts, None

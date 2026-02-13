@@ -19,9 +19,6 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_completed
 from collections import defaultdict
 
-import numba 
-from numba import njit
-
 from .p3sam_models import MultiHeadSegment as P3SAM
 
 
@@ -72,18 +69,14 @@ def get_mask(model, feats, points, point_prompt, iter=1):
     """
     point_num = points.shape[0]
     prompt_num = point_prompt.shape[0]
-    feats = feats.unsqueeze(1)  # [N, 1, 512]
-    feats = feats.repeat(1, prompt_num, 1).cuda()  # [N, K, 512]
-    points = torch.from_numpy(points).float().cuda().unsqueeze(1)  # [N, 1, 3]
-    points = points.repeat(1, prompt_num, 1)  # [N, K, 3]
-    prompt_coord = (
-        torch.from_numpy(point_prompt).float().cuda().unsqueeze(0)
-    )  # [1, K, 3]
-    prompt_coord = prompt_coord.repeat(point_num, 1, 1)  # [N, K, 3]
-    
-    feats = feats.transpose(0, 1)  # [K, N, 512]
-    points = points.transpose(0, 1)  # [K, N, 3]
-    prompt_coord = prompt_coord.transpose(0, 1)  # [K, N, 3]
+    # expand creates zero-copy views instead of repeat's full allocation
+    feats = feats.unsqueeze(1).expand(-1, prompt_num, -1).cuda()
+    points = torch.from_numpy(points).float().cuda().unsqueeze(1).expand(-1, prompt_num, -1)
+    prompt_coord = torch.from_numpy(point_prompt).float().cuda().unsqueeze(0).expand(point_num, -1, -1)
+
+    feats = feats.transpose(0, 1).contiguous()          # [K, N, 512]
+    points = points.transpose(0, 1).contiguous()         # [K, N, 3]
+    prompt_coord = prompt_coord.transpose(0, 1).contiguous()  # [K, N, 3]
 
     mask_1, mask_2, mask_3, pred_iou = model(feats, points, prompt_coord, iter)
 
@@ -641,37 +634,32 @@ class Timer:
         self.elapsed_time = self.end_time - self.start_time
         print(f">>>>>> {self.name} runtime: {self.elapsed_time:.4f} seconds")
 
-###################### NUMBA 加速 ######################
-@njit
 def build_adjacent_faces_numba(face_adjacency):
     """
-    使用 Numba 加速构建邻接面片数组。
-    :param face_adjacency: (N, 2) numpy 数组，包含邻接面片对。
-    :return: 
-        - adj_list: 一维数组，存储所有邻接面片。
-        - offsets: 一维数组，记录每个面片的邻接起始位置。
+    Build adjacent faces array from face adjacency pairs.
+    :param face_adjacency: (N, 2) numpy array of adjacent face pairs.
+    :return: (n_faces, max_degree) array where each row lists adjacent face indices, padded with -1.
     """
-    n_faces = np.max(face_adjacency) + 1  # 总面片数
-    n_edges = face_adjacency.shape[0]     # 总邻接边数
+    n_faces = int(np.max(face_adjacency)) + 1
+    f1 = face_adjacency[:, 0]
+    f2 = face_adjacency[:, 1]
 
-    # 第一步：统计每个面片的邻接数量（度数）
+    # Count degrees for each face
     degrees = np.zeros(n_faces, dtype=np.int32)
-    for i in range(n_edges):
-        f1, f2 = face_adjacency[i]
-        degrees[f1] += 1
-        degrees[f2] += 1
-    max_degree = np.max(degrees)  # 最大度数
+    np.add.at(degrees, f1, 1)
+    np.add.at(degrees, f2, 1)
+    max_degree = int(np.max(degrees))
 
-    adjacent_faces = np.ones((n_faces, max_degree), dtype=np.int32) * -1  # 邻接面片数组
-    adjacent_faces_count = np.zeros(n_faces, dtype=np.int32)  # 邻接面片计数器
-    for i in range(n_edges):
-        f1, f2 = face_adjacency[i]
-        adjacent_faces[f1, adjacent_faces_count[f1]] = f2
-        adjacent_faces_count[f1] += 1
-        adjacent_faces[f2, adjacent_faces_count[f2]] = f1
-        adjacent_faces_count[f2] += 1
+    # Build adjacency array
+    adjacent_faces = np.full((n_faces, max_degree), -1, dtype=np.int32)
+    count = np.zeros(n_faces, dtype=np.int32)
+    for i in range(face_adjacency.shape[0]):
+        a, b = face_adjacency[i]
+        adjacent_faces[a, count[a]] = b
+        count[a] += 1
+        adjacent_faces[b, count[b]] = a
+        count[b] += 1
     return adjacent_faces
-###################### NUMBA 加速 ######################
 
 def mesh_sam(
     model,

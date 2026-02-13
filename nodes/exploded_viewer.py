@@ -23,14 +23,11 @@ class ExplodedMeshViewer:
     Three.js viewer with a slider to control part separation.
     """
 
-    def __init__(self):
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
-
     @classmethod
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "mesh": ("TRIMESH",),
+                "part_meshes": ("TRIMESH",),
             },
             "optional": {
                 "face_ids": ("FACE_IDS",),
@@ -42,33 +39,36 @@ class ExplodedMeshViewer:
     FUNCTION = "create_exploded_view"
     CATEGORY = "Hunyuan3D/Visualization"
 
-    def create_exploded_view(self, mesh, face_ids=None):
+    def create_exploded_view(self, part_meshes, face_ids=None):
         """
         Create exploded mesh visualization.
 
         Args:
-            mesh: Input trimesh.Trimesh or trimesh.Scene object
+            part_meshes: List of trimesh.Trimesh parts, single Trimesh, or Scene
             face_ids: (optional) numpy array mapping each face to its segment ID
 
         Returns:
             dict: UI data for frontend widget with scene file path and metadata
         """
-        # Check if mesh is already a Scene (from X-Part)
-        if isinstance(mesh, trimesh.Scene):
-            print(f"[ExplodedViewer] Processing Scene with {len(mesh.geometry)} parts")
-            scene = mesh
-            # Get a sample mesh for bounds calculation
-            mesh_obj = trimesh.util.concatenate(list(mesh.geometry.values()))
+        # List of Trimesh parts (from X-Part pipeline)
+        if isinstance(part_meshes, list):
+            print(f"[ExplodedViewer] Processing list of {len(part_meshes)} parts")
+            scene = trimesh.Scene()
+            for i, part in enumerate(part_meshes):
+                scene.add_geometry(part, node_name=f"part_{i}")
+            mesh_obj = trimesh.util.concatenate(part_meshes)
+        elif isinstance(part_meshes, trimesh.Scene):
+            print(f"[ExplodedViewer] Processing Scene with {len(part_meshes.geometry)} parts")
+            scene = part_meshes
+            mesh_obj = trimesh.util.concatenate(list(part_meshes.geometry.values()))
         elif face_ids is not None:
-            # Load mesh if needed
-            if isinstance(mesh, dict) and 'trimesh' in mesh:
-                mesh_obj = mesh['trimesh']
-            elif isinstance(mesh, str):
-                mesh_obj = load_mesh(mesh)
-            elif isinstance(mesh, trimesh.Trimesh):
-                mesh_obj = mesh
+            # Single mesh with face_ids — split into parts
+            if isinstance(part_meshes, trimesh.Trimesh):
+                mesh_obj = part_meshes
+            elif isinstance(part_meshes, str):
+                mesh_obj = load_mesh(part_meshes)
             else:
-                mesh_obj = load_mesh(mesh)
+                mesh_obj = load_mesh(part_meshes)
 
             # Handle face_ids input
             if isinstance(face_ids, dict) and 'face_ids' in face_ids:
@@ -83,7 +83,7 @@ class ExplodedMeshViewer:
             # Split mesh into separate parts based on face_ids
             scene = self._split_mesh_by_face_ids(mesh_obj, face_ids_array)
         else:
-            raise ValueError("[ExplodedViewer] Either mesh must be a Scene or face_ids must be provided")
+            raise ValueError("[ExplodedViewer] Either provide a list of parts or a single mesh with face_ids")
 
         # Calculate part centers and global center for explosion
         part_info = self._calculate_part_info(scene)
