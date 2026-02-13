@@ -1,5 +1,3 @@
-"""ComfyUI Custom Nodes for Hunyuan3D-Part."""
-
 from comfy_env import register_nodes
 
 NODE_CLASS_MAPPINGS, NODE_DISPLAY_NAME_MAPPINGS = register_nodes()
