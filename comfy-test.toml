@@ -1,14 +1,17 @@
 [test]
-name = "ComfyUI-Hunyuan3D-Part"
-python_version = "3.11"
-cpu_only = false
 levels = ["syntax", "install", "registration", "instantiation", "validation", "execution"]
+publish = true
 
 [test.workflows]
-run = "all"
-screenshot = "all"
+timeout = 300
+cpu = ["H3DPART-segment"]
+gpu = ["H3DPART-segment-partgen"]
 
 [test.platforms]
 linux = true
+macos = true
 windows = true
 windows_portable = true
+linux_gpu = true
+windows_gpu = true
+windows_portable_gpu = true

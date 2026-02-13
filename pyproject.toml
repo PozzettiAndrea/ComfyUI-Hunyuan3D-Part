@@ -1,26 +1,11 @@
 [project]
-name = "comfyui-hunyuan3d-part"
+name = "ComfyUI-Hunyuan3D-Part"
 description = "Hunyuan3D-Part nodes for ComfyUI: 3D part segmentation with P3-SAM and high-fidelity part generation with X-Part diffusion."
 version = "0.1.4"
 license = {file = "LICENSE"}
-requires-python = ">=3.10"
-
-# Standard dependencies that can be installed via pip
-# CUDA-specific packages (spconv, torch-scatter, torch-cluster) are handled by install.py
-dynamic = ["dependencies"]
 
 [project.urls]
 Repository = "https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part"
-Documentation = "https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part#readme"
-"Bug Tracker" = "https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part/issues"
-
-# ComfyUI Registry configuration
-[build-system]
-requires = ["setuptools>=45", "wheel"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
 
 [tool.comfy]
 PublisherId = "pznodes"

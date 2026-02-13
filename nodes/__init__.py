@@ -1,42 +1,34 @@
-"""
-ComfyUI-Hunyuan3D-Part Nodes
+"""ComfyUI-Hunyuan3D-Part Nodes."""
 
-Granular node definitions for P3-SAM segmentation and X-Part generation.
-Provides fine-grained control over model loading, memory management, and caching.
-"""
+from .loaders import NODE_CLASS_MAPPINGS as _loaders, NODE_DISPLAY_NAME_MAPPINGS as _loaders_d
+from .processing import NODE_CLASS_MAPPINGS as _processing, NODE_DISPLAY_NAME_MAPPINGS as _processing_d
+from .memory import NODE_CLASS_MAPPINGS as _memory, NODE_DISPLAY_NAME_MAPPINGS as _memory_d
+from .cache import NODE_CLASS_MAPPINGS as _cache, NODE_DISPLAY_NAME_MAPPINGS as _cache_d
+from .bbox_io_nodes import NODE_CLASS_MAPPINGS as _bbox_io, NODE_DISPLAY_NAME_MAPPINGS as _bbox_io_d
+from .exploded_viewer import NODE_CLASS_MAPPINGS as _viewer, NODE_DISPLAY_NAME_MAPPINGS as _viewer_d
+from .bbox_visualization import NODE_CLASS_MAPPINGS as _bbox_viz, NODE_DISPLAY_NAME_MAPPINGS as _bbox_viz_d
+from .mesh_io import NODE_CLASS_MAPPINGS as _mesh_io, NODE_DISPLAY_NAME_MAPPINGS as _mesh_io_d
 
-from .loaders import NODE_CLASS_MAPPINGS as LOADER_MAPPINGS
-from .loaders import NODE_DISPLAY_NAME_MAPPINGS as LOADER_DISPLAY_MAPPINGS
-from .processing import NODE_CLASS_MAPPINGS as PROCESSING_MAPPINGS
-from .processing import NODE_DISPLAY_NAME_MAPPINGS as PROCESSING_DISPLAY_MAPPINGS
-from .memory import NODE_CLASS_MAPPINGS as MEMORY_MAPPINGS
-from .memory import NODE_DISPLAY_NAME_MAPPINGS as MEMORY_DISPLAY_MAPPINGS
-from .cache import NODE_CLASS_MAPPINGS as CACHE_MAPPINGS
-from .cache import NODE_DISPLAY_NAME_MAPPINGS as CACHE_DISPLAY_MAPPINGS
-from .bbox_io_nodes import NODE_CLASS_MAPPINGS as BBOX_IO_MAPPINGS
-from .bbox_io_nodes import NODE_DISPLAY_NAME_MAPPINGS as BBOX_IO_DISPLAY_MAPPINGS
-from .exploded_viewer import NODE_CLASS_MAPPINGS as VIEWER_MAPPINGS
-from .exploded_viewer import NODE_DISPLAY_NAME_MAPPINGS as VIEWER_DISPLAY_MAPPINGS
-from .bbox_visualization import NODE_CLASS_MAPPINGS as BBOX_VIZ_MAPPINGS
-from .bbox_visualization import NODE_DISPLAY_NAME_MAPPINGS as BBOX_VIZ_DISPLAY_MAPPINGS
-from .mesh_io import NODE_CLASS_MAPPINGS as MESH_IO_MAPPINGS
-from .mesh_io import NODE_DISPLAY_NAME_MAPPINGS as MESH_IO_DISPLAY_MAPPINGS
+NODE_CLASS_MAPPINGS = {
+    **_loaders,
+    **_processing,
+    **_memory,
+    **_cache,
+    **_bbox_io,
+    **_viewer,
+    **_bbox_viz,
+    **_mesh_io,
+}
 
-__all__ = [
-    "LOADER_MAPPINGS",
-    "LOADER_DISPLAY_MAPPINGS",
-    "PROCESSING_MAPPINGS",
-    "PROCESSING_DISPLAY_MAPPINGS",
-    "MEMORY_MAPPINGS",
-    "MEMORY_DISPLAY_MAPPINGS",
-    "CACHE_MAPPINGS",
-    "CACHE_DISPLAY_MAPPINGS",
-    "BBOX_IO_MAPPINGS",
-    "BBOX_IO_DISPLAY_MAPPINGS",
-    "VIEWER_MAPPINGS",
-    "VIEWER_DISPLAY_MAPPINGS",
-    "BBOX_VIZ_MAPPINGS",
-    "BBOX_VIZ_DISPLAY_MAPPINGS",
-    "MESH_IO_MAPPINGS",
-    "MESH_IO_DISPLAY_MAPPINGS",
-]
+NODE_DISPLAY_NAME_MAPPINGS = {
+    **_loaders_d,
+    **_processing_d,
+    **_memory_d,
+    **_cache_d,
+    **_bbox_io_d,
+    **_viewer_d,
+    **_bbox_viz_d,
+    **_mesh_io_d,
+}
+
+__all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS"]

@@ -1,0 +1,24 @@
+[apt]
+packages = ["python3-dev"]
+
+[cuda]
+packages = ["spconv", "flash-attn", "torch-scatter", "torch-cluster", "torch", "torchvision"]
+
+[pypi-dependencies]
+trimesh = "*"
+pymeshlab = "==2023.12.post3"
+diffusers = "*"
+timm = "*"
+einops = "*"
+numpy = ">=1.20.0"
+scipy = "*"
+scikit-learn = "*"
+scikit-image = "*"
+fpsample = "*"
+addict = "*"
+omegaconf = "*"
+huggingface-hub = "*"
+hf-transfer = "*"
+numba = "*"
+Pillow = "*"
+tqdm = "*"
