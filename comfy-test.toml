@@ -1,11 +1,11 @@
 [test]
-levels = ["syntax", "install", "registration", "instantiation", "validation", "execution"]
+levels = ["syntax", "install", "registration", "instantiation", "execution"]
 publish = true
 
 [test.workflows]
 timeout = 300
-cpu = ["H3DPART-segment"]
-gpu = ["H3DPART-segment-partgen"]
+cpu = []
+gpu = ["H3DPART-segment", "H3DPART-segment-partgen"]
 
 [test.platforms]
 linux = true

@@ -224,5 +224,5 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "ExplodedMeshViewer": "Exploded Mesh Viewer 🔍",
+    "ExplodedMeshViewer": "Exploded Mesh Viewer",
 }

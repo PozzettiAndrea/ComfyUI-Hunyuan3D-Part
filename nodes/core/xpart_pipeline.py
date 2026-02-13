@@ -251,20 +251,20 @@ class PartFormerPipeline(TokenAllocMixin):
             import time
             t0 = time.time()
             ckpt = torch.load(old_ckpt_file, map_location="cuda", weights_only=False)
-            print(f"[X-Part] ✓ Loaded checkpoint ({time.time()-t0:.2f}s)")
+            print(f"[X-Part] [OK] Loaded checkpoint ({time.time()-t0:.2f}s)")
 
             # load model
             print(f"[X-Part] Loading model...")
             t0 = time.time()
             model = instantiate_from_config(config["model"])
             init_from_ckpt(model, ckpt, prefix="model", ignore_keys=ignore_keys)
-            print(f"[X-Part] ✓ Model loaded ({time.time()-t0:.2f}s)")
+            print(f"[X-Part] [OK] Model loaded ({time.time()-t0:.2f}s)")
 
             print(f"[X-Part] Loading VAE...")
             t0 = time.time()
             vae = instantiate_from_config(config["shapevae"])
             init_from_ckpt(vae, ckpt, prefix="shapevae", ignore_keys=ignore_keys)
-            print(f"[X-Part] ✓ VAE loaded ({time.time()-t0:.2f}s)")
+            print(f"[X-Part] [OK] VAE loaded ({time.time()-t0:.2f}s)")
 
             if config.get("conditioner", None) is not None:
                 print(f"[X-Part] Loading conditioner...")
@@ -273,7 +273,7 @@ class PartFormerPipeline(TokenAllocMixin):
                 init_from_ckpt(
                     conditioner, ckpt, prefix="conditioner", ignore_keys=ignore_keys
                 )
-                print(f"[X-Part] ✓ Conditioner loaded ({time.time()-t0:.2f}s)")
+                print(f"[X-Part] [OK] Conditioner loaded ({time.time()-t0:.2f}s)")
             else:
                 conditioner = vae
             p3sam_ckpt_path = os.path.join(ckpt_path, "p3sam.ckpt")
@@ -291,7 +291,7 @@ class PartFormerPipeline(TokenAllocMixin):
             print(f"[X-Part]   Reading {model_path}")
             model_state = load_file(model_path, device="cuda")
             model.load_state_dict(model_state, strict=False)
-            print(f"[X-Part] ✓ Model loaded ({time.time()-t0:.2f}s)")
+            print(f"[X-Part] [OK] Model loaded ({time.time()-t0:.2f}s)")
 
             # Load shapevae
             print(f"[X-Part] Loading VAE...")
@@ -301,7 +301,7 @@ class PartFormerPipeline(TokenAllocMixin):
             print(f"[X-Part]   Reading {vae_path}")
             vae_state = load_file(vae_path, device="cuda")
             vae.load_state_dict(vae_state, strict=False)
-            print(f"[X-Part] ✓ VAE loaded ({time.time()-t0:.2f}s)")
+            print(f"[X-Part] [OK] VAE loaded ({time.time()-t0:.2f}s)")
 
             # Load conditioner
             if config.get("conditioner", None) is not None:
@@ -314,7 +314,7 @@ class PartFormerPipeline(TokenAllocMixin):
                 conditioner_state = load_file(conditioner_path, device="cuda")
                 conditioner.load_state_dict(conditioner_state, strict=False)
                 print(f"[X-Part] DEBUG: After load_state_dict, obj_encoder.encoder.pc_size = {conditioner.obj_encoder.encoder.pc_size}")
-                print(f"[X-Part] ✓ Conditioner loaded ({time.time()-t0:.2f}s)")
+                print(f"[X-Part] [OK] Conditioner loaded ({time.time()-t0:.2f}s)")
             else:
                 conditioner = vae
 
@@ -330,14 +330,14 @@ class PartFormerPipeline(TokenAllocMixin):
         model.eval()
         vae.eval()
         conditioner.eval()
-        print(f"[X-Part] ✓ Models in eval mode")
+        print(f"[X-Part] [OK] Models in eval mode")
 
         # Ensure models are on correct device and dtype
         print(f"[X-Part] Moving models to {device} with float32 precision...")
         model = model.to(device=device, dtype=dtype)
         vae = vae.to(device=device, dtype=dtype)
         conditioner = conditioner.to(device=device, dtype=dtype)
-        print(f"[X-Part] ✓ Models ready on {device} in float32")
+        print(f"[X-Part] [OK] Models ready on {device} in float32")
 
         model_kwargs = dict(
             vae=vae,
@@ -374,8 +374,8 @@ class PartFormerPipeline(TokenAllocMixin):
 
     def prepare_extra_step_kwargs(self, generator, eta):
         # prepare extra kwargs for the scheduler step, since not all schedulers have the same signature
-        # eta (η) is only used with the DDIMScheduler, it will be ignored for other schedulers.
-        # eta corresponds to η in DDIM paper: https://arxiv.org/abs/2010.02502
+        # eta is only used with the DDIMScheduler, it will be ignored for other schedulers.
+        # eta corresponds to eta in DDIM paper: https://arxiv.org/abs/2010.02502
         # and should be between [0, 1]
 
         accepts_eta = "eta" in set(

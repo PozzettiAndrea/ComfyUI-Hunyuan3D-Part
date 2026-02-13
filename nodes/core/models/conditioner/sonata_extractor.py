@@ -118,7 +118,7 @@ class SonataFeatureExtractor(nn.Module):
                 print(f"Unexpected keys: {result.unexpected_keys}")
             print("MLP weights loaded successfully!")
 
-        print(f"\n✓ Loaded checkpoint from {checkpoint_path}")
+        print(f"\n[OK] Loaded checkpoint from {checkpoint_path}")
 
     def prepare_batch_data(
         self, points: torch.Tensor, normals: Optional[torch.Tensor] = None

@@ -394,78 +394,78 @@ def generate_dense_grid_points(
 
 def extract_near_surface_volume_fn(input_tensor: torch.Tensor, alpha: float):
     """
-    修复维度问题的PyTorch实现
+    PyTorch implementation with dimension fix.
     Args:
         input_tensor: shape [D, D, D], torch.float16
-        alpha: 标量偏移值
+        alpha: scalar offset value
     Returns:
-        mask: shape [D, D, D], torch.int32 表面掩码
+        mask: shape [D, D, D], torch.int32 surface mask
     """
     device = input_tensor.device
     D = input_tensor.shape[0]
     signed_val = 0.0
 
-    # 添加偏移并处理无效值
+    # Add offset and handle invalid values
     val = input_tensor + alpha
-    valid_mask = val > -9000  # 假设-9000是无效值
+    valid_mask = val > -9000  # assume -9000 is invalid
 
-    # 改进的邻居获取函数（保持维度一致）
+    # Improved neighbor retrieval function (maintains dimension consistency)
     def get_neighbor(t, shift, axis):
-        """根据指定轴进行位移并保持维度一致"""
+        """Shift along specified axis while maintaining dimension consistency"""
         if shift == 0:
             return t.clone()
 
-        # 确定填充轴（输入为[D, D, D]对应z,y,x轴）
-        pad_dims = [0, 0, 0, 0, 0, 0]  # 格式：[x前，x后，y前，y后，z前，z后]
+        # Determine padding axis (input [D, D, D] corresponds to z,y,x axes)
+        pad_dims = [0, 0, 0, 0, 0, 0]  # format: [x_front, x_back, y_front, y_back, z_front, z_back]
 
-        # 根据轴类型设置填充
-        if axis == 0:  # x轴（最后一个维度）
+        # Set padding based on axis type
+        if axis == 0:  # x-axis (last dimension)
             pad_idx = 0 if shift > 0 else 1
             pad_dims[pad_idx] = abs(shift)
-        elif axis == 1:  # y轴（中间维度）
+        elif axis == 1:  # y-axis (middle dimension)
             pad_idx = 2 if shift > 0 else 3
             pad_dims[pad_idx] = abs(shift)
-        elif axis == 2:  # z轴（第一个维度）
+        elif axis == 2:  # z-axis (first dimension)
             pad_idx = 4 if shift > 0 else 5
             pad_dims[pad_idx] = abs(shift)
 
-        # 执行填充（添加batch和channel维度适配F.pad）
+        # Execute padding (add batch and channel dims to match F.pad)
         padded = F.pad(
             t.unsqueeze(0).unsqueeze(0), pad_dims[::-1], mode="replicate"
-        )  # 反转顺序适配F.pad
+        )  # reverse order to match F.pad
 
-        # 构建动态切片索引
-        slice_dims = [slice(None)] * 3  # 初始化为全切片
-        if axis == 0:  # x轴（dim=2）
+        # Build dynamic slice indices
+        slice_dims = [slice(None)] * 3  # initialize as full slices
+        if axis == 0:  # x-axis (dim=2)
             if shift > 0:
                 slice_dims[0] = slice(shift, None)
             else:
                 slice_dims[0] = slice(None, shift)
-        elif axis == 1:  # y轴（dim=1）
+        elif axis == 1:  # y-axis (dim=1)
             if shift > 0:
                 slice_dims[1] = slice(shift, None)
             else:
                 slice_dims[1] = slice(None, shift)
-        elif axis == 2:  # z轴（dim=0）
+        elif axis == 2:  # z-axis (dim=0)
             if shift > 0:
                 slice_dims[2] = slice(shift, None)
             else:
                 slice_dims[2] = slice(None, shift)
 
-        # 应用切片并恢复维度
+        # Apply slicing and restore dimensions
         padded = padded.squeeze(0).squeeze(0)
         sliced = padded[slice_dims]
         return sliced
 
-    # 获取各方向邻居（确保维度一致）
-    left = get_neighbor(val, 1, axis=0)  # x方向
+    # Get neighbors in each direction (ensuring dimension consistency)
+    left = get_neighbor(val, 1, axis=0)  # x direction
     right = get_neighbor(val, -1, axis=0)
-    back = get_neighbor(val, 1, axis=1)  # y方向
+    back = get_neighbor(val, 1, axis=1)  # y direction
     front = get_neighbor(val, -1, axis=1)
-    down = get_neighbor(val, 1, axis=2)  # z方向
+    down = get_neighbor(val, 1, axis=2)  # z direction
     up = get_neighbor(val, -1, axis=2)
 
-    # 处理边界无效值（使用where保持维度一致）
+    # Handle boundary invalid values (use where to maintain dimension consistency)
     def safe_where(neighbor):
         return torch.where(neighbor > -9000, neighbor, val)
 
@@ -476,7 +476,7 @@ def extract_near_surface_volume_fn(input_tensor: torch.Tensor, alpha: float):
     down = safe_where(down)
     up = safe_where(up)
 
-    # 计算符号一致性（转换为float32确保精度）
+    # Compute sign consistency (convert to float32 for precision)
     sign = torch.sign(val.to(torch.float32))
     neighbors_sign = torch.stack(
         [
@@ -490,10 +490,10 @@ def extract_near_surface_volume_fn(input_tensor: torch.Tensor, alpha: float):
         dim=0,
     )
 
-    # 检查所有符号是否一致
+    # Check if all signs are consistent
     same_sign = torch.all(neighbors_sign == sign, dim=0)
 
-    # 生成最终掩码
+    # Generate final mask
     mask = (~same_sign).to(torch.int32)
     return mask * valid_mask.to(torch.int32)
 
@@ -745,10 +745,10 @@ def pymeshlab2trimesh(mesh: pymeshlab.MeshSet):
     with tempfile.NamedTemporaryFile(suffix=".ply", delete=False) as temp_file:
         mesh.save_current_mesh(temp_file.name)
         mesh = trimesh.load(temp_file.name)
-    # 检查加载的对象类型
+    # Check the loaded object type
     if isinstance(mesh, trimesh.Scene):
         combined_mesh = trimesh.Trimesh()
-        # 如果是Scene，遍历所有的geometry并合并
+        # If Scene, iterate all geometry and merge
         for geom in mesh.geometry.values():
             combined_mesh = trimesh.util.concatenate([combined_mesh, geom])
         mesh = combined_mesh
