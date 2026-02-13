@@ -21,6 +21,10 @@ wheels/
 *.egg
 *.ipynb_checkpoints
 
+# comfy-env environments
+_env_*
+_root_env
+
 # Virtual environments
 venv/
 ENV/
