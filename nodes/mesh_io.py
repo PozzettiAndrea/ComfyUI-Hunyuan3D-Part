@@ -69,8 +69,8 @@ def load_mesh_file(file_path: str):
 
         # Merge duplicate vertices and clean up
         mesh.merge_vertices()
-        mesh.remove_duplicate_faces()
-        mesh.remove_degenerate_faces()
+        mesh.update_faces(mesh.unique_faces())
+        mesh.update_faces(mesh.nondegenerate_faces())
 
         verts_after = len(mesh.vertices)
         faces_after = len(mesh.faces)
