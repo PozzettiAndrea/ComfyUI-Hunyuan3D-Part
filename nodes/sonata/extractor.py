@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import comfy.model_management
 
 from typing import Dict, Optional
 
@@ -44,10 +45,12 @@ class SonataFeatureExtractor(nn.Module):
         """Load model weights from checkpoint."""
         if checkpoint_path.endswith('.safetensors'):
             from safetensors.torch import load_file
-            checkpoint = load_file(checkpoint_path, device="cuda")
+            device = str(comfy.model_management.get_torch_device())
+            checkpoint = load_file(checkpoint_path, device=device)
             state_dict = checkpoint
         else:
-            checkpoint = torch.load(checkpoint_path, map_location="cuda", weights_only=False)
+            device = str(comfy.model_management.get_torch_device())
+            checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
             if "state_dict" in checkpoint:
                 state_dict = checkpoint["state_dict"]
                 state_dict = {k.replace("model.", ""): v for k, v in state_dict.items()}
@@ -264,7 +267,8 @@ class SonataFeatureExtractor(nn.Module):
             else:
                 normals_tensor = None
 
-            with torch.cuda.amp.autocast(enabled=True):
+            device_type = str(comfy.model_management.get_torch_device()).split(':')[0]
+            with torch.amp.autocast(device_type=device_type, enabled=True):
                 batch_features = self.forward(
                     batch_tensor, normals_tensor
                 )  # [B, max_n, 512]

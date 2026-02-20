@@ -6,6 +6,7 @@ Provides control over model memory allocation.
 
 import torch
 import gc
+import comfy.model_management
 
 
 class ClearAllModelCaches:
@@ -60,11 +61,10 @@ class ClearAllModelCaches:
             ComputeMeshFeatures._feature_cache.clear()
             print("[Clear Caches] Cleared feature cache")
 
-            # Clear CUDA cache
-            if torch.cuda.is_available():
-                gc.collect()
-                torch.cuda.empty_cache()
-                print("[Clear Caches] Cleared CUDA cache")
+            # Clear GPU cache
+            gc.collect()
+            comfy.model_management.soft_empty_cache()
+            print("[Clear Caches] Cleared GPU cache")
 
             print("[Clear Caches] All caches cleared successfully")
 

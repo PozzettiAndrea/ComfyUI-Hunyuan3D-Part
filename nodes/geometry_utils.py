@@ -10,6 +10,7 @@ from einops import repeat
 import traceback
 import pymeshlab
 import tempfile
+import comfy.model_management
 
 
 def random_sample_pointcloud(mesh: trimesh.Trimesh, num=30000, seed=42):
@@ -164,12 +165,14 @@ def load_surface_points(
     return surface, geo_points
 
 
-def sample_bbox_points_from_trimesh(mesh, aabb, num_points, seed=42):
+def sample_bbox_points_from_trimesh(mesh, aabb, num_points, seed=42, device=None):
+    if device is None:
+        device = aabb.device
     _faces = mesh.faces
     _vertices = mesh.vertices
     _faces = np.reshape(_faces, (-1))
     num_parts = aabb.shape[0]
-    _points = torch.from_numpy(_vertices[_faces]).cuda()
+    _points = torch.from_numpy(_vertices[_faces]).to(device)
     _part_mask = torch.all(
         (_points[None, :, :3] >= aabb[:, :1]) & (_points[None, :, :3] <= aabb[:, 1:]),
         dim=-1,
@@ -682,7 +685,7 @@ def extract_geometry_fast(
                 vertices = vertices / (grid_size - 1) * bbox_size + bbox_min
                 # vertices[:, [0, 1]] = vertices[:, [1, 0]]
             elif mc_mode == "dmc":
-                torch.cuda.empty_cache()
+                comfy.model_management.soft_empty_cache()
                 grid_logits = -grid_logits[i]
                 grid_logits = grid_logits.to(torch.float32).contiguous()
                 verts, faces = diffdmc(

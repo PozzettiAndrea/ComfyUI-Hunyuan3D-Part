@@ -13,6 +13,7 @@ import os
 import tempfile
 import time
 import concurrent.futures
+import comfy.model_management
 
 # Import utilities from core
 from .mesh_utils import load_mesh, save_mesh, colorize_segmentation, get_temp_mesh_path
@@ -106,7 +107,7 @@ def _get_xpart_models(config):
 
     if cache_key in _xpart_model_cache:
         cached = _xpart_model_cache[cache_key]
-        device = "cuda" if torch.cuda.is_available() else "cpu"
+        device = comfy.model_management.get_torch_device()
         cached['dit'].to(device)
         cached['vae'].to(device)
         cached['conditioner'].to(device)
@@ -120,7 +121,7 @@ def _get_xpart_models(config):
 
     ops = comfy.ops.manual_cast
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    device = comfy.model_management.get_torch_device()
     precision = config['precision']
     enable_flash = config['enable_flash']
     pc_size = config['pc_size']
@@ -308,7 +309,7 @@ class XPartGenerateParts:
     def generate(self, mesh_with_features, bounding_boxes, xpart_config, octree_resolution, num_inference_steps,
                 guidance_scale, seed, num_chunks, output_coordinate_system):
         """Generate part meshes."""
-        device = "cuda" if torch.cuda.is_available() else "cpu"
+        device = comfy.model_management.get_torch_device()
         try:
             # Extract mesh and Sonata features from mesh_with_features
             mesh_obj = mesh_with_features['mesh']
@@ -465,7 +466,7 @@ class XPartGenerateParts:
                 dit.to("cpu")
                 vae.to("cpu")
                 conditioner.to("cpu")
-                torch.cuda.empty_cache()
+                comfy.model_management.soft_empty_cache()
                 print("[X-Part Generate] Models unloaded, VRAM freed")
 
             return (parts_list, parts_path, bbox_path, exploded_path)

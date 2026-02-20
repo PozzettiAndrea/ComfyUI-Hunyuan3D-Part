@@ -11,6 +11,7 @@ import numpy as np
 import trimesh
 import hashlib
 from collections import OrderedDict
+import comfy.model_management
 
 from .mesh_utils import load_mesh
 
@@ -27,14 +28,14 @@ def _get_p3sam_model(config):
 
     if cache_key in _p3sam_model_cache:
         model = _p3sam_model_cache[cache_key]
-        device = "cuda" if torch.cuda.is_available() else "cpu"
+        device = comfy.model_management.get_torch_device()
         model.to(device)
         return model
 
     from .p3sam.model import MultiHeadSegment
     from safetensors.torch import load_file
 
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    device = comfy.model_management.get_torch_device()
 
     print(f"[P3-SAM] Building model with enable_flash={config['enable_flash']}...")
     model = MultiHeadSegment(
@@ -182,7 +183,7 @@ class ComputeMeshFeatures:
             # Auto-unload if not caching
             if not p3sam_config.get('cache_on_gpu', True):
                 p3sam.to("cpu")
-                torch.cuda.empty_cache()
+                comfy.model_management.soft_empty_cache()
 
             # Prepare cache data
             # np.asarray() strips trimesh TrackedArray wrappers so comfy_env can serialize
@@ -190,7 +191,7 @@ class ComputeMeshFeatures:
                 'mesh': mesh_loaded,
                 'face_idx': np.asarray(face_idx) if face_idx is not None else None,
                 'adjacent_faces': np.asarray(adjacent_faces),
-                'features': feats,
+                'features': feats.detach().cpu(),
                 'points': np.asarray(points),
                 'normals': np.asarray(normals),
                 'all_points': all_points,
@@ -295,7 +296,7 @@ class P3SAMSegmentMesh:
 
             # Load model from config
             p3sam = _get_p3sam_model(p3sam_config)
-            device = "cuda" if torch.cuda.is_available() else "cpu"
+            device = comfy.model_management.get_torch_device()
             p3sam = p3sam.to(device).eval()
 
             # Import functions from core
@@ -413,7 +414,7 @@ class P3SAMSegmentMesh:
             if not p3sam_config.get('cache_on_gpu', True):
                 print("[P3-SAM Segment] Auto-unloading P3-SAM model from GPU...")
                 p3sam.to("cpu")
-                torch.cuda.empty_cache()
+                comfy.model_management.soft_empty_cache()
 
             # Prepare outputs
             bboxes_output = {

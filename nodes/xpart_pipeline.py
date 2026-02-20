@@ -1,4 +1,5 @@
 import torch
+import comfy.model_management
 from .misc_utils import logger, synchronize_timer
 import inspect
 from typing import List, Optional
@@ -409,7 +410,7 @@ class PartFormerPipeline(TokenAllocMixin):
             mesh, post_process=True, seed=seed
         )
         # aabb, face_ids, mesh = self.bbox_predictor.predict_aabb(mesh, post_process=False)
-        aabb = torch.from_numpy(aabb).cuda()
+        aabb = torch.from_numpy(aabb).to(self.device)
         return aabb
 
     def prepare_latents(
@@ -549,10 +550,10 @@ class PartFormerPipeline(TokenAllocMixin):
             print(f"Get bbox from bbox_predictor: {aabb.shape}")
         else:
             if isinstance(aabb, np.ndarray):
-                aabb = torch.from_numpy(aabb).cuda()
+                aabb = torch.from_numpy(aabb).to(self.device)
             # normalize aabb by mesh scale and center
             aabb = aabb.float()
-            aabb = (aabb - torch.from_numpy(center).float().cuda()) / scale
+            aabb = (aabb - torch.from_numpy(center).float().to(self.device)) / scale
 
         # 3. load part surface in bbox
         if part_surface_inbbox is None:
@@ -750,7 +751,7 @@ class PartFormerPipeline(TokenAllocMixin):
             sigmas=sigmas,
         )
 
-        torch.cuda.empty_cache()
+        comfy.model_management.soft_empty_cache()
 
         # Save original aabb for reuse in loop (to avoid exponential growth with CFG)
         aabb_orig = aabb

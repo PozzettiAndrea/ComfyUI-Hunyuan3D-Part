@@ -4,6 +4,7 @@ import trimesh
 from tqdm import tqdm
 import time
 from concurrent.futures import ThreadPoolExecutor
+import comfy.model_management
 
 
 def normalize_pc(pc):
@@ -19,7 +20,9 @@ def normalize_pc(pc):
 
 
 @torch.no_grad()
-def get_feat(model, points, normals):
+def get_feat(model, points, normals, device=None):
+    if device is None:
+        device = comfy.model_management.get_torch_device()
     data_dict = {
         "coord": points,
         "normal": normals,
@@ -29,7 +32,7 @@ def get_feat(model, points, normals):
     data_dict = model.transform(data_dict)
     for k in data_dict:
         if isinstance(data_dict[k], torch.Tensor):
-            data_dict[k] = data_dict[k].cuda()
+            data_dict[k] = data_dict[k].to(device)
     point = model.sonata(data_dict)
     while "pooling_parent" in point.keys():
         assert "pooling_inverse" in point.keys()
@@ -45,18 +48,20 @@ def get_feat(model, points, normals):
 
 
 @torch.no_grad()
-def get_mask(model, feats, points, point_prompt, iter=1):
+def get_mask(model, feats, points, point_prompt, iter=1, device=None):
     """
     feats: [N, 512]
     points: [N, 3]
     point_prompt: [K, 3]
     """
+    if device is None:
+        device = comfy.model_management.get_torch_device()
     point_num = points.shape[0]
     prompt_num = point_prompt.shape[0]
     # expand creates zero-copy views instead of repeat's full allocation
-    feats = feats.unsqueeze(1).expand(-1, prompt_num, -1).cuda()
-    points = torch.from_numpy(points).float().cuda().unsqueeze(1).expand(-1, prompt_num, -1)
-    prompt_coord = torch.from_numpy(point_prompt).float().cuda().unsqueeze(0).expand(point_num, -1, -1)
+    feats = feats.unsqueeze(1).expand(-1, prompt_num, -1).to(device)
+    points = torch.from_numpy(points).float().to(device).unsqueeze(1).expand(-1, prompt_num, -1)
+    prompt_coord = torch.from_numpy(point_prompt).float().to(device).unsqueeze(0).expand(point_num, -1, -1)
 
     feats = feats.transpose(0, 1).contiguous()          # [K, N, 512]
     points = points.transpose(0, 1).contiguous()         # [K, N, 3]

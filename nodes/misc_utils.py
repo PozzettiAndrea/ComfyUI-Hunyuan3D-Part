@@ -160,44 +160,45 @@ def instantiate_non_trainable_model(config):
 def smart_load_model(
     model_path,
 ):
-    original_model_path = model_path
-    # try local path - use ComfyUI's models folder if available
+    """Ensure model files are available, downloading from HuggingFace if needed.
+
+    Downloads to ComfyUI/models/hunyuan3d-part/ (flat, no repo_id nesting).
+    Returns the local directory path containing the model files.
+    """
     try:
         import folder_paths
-        comfyui_models = folder_paths.models_dir
-        default_base = os.path.join(comfyui_models, "hunyuan3d-part")
-    except:
+        default_base = os.path.join(folder_paths.models_dir, "hunyuan3d-part")
+    except Exception:
         default_base = "~/.cache/xpart"
 
-    base_dir = os.environ.get("HY3DGEN_MODELS", default_base)
-    model_fld = os.path.expanduser(os.path.join(base_dir, model_path))
-    logger.info(f"Try to load model from local path: {model_path}")
-    if not os.path.exists(model_fld):
-        logger.info("Model path not exists, try to download from huggingface")
-        try:
-            from huggingface_hub import snapshot_download
+    model_dir = os.path.expanduser(
+        os.environ.get("HY3DGEN_MODELS", default_base)
+    )
 
-            # Only download specified subdirectory
-            path = snapshot_download(
-                repo_id=original_model_path,
-                # allow_patterns=[f"{subfolder}/*"],  # pattern match subfolder
-                local_dir=model_fld,
-            )
-            model_path = path  # os.path.join(path, subfolder)  # keep path join logic unchanged
-        except ImportError:
-            logger.warning(
-                "You need to install HuggingFace Hub to load models from the hub."
-            )
-            raise RuntimeError(f"Model path {model_fld} not found")
-        except Exception as e:
-            raise e
-    else:
-        model_path = model_fld
+    # Check if models already exist (look for any .safetensors file)
+    if os.path.isdir(model_dir) and any(
+        f.endswith(".safetensors")
+        for dirpath, _, files in os.walk(model_dir)
+        for f in files
+    ):
+        logger.info(f"Using local models at: {model_dir}")
+        return model_dir
 
-    if not os.path.exists(model_path):
-        raise FileNotFoundError(f"Model path {original_model_path} not found")
+    logger.info(f"Models not found at {model_dir}, downloading from HuggingFace...")
+    try:
+        from huggingface_hub import snapshot_download
 
-    return model_path
+        snapshot_download(
+            repo_id=model_path,
+            local_dir=model_dir,
+        )
+    except ImportError:
+        raise RuntimeError(
+            f"Models not found at {model_dir}. "
+            "Install huggingface_hub to auto-download, or download manually."
+        )
+
+    return model_dir
 
 
 def init_from_ckpt(model, ckpt, prefix="model", ignore_keys=()):
