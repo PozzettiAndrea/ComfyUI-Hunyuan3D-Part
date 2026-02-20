@@ -15,15 +15,93 @@ import time
 import concurrent.futures
 
 # Import utilities from core
-from .core.mesh_utils import load_mesh, save_mesh, colorize_segmentation, get_temp_mesh_path
-from .core.models.diffusion.schedulers import FlowMatchEulerDiscreteScheduler
+from .mesh_utils import load_mesh, save_mesh, colorize_segmentation, get_temp_mesh_path
+from .schedulers import FlowMatchEulerDiscreteScheduler
 
 # Worker-process model cache for X-Part models
 _xpart_model_cache = {}
 
 
+def _fix_meta_buffers(model, device):
+    """Reinitialize any buffers left on meta device after assign=True loading."""
+    for name, buf in model.named_buffers():
+        if buf.device.type == "meta":
+            parts = name.split(".")
+            parent = model
+            for p in parts[:-1]:
+                parent = getattr(parent, p)
+            parent._buffers[parts[-1]] = torch.zeros_like(buf, device=device)
+
+
+def _xpart_arch_config():
+    """Architecture config for X-Part models (matches pretrained weights)."""
+    num_latents = 1024
+    z_scale_factor = 1.0039506158752403
+    num_tokens_cond = 2048
+
+    _shared_vae_params = dict(
+        embed_dim=64, num_freqs=8, include_pi=False, heads=16,
+        width=1024, num_encoder_layers=8, num_decoder_layers=16,
+        qkv_bias=False, qk_norm=True, scale_factor=z_scale_factor,
+        geo_decoder_mlp_expand_ratio=4, geo_decoder_downsample_ratio=1,
+        geo_decoder_ln_post=True, point_feats=4,
+    )
+
+    return {
+        "shapevae": {"params": {
+            **_shared_vae_params,
+            "num_latents": num_latents,
+            "pc_size": 40960,
+            "pc_sharpedge_size": 0,
+        }},
+        "conditioner": {"params": {
+            "use_geo": True, "use_obj": True, "use_seg_feat": True,
+            "geo_cfg": {
+                "output_dim": 1024,
+                "params": {
+                    "use_local": True,
+                    "local_feat_type": "latents_shape",
+                    "num_tokens_cond": num_tokens_cond,
+                    "local_geo_cfg": {"params": {
+                        **_shared_vae_params,
+                        "num_latents": num_tokens_cond,
+                        "pc_size": 40960,
+                        "pc_sharpedge_size": 0,
+                    }},
+                },
+            },
+            "obj_encoder_cfg": {
+                "output_dim": 1024,
+                "params": {
+                    **_shared_vae_params,
+                    "num_latents": 4096,
+                    "pc_size": 40960,
+                    "pc_sharpedge_size": 0,
+                },
+            },
+            "seg_feat_cfg": {"params": {}},
+        }},
+        "model": {"params": {
+            "use_self_attention": True, "use_cross_attention": True,
+            "use_cross_attention_2": True, "use_bbox_cond": False,
+            "num_freqs": 8, "use_part_embed": True, "valid_num": 50,
+            "input_size": num_latents, "in_channels": 64,
+            "hidden_size": 2048,
+            "encoder_hidden_dim": 1024,
+            "encoder_hidden2_dim": 1024,
+            "depth": 21, "num_heads": 16,
+            "qk_norm": True, "qkv_bias": False, "qk_norm_type": "rms",
+            "with_decoupled_ca": False, "decoupled_ca_dim": num_tokens_cond,
+            "decoupled_ca_weight": 1.0, "use_attention_pooling": False,
+            "use_pos_emb": False,
+            "num_moe_layers": 6, "num_experts": 8, "moe_top_k": 2,
+        }},
+        "scheduler": {"params": {"num_train_timesteps": 1000}},
+    }
+
+
 def _get_xpart_models(config):
-    """Load or return cached X-Part models within the worker process."""
+    """Load or return cached X-Part models (ComfyUI-native, meta-device pattern)."""
     cache_key = f"{config['precision']}_{config['enable_flash']}_{config['pc_size']}"
 
     if cache_key in _xpart_model_cache:
@@ -34,12 +112,13 @@ def _get_xpart_models(config):
         cached['conditioner'].to(device)
         return cached
 
-    from .core.models.partformer_dit import PartFormerDITPlain
-    from .core.models.autoencoders import VolumeDecoderShapeVAE
-    from .core.models.conditioner.condioner_release import Conditioner
-    from omegaconf import OmegaConf
-    from pathlib import Path
+    from .hunyuan3d_part.model import PartFormerDITPlain
+    from .hunyuan3d_part.vae import VolumeDecoderShapeVAE
+    from .hunyuan3d_part.conditioner import Conditioner
+    import comfy.ops
     from safetensors.torch import load_file
+
+    ops = comfy.ops.manual_cast
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     precision = config['precision']
@@ -49,81 +128,94 @@ def _get_xpart_models(config):
 
     dtype = torch.float16 if precision == "float16" else torch.bfloat16
 
-    # Load shared config
-    config_path = Path(__file__).parent / "core" / "config" / "infer.yaml"
-    xpart_config = OmegaConf.load(str(config_path))
+    # Get architecture config and apply runtime overrides
+    xpart_config = _xpart_arch_config()
 
-    # Override pc_size values
     print(f"[X-Part Models] Overriding pc_size in config: {pc_size}")
     xpart_config["shapevae"]["params"]["pc_size"] = pc_size
     xpart_config["shapevae"]["params"]["pc_sharpedge_size"] = 0
+    xpart_config["conditioner"]["params"]["geo_cfg"]["params"]["local_geo_cfg"]["params"]["pc_size"] = pc_size
+    xpart_config["conditioner"]["params"]["geo_cfg"]["params"]["local_geo_cfg"]["params"]["pc_sharpedge_size"] = 0
+    xpart_config["conditioner"]["params"]["obj_encoder_cfg"]["params"]["pc_size"] = pc_size
+    xpart_config["conditioner"]["params"]["obj_encoder_cfg"]["params"]["pc_sharpedge_size"] = 0
+    xpart_config["conditioner"]["params"]["seg_feat_cfg"]["params"]["enable_flash"] = enable_flash
 
-    # Override in conditioner geo_cfg (local_geo_cfg)
-    if "conditioner" in xpart_config and "params" in xpart_config["conditioner"]:
-        if "geo_cfg" in xpart_config["conditioner"]["params"]:
-            if "params" in xpart_config["conditioner"]["params"]["geo_cfg"]:
-                if "local_geo_cfg" in xpart_config["conditioner"]["params"]["geo_cfg"]["params"]:
-                    if "params" in xpart_config["conditioner"]["params"]["geo_cfg"]["params"]["local_geo_cfg"]:
-                        xpart_config["conditioner"]["params"]["geo_cfg"]["params"]["local_geo_cfg"]["params"]["pc_size"] = pc_size
-                        xpart_config["conditioner"]["params"]["geo_cfg"]["params"]["local_geo_cfg"]["params"]["pc_sharpedge_size"] = 0
-
-        if "obj_encoder_cfg" in xpart_config["conditioner"]["params"]:
-            if "params" in xpart_config["conditioner"]["params"]["obj_encoder_cfg"]:
-                xpart_config["conditioner"]["params"]["obj_encoder_cfg"]["params"]["pc_size"] = pc_size
-                xpart_config["conditioner"]["params"]["obj_encoder_cfg"]["params"]["pc_sharpedge_size"] = 0
-
-        if "seg_feat_cfg" in xpart_config["conditioner"]["params"]:
-            if "params" not in xpart_config["conditioner"]["params"]["seg_feat_cfg"]:
-                xpart_config["conditioner"]["params"]["seg_feat_cfg"]["params"] = {}
-            xpart_config["conditioner"]["params"]["seg_feat_cfg"]["params"]["enable_flash"] = enable_flash
-
-    print(f"[X-Part Models] Loading DiT, VAE, and Conditioner in parallel ({precision})...")
+    print(f"[X-Part Models] Loading DiT, VAE, and Conditioner ({precision}, meta-device)...")
     t0 = time.time()
 
     def load_dit():
         model_params = dict(xpart_config["model"]["params"])
-        model = PartFormerDITPlain(**model_params)
-        state_dict = load_file(config['model_file'], device=device)
-        model.load_state_dict(state_dict, strict=False)
-        model = model.to(device=device, dtype=dtype).eval()
+        with torch.device("meta"):
+            model = PartFormerDITPlain(**model_params, dtype=dtype, device="meta", operations=ops)
+        sd = load_file(config['model_file'], device=device)
+        model.load_state_dict(sd, strict=False, assign=True)
+        _fix_meta_buffers(model, device)
+        model = model.to(device=device).eval()
         print(f"[X-Part Models] DiT loaded")
         return model
 
     def load_vae():
         vae_params = dict(xpart_config["shapevae"]["params"])
-        vae = VolumeDecoderShapeVAE(**vae_params)
-        state_dict = load_file(config['vae_file'], device=device)
-        vae.load_state_dict(state_dict, strict=False)
-        vae = vae.to(device=device, dtype=dtype).eval()
+        with torch.device("meta"):
+            vae = VolumeDecoderShapeVAE(**vae_params, dtype=dtype, device="meta", operations=ops)
+        sd = load_file(config['vae_file'], device=device)
+        vae.load_state_dict(sd, strict=False, assign=True)
+        _fix_meta_buffers(vae, device)
+        vae = vae.to(device=device).eval()
         print(f"[X-Part Models] VAE loaded")
         return vae
 
     def load_cond():
-        cond_cfg = xpart_config["conditioner"]["params"]
-        if "geo_cfg" in cond_cfg:
-            cond_cfg["geo_cfg"]["target"] = ".models.conditioner.part_encoders.PartEncoder"
-            if "local_geo_cfg" in cond_cfg["geo_cfg"]["params"]:
-                cond_cfg["geo_cfg"]["params"]["local_geo_cfg"]["target"] = ".models.autoencoders.VolumeDecoderShapeVAE"
-        if "obj_encoder_cfg" in cond_cfg:
-            cond_cfg["obj_encoder_cfg"]["target"] = ".models.autoencoders.VolumeDecoderShapeVAE"
-        if "seg_feat_cfg" in cond_cfg:
-            cond_cfg["seg_feat_cfg"]["target"] = ".models.conditioner.sonata_extractor.SonataFeatureExtractor"
+        # Extract params directly (no instantiate_from_config)
+        cond_cfg = dict(xpart_config["conditioner"]["params"])
 
-        conditioner = Conditioner(**cond_cfg)
-        state_dict = load_file(config['cond_file'], device=device)
-        conditioner.load_state_dict(state_dict, strict=False)
+        # Build geo_encoder_params from geo_cfg
+        geo_encoder_params = None
+        geo_output_dim = None
+        if cond_cfg.get("use_geo") and "geo_cfg" in cond_cfg:
+            raw_geo = dict(cond_cfg["geo_cfg"])
+            geo_output_dim = raw_geo.get("output_dim")
+            raw_geo_params = dict(raw_geo.get("params", {}))
+            # Convert local_geo_cfg from nested {target, params} to flat params dict
+            if "local_geo_cfg" in raw_geo_params:
+                raw_local = raw_geo_params["local_geo_cfg"]
+                raw_geo_params["local_geo_cfg"] = dict(raw_local.get("params", {}))
+            geo_encoder_params = raw_geo_params
 
-        # Selective dtype conversion (keep seg_feat_encoder in float32)
-        if hasattr(conditioner, 'geo_encoder') and conditioner.geo_encoder is not None:
-            conditioner.geo_encoder = conditioner.geo_encoder.to(dtype=dtype)
-        if hasattr(conditioner, 'obj_encoder') and conditioner.obj_encoder is not None:
-            conditioner.obj_encoder = conditioner.obj_encoder.to(dtype=dtype)
-        if hasattr(conditioner, 'geo_out_proj') and conditioner.geo_out_proj is not None:
-            conditioner.geo_out_proj = conditioner.geo_out_proj.to(dtype=dtype)
-        if hasattr(conditioner, 'obj_out_proj') and conditioner.obj_out_proj is not None:
-            conditioner.obj_out_proj = conditioner.obj_out_proj.to(dtype=dtype)
-        if hasattr(conditioner, 'seg_feat_outproj') and conditioner.seg_feat_outproj is not None:
-            conditioner.seg_feat_outproj = conditioner.seg_feat_outproj.to(dtype=dtype)
+        # Build obj_encoder_params from obj_encoder_cfg
+        obj_encoder_params = None
+        obj_output_dim = None
+        if cond_cfg.get("use_obj") and "obj_encoder_cfg" in cond_cfg:
+            raw_obj = dict(cond_cfg["obj_encoder_cfg"])
+            obj_output_dim = raw_obj.get("output_dim")
+            obj_encoder_params = dict(raw_obj.get("params", {}))
+
+        # Build seg_feat_encoder_params from seg_feat_cfg
+        seg_feat_encoder_params = None
+        seg_feat_output_dim = None
+        if cond_cfg.get("use_seg_feat") and "seg_feat_cfg" in cond_cfg:
+            raw_seg = dict(cond_cfg["seg_feat_cfg"])
+            seg_feat_output_dim = raw_seg.get("output_dim")
+            seg_feat_encoder_params = dict(raw_seg.get("params", {}))
+
+        # No meta-device for Conditioner (Sonata uses spconv which needs real device)
+        conditioner = Conditioner(
+            use_image=cond_cfg.get("use_image", False),
+            use_geo=cond_cfg.get("use_geo", True),
+            use_obj=cond_cfg.get("use_obj", True),
+            use_seg_feat=cond_cfg.get("use_seg_feat", False),
+            geo_encoder_params=geo_encoder_params,
+            geo_output_dim=geo_output_dim,
+            obj_encoder_params=obj_encoder_params,
+            obj_output_dim=obj_output_dim,
+            seg_feat_encoder_params=seg_feat_encoder_params,
+            seg_feat_output_dim=seg_feat_output_dim,
+            dtype=dtype, device=device, operations=ops,
+        )
+        sd = load_file(config['cond_file'], device=device)
+        conditioner.load_state_dict(sd, strict=False)
+
+        # Keep seg_feat_encoder in float32 (Sonata backbone)
         if hasattr(conditioner, 'seg_feat_encoder') and conditioner.seg_feat_encoder is not None:
             conditioner.seg_feat_encoder = conditioner.seg_feat_encoder.to(dtype=torch.float32)
 
@@ -257,7 +349,7 @@ class XPartGenerateParts:
             print(f"[X-Part Generate] Using {dtype_str} precision")
 
             # Import from core
-            from .core.xpart_pipeline import PartFormerPipeline
+            from .xpart_pipeline import PartFormerPipeline
             from pathlib import Path
 
             # Create scheduler directly

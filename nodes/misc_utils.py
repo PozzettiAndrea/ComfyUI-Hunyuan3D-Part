@@ -104,7 +104,7 @@ def get_obj_from_str(string, reload=False):
     # Handle relative imports (starting with ".")
     if module.startswith("."):
         # Import relative to current package (get package name dynamically)
-        # __package__ will be like 'custom_nodes.ComfyUI-Hunyuan3D-Part.nodes.core'
+        # __package__ will be like 'custom_nodes.ComfyUI-Hunyuan3D-Part.nodes'
         package = __package__ if __package__ else __name__.rsplit(".", 1)[0]
         if reload:
             module_imp = importlib.import_module(module, package=package)

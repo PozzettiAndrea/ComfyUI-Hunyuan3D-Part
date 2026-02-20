@@ -39,7 +39,7 @@ class LoadP3SAMSegmentor:
 
     def load_model(self, cache_on_gpu, enable_flash):
         """Download model files and return config dict."""
-        from .core.misc_utils import smart_load_model
+        from .misc_utils import smart_load_model
 
         print("[Load P3-SAM] Ensuring model files are downloaded...")
         ckpt_path = smart_load_model(model_path="tencent/Hunyuan3D-Part")
@@ -100,7 +100,7 @@ class LoadXPartModels:
 
     def load_models(self, precision, cache_on_gpu, enable_flash, pc_size):
         """Download model files and return config dict."""
-        from .core.misc_utils import smart_load_model
+        from .misc_utils import smart_load_model
 
         if pc_size < 20480:
             print(f"[Load X-Part Models] WARNING: Using reduced point count ({pc_size}) - quality may degrade")

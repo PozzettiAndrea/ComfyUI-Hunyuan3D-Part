@@ -878,9 +878,35 @@ def load(
     return model
 
 
-def load_by_config(config_path: str, custom_config: dict = None):
-    with open(config_path, "r") as f:
-        config = json.load(f)
+SONATA_CONFIG = {
+    "in_channels": 9,
+    "order": ["z", "z-trans", "hilbert", "hilbert-trans"],
+    "stride": [2, 2, 2, 2],
+    "enc_depths": [3, 3, 3, 12, 3],
+    "enc_channels": [48, 96, 192, 384, 512],
+    "enc_num_head": [3, 6, 12, 24, 32],
+    "enc_patch_size": [1024, 1024, 1024, 1024, 1024],
+    "mlp_ratio": 4,
+    "qkv_bias": True,
+    "qk_scale": None,
+    "attn_drop": 0.0,
+    "proj_drop": 0.0,
+    "drop_path": 0.3,
+    "shuffle_orders": True,
+    "pre_norm": True,
+    "enable_rpe": False,
+    "enable_flash": True,
+    "upcast_attention": False,
+    "upcast_softmax": False,
+    "traceable": True,
+    "enc_mode": True,
+    "mask_token": True,
+}
+
+
+def load_by_config(config: dict = None, custom_config: dict = None):
+    if config is None:
+        config = dict(SONATA_CONFIG)
 
     # Apply custom config overrides
     if custom_config is not None:

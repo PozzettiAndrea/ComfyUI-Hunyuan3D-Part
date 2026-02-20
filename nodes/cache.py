@@ -12,7 +12,7 @@ import trimesh
 import hashlib
 from collections import OrderedDict
 
-from .core.mesh_utils import load_mesh
+from .mesh_utils import load_mesh
 
 # Maximum number of cached feature sets (to prevent unbounded memory growth)
 MAX_CACHE_SIZE = 10
@@ -31,7 +31,7 @@ def _get_p3sam_model(config):
         model.to(device)
         return model
 
-    from .core.p3sam_models import MultiHeadSegment
+    from .p3sam.model import MultiHeadSegment
     from safetensors.torch import load_file
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -45,7 +45,9 @@ def _get_p3sam_model(config):
     )
 
     state_dict = load_file(config['ckpt_path'], device=device)
-    model.load_state_dict(state_dict=state_dict, strict=False)
+    # Strip 'dit.' prefix from checkpoint keys (legacy checkpoint format)
+    state_dict = {k.removeprefix("dit."): v for k, v in state_dict.items()}
+    model.load_state_dict(state_dict, strict=False)
     model = model.to(device).eval()
 
     print(f"[P3-SAM] Model loaded on {device}")
@@ -133,7 +135,7 @@ class ComputeMeshFeatures:
             p3sam = _get_p3sam_model(p3sam_config)
 
             # Import required functions from core
-            from .core.p3sam_processing import (
+            from .p3sam_processing import (
                 build_adjacent_faces_numba,
                 get_feat,
                 clean_mesh,
@@ -297,14 +299,14 @@ class P3SAMSegmentMesh:
             p3sam = p3sam.to(device).eval()
 
             # Import functions from core
-            from .core.p3sam_processing import (
+            from .p3sam_processing import (
                 get_mask,
                 cal_iou,
                 fix_label,
                 get_aabb_from_face_ids,
                 do_post_process
             )
-            from .core.mesh_utils import colorize_segmentation, save_mesh
+            from .mesh_utils import colorize_segmentation, save_mesh
 
             # FPS sample prompt points
             fps_idx = fpsample.fps_sampling(points, prompt_num)

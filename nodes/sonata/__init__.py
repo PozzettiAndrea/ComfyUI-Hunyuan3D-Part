@@ -18,7 +18,6 @@ from .model import load, load_by_config
 from . import model
 from . import module
 from . import structure
-from . import data
 from . import transform
 from . import utils
 from . import registry

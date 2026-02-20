@@ -10,7 +10,7 @@ import uuid
 
 import trimesh as trimesh_module
 
-from .core.mesh_utils import create_bbox_visualization, export_scene_to_vtp
+from .mesh_utils import create_bbox_visualization, export_scene_to_vtp
 
 # ComfyUI folder paths
 try:

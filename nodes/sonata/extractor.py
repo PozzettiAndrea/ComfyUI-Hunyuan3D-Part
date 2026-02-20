@@ -1,9 +1,10 @@
 import torch
 import torch.nn as nn
-from .. import sonata
 
-from typing import Dict, Union, Optional
-from pathlib import Path
+from typing import Dict, Optional
+
+from . import load_by_config
+from . import transform as sonata_transform
 
 
 class SonataFeatureExtractor(nn.Module):
@@ -21,13 +22,7 @@ class SonataFeatureExtractor(nn.Module):
 
         # Load Sonata model with enable_flash override
         custom_config = {"enable_flash": enable_flash}
-        self.sonata = sonata.load_by_config(
-            str(Path(__file__).parent.parent.parent / "config" / "sonata.json"),
-            custom_config=custom_config
-        )
-
-        # Store original dtype for later reference
-        # self._original_dtype = next(self.parameters()).dtype
+        self.sonata = load_by_config(custom_config=custom_config)
 
         # Define MLP projection head (same as in train-sonata.py)
         self.mlp = nn.Sequential(
@@ -39,7 +34,7 @@ class SonataFeatureExtractor(nn.Module):
         )
 
         # Define transform
-        self.transform = sonata.transform.default()
+        self.transform = sonata_transform.default()
 
         # Load checkpoint if provided
         if ckpt_path:
@@ -47,22 +42,18 @@ class SonataFeatureExtractor(nn.Module):
 
     def load_checkpoint(self, checkpoint_path: str):
         """Load model weights from checkpoint."""
-        # Check if using safetensors or pytorch format
         if checkpoint_path.endswith('.safetensors'):
             from safetensors.torch import load_file
             checkpoint = load_file(checkpoint_path, device="cuda")
             state_dict = checkpoint
         else:
             checkpoint = torch.load(checkpoint_path, map_location="cuda", weights_only=False)
-            # Extract state dict from Lightning checkpoint
             if "state_dict" in checkpoint:
                 state_dict = checkpoint["state_dict"]
-                # Remove 'model.' prefix if present from Lightning
                 state_dict = {k.replace("model.", ""): v for k, v in state_dict.items()}
             else:
                 state_dict = checkpoint
 
-        # Debug: Show all keys in checkpoint
         print("\n=== Checkpoint Keys ===")
         print(f"Total keys in checkpoint: {len(state_dict)}")
         print("\nSample keys:")
@@ -71,7 +62,6 @@ class SonataFeatureExtractor(nn.Module):
         if len(state_dict) > 10:
             print(f"  ... and {len(state_dict) - 10} more keys")
 
-        # Load only the relevant weights
         sonata_dict = {
             k.replace("sonata.", ""): v
             for k, v in state_dict.items()
@@ -86,13 +76,12 @@ class SonataFeatureExtractor(nn.Module):
         print(f"\nFound {len(sonata_dict)} Sonata keys")
         print(f"Found {len(mlp_dict)} MLP keys")
 
-        # Load Sonata weights and show missing/unexpected keys
         if sonata_dict:
             print("\n=== Loading Sonata Weights ===")
             result = self.sonata.load_state_dict(sonata_dict, strict=False)
             if result.missing_keys:
                 print(f"\nMissing keys ({len(result.missing_keys)}):")
-                for key in result.missing_keys[:20]:  # Show first 20
+                for key in result.missing_keys[:20]:
                     print(f"  - {key}")
                 if len(result.missing_keys) > 20:
                     print(f"  ... and {len(result.missing_keys) - 20} more")
@@ -101,14 +90,13 @@ class SonataFeatureExtractor(nn.Module):
 
             if result.unexpected_keys:
                 print(f"\nUnexpected keys ({len(result.unexpected_keys)}):")
-                for key in result.unexpected_keys[:20]:  # Show first 20
+                for key in result.unexpected_keys[:20]:
                     print(f"  - {key}")
                 if len(result.unexpected_keys) > 20:
                     print(f"  ... and {len(result.unexpected_keys) - 20} more")
             else:
                 print("No unexpected keys!")
 
-        # Load MLP weights
         if mlp_dict:
             print("\n=== Loading MLP Weights ===")
             result = self.mlp.load_state_dict(mlp_dict, strict=False)
@@ -133,35 +121,26 @@ class SonataFeatureExtractor(nn.Module):
         Returns:
             Dictionary formatted for Sonata input
         """
-        # Handle single batch case
         if points.dim() == 2:
             points = points.unsqueeze(0)
             if normals is not None:
                 normals = normals.unsqueeze(0)
-        # print('Sonata points shape: ', points.shape)
         B, N, _ = points.shape
 
-        # Prepare batch indices
         batch_idx = torch.arange(B).view(-1, 1).repeat(1, N).reshape(-1)
 
-        # Flatten points for Sonata format
         coord = points.reshape(B * N, 3)
 
         if normals is not None:
             normal = normals.reshape(B * N, 3)
         else:
-            # Generate dummy normals if not provided
             normal = torch.ones_like(coord)
 
-        # Generate dummy colors
         color = torch.ones_like(coord)
 
-        # Function to convert tensor to numpy array, handling BFloat16
         def to_numpy(tensor):
-            # First convert to CPU if needed
             if tensor.is_cuda:
                 tensor = tensor.cpu()
-            # Convert BFloat16 or other unsupported dtypes to float32
             if tensor.dtype not in [
                 torch.float32,
                 torch.float64,
@@ -172,10 +151,8 @@ class SonataFeatureExtractor(nn.Module):
                 torch.int16,
             ]:
                 tensor = tensor.to(torch.float32)
-            # Then convert to numpy
             return tensor.numpy()
 
-        # Create data dict
         data_dict = {
             "coord": to_numpy(coord),
             "normal": to_numpy(normal),
@@ -183,7 +160,6 @@ class SonataFeatureExtractor(nn.Module):
             "batch": to_numpy(batch_idx),
         }
 
-        # Apply transform
         data_dict = self.transform(data_dict)
 
         return data_dict, B, N
@@ -201,35 +177,23 @@ class SonataFeatureExtractor(nn.Module):
         Returns:
             features: [B, N, 512] or [N, 512] tensor of features
         """
-        # Store original shape
         original_shape = points.shape
         single_batch = points.dim() == 2
 
-        # Prepare data for Sonata
         data_dict, B, N = self.prepare_batch_data(points, normals)
 
-        # Move to GPU if needed and convert to appropriate dtype
         device = points.device
         dtype = points.dtype
 
-        # Make sure the entire model is in the correct dtype
-        # if dtype != self._original_dtype:
-        #     self.to(dtype)
-        #     self._original_dtype = dtype
-
         for key in data_dict.keys():
             if isinstance(data_dict[key], torch.Tensor):
-                # Convert tensors to the right device and dtype if they're floating point
                 if data_dict[key].is_floating_point():
                     data_dict[key] = data_dict[key].to(device=device, dtype=dtype)
                 else:
-                    # For integer tensors, just move to device without changing dtype
                     data_dict[key] = data_dict[key].to(device)
 
-        # Extract Sonata features
         point = self.sonata(data_dict)
 
-        # Handle pooling layers (same as in train-sonata.py)
         while "pooling_parent" in point.keys():
             assert "pooling_inverse" in point.keys()
             parent = point.pop("pooling_parent")
@@ -237,17 +201,13 @@ class SonataFeatureExtractor(nn.Module):
             parent.feat = torch.cat([parent.feat, point.feat[inverse]], dim=-1)
             point = parent
 
-        # Get features and apply MLP
         feat = point.feat  # [M, 1232]
         feat = self.mlp(feat)  # [M, 512]
 
-        # Map back to original points
         feat = feat[point.inverse]  # [B*N, 512]
 
-        # Reshape to batch format
         feat = feat.reshape(B, -1, feat.shape[-1])  # [B, N, 512]
 
-        # Return in original format
         if single_batch:
             feat = feat.squeeze(0)  # [N, 512]
 
@@ -272,15 +232,12 @@ class SonataFeatureExtractor(nn.Module):
         """
         features_list = []
 
-        # Process in batches
         for i in range(0, len(points_list), batch_size):
             batch_points = points_list[i : i + batch_size]
             batch_normals = normals_list[i : i + batch_size] if normals_list else None
 
-            # Find max points in batch
             max_n = max(p.shape[0] for p in batch_points)
 
-            # Pad to same size
             padded_points = []
             masks = []
             for points in batch_points:
@@ -293,10 +250,8 @@ class SonataFeatureExtractor(nn.Module):
                 mask[:n] = True
                 masks.append(mask)
 
-            # Stack batch
             batch_tensor = torch.stack(padded_points)  # [B, max_n, 3]
 
-            # Handle normals similarly if provided
             if batch_normals:
                 padded_normals = []
                 for j, normals in enumerate(batch_normals):
@@ -309,15 +264,12 @@ class SonataFeatureExtractor(nn.Module):
             else:
                 normals_tensor = None
 
-            # Extract features
             with torch.cuda.amp.autocast(enabled=True):
                 batch_features = self.forward(
                     batch_tensor, normals_tensor
                 )  # [B, max_n, 512]
 
-            # Unpad and add to results
             for j, (feat, mask) in enumerate(zip(batch_features, masks)):
                 features_list.append(feat[mask])
 
         return features_list
-

@@ -1,5 +1,5 @@
 import torch
-from .utils.misc import logger, synchronize_timer
+from .misc_utils import logger, synchronize_timer
 import inspect
 from typing import List, Optional
 import trimesh
@@ -8,14 +8,14 @@ from tqdm import tqdm
 import copy
 from typing import List, Optional, Union
 import os
-from .utils.mesh_utils import (
+from .geometry_utils import (
     SampleMesh,
     load_surface_points,
     sample_bbox_points_from_trimesh,
     explode_mesh,
     fix_mesh,
 )
-from .utils.misc import (
+from .misc_utils import (
     init_from_ckpt,
     instantiate_from_config,
     get_config_from_file,
@@ -637,7 +637,6 @@ class PartFormerPipeline(TokenAllocMixin):
         return outputs
 
     @torch.no_grad()
-    @torch.autocast("cuda", dtype=torch.float32)
     def __call__(
         self,
         obj_surface=None,

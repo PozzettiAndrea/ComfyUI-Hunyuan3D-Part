@@ -12,7 +12,7 @@ import os
 import uuid
 import tempfile
 
-from .core.mesh_utils import load_mesh
+from .mesh_utils import load_mesh
 
 
 class ExplodedMeshViewer:
