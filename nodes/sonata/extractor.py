@@ -45,12 +45,10 @@ class SonataFeatureExtractor(nn.Module):
         """Load model weights from checkpoint."""
         if checkpoint_path.endswith('.safetensors'):
             from safetensors.torch import load_file
-            device = str(comfy.model_management.get_torch_device())
-            checkpoint = load_file(checkpoint_path, device=device)
+            checkpoint = load_file(checkpoint_path, device="cpu")
             state_dict = checkpoint
         else:
-            device = str(comfy.model_management.get_torch_device())
-            checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
+            checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
             if "state_dict" in checkpoint:
                 state_dict = checkpoint["state_dict"]
                 state_dict = {k.replace("model.", ""): v for k, v in state_dict.items()}

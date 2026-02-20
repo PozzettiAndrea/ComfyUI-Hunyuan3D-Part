@@ -43,7 +43,7 @@ class LoadP3SAMSegmentor:
 
         print("[Load P3-SAM] Ensuring model files are downloaded...")
         ckpt_path = smart_load_model(model_path="tencent/Hunyuan3D-Part")
-        p3sam_ckpt_path = os.path.join(ckpt_path, "p3sam", "p3sam.safetensors")
+        p3sam_ckpt_path = os.path.join(ckpt_path, "p3sam.safetensors")
 
         if not os.path.exists(p3sam_ckpt_path):
             raise FileNotFoundError(f"P3-SAM checkpoint not found: {p3sam_ckpt_path}")
@@ -111,9 +111,9 @@ class LoadXPartModels:
         ckpt_path = smart_load_model(model_path="tencent/Hunyuan3D-Part")
 
         # Verify files exist
-        model_file = os.path.join(ckpt_path, "model", "model.safetensors")
-        vae_file = os.path.join(ckpt_path, "shapevae", "shapevae.safetensors")
-        cond_file = os.path.join(ckpt_path, "conditioner", "conditioner.safetensors")
+        model_file = os.path.join(ckpt_path, "model.safetensors")
+        vae_file = os.path.join(ckpt_path, "shapevae.safetensors")
+        cond_file = os.path.join(ckpt_path, "conditioner.safetensors")
 
         for f in [model_file, vae_file, cond_file]:
             if not os.path.exists(f):

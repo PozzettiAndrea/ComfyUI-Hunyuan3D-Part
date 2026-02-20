@@ -148,7 +148,7 @@ def _get_xpart_models(config):
         model_params = dict(xpart_config["model"]["params"])
         with torch.device("meta"):
             model = PartFormerDITPlain(**model_params, dtype=dtype, device="meta", operations=ops)
-        sd = load_file(config['model_file'], device=device)
+        sd = load_file(config['model_file'], device="cpu")
         model.load_state_dict(sd, strict=False, assign=True)
         _fix_meta_buffers(model, device)
         model = model.to(device=device).eval()
@@ -159,7 +159,7 @@ def _get_xpart_models(config):
         vae_params = dict(xpart_config["shapevae"]["params"])
         with torch.device("meta"):
             vae = VolumeDecoderShapeVAE(**vae_params, dtype=dtype, device="meta", operations=ops)
-        sd = load_file(config['vae_file'], device=device)
+        sd = load_file(config['vae_file'], device="cpu")
         vae.load_state_dict(sd, strict=False, assign=True)
         _fix_meta_buffers(vae, device)
         vae = vae.to(device=device).eval()
@@ -213,7 +213,7 @@ def _get_xpart_models(config):
             seg_feat_output_dim=seg_feat_output_dim,
             dtype=dtype, device=device, operations=ops,
         )
-        sd = load_file(config['cond_file'], device=device)
+        sd = load_file(config['cond_file'], device="cpu")
         conditioner.load_state_dict(sd, strict=False)
 
         # Keep seg_feat_encoder in float32 (Sonata backbone)

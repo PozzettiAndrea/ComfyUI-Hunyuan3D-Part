@@ -45,7 +45,7 @@ def _get_p3sam_model(config):
         enable_flash=config['enable_flash']
     )
 
-    state_dict = load_file(config['ckpt_path'], device=device)
+    state_dict = load_file(config['ckpt_path'], device="cpu")
     # Strip 'dit.' prefix from checkpoint keys (legacy checkpoint format)
     state_dict = {k.removeprefix("dit."): v for k, v in state_dict.items()}
     model.load_state_dict(state_dict, strict=False)

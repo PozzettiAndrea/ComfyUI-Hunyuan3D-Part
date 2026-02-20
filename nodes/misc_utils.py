@@ -162,8 +162,9 @@ def smart_load_model(
 ):
     """Ensure model files are available, downloading from HuggingFace if needed.
 
-    Downloads to ComfyUI/models/hunyuan3d-part/ (flat, no repo_id nesting).
-    Returns the local directory path containing the model files.
+    Downloads only the 4 required .safetensors files flat into
+    ComfyUI/models/hunyuan3d-part/{model,shapevae,conditioner,p3sam}.safetensors.
+    Returns the local directory path.
     """
     try:
         import folder_paths
@@ -175,28 +176,56 @@ def smart_load_model(
         os.environ.get("HY3DGEN_MODELS", default_base)
     )
 
-    # Check if models already exist (look for any .safetensors file)
-    if os.path.isdir(model_dir) and any(
-        f.endswith(".safetensors")
-        for dirpath, _, files in os.walk(model_dir)
-        for f in files
-    ):
+    # repo path → flat local name
+    required_files = {
+        "model/model.safetensors": "model.safetensors",
+        "shapevae/shapevae.safetensors": "shapevae.safetensors",
+        "conditioner/conditioner.safetensors": "conditioner.safetensors",
+        "p3sam/p3sam.safetensors": "p3sam.safetensors",
+    }
+
+    all_present = all(
+        os.path.isfile(os.path.join(model_dir, local_name))
+        for local_name in required_files.values()
+    )
+    if all_present:
         logger.info(f"Using local models at: {model_dir}")
         return model_dir
 
-    logger.info(f"Models not found at {model_dir}, downloading from HuggingFace...")
+    logger.info(f"Downloading models to {model_dir}...")
     try:
-        from huggingface_hub import snapshot_download
-
-        snapshot_download(
-            repo_id=model_path,
-            local_dir=model_dir,
-        )
+        from huggingface_hub import hf_hub_download
     except ImportError:
         raise RuntimeError(
             f"Models not found at {model_dir}. "
             "Install huggingface_hub to auto-download, or download manually."
         )
+
+    os.makedirs(model_dir, exist_ok=True)
+    for repo_path, local_name in required_files.items():
+        local_path = os.path.join(model_dir, local_name)
+        if not os.path.isfile(local_path):
+            logger.info(f"Downloading {local_name}...")
+            hf_hub_download(
+                repo_id=model_path,
+                filename=repo_path,
+                local_dir=model_dir,
+            )
+            # Flatten: hf_hub_download creates repo_path structure, move to root
+            subfolder_path = os.path.join(model_dir, repo_path)
+            if os.path.isfile(subfolder_path) and subfolder_path != local_path:
+                os.rename(subfolder_path, local_path)
+                # Remove empty parent dir
+                try:
+                    os.rmdir(os.path.dirname(subfolder_path))
+                except OSError:
+                    pass
+
+    # Clean up HF metadata dir
+    hf_cache = os.path.join(model_dir, ".cache")
+    if os.path.isdir(hf_cache):
+        import shutil
+        shutil.rmtree(hf_cache)
 
     return model_dir
 
