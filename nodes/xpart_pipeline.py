@@ -1,5 +1,6 @@
 import torch
 import comfy.model_management
+import comfy.utils
 from .misc_utils import logger, synchronize_timer
 import inspect
 from typing import List, Optional
@@ -608,12 +609,16 @@ class PartFormerPipeline(TokenAllocMixin):
         output_type="trimesh",
         box_v=1.01,
         mc_level=0.0,
-        num_chunks=20000,
+        num_chunks=0,
         octree_resolution=256,
         mc_algo="mc",
         enable_pbar=True,
         **kwargs,
     ):
+        if num_chunks <= 0:
+            from .geometry_utils import _auto_num_chunks
+            num_chunks = _auto_num_chunks(self.device)
+            print(f"[X-Part Export] Auto num_chunks={num_chunks}")
         if not output_type == "latent":
             latents = 1.0 / self.vae.scale_factor * latents
             latents = self.vae(latents)
@@ -660,7 +665,7 @@ class PartFormerPipeline(TokenAllocMixin):
         box_v=1.01,
         octree_resolution=512,
         mc_level=-1 / 512,
-        num_chunks=400000,
+        num_chunks=0,
         mc_algo="mc",
         output_type: Optional[str] = "trimesh",
         enable_pbar=True,
@@ -757,6 +762,7 @@ class PartFormerPipeline(TokenAllocMixin):
         aabb_orig = aabb
 
         # 6. Denoising loop
+        diffusion_pbar = comfy.utils.ProgressBar(len(timesteps))
         with synchronize_timer("Diffusion Sampling"):
             for i, t in enumerate(
                 tqdm(timesteps, disable=not enable_pbar, desc="Diffusion Sampling:")
@@ -799,8 +805,10 @@ class PartFormerPipeline(TokenAllocMixin):
                 if callback is not None and i % callback_steps == 0:
                     step_idx = i // getattr(self.scheduler, "order", 1)
                     callback(step_idx, t, outputs)
+                diffusion_pbar.update(1)
 
         # latents2mesh — build list of Trimesh (not Scene) for comfy_env serialization
+        export_pbar = comfy.utils.ProgressBar(len(latents))
         parts = []
         for i, part_latent in enumerate(latents):
             try:
@@ -819,6 +827,7 @@ class PartFormerPipeline(TokenAllocMixin):
                 parts.append(part_mesh)
             except Exception as e:
                 logger.error(f"Failed to export part {i} with error {e}")
+            export_pbar.update(1)
 
         # Denormalize directly on list
         print(f"Denormalize mesh: {center}, {scale}")

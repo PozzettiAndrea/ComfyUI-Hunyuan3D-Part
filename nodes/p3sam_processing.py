@@ -30,9 +30,13 @@ def get_feat(model, points, normals, device=None):
         "batch": np.zeros(points.shape[0], dtype=np.int64),
     }
     data_dict = model.transform(data_dict)
+    model_dtype = next(model.sonata.parameters()).dtype
     for k in data_dict:
         if isinstance(data_dict[k], torch.Tensor):
-            data_dict[k] = data_dict[k].to(device)
+            if data_dict[k].is_floating_point():
+                data_dict[k] = data_dict[k].to(device=device, dtype=model_dtype)
+            else:
+                data_dict[k] = data_dict[k].to(device)
     point = model.sonata(data_dict)
     while "pooling_parent" in point.keys():
         assert "pooling_inverse" in point.keys()
@@ -56,12 +60,13 @@ def get_mask(model, feats, points, point_prompt, iter=1, device=None):
     """
     if device is None:
         device = comfy.model_management.get_torch_device()
+    model_dtype = next(model.parameters()).dtype
     point_num = points.shape[0]
     prompt_num = point_prompt.shape[0]
     # expand creates zero-copy views instead of repeat's full allocation
-    feats = feats.unsqueeze(1).expand(-1, prompt_num, -1).to(device)
-    points = torch.from_numpy(points).float().to(device).unsqueeze(1).expand(-1, prompt_num, -1)
-    prompt_coord = torch.from_numpy(point_prompt).float().to(device).unsqueeze(0).expand(point_num, -1, -1)
+    feats = feats.unsqueeze(1).expand(-1, prompt_num, -1).to(device=device, dtype=model_dtype)
+    points = torch.from_numpy(points).to(device=device, dtype=model_dtype).unsqueeze(1).expand(-1, prompt_num, -1)
+    prompt_coord = torch.from_numpy(point_prompt).to(device=device, dtype=model_dtype).unsqueeze(0).expand(point_num, -1, -1)
 
     feats = feats.transpose(0, 1).contiguous()          # [K, N, 512]
     points = points.transpose(0, 1).contiguous()         # [K, N, 3]

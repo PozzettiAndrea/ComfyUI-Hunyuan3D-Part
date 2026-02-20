@@ -38,7 +38,7 @@ class ClearAllModelCaches:
             print("[Clear Caches] Clearing all model caches...")
 
             # Clear P3-SAM model cache
-            from .cache import _p3sam_model_cache
+            from .processing import _p3sam_model_cache
             for key in list(_p3sam_model_cache.keys()):
                 model = _p3sam_model_cache.pop(key)
                 if hasattr(model, 'to'):
@@ -55,11 +55,6 @@ class ClearAllModelCaches:
                         models[name].to('cpu')
                 del models
             print("[Clear Caches] Cleared X-Part model cache")
-
-            # Clear feature cache
-            from .cache import ComputeMeshFeatures
-            ComputeMeshFeatures._feature_cache.clear()
-            print("[Clear Caches] Cleared feature cache")
 
             # Clear GPU cache
             gc.collect()

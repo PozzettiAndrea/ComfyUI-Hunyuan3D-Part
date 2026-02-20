@@ -172,12 +172,14 @@ class VanillaVolumeDecoder:
 
 class FourierEmbedder(nn.Module):
     def __init__(self, num_freqs=6, logspace=True, input_dim=3,
-                 include_input=True, include_pi=True):
+                 include_input=True, include_pi=True, dtype=None):
         super().__init__()
+        if dtype is None:
+            dtype = torch.float32
         if logspace:
-            frequencies = 2.0 ** torch.arange(num_freqs, dtype=torch.float32)
+            frequencies = 2.0 ** torch.arange(num_freqs, dtype=dtype)
         else:
-            frequencies = torch.linspace(1.0, 2.0 ** (num_freqs - 1), num_freqs, dtype=torch.float32)
+            frequencies = torch.linspace(1.0, 2.0 ** (num_freqs - 1), num_freqs, dtype=dtype)
         if include_pi:
             frequencies *= torch.pi
         self.register_buffer("frequencies", frequencies, persistent=False)
@@ -621,8 +623,8 @@ class PointCrossAttentionEncoder(nn.Module):
             data = torch.cat([data, input_feats], dim=-1)
 
         if input_sharpedge_pc_size == 0:
-            query_sharpedge_pc = torch.zeros(B, 1, D).to(pc.device)
-            input_sharpedge_pc = torch.zeros(B, 1, D).to(pc.device)
+            query_sharpedge_pc = torch.zeros(B, 1, D, dtype=pc.dtype, device=pc.device)
+            input_sharpedge_pc = torch.zeros(B, 1, D, dtype=pc.dtype, device=pc.device)
 
         return (
             query.view(B, -1, query.shape[-1]),
@@ -753,7 +755,7 @@ class VolumeDecoderShapeVAE(VectsetVAE):
         self.geo_decoder_ln_post = geo_decoder_ln_post
         self.downsample_ratio = downsample_ratio
 
-        self.fourier_embedder = FourierEmbedder(num_freqs=num_freqs, include_pi=include_pi)
+        self.fourier_embedder = FourierEmbedder(num_freqs=num_freqs, include_pi=include_pi, dtype=dtype)
 
         self.encoder = PointCrossAttentionEncoder(
             fourier_embedder=self.fourier_embedder,

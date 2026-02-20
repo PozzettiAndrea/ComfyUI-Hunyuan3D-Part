@@ -2,7 +2,7 @@
 packages = ["python3-dev"]
 
 [cuda]
-packages = ["flash-attn", "torch-scatter", "torch-cluster", "torch", "torchvision"]
+packages = ["flash-attn", "torch-scatter", "torch-cluster", "torch", "torchvision", "spconv", "cumm"]
 
 [pypi-dependencies]
 trimesh = "*"
@@ -21,9 +21,7 @@ huggingface-hub = "*"
 hf-transfer = "*"
 Pillow = "*"
 tqdm = "*"
-cumm-cu121 = "==0.7.11"
 pccm = "*"
-spconv-cu121 = "*"
 hf_xet = "*"
 psutil = "*"
 comfy-aimdo = "*"

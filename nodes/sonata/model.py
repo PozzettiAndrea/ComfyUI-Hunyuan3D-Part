@@ -295,27 +295,22 @@ class SerializedAttention(PointModule):
             q, k, v = (
                 qkv.reshape(-1, K, 3, H, C // H).permute(2, 0, 3, 1, 4).unbind(dim=0)
             )
-            # attn
-            if self.upcast_attention:
-                q = q.float()
-                k = k.float()
-            attn = (q * self.scale) @ k.transpose(-2, -1)  # (N', H, K, K)
-            if self.enable_rpe:
-                attn = attn + self.rpe(self.get_rel_pos(point, order))
-            if self.upcast_softmax:
-                attn = attn.float()
-            attn = self.softmax(attn)
-            attn = self.attn_drop(attn).to(qkv.dtype)
-            feat = (attn @ v).transpose(1, 2).reshape(-1, C)
+            # RPE bias added to attention scores (if enabled)
+            attn_bias = self.rpe(self.get_rel_pos(point, order)) if self.enable_rpe else None
+            # PyTorch SDPA handles backend selection (flash/efficient/math)
+            feat = F.scaled_dot_product_attention(
+                q, k, v,
+                attn_mask=attn_bias,
+                scale=self.scale,
+            ).transpose(1, 2).reshape(-1, C)
         else:
             feat = flash_attn.flash_attn_varlen_qkvpacked_func(
-                qkv.half().reshape(-1, 3, H, C // H),
+                qkv.reshape(-1, 3, H, C // H),
                 cu_seqlens,
                 max_seqlen=self.patch_size,
                 dropout_p=self.attn_drop if self.training else 0,
                 softmax_scale=self.scale,
             ).reshape(-1, C)
-            feat = feat.to(qkv.dtype)
         feat = feat[inverse]
 
         # ffn

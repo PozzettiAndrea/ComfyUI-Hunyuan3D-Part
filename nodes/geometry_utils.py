@@ -11,6 +11,17 @@ import traceback
 import pymeshlab
 import tempfile
 import comfy.model_management
+import comfy.utils
+
+
+def _auto_num_chunks(device, bytes_per_point=4096):
+    """Auto-determine chunk size using try-descending-sizes pattern from ComfyUI attention split."""
+    free_mem = comfy.model_management.get_free_memory(device)
+    for num_chunks in [500000, 250000, 125000, 62500, 30000, 15000]:
+        mem_needed = num_chunks * bytes_per_point
+        if mem_needed < free_mem * 0.25:
+            return num_chunks
+    return 10000
 
 
 def random_sample_pointcloud(mesh: trimesh.Trimesh, num=30000, seed=42):
@@ -515,7 +526,7 @@ def extract_geometry_fast(
         1.25,
     ),
     octree_depth: int = 7,
-    num_chunks: int = 10000,
+    num_chunks: int = 0,
     disable: bool = True,
     mc_level: float = -1 / 512,
     octree_resolution: int = None,
@@ -548,6 +559,10 @@ def extract_geometry_fast(
     assert (
         octree_resolution >= 256
     ), "octree resolution must be at least 256 for fast inference"
+
+    if num_chunks <= 0:
+        num_chunks = _auto_num_chunks(device)
+        print(f"[Geometry] Auto num_chunks={num_chunks} based on free VRAM")
 
     resolutions = []
     if octree_resolution < min_resolution:
@@ -588,6 +603,8 @@ def extract_geometry_fast(
             f" {mc_level}."
         )
     batch_logits = []
+    initial_steps = len(range(0, xyz_samples.shape[0], num_chunks))
+    geo_pbar = comfy.utils.ProgressBar(initial_steps)
     for start in tqdm(
         range(0, xyz_samples.shape[0], num_chunks),
         desc=f"MC Level {mc_level} Implicit Function:",
@@ -605,6 +622,7 @@ def extract_geometry_fast(
             )
             logits = torch.sigmoid(logits) * 2 - 1
         batch_logits.append(logits)
+        geo_pbar.update(1)
 
     grid_logits = (
         torch.cat(batch_logits, dim=1)
@@ -646,6 +664,8 @@ def extract_geometry_fast(
             resolution, device=device
         ) + torch.tensor(bbox_min, device=device)
         batch_logits = []
+        refine_steps = len(range(0, next_points.shape[0], num_chunks))
+        refine_pbar = comfy.utils.ProgressBar(refine_steps)
         for start in tqdm(
             range(0, next_points.shape[0], num_chunks),
             desc=f"MC Level {octree_depth_now + 1} Implicit Function:",
@@ -663,6 +683,7 @@ def extract_geometry_fast(
                 )
                 logits = torch.sigmoid(logits) * 2 - 1
             batch_logits.append(logits)
+            refine_pbar.update(1)
         grid_logits = torch.cat(batch_logits, dim=1).half()
         next_logits[nidx] = grid_logits[0]
         grid_logits = next_logits.unsqueeze(0)

@@ -157,7 +157,7 @@ class Conditioner(nn.Module):
                 precomputed_points = precomputed_sonata_features['points']
                 precomputed_feats = precomputed_sonata_features['features']
 
-                obj_points = object_surface[:1, ..., :3].float()
+                obj_points = object_surface[:1, ..., :3].to(dtype=precomputed_points.dtype)
 
                 with torch.no_grad():
                     dists = torch.cdist(obj_points[0], precomputed_points.unsqueeze(0)[0])

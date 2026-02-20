@@ -8,6 +8,8 @@ the consuming nodes (within the worker process).
 
 import os
 
+ATTN_BACKENDS = ['auto', 'flash_attn', 'xformers', 'sdpa']
+
 
 class LoadP3SAMSegmentor:
     """
@@ -20,14 +22,15 @@ class LoadP3SAMSegmentor:
     @classmethod
     def INPUT_TYPES(cls):
         return {
-            "required": {
-                "cache_on_gpu": ("BOOLEAN", {
-                    "default": True,
-                    "tooltip": "Keep model on GPU. True = faster subsequent runs. False = auto-unload after use to free VRAM."
+            "required": {},
+            "optional": {
+                "precision": (["auto", "bf16", "fp16", "fp32"], {
+                    "default": "auto",
+                    "tooltip": "Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older)."
                 }),
-                "enable_flash": ("BOOLEAN", {
-                    "default": True,
-                    "tooltip": "Enable Flash Attention for ~10-20% speedup. Requires flash-attn package. Model reloads on change."
+                "attn_backend": (ATTN_BACKENDS, {
+                    "default": "auto",
+                    "tooltip": "Attention backend. auto = best available (flash_attn > xformers > sdpa)."
                 }),
             },
         }
@@ -37,7 +40,7 @@ class LoadP3SAMSegmentor:
     FUNCTION = "load_model"
     CATEGORY = "Hunyuan3D/Models"
 
-    def load_model(self, cache_on_gpu, enable_flash):
+    def load_model(self, precision="auto", attn_backend="auto", **kwargs):
         """Download model files and return config dict."""
         from .misc_utils import smart_load_model
 
@@ -54,8 +57,8 @@ class LoadP3SAMSegmentor:
             "type": "p3sam",
             "ckpt_path": p3sam_ckpt_path,
             "model_path": ckpt_path,
-            "enable_flash": enable_flash,
-            "cache_on_gpu": cache_on_gpu,
+            "precision": precision,
+            "attn_backend": attn_backend,
         },)
 
 
@@ -70,25 +73,15 @@ class LoadXPartModels:
     @classmethod
     def INPUT_TYPES(cls):
         return {
-            "required": {
-                "precision": (["bfloat16", "float16"], {
-                    "default": "bfloat16",
-                    "tooltip": "Model precision. bfloat16 = native format (recommended). float16 = alternative half-precision."
+            "required": {},
+            "optional": {
+                "precision": (["auto", "bf16", "fp16", "fp32"], {
+                    "default": "auto",
+                    "tooltip": "Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older)."
                 }),
-                "cache_on_gpu": ("BOOLEAN", {
-                    "default": True,
-                    "tooltip": "Keep models on GPU. True = faster subsequent runs. False = auto-unload after use to free VRAM."
-                }),
-                "enable_flash": ("BOOLEAN", {
-                    "default": True,
-                    "tooltip": "Enable Flash Attention for ~10-20% speedup. Requires flash-attn package. Model reloads on change."
-                }),
-                "pc_size": ("INT", {
-                    "default": 40960,
-                    "min": 1024,
-                    "max": 81920,
-                    "step": 1024,
-                    "tooltip": "Points per object/part. 40960=trained default, <20480=quality loss, <5120=very poor. Model reloads on change."
+                "attn_backend": (ATTN_BACKENDS, {
+                    "default": "auto",
+                    "tooltip": "Attention backend. auto = best available (flash_attn > xformers > sdpa)."
                 }),
             },
         }
@@ -98,14 +91,9 @@ class LoadXPartModels:
     FUNCTION = "load_models"
     CATEGORY = "Hunyuan3D/Models"
 
-    def load_models(self, precision, cache_on_gpu, enable_flash, pc_size):
+    def load_models(self, precision="auto", attn_backend="auto", **kwargs):
         """Download model files and return config dict."""
         from .misc_utils import smart_load_model
-
-        if pc_size < 20480:
-            print(f"[Load X-Part Models] WARNING: Using reduced point count ({pc_size}) - quality may degrade")
-        if pc_size < 5120:
-            print(f"[Load X-Part Models] WARNING: Very low point count ({pc_size}) - expect poor quality")
 
         print("[Load X-Part Models] Ensuring model files are downloaded...")
         ckpt_path = smart_load_model(model_path="tencent/Hunyuan3D-Part")
@@ -128,9 +116,7 @@ class LoadXPartModels:
             "vae_file": vae_file,
             "cond_file": cond_file,
             "precision": precision,
-            "enable_flash": enable_flash,
-            "cache_on_gpu": cache_on_gpu,
-            "pc_size": pc_size,
+            "attn_backend": attn_backend,
         },)
 
 
