@@ -1,0 +1,43 @@
+[00:00] Crash dump logging enabled: D:\a\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\comfy-test-logs\Hunyuan3D-Part-1529\windows_portable-cpu\crash_dump.log
+[00:00] 
+[00:00] [1/3] REGISTRATION
+[00:00] ----------------------------------------
+[00:00] [DEBUG] server=None, server_url=http://127.0.0.1:8188, api=None
+[00:00] 
+Connecting to existing server at http://127.0.0.1:8188...
+[00:00] Connecting to existing server at http://127.0.0.1:8188...
+[00:00] Connected to server! (attempt 1, 0.0s)
+[00:00] Checking for import errors in server logs...
+[00:00] No import errors detected
+[00:00] Found 674 registered nodes
+[00:00] [REGISTRATION] PASSED
+[00:00] 
+[00:00] [2/3] INSTANTIATION
+[00:00] ----------------------------------------
+[00:00] [DEBUG] server=<comfy_test.comfyui.server.ExternalComfyUIServer object at 0x0000018272428D70>, server_url=http://127.0.0.1:8188, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x0000018272428EC0>
+[00:00] Testing node constructors...
+[00:08] All 0 node(s) instantiated successfully!
+[00:08] [INSTANTIATION] PASSED
+[00:08] 
+[00:08] [3/3] EXECUTION
+[00:08] ----------------------------------------
+[00:08] [DEBUG] server=<comfy_test.comfyui.server.ExternalComfyUIServer object at 0x0000018272428D70>, server_url=http://127.0.0.1:8188, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x0000018272428EC0>
+[00:08] CPU runner - no workflows configured for this runner type
+[00:08] Running 2 workflow(s) (all with videos)...
+[00:10] Execution path: browser (Playwright)
+[00:27] Results saved to D:\a\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\comfy-test-logs\Hunyuan3D-Part-1529\windows_portable-cpu\results.json
+[00:27] Model report: 8 files, 18.7 MB -> D:\a\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\comfy-test-logs\Hunyuan3D-Part-1529\windows_portable-cpu\models.json
+[00:27] Saved: D:\a\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\comfy-test-logs\Hunyuan3D-Part-1529\windows_portable-cpu\index.html
+[00:27] 
+windows_portable: FAILED
+[00:27] Error: Workflow execution failed (2 error(s))
+[00:27] Details: H3DPART-segment-partgen.json: Failed to queue prompt
+
+Details:
+Node validation errors:
+{}
+H3DPART-segment.json: Failed to queue prompt
+
+Details:
+Node validation errors:
+{}

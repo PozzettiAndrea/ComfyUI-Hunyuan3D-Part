@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-02-20T15:27:04.108037+00:00",
+  "platform": "macos",
+  "hardware": {
+    "os": "macOS-15.7.3-arm64-arm-64bit-Mach-O",
+    "cpu": "arm"
+  },
+  "summary": {
+    "total": 2,
+    "passed": 0,
+    "failed": 2
+  },
+  "workflows": [
+    {
+      "name": "H3DPART-segment-partgen",
+      "status": "fail",
+      "duration_seconds": 17.92,
+      "error": "Failed to queue prompt\n\nDetails:\nNode validation errors:\n{\n  \"32\": {\n    \"errors\": [\n      {\n        \"type\": \"value_not_in_list\",\n        \"message\": \"Value not in list\",\n        \"details\": \"precision: 'True' not in ['auto', 'bf16', 'fp16', 'fp32']\",\n        \"extra_info\": {\n          \"input_name\": \"precision\",\n          \"input_config\": [\n            [\n              \"auto\",\n              \"bf16\",\n              \"fp16\",\n              \"fp32\"\n            ],\n            {\n              \"default\": \"auto\",\n              \"tooltip\": \"Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older).\"\n            }\n          ],\n          \"received_value\": true\n        }\n      },\n      {\n        \"type\": \"value_not_in_list\",\n        \"message\": \"Value not in list\",\n        \"details\": \"attn_backend: 'True' not in ['auto', 'flash_attn', 'xformers', 'sdpa']\",\n        \"extra_info\": {\n          \"input_name\": \"attn_backend\",\n          \"input_config\": [\n            [\n              \"auto\",\n              \"flash_attn\",\n              \"xformers\",\n              \"sdpa\"\n            ],\n            {\n              \"default\": \"auto\",\n              \"tooltip\": \"Attention backend. auto = best available (flash_attn > xformers > sdpa).\"\n            }\n          ],\n          \"received_value\": true\n        }\n      }\n    ],\n    \"dependent_outputs\": [\n      \"37\",\n      \"19\",\n      \"20\"\n    ],\n    \"class_type\": \"LoadP3SAMSegmentor\"\n  },\n  \"22\": {\n    \"errors\": [\n      {\n        \"type\": \"value_not_in_list\",\n        \"message\": \"Value not in list\",\n        \"details\": \"precision: 'bfloat16' not in ['auto', 'bf16', 'fp16', 'fp32']\",\n        \"extra_info\": {\n          \"input_name\": \"precision\",\n          \"input_config\": [\n            [\n              \"auto\",\n              \"bf16\",\n              \"fp16\",\n              \"fp32\"\n            ],\n            {\n              \"default\": \"auto\",\n              \"tooltip\": \"Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older).\"\n            }\n          ],\n          \"received_value\": \"bfloat16\"\n        }\n      },\n      {\n        \"type\": \"value_not_in_list\",\n        \"message\": \"Value not in list\",\n        \"details\": \"attn_backend: 'False' not in ['auto', 'flash_attn', 'xformers', 'sdpa']\",\n        \"extra_info\": {\n          \"input_name\": \"attn_backend\",\n          \"input_config\": [\n            [\n              \"auto\",\n              \"flash_attn\",\n              \"xformers\",\n              \"sdpa\"\n            ],\n            {\n              \"default\": \"auto\",\n              \"tooltip\": \"Attention backend. auto = best available (flash_attn > xformers > sdpa).\"\n            }\n          ],\n          \"received_value\": false\n        }\n      }\n    ],\n    \"dependent_outputs\": [\n      \"37\",\n      \"19\",\n      \"20\"\n    ],\n    \"class_type\": \"LoadXPartModels\"\n  }\n}",
+      "hardware": {
+        "os": "macOS-15.7.3-arm64-arm-64bit-Mach-O",
+        "cpu": "arm"
+      },
+      "resources": {
+        "ram": {
+          "peak": 3.94,
+          "avg": 3.81
+        },
+        "total_ram_gb": 7.0,
+        "samples": 18
+      }
+    },
+    {
+      "name": "H3DPART-segment",
+      "status": "fail",
+      "duration_seconds": 9.23,
+      "error": "Failed to queue prompt\n\nDetails:\nNode validation errors:\n{\n  \"27\": {\n    \"errors\": [\n      {\n        \"type\": \"value_not_in_list\",\n        \"message\": \"Value not in list\",\n        \"details\": \"precision: 'False' not in ['auto', 'bf16', 'fp16', 'fp32']\",\n        \"extra_info\": {\n          \"input_name\": \"precision\",\n          \"input_config\": [\n            [\n              \"auto\",\n              \"bf16\",\n              \"fp16\",\n              \"fp32\"\n            ],\n            {\n              \"default\": \"auto\",\n              \"tooltip\": \"Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older).\"\n            }\n          ],\n          \"received_value\": false\n        }\n      },\n      {\n        \"type\": \"value_not_in_list\",\n        \"message\": \"Value not in list\",\n        \"details\": \"attn_backend: 'True' not in ['auto', 'flash_attn', 'xformers', 'sdpa']\",\n        \"extra_info\": {\n          \"input_name\": \"attn_backend\",\n          \"input_config\": [\n            [\n              \"auto\",\n              \"flash_attn\",\n              \"xformers\",\n              \"sdpa\"\n            ],\n            {\n              \"default\": \"auto\",\n              \"tooltip\": \"Attention backend. auto = best available (flash_attn > xformers > sdpa).\"\n            }\n          ],\n          \"received_value\": true\n        }\n      }\n    ],\n    \"dependent_outputs\": [\n      \"20\"\n    ],\n    \"class_type\": \"LoadP3SAMSegmentor\"\n  }\n}",
+      "hardware": {
+        "os": "macOS-15.7.3-arm64-arm-64bit-Mach-O",
+        "cpu": "arm"
+      },
+      "resources": {
+        "ram": {
+          "peak": 3.91,
+          "avg": 3.84
+        },
+        "total_ram_gb": 7.0,
+        "samples": 9
+      }
+    }
+  ]
+}

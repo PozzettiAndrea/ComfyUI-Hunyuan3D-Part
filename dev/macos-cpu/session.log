@@ -1,0 +1,198 @@
+[00:00] Crash dump logging enabled: /Users/runner/work/ComfyUI-Hunyuan3D-Part/ComfyUI-Hunyuan3D-Part/comfy-test-logs/Hunyuan3D-Part-1526/macos-cpu/crash_dump.log
+[00:00] 
+[00:00] [1/3] REGISTRATION
+[00:00] ----------------------------------------
+[00:00] [DEBUG] server=None, server_url=http://127.0.0.1:8188, api=None
+[00:00] 
+Connecting to existing server at http://127.0.0.1:8188...
+[00:00] Connecting to existing server at http://127.0.0.1:8188...
+[00:00] Connected to server! (attempt 1, 0.0s)
+[00:00] Checking for import errors in server logs...
+[00:00] No import errors detected
+[00:00] Found 687 registered nodes
+[00:00] [REGISTRATION] PASSED
+[00:00] 
+[00:00] [2/3] INSTANTIATION
+[00:00] ----------------------------------------
+[00:00] [DEBUG] server=<comfy_test.comfyui.server.ExternalComfyUIServer object at 0x1068986e0>, server_url=http://127.0.0.1:8188, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x106898830>
+[00:00] Testing node constructors...
+[00:10] All 10 node(s) instantiated successfully!
+[00:10] [INSTANTIATION] PASSED
+[00:10] 
+[00:10] [3/3] EXECUTION
+[00:10] ----------------------------------------
+[00:10] [DEBUG] server=<comfy_test.comfyui.server.ExternalComfyUIServer object at 0x1068986e0>, server_url=http://127.0.0.1:8188, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x106898830>
+[00:10] CPU runner - no workflows configured for this runner type
+[00:10] Running 2 workflow(s) (all with videos)...
+[00:13] Execution path: browser (Playwright)
+[00:42] Results saved to /Users/runner/work/ComfyUI-Hunyuan3D-Part/ComfyUI-Hunyuan3D-Part/comfy-test-logs/Hunyuan3D-Part-1526/macos-cpu/results.json
+[00:42] Saved: /Users/runner/work/ComfyUI-Hunyuan3D-Part/ComfyUI-Hunyuan3D-Part/comfy-test-logs/Hunyuan3D-Part-1526/macos-cpu/index.html
+[00:42] 
+macos: FAILED
+[00:42] Error: Workflow execution failed (2 error(s))
+[00:42] Details: H3DPART-segment-partgen.json: Failed to queue prompt
+
+Details:
+Node validation errors:
+{
+  "32": {
+    "errors": [
+      {
+        "type": "value_not_in_list",
+        "message": "Value not in list",
+        "details": "precision: 'True' not in ['auto', 'bf16', 'fp16', 'fp32']",
+        "extra_info": {
+          "input_name": "precision",
+          "input_config": [
+            [
+              "auto",
+              "bf16",
+              "fp16",
+              "fp32"
+            ],
+            {
+              "default": "auto",
+              "tooltip": "Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older)."
+            }
+          ],
+          "received_value": true
+        }
+      },
+      {
+        "type": "value_not_in_list",
+        "message": "Value not in list",
+        "details": "attn_backend: 'True' not in ['auto', 'flash_attn', 'xformers', 'sdpa']",
+        "extra_info": {
+          "input_name": "attn_backend",
+          "input_config": [
+            [
+              "auto",
+              "flash_attn",
+              "xformers",
+              "sdpa"
+            ],
+            {
+              "default": "auto",
+              "tooltip": "Attention backend. auto = best available (flash_attn > xformers > sdpa)."
+            }
+          ],
+          "received_value": true
+        }
+      }
+    ],
+    "dependent_outputs": [
+      "37",
+      "19",
+      "20"
+    ],
+    "class_type": "LoadP3SAMSegmentor"
+  },
+  "22": {
+    "errors": [
+      {
+        "type": "value_not_in_list",
+        "message": "Value not in list",
+        "details": "precision: 'bfloat16' not in ['auto', 'bf16', 'fp16', 'fp32']",
+        "extra_info": {
+          "input_name": "precision",
+          "input_config": [
+            [
+              "auto",
+              "bf16",
+              "fp16",
+              "fp32"
+            ],
+            {
+              "default": "auto",
+              "tooltip": "Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older)."
+            }
+          ],
+          "received_value": "bfloat16"
+        }
+      },
+      {
+        "type": "value_not_in_list",
+        "message": "Value not in list",
+        "details": "attn_backend: 'False' not in ['auto', 'flash_attn', 'xformers', 'sdpa']",
+        "extra_info": {
+          "input_name": "attn_backend",
+          "input_config": [
+            [
+              "auto",
+              "flash_attn",
+              "xformers",
+              "sdpa"
+            ],
+            {
+              "default": "auto",
+              "tooltip": "Attention backend. auto = best available (flash_attn > xformers > sdpa)."
+            }
+          ],
+          "received_value": false
+        }
+      }
+    ],
+    "dependent_outputs": [
+      "37",
+      "19",
+      "20"
+    ],
+    "class_type": "LoadXPartModels"
+  }
+}
+H3DPART-segment.json: Failed to queue prompt
+
+Details:
+Node validation errors:
+{
+  "27": {
+    "errors": [
+      {
+        "type": "value_not_in_list",
+        "message": "Value not in list",
+        "details": "precision: 'False' not in ['auto', 'bf16', 'fp16', 'fp32']",
+        "extra_info": {
+          "input_name": "precision",
+          "input_config": [
+            [
+              "auto",
+              "bf16",
+              "fp16",
+              "fp32"
+            ],
+            {
+              "default": "auto",
+              "tooltip": "Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older)."
+            }
+          ],
+          "received_value": false
+        }
+      },
+      {
+        "type": "value_not_in_list",
+        "message": "Value not in list",
+        "details": "attn_backend: 'True' not in ['auto', 'flash_attn', 'xformers', 'sdpa']",
+        "extra_info": {
+          "input_name": "attn_backend",
+          "input_config": [
+            [
+              "auto",
+              "flash_attn",
+              "xformers",
+              "sdpa"
+            ],
+            {
+              "default": "auto",
+              "tooltip": "Attention backend. auto = best available (flash_attn > xformers > sdpa)."
+            }
+          ],
+          "received_value": true
+        }
+      }
+    ],
+    "dependent_outputs": [
+      "20"
+    ],
+    "class_type": "LoadP3SAMSegmentor"
+  }
+}

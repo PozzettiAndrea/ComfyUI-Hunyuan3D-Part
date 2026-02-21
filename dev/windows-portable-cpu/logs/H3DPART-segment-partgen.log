@@ -1,0 +1,36 @@
+Capturing execution frames: H3DPART-segment-partgen.json
+  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+  [Console-warning] WARNING: Multiple instances of Three.js being imported.
+  [Console-warning] [MaskEditor] ComfyApp.open_maskeditor is deprecated. Plugins should migrate to using the command system or direct node context menu integration.
+  [Console-error] THREE.WebGLRenderer: A WebGL context could not be created. Reason:  Could not create a WebGL context, VENDOR = 0x1414, DEVICE = 0x008c, GL_VENDOR = Google Inc. (Microsoft), GL_RENDERER = ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11-10.0.26100.32234), GL_VERSION = 10.0.26100.32234, Sandboxed = no, Optimus = no, AMD switchable = no, Reset notification strategy = 0x8252, ErrorMessage = BindToCurrentSequence failed: .
+  [Console-error] THREE.WebGLRenderer: A WebGL context could not be created. Reason:  Could not create a WebGL context, VENDOR = 0x1414, DEVICE = 0x008c, GL_VENDOR = Google Inc. (Microsoft), GL_RENDERER = ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11-10.0.26100.32234), GL_VERSION = 10.0.26100.32234, Sandboxed = no, Optimus = no, AMD switchable = no, Reset notification strategy = 0x8252, ErrorMessage = BindToCurrentSequence failed: .
+  [Console-error] THREE.WebGLRenderer: Error creating WebGL context.
+  [Console-error] Error initializing Load3d: Error: Error creating WebGL context.
+    at new WebGLRenderer (http://127.0.0.1:8188/assets/vendor-three-BDtRe4OM.js:3824:10777)
+    at new Load3d (http://127.0.0.1:8188/assets/dialogService-Cr3DyAja.js:18:6948)
+    at Proxy.initializeLoad3d (http://127.0.0.1:8188/assets/dialogService-Cr3DyAja.js:18:20777)
+    at http://127.0.0.1:8188/assets/Load3D-er4iDy_w.js:1:1426
+    at http://127.0.0.1:8188/assets/vendor-primevue-D50rA9nL.js:3:56394
+    at callWithErrorHandling (http://127.0.0.1:8188/assets/vendor-primevue-D50rA9nL.js:2:152464)
+    at callWithAsyncErrorHandling (http://127.0.0.1:8188/assets/vendor-primevue-D50rA9nL.js:2:152574)
+    at t.__weh (http://127.0.0.1:8188/assets/vendor-primevue-D50rA9nL.js:3:5140)
+    at flushPostFlushCbs (http://127.0.0.1:8188/assets/vendor-primevue-D50rA9nL.js:2:154217)
+    at flushJobs (http://127.0.0.1:8188/assets/vendor-primevue-D50rA9nL.js:2:154503)
+  Validating workflow...
+  Validation failed: graphToPrompt produced nodes without class_type: graphToPrompt: 10 nodes, missing class_type: [20,22,32,33,34,35,36,37], sample: {"inputs":{"model_file":["36",2],"image":""},"class_type":"Preview3D","_meta":{"title":"Preview 3D & Animation"}}
+    Browser execution failed: Workflow validation failed
+    Retrying with Python converter...
+Loading workflow from D:\a\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\workflows\H3DPART-segment-partgen.json...
+Converting litegraph workflow to prompt format...
+Queuing workflow: D:\a\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\workflows\H3DPART-segment-partgen.json...
+[DEBUG] Connecting WebSocket to ws://127.0.0.1:8188/ws?clientId=c3c8d0b4-4374-481d-9fbe-8cf057058642
+[DEBUG] WebSocket connected successfully
+    Status: FAILED (unexpected error)
+    Error: Failed to queue prompt
+
+Details:
+Node validation errors:
+{}

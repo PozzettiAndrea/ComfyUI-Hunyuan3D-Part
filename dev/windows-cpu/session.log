@@ -1,0 +1,42 @@
+[00:00] Crash dump logging enabled: D:\a\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\comfy-test-logs\Hunyuan3D-Part-1528\windows-cpu\crash_dump.log
+[00:00] 
+[00:00] [1/3] REGISTRATION
+[00:00] ----------------------------------------
+[00:00] [DEBUG] server=None, server_url=http://127.0.0.1:8188, api=None
+[00:00] 
+Connecting to existing server at http://127.0.0.1:8188...
+[00:00] Connecting to existing server at http://127.0.0.1:8188...
+[00:00] Connected to server! (attempt 1, 0.0s)
+[00:00] Checking for import errors in server logs...
+[00:00] No import errors detected
+[00:00] Found 677 registered nodes
+[00:00] [REGISTRATION] PASSED
+[00:00] 
+[00:00] [2/3] INSTANTIATION
+[00:00] ----------------------------------------
+[00:00] [DEBUG] server=<comfy_test.comfyui.server.ExternalComfyUIServer object at 0x0000026F0BFD4590>, server_url=http://127.0.0.1:8188, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x0000026F0BFD46E0>
+[00:00] Testing node constructors...
+[00:06] All 0 node(s) instantiated successfully!
+[00:06] [INSTANTIATION] PASSED
+[00:06] 
+[00:06] [3/3] EXECUTION
+[00:06] ----------------------------------------
+[00:06] [DEBUG] server=<comfy_test.comfyui.server.ExternalComfyUIServer object at 0x0000026F0BFD4590>, server_url=http://127.0.0.1:8188, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x0000026F0BFD46E0>
+[00:06] CPU runner - no workflows configured for this runner type
+[00:06] Running 2 workflow(s) (all with videos)...
+[00:08] Execution path: browser (Playwright)
+[00:24] Results saved to D:\a\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\comfy-test-logs\Hunyuan3D-Part-1528\windows-cpu\results.json
+[00:24] Saved: D:\a\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\comfy-test-logs\Hunyuan3D-Part-1528\windows-cpu\index.html
+[00:24] 
+windows: FAILED
+[00:24] Error: Workflow execution failed (2 error(s))
+[00:24] Details: H3DPART-segment-partgen.json: Failed to queue prompt
+
+Details:
+Node validation errors:
+{}
+H3DPART-segment.json: Failed to queue prompt
+
+Details:
+Node validation errors:
+{}

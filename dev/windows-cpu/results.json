@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-02-20T15:29:12.079362+00:00",
+  "platform": "windows",
+  "hardware": {
+    "os": "Windows-2025Server-10.0.26100-SP0",
+    "cpu": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD"
+  },
+  "summary": {
+    "total": 2,
+    "passed": 0,
+    "failed": 2
+  },
+  "workflows": [
+    {
+      "name": "H3DPART-segment-partgen",
+      "status": "fail",
+      "duration_seconds": 8.94,
+      "error": "Failed to queue prompt\n\nDetails:\nNode validation errors:\n{}",
+      "hardware": {
+        "os": "Windows-2025Server-10.0.26100-SP0",
+        "cpu": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD"
+      },
+      "resources": {
+        "ram": {
+          "peak": 4.5,
+          "avg": 4.38
+        },
+        "total_ram_gb": 16.0,
+        "samples": 9
+      }
+    },
+    {
+      "name": "H3DPART-segment",
+      "status": "fail",
+      "duration_seconds": 6.56,
+      "error": "Failed to queue prompt\n\nDetails:\nNode validation errors:\n{}",
+      "hardware": {
+        "os": "Windows-2025Server-10.0.26100-SP0",
+        "cpu": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD"
+      },
+      "resources": {
+        "ram": {
+          "peak": 4.54,
+          "avg": 4.51
+        },
+        "total_ram_gb": 16.0,
+        "samples": 7
+      }
+    }
+  ]
+}
