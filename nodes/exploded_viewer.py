@@ -29,6 +29,9 @@ class ExplodedMeshViewer:
             "required": {
                 "part_meshes": ("TRIMESH",),
             },
+            "hidden": {
+                "explosion_percentage": ("FLOAT", {"default": 0.0}),
+            },
         }
 
     RETURN_TYPES = ()
@@ -36,7 +39,7 @@ class ExplodedMeshViewer:
     FUNCTION = "create_exploded_view"
     CATEGORY = "Hunyuan3D/Visualization"
 
-    def create_exploded_view(self, part_meshes):
+    def create_exploded_view(self, part_meshes, explosion_percentage=0.0):
         """
         Create exploded mesh visualization.
 

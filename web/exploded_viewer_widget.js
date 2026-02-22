@@ -20,6 +20,13 @@ app.registerExtension({
 
                 console.log("[Hunyuan3D] Exploded viewer node created, adding widget");
 
+                const node = this;
+
+                // Helper to get the native hidden explosion_percentage widget
+                function getExplosionWidget() {
+                    return node.widgets?.find(w => w.name === "explosion_percentage");
+                }
+
                 // Create iframe for 3D viewer
                 const iframe = document.createElement("iframe");
                 iframe.style.width = "100%";
@@ -31,19 +38,27 @@ app.registerExtension({
                 // Point to our HTML viewer (with cache buster)
                 iframe.src = "/extensions/ComfyUI-Hunyuan3D-Part/exploded_viewer.html?v=" + Date.now();
 
-                // Add DOM widget to node
-                const widget = this.addDOMWidget("preview", "EXPLODED_VIEWER", iframe, {
-                    getValue() { return ""; },
-                    setValue(v) { }
+                // Add DOM widget to node (no custom getValue/setValue needed — state lives in the hidden Python input)
+                const domWidget = this.addDOMWidget("preview", "EXPLODED_VIEWER", iframe, {});
+
+                // Listen for state updates sent back from the iframe — write into native widget
+                window.addEventListener('message', (event) => {
+                    if (event.source !== iframe.contentWindow) return;
+                    if (event.data?.type === 'WIDGET_UPDATE' && event.data.widget === 'explosion_percentage') {
+                        const w = getExplosionWidget();
+                        if (w) {
+                            w.value = parseFloat(event.data.value);
+                            app.graph?.setDirtyCanvas(true);
+                        }
+                    }
                 });
 
                 // Set widget size - make it square
-                widget.computeSize = function(width) {
-                    const size = [width || 600, width || 600];
-                    return size;
+                domWidget.computeSize = function(width) {
+                    return [width || 600, width || 600];
                 };
 
-                widget.element = iframe;
+                domWidget.element = iframe;
 
                 // Store iframe reference
                 this.explodedViewerIframe = iframe;
@@ -57,7 +72,6 @@ app.registerExtension({
                     console.log("[Hunyuan3D] onExecuted called with message:", message);
                     onExecuted?.apply(this, arguments);
 
-                    // Extract scene file and metadata from message
                     if (message?.scene_file && message.scene_file[0]) {
                         const filename = message.scene_file[0];
                         const numParts = message.num_parts ? message.num_parts[0] : 0;
@@ -66,12 +80,11 @@ app.registerExtension({
 
                         console.log(`[Hunyuan3D] Loading scene: ${filename} (${numParts} parts)`);
 
-                        // ComfyUI serves output files via /view API endpoint
                         const filepath = `/view?filename=${encodeURIComponent(filename)}&type=output&subfolder=`;
 
-                        // Send message to iframe (with delay to ensure iframe is loaded)
                         setTimeout(() => {
                             if (iframe.contentWindow) {
+                                const explosionPct = getExplosionWidget()?.value ?? 0;
                                 console.log(`[Hunyuan3D] Sending postMessage to iframe: ${filepath}`);
                                 iframe.contentWindow.postMessage({
                                     type: "LOAD_EXPLODED_SCENE",
@@ -79,6 +92,7 @@ app.registerExtension({
                                     numParts: numParts,
                                     globalCenter: globalCenter,
                                     maxExtent: maxExtent,
+                                    explosion_percentage: explosionPct,
                                     timestamp: Date.now()
                                 }, "*");
                             } else {

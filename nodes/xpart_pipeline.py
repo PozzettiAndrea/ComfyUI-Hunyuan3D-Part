@@ -555,6 +555,9 @@ class PartFormerPipeline(TokenAllocMixin):
             # normalize aabb by mesh scale and center
             aabb = aabb.float()
             aabb = (aabb - torch.from_numpy(center).float().to(self.device)) / scale
+            print(f"[X-Part Check DEBUG] Normalized AABB (mesh in ~[-0.8,0.8]): {aabb.shape}")
+            for i, box in enumerate(aabb):
+                print(f"  Part {i}: min={box[0].tolist()}, max={box[1].tolist()}")
 
         # 3. load part surface in bbox
         if part_surface_inbbox is None:
@@ -621,7 +624,14 @@ class PartFormerPipeline(TokenAllocMixin):
             print(f"[X-Part Export] Auto num_chunks={num_chunks}")
         if not output_type == "latent":
             latents = 1.0 / self.vae.scale_factor * latents
+            print(f"[X-Part Export DEBUG] pre-vae latent: shape={latents.shape}, "
+                  f"min={latents.min().item():.4f}, max={latents.max().item():.4f}, "
+                  f"mean={latents.mean().item():.4f}, std={latents.std().item():.4f}, "
+                  f"scale_factor={self.vae.scale_factor}")
             latents = self.vae(latents)
+            print(f"[X-Part Export DEBUG] post-vae latent: shape={latents.shape}, "
+                  f"min={latents.min().item():.4f}, max={latents.max().item():.4f}, "
+                  f"mean={latents.mean().item():.4f}, std={latents.std().item():.4f}")
             outputs = self.vae.latent2mesh_2(
                 # outputs = self.vae.latents2mesh(
                 latents,

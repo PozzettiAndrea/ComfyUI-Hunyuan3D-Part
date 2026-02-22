@@ -172,14 +172,16 @@ class VanillaVolumeDecoder:
 
 class FourierEmbedder(nn.Module):
     def __init__(self, num_freqs=6, logspace=True, input_dim=3,
-                 include_input=True, include_pi=True, dtype=None):
+                 include_input=True, include_pi=True):
         super().__init__()
-        if dtype is None:
-            dtype = torch.float32
+        # Always float32 + explicit CPU: bypasses any torch.device("meta") context so
+        # _fix_meta_buffers won't zero these out. model.to(dtype) later converts to
+        # model dtype; load_models_gpu moves to GPU. Values [1,2,4,...] are exact in bf16.
         if logspace:
-            frequencies = 2.0 ** torch.arange(num_freqs, dtype=dtype)
+            frequencies = 2.0 ** torch.arange(num_freqs, dtype=torch.float32, device='cpu')
         else:
-            frequencies = torch.linspace(1.0, 2.0 ** (num_freqs - 1), num_freqs, dtype=dtype)
+            frequencies = torch.linspace(1.0, 2.0 ** (num_freqs - 1), num_freqs,
+                                         dtype=torch.float32, device='cpu')
         if include_pi:
             frequencies *= torch.pi
         self.register_buffer("frequencies", frequencies, persistent=False)
@@ -581,8 +583,8 @@ class PointCrossAttentionEncoder(nn.Module):
         query_pc = torch.cat([query_random_pc, query_sharpedge_pc], dim=1)
         input_pc = torch.cat([input_random_pc, input_sharpedge_pc], dim=1)
 
-        query = self.fourier_embedder(query_pc)
-        data = self.fourier_embedder(input_pc)
+        query = self.fourier_embedder(query_pc).to(query_pc.dtype)
+        data = self.fourier_embedder(input_pc).to(input_pc.dtype)
 
         if self.point_feats != 0:
             random_surface_feats, sharpedge_surface_feats = torch.split(
@@ -755,7 +757,7 @@ class VolumeDecoderShapeVAE(VectsetVAE):
         self.geo_decoder_ln_post = geo_decoder_ln_post
         self.downsample_ratio = downsample_ratio
 
-        self.fourier_embedder = FourierEmbedder(num_freqs=num_freqs, include_pi=include_pi, dtype=dtype)
+        self.fourier_embedder = FourierEmbedder(num_freqs=num_freqs, include_pi=include_pi)
 
         self.encoder = PointCrossAttentionEncoder(
             fourier_embedder=self.fourier_embedder,

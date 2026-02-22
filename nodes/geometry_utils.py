@@ -629,6 +629,11 @@ def extract_geometry_fast(
         .view((batch_size, grid_size[0], grid_size[1], grid_size[2]))
         .half()
     )
+    print(f"[MC DEBUG] Initial grid_logits: shape={grid_logits.shape}, "
+          f"min={grid_logits.min().item():.4f}, max={grid_logits.max().item():.4f}, "
+          f"mean={grid_logits.mean().item():.4f}, "
+          f"frac_below_threshold={(grid_logits < mc_level).float().mean().item():.4f} "
+          f"(mc_level={mc_level})")
 
     for octree_depth_now in resolutions[1:]:
         grid_size = np.array([octree_depth_now + 1] * 3)
@@ -684,6 +689,10 @@ def extract_geometry_fast(
                 logits = torch.sigmoid(logits) * 2 - 1
             batch_logits.append(logits)
             refine_pbar.update(1)
+        if not batch_logits:
+            print(f"[MC DEBUG] Octree refinement depth={octree_depth_now}: empty batch_logits "
+                  f"(next_points.shape={next_points.shape}) — no surface found, stopping early")
+            break
         grid_logits = torch.cat(batch_logits, dim=1).half()
         next_logits[nidx] = grid_logits[0]
         grid_logits = next_logits.unsqueeze(0)

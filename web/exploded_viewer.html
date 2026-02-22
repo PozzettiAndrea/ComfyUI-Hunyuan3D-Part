@@ -346,15 +346,25 @@
             );
         }
 
-        // Slider event
+        // Slider event — update viewer and notify parent widget to persist the value
         explosionSlider.addEventListener('input', (e) => {
             updateExplosion(parseFloat(e.target.value));
+            window.parent.postMessage({
+                type: 'WIDGET_UPDATE',
+                widget: 'explosion_percentage',
+                value: e.target.value
+            }, '*');
         });
 
         // Reset button
         resetBtn.addEventListener('click', () => {
             explosionSlider.value = 0;
             updateExplosion(0);
+            window.parent.postMessage({
+                type: 'WIDGET_UPDATE',
+                widget: 'explosion_percentage',
+                value: '0'
+            }, '*');
         });
 
         // Listen for messages from parent widget
@@ -367,6 +377,16 @@
                     globalCenter: event.data.globalCenter,
                     maxExtent: event.data.maxExtent
                 });
+                // Restore saved explosion percentage after scene loads
+                if (event.data.explosion_percentage !== undefined) {
+                    const pct = parseFloat(event.data.explosion_percentage);
+                    if (pct > 0) {
+                        setTimeout(() => {
+                            explosionSlider.value = pct;
+                            updateExplosion(pct);
+                        }, 200);
+                    }
+                }
             }
         });
 

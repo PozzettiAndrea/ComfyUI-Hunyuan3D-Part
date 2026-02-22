@@ -731,8 +731,6 @@ class P3SAMSegmentMesh:
 
             # Add metadata
             processed_mesh = mesh_loaded
-            processed_mesh.metadata['part_bboxes'] = aabb
-            processed_mesh.metadata['num_parts'] = len(aabb)
 
             # Store face part IDs as a face attribute so GeometryPack can visualize it
             if not hasattr(processed_mesh, 'face_attributes') or processed_mesh.face_attributes is None:
@@ -766,6 +764,7 @@ class XPartGenerateParts:
         return {
             "required": {
                 "mesh_with_features": ("TRIMESH",),
+                "bounding_boxes": ("BBOXES_3D",),
                 "xpart_config": ("XPART_CONFIG",),
                 "octree_resolution": ("INT", {
                     "default": 256,
@@ -815,7 +814,7 @@ class XPartGenerateParts:
     FUNCTION = "generate"
     CATEGORY = "Hunyuan3D/Processing"
 
-    def generate(self, mesh_with_features, xpart_config, octree_resolution, num_inference_steps,
+    def generate(self, mesh_with_features, bounding_boxes, xpart_config, octree_resolution, num_inference_steps,
                 guidance_scale, seed, pc_size, output_coordinate_system):
         """Generate part meshes."""
         device = comfy.model_management.get_torch_device()
@@ -843,14 +842,9 @@ class XPartGenerateParts:
             mesh_path = get_temp_mesh_path(prefix="xpart_input_", suffix=".glb")
             save_mesh(mesh_obj, mesh_path)
 
-            # Read bounding boxes from mesh metadata (set by P3SAMSegmentMesh)
-            if 'part_bboxes' not in mesh_with_features.metadata:
-                raise ValueError(
-                    "mesh_with_features has no bounding boxes. "
-                    "Ensure the mesh passed through P3-SAM Segment Mesh before X-Part Generate Parts."
-                )
-            aabb = mesh_with_features.metadata['part_bboxes']
-            print(f"[X-Part Generate] Using {len(aabb)} bounding boxes from mesh metadata")
+            # Read bounding boxes from explicit BBOXES_3D input (from P3SAMSegmentMesh)
+            aabb = bounding_boxes['bboxes']
+            print(f"[X-Part Generate] Using {len(aabb)} bounding boxes")
 
             # Load models from config (returns ModelPatcher-wrapped models)
             models = _get_xpart_models(xpart_config, pc_size=pc_size)
