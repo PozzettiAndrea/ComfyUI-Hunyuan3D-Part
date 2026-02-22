@@ -62,6 +62,55 @@ class LoadP3SAMSegmentor:
         },)
 
 
+class LoadSonataEncoder:
+    """
+    Load the Sonata encoder (feature extraction only).
+
+    Loads only the Sonata backbone + projection MLP from the P3-SAM checkpoint,
+    skipping the segmentation heads. Use this as input to Compute Mesh Features.
+    """
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {},
+            "optional": {
+                "precision": (["auto", "bf16", "fp16", "fp32"], {
+                    "default": "auto",
+                    "tooltip": "Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older)."
+                }),
+                "attn_backend": (ATTN_BACKENDS, {
+                    "default": "auto",
+                    "tooltip": "Attention backend. auto = best available (flash_attn > xformers > sdpa)."
+                }),
+            },
+        }
+
+    RETURN_TYPES = ("SONATA_CONFIG",)
+    RETURN_NAMES = ("sonata_config",)
+    FUNCTION = "load_model"
+    CATEGORY = "Hunyuan3D/Models"
+
+    def load_model(self, precision="auto", attn_backend="auto", **kwargs):
+        from .misc_utils import smart_load_model
+
+        print("[Load Sonata Encoder] Ensuring model files are downloaded...")
+        ckpt_path = smart_load_model(model_path="tencent/Hunyuan3D-Part")
+        p3sam_ckpt_path = os.path.join(ckpt_path, "p3sam.safetensors")
+
+        if not os.path.exists(p3sam_ckpt_path):
+            raise FileNotFoundError(f"P3-SAM checkpoint not found: {p3sam_ckpt_path}")
+
+        print(f"[Load Sonata Encoder] Model files ready at {ckpt_path}")
+
+        return ({
+            "type": "sonata",
+            "ckpt_path": p3sam_ckpt_path,
+            "precision": precision,
+            "attn_backend": attn_backend,
+        },)
+
+
 class LoadXPartModels:
     """
     Download and configure X-Part generation models.
@@ -123,10 +172,12 @@ class LoadXPartModels:
 # Node mappings
 NODE_CLASS_MAPPINGS = {
     "LoadP3SAMSegmentor": LoadP3SAMSegmentor,
+    "LoadSonataEncoder": LoadSonataEncoder,
     "LoadXPartModels": LoadXPartModels,
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "LoadP3SAMSegmentor": "Load P3-SAM Segmentor",
+    "LoadSonataEncoder": "Load Sonata Encoder",
     "LoadXPartModels": "Load X-Part Models",
 }

@@ -21,6 +21,12 @@ import comfy.utils
 from .mesh_utils import load_mesh, save_mesh, colorize_segmentation, get_temp_mesh_path
 from .schedulers import FlowMatchEulerDiscreteScheduler
 
+def _dbg(*args, **kwargs):
+    """Print only when COMFYUI_DEBUG_NODES=1."""
+    if os.environ.get("COMFYUI_DEBUG_NODES") == "1":
+        print("[P3-SAM DEBUG]", *args, **kwargs)
+
+
 # Worker-process model caches (persist across node executions, same as TRELLIS2 pattern)
 _p3sam_model_cache = {}
 _xpart_model_cache = {}
@@ -85,6 +91,72 @@ def _get_p3sam_model(config):
 
     _p3sam_model_cache[cache_key] = patcher
 
+    return patcher.model
+
+
+def _get_sonata_model(config):
+    """Load or return cached Sonata encoder (sonata + mlp only, no segmentation heads)."""
+    import comfy.model_patcher
+    from .p3sam.model import SonataEncoder
+    from safetensors.torch import load_file
+
+    precision = config.get('precision', 'auto')
+    attn_backend = config.get('attn_backend', 'auto')
+    enable_flash = attn_backend in ('auto', 'flash_attn')
+    cache_key = f"sonata_{precision}_{attn_backend}"
+
+    if cache_key in _p3sam_model_cache:
+        patcher = _p3sam_model_cache[cache_key]
+        comfy.model_management.load_models_gpu([patcher])
+        return patcher.model
+
+    device = comfy.model_management.get_torch_device()
+    offload_device = comfy.model_management.unet_offload_device()
+
+    print(f"[Sonata Encoder] Building model (precision={precision}, attn_backend={attn_backend})...")
+    model = SonataEncoder(enable_flash=enable_flash)
+
+    state_dict = load_file(config['ckpt_path'], device="cpu")
+    state_dict = {k.removeprefix("dit."): v for k, v in state_dict.items()}
+
+    # Load Sonata backbone weights from the P3-SAM checkpoint.
+    # The checkpoint stores its own copy of Sonata weights (453 keys).
+    # These must be used instead of the generic facebook/sonata defaults to
+    # ensure features are identical to what the full P3-SAM model produces.
+    sonata_state = {k.removeprefix("sonata."): v for k, v in state_dict.items() if k.startswith("sonata.")}
+    if sonata_state:
+        missing, unexpected = model.sonata.load_state_dict(sonata_state, strict=False)
+        if missing:
+            print(f"[Sonata Encoder] Warning: {len(missing)} missing Sonata keys")
+        if unexpected:
+            print(f"[Sonata Encoder] Warning: {len(unexpected)} unexpected Sonata keys")
+        print(f"[Sonata Encoder] Loaded {len(sonata_state)} Sonata backbone weights from P3-SAM checkpoint")
+    else:
+        print("[Sonata Encoder] Warning: no sonata.* keys found in checkpoint, using facebook/sonata defaults")
+
+    # Load MLP projection weights
+    mlp_state = {k.removeprefix("mlp."): v for k, v in state_dict.items() if k.startswith("mlp.")}
+    model.mlp.load_state_dict(mlp_state, strict=True)
+    model.eval()
+
+    weight_dtype = next(iter(mlp_state.values())).dtype
+    if precision == 'auto':
+        model_dtype = comfy.model_management.unet_dtype(
+            device=device,
+            supported_dtypes=[torch.bfloat16, torch.float32],
+            weight_dtype=weight_dtype,
+        )
+    else:
+        model_dtype = {"bf16": torch.bfloat16, "fp16": torch.float16, "fp32": torch.float32}[precision]
+    model.to(model_dtype)
+
+    patcher = comfy.model_patcher.ModelPatcher(
+        model, load_device=device, offload_device=offload_device,
+    )
+    comfy.model_management.load_models_gpu([patcher])
+    print(f"[Sonata Encoder] Loaded on {device}, dtype={model_dtype}")
+
+    _p3sam_model_cache[cache_key] = patcher
     return patcher.model
 
 
@@ -350,8 +422,6 @@ class ComputeMeshFeatures:
     - Mesh cleaning and adjacent faces computation (~1.4s)
     - Point cloud sampling (~0.03s)
     - Sonata feature extraction (~0.5s)
-
-    Uses the Sonata encoder built into P3-SAM model.
     """
 
     @classmethod
@@ -359,7 +429,7 @@ class ComputeMeshFeatures:
         return {
             "required": {
                 "mesh": ("TRIMESH",),
-                "p3sam_config": ("P3SAM_CONFIG",),
+                "sonata_config": ("SONATA_CONFIG",),
                 "all_points": ("BOOLEAN", {
                     "default": False,
                     "tooltip": "Use ALL mesh vertices instead of sampling. Enable for X-Part generation."
@@ -381,13 +451,13 @@ class ComputeMeshFeatures:
             },
         }
 
-    RETURN_TYPES = ("MESH_FEATURES",)
+    RETURN_TYPES = ("TRIMESH",)
     RETURN_NAMES = ("mesh_with_features",)
     FUNCTION = "compute_features"
     CATEGORY = "Hunyuan3D/Processing"
 
-    def compute_features(self, mesh, p3sam_config, all_points, point_num, seed):
-        """Compute mesh features using P3-SAM's internal Sonata encoder."""
+    def compute_features(self, mesh, sonata_config, all_points, point_num, seed):
+        """Compute mesh features using Sonata encoder."""
         try:
             # Load mesh if needed
             if isinstance(mesh, dict) and 'trimesh' in mesh:
@@ -401,8 +471,8 @@ class ComputeMeshFeatures:
 
             print(f"[Compute Features] Computing mesh features...")
 
-            # Load model from config
-            p3sam = _get_p3sam_model(p3sam_config)
+            # Load Sonata encoder
+            sonata_model = _get_sonata_model(sonata_config)
 
             # Import required functions from core
             from .p3sam_processing import (
@@ -442,33 +512,58 @@ class ComputeMeshFeatures:
             points = _points_normalized.astype(np.float32)
             normals = normals.astype(np.float32)
 
-            # Get features (p3sam has .sonata and .transform attributes)
+            # Get features using Sonata encoder
             t0 = time.time()
-            feats = get_feat(p3sam, points, normals)
+            feats = get_feat(sonata_model, points, normals)
             feat_time = time.time() - t0
             print(f"[Compute Features] Features computed ({feat_time:.2f}s)")
 
-            # Prepare output data
-            # np.asarray() strips trimesh TrackedArray wrappers so comfy_env can serialize
-            cache_data = {
-                'mesh': mesh_loaded,
-                'face_idx': np.asarray(face_idx) if face_idx is not None else None,
-                'adjacent_faces': np.asarray(adjacent_faces),
-                'features': feats.detach().cpu(),
-                'points': np.asarray(points),
-                'normals': np.asarray(normals),
-                'all_points': all_points,
-                'point_num': point_num if not all_points else len(_points),
-                'seed': seed,
-            }
+            # Store everything P3-SAM needs in mesh metadata
+            feats_np = feats.detach().cpu().to(torch.float32).numpy()  # [N, 512]
+            mesh_loaded.metadata['features'] = feats_np
+            mesh_loaded.metadata['points'] = np.asarray(points)
+            mesh_loaded.metadata['normals'] = np.asarray(normals)  # [N, 3]
+            mesh_loaded.metadata['face_idx'] = np.asarray(face_idx) if face_idx is not None else None
+            mesh_loaded.metadata['adjacent_faces'] = np.asarray(adjacent_faces)
+            mesh_loaded.metadata['seed'] = seed
 
-            return (cache_data,)
+            # PCA4 on raw sample features (clean data, no zero-padding artifacts)
+            print(f"[Compute Features] Computing PCA4 debug field...")
+            X = feats_np - feats_np.mean(axis=0)  # [N, 512]
+            C = (X.T @ X) / max(len(X), 1)        # [512, 512] covariance
+            eigenvalues, eigenvectors = np.linalg.eigh(C)
+            top4 = eigenvectors[:, np.argsort(eigenvalues)[::-1][:4]]  # [512, 4]
+            pca4_samples = (X @ top4).astype(np.float32)  # [N, 4]
+
+            # Project PCA scores to vertices via face_idx scatter-average
+            num_verts = len(mesh_loaded.vertices)
+            if all_points:
+                pca4_verts = pca4_samples  # N == V
+            else:
+                face_idx_arr = np.asarray(face_idx)
+                # Vectorized scatter: for each sample, add its PCA scores to the 3 face vertices
+                vert_pca = np.zeros((num_verts, 4), dtype=np.float32)
+                vert_counts = np.zeros(num_verts, dtype=np.float32)
+                sample_verts = mesh_loaded.faces[face_idx_arr]  # [N, 3]
+                for c in range(3):
+                    np.add.at(vert_pca, sample_verts[:, c], pca4_samples)
+                    np.add.at(vert_counts, sample_verts[:, c], 1.0)
+                covered = vert_counts > 0
+                vert_pca[covered] /= vert_counts[covered, np.newaxis]
+                pca4_verts = vert_pca
+
+            if not hasattr(mesh_loaded, 'vertex_attributes') or mesh_loaded.vertex_attributes is None:
+                mesh_loaded.vertex_attributes = {}
+            mesh_loaded.vertex_attributes['features_pca4_debug'] = pca4_verts
+
+            return (mesh_loaded,)
 
         except Exception as e:
             print(f"[Compute Features] Error: {e}")
             import traceback
             traceback.print_exc()
             raise
+
 
 
 class P3SAMSegmentMesh:
@@ -482,21 +577,14 @@ class P3SAMSegmentMesh:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "mesh_with_features": ("MESH_FEATURES",),
+                "mesh_with_features": ("TRIMESH",),
                 "p3sam_config": ("P3SAM_CONFIG",),
                 "prompt_num": ("INT", {
                     "default": 400,
                     "min": 50,
                     "max": 1000,
                     "step": 10,
-                    "tooltip": "Number of prompt points."
-                }),
-                "prompt_bs": ("INT", {
-                    "default": 4,
-                    "min": 1,
-                    "max": 128,
-                    "step": 1,
-                    "tooltip": "Prompt batch size. Higher = more VRAM but faster."
+                    "tooltip": "Number of prompt points sampled across the mesh surface. More prompts improve coverage: small or thin parts that receive no prompt point will be missed. Increase if parts are being skipped; decrease to speed up inference."
                 }),
                 "threshold": ("FLOAT", {
                     "default": 0.95,
@@ -512,12 +600,12 @@ class P3SAMSegmentMesh:
             },
         }
 
-    RETURN_TYPES = ("TRIMESH", "BBOXES_3D", "FACE_IDS", "STRING")
-    RETURN_NAMES = ("mesh", "bounding_boxes", "face_ids", "preview_path")
+    RETURN_TYPES = ("TRIMESH", "BBOXES_3D")
+    RETURN_NAMES = ("mesh", "bounding_boxes")
     FUNCTION = "segment"
     CATEGORY = "Hunyuan3D/Processing"
 
-    def segment(self, mesh_with_features, p3sam_config, prompt_num, prompt_bs, threshold, post_process):
+    def segment(self, mesh_with_features, p3sam_config, prompt_num, threshold, post_process):
         """Segment mesh into parts using P3-SAM."""
         try:
             import fpsample
@@ -525,13 +613,13 @@ class P3SAMSegmentMesh:
             from collections import defaultdict
             from concurrent.futures import ThreadPoolExecutor
 
-            # Extract feature data
-            mesh_loaded = mesh_with_features['mesh']
-            face_idx = mesh_with_features['face_idx']
-            adjacent_faces = mesh_with_features['adjacent_faces']
-            feats = mesh_with_features['features']
-            points = mesh_with_features['points']
-            seed = mesh_with_features['seed']
+            # Extract feature data from mesh metadata
+            mesh_loaded = mesh_with_features
+            face_idx = mesh_with_features.metadata['face_idx']
+            adjacent_faces = mesh_with_features.metadata['adjacent_faces']
+            feats = torch.from_numpy(mesh_with_features.metadata['features'])
+            points = mesh_with_features.metadata['points']
+            seed = mesh_with_features.metadata['seed']
 
             print(f"[P3-SAM Segment] Running segmentation with {prompt_num} prompts...")
 
@@ -551,9 +639,9 @@ class P3SAMSegmentMesh:
             # FPS sample prompt points
             fps_idx = fpsample.fps_sampling(points, prompt_num)
             _point_prompts = points[fps_idx]
+            _dbg(f"FPS done, {len(fps_idx)} prompt points selected")
 
-            # Get masks (inference step)
-            bs = prompt_bs
+            bs = 1
             step_num = prompt_num // bs + 1
             mask_res = []
             iou_res = []
@@ -570,6 +658,7 @@ class P3SAMSegmentMesh:
                 for j in range(max_idx.shape[0]):
                     mask_res.append(pred_mask[:, j, max_idx[j]])
                     iou_res.append(pred_iou[j, max_idx[j]])
+                _dbg(f"Batch {i + 1}/{step_num}, masks so far: {len(mask_res)}")
                 comfy_pbar.update(1)
 
             mask_res = np.stack(mask_res, axis=-1)
@@ -612,6 +701,8 @@ class P3SAMSegmentMesh:
                 if not merged:
                     merged_clusters.append(i)
 
+            _dbg(f"NMS clusters: {len(clusters)}, filtered: {len(filtered_clusters)}, merged: {len(merged_clusters)}")
+
             # Calculate point labels
             point_labels = np.zeros(len(points), dtype=np.int32) - 1
             for idx, cluster_id in enumerate(merged_clusters):
@@ -624,6 +715,8 @@ class P3SAMSegmentMesh:
                 for i, fid in enumerate(face_idx):
                     if point_labels[i] >= 0 and face_labels[fid] < 0:
                         face_labels[fid] = point_labels[i]
+
+            _dbg(f"Face labels: {np.sum(face_labels >= 0)}/{len(face_labels)} assigned")
 
             # Fix unlabeled faces
             if post_process:
@@ -638,31 +731,20 @@ class P3SAMSegmentMesh:
 
             # Add metadata
             processed_mesh = mesh_loaded
-            processed_mesh.metadata['face_part_ids'] = face_ids
             processed_mesh.metadata['part_bboxes'] = aabb
             processed_mesh.metadata['num_parts'] = len(aabb)
 
-            # Create colored visualization
-            colored_mesh = colorize_segmentation(processed_mesh, face_ids, seed=seed)
+            # Store face part IDs as a face attribute so GeometryPack can visualize it
+            if not hasattr(processed_mesh, 'face_attributes') or processed_mesh.face_attributes is None:
+                processed_mesh.face_attributes = {}
+            processed_mesh.face_attributes['part_id'] = face_ids.astype(np.int32)
 
-            # Save preview
-            output_dir = folder_paths.get_output_directory()
-            preview_path = os.path.join(output_dir, f"p3sam_segmentation_{seed}.glb")
-            save_mesh(colored_mesh, preview_path)
-            print(f"[P3-SAM Segment] Saved preview to: {preview_path}")
-
-            # Prepare outputs
             bboxes_output = {
                 'bboxes': aabb,
                 'num_parts': len(aabb)
             }
 
-            face_ids_output = {
-                'face_ids': face_ids,
-                'num_parts': len(np.unique(face_ids[face_ids >= 0]))
-            }
-
-            return (processed_mesh, bboxes_output, face_ids_output, preview_path)
+            return (processed_mesh, bboxes_output)
 
         except Exception as e:
             print(f"[P3-SAM Segment] Error: {e}")
@@ -683,8 +765,7 @@ class XPartGenerateParts:
     def INPUT_TYPES(cls):
         return {
             "required": {
-                "mesh_with_features": ("MESH_FEATURES",),  # REQUIRED - use ComputeMeshFeatures with all_points=True
-                "bounding_boxes": ("BBOXES_3D",),
+                "mesh_with_features": ("TRIMESH",),
                 "xpart_config": ("XPART_CONFIG",),
                 "octree_resolution": ("INT", {
                     "default": 256,
@@ -727,6 +808,11 @@ class XPartGenerateParts:
                     "tooltip": "Output coordinate system. Use Z-up if your input mesh is Z-up (CAD convention like STL)."
                 }),
             },
+            "optional": {
+                "bounding_boxes": ("BBOXES_3D", {
+                    "tooltip": "Bounding boxes from P3-SAM Segment Mesh. If not connected, reads from mesh metadata automatically."
+                }),
+            },
         }
 
     RETURN_TYPES = ("TRIMESH", "STRING", "STRING", "STRING")
@@ -734,20 +820,26 @@ class XPartGenerateParts:
     FUNCTION = "generate"
     CATEGORY = "Hunyuan3D/Processing"
 
-    def generate(self, mesh_with_features, bounding_boxes, xpart_config, octree_resolution, num_inference_steps,
-                guidance_scale, seed, pc_size, output_coordinate_system):
+    def generate(self, mesh_with_features, xpart_config, octree_resolution, num_inference_steps,
+                guidance_scale, seed, pc_size, output_coordinate_system, bounding_boxes=None):
         """Generate part meshes."""
         device = comfy.model_management.get_torch_device()
         try:
-            # Extract mesh and Sonata features from mesh_with_features
-            mesh_obj = mesh_with_features['mesh']
-            sonata_features = mesh_with_features['features']
-            sonata_points = mesh_with_features['points']
-            sonata_normals = mesh_with_features['normals']
-            all_points_mode = mesh_with_features.get('all_points', False)
+            # Read Sonata features and geometry from mesh metadata
+            mesh_obj = mesh_with_features
+            sonata_features = mesh_with_features.metadata.get('features')
+            sonata_points = mesh_with_features.metadata.get('points')
+            sonata_normals = mesh_with_features.metadata.get('normals')
 
+            if sonata_features is None or sonata_points is None or sonata_normals is None:
+                raise ValueError(
+                    "mesh_with_features is missing Sonata features. "
+                    "Connect a ComputeMeshFeatures node (with all_points=True recommended) to this input."
+                )
+
+            all_points_mode = mesh_with_features.metadata.get('face_idx') is None
             if not all_points_mode:
-                print(f"[X-Part Generate] WARNING: mesh_with_features was computed with all_points=False. "
+                print(f"[X-Part Generate] WARNING: features were computed with all_points=False. "
                       f"For best results, use ComputeMeshFeatures with all_points=True for X-Part generation.")
 
             print(f"[X-Part Generate] Using pre-computed Sonata features ({len(sonata_features)} points)")
@@ -756,13 +848,16 @@ class XPartGenerateParts:
             mesh_path = get_temp_mesh_path(prefix="xpart_input_", suffix=".glb")
             save_mesh(mesh_obj, mesh_path)
 
-            # Extract bounding boxes
-            if isinstance(bounding_boxes, dict) and 'bboxes' in bounding_boxes:
+            # Resolve bounding boxes: explicit input → mesh metadata → auto-detect
+            if bounding_boxes is not None and isinstance(bounding_boxes, dict) and 'bboxes' in bounding_boxes:
                 aabb = bounding_boxes['bboxes']
-                print(f"[X-Part Generate] Using {len(aabb)} bounding boxes")
+                print(f"[X-Part Generate] Using {len(aabb)} bounding boxes from input")
+            elif 'part_bboxes' in mesh_with_features.metadata:
+                aabb = mesh_with_features.metadata['part_bboxes']
+                print(f"[X-Part Generate] Using {len(aabb)} bounding boxes from mesh metadata")
             else:
                 aabb = None
-                print(f"[X-Part Generate] No bounding boxes, will auto-detect")
+                print(f"[X-Part Generate] No bounding boxes found, will auto-detect")
 
             # Load models from config (returns ModelPatcher-wrapped models)
             models = _get_xpart_models(xpart_config, pc_size=pc_size)

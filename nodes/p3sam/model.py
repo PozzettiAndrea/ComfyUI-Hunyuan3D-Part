@@ -5,6 +5,36 @@ import os
 from .. import sonata
 
 
+class SonataEncoder(nn.Module):
+    """
+    Lightweight encoder: Sonata backbone + projection MLP only.
+    Loads the encoder half of the P3-SAM checkpoint, skipping all segmentation heads.
+    Compatible with get_feat() which accesses .sonata, .mlp, and .transform.
+    """
+
+    def __init__(self, enable_flash=True, dtype=None, device=None, operations=None):
+        super().__init__()
+        if operations is None:
+            operations = nn
+
+        try:
+            import folder_paths
+            sonata_cache = os.path.join(folder_paths.models_dir, "sonata")
+        except Exception:
+            sonata_cache = os.path.expanduser("~/.cache/sonata/ckpt")
+
+        custom_config = {"enable_flash": enable_flash}
+        self.sonata = sonata.load("sonata", repo_id="facebook/sonata", download_root=sonata_cache, custom_config=custom_config)
+        self.mlp = nn.Sequential(
+            operations.Linear(1232, 512, dtype=dtype, device=device),
+            nn.GELU(),
+            operations.Linear(512, 512, dtype=dtype, device=device),
+            nn.GELU(),
+            operations.Linear(512, 512, dtype=dtype, device=device),
+        )
+        self.transform = sonata.transform.default()
+
+
 class MultiHeadSegment(nn.Module):
     '''
     P3-SAM model: Sonata backbone + two-stage multi-head segmentor + IoU predictor.
