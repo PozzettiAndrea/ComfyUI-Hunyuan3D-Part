@@ -808,11 +808,6 @@ class XPartGenerateParts:
                     "tooltip": "Output coordinate system. Use Z-up if your input mesh is Z-up (CAD convention like STL)."
                 }),
             },
-            "optional": {
-                "bounding_boxes": ("BBOXES_3D", {
-                    "tooltip": "Bounding boxes from P3-SAM Segment Mesh. If not connected, reads from mesh metadata automatically."
-                }),
-            },
         }
 
     RETURN_TYPES = ("TRIMESH", "STRING", "STRING", "STRING")
@@ -821,7 +816,7 @@ class XPartGenerateParts:
     CATEGORY = "Hunyuan3D/Processing"
 
     def generate(self, mesh_with_features, xpart_config, octree_resolution, num_inference_steps,
-                guidance_scale, seed, pc_size, output_coordinate_system, bounding_boxes=None):
+                guidance_scale, seed, pc_size, output_coordinate_system):
         """Generate part meshes."""
         device = comfy.model_management.get_torch_device()
         try:
@@ -848,16 +843,14 @@ class XPartGenerateParts:
             mesh_path = get_temp_mesh_path(prefix="xpart_input_", suffix=".glb")
             save_mesh(mesh_obj, mesh_path)
 
-            # Resolve bounding boxes: explicit input → mesh metadata → auto-detect
-            if bounding_boxes is not None and isinstance(bounding_boxes, dict) and 'bboxes' in bounding_boxes:
-                aabb = bounding_boxes['bboxes']
-                print(f"[X-Part Generate] Using {len(aabb)} bounding boxes from input")
-            elif 'part_bboxes' in mesh_with_features.metadata:
-                aabb = mesh_with_features.metadata['part_bboxes']
-                print(f"[X-Part Generate] Using {len(aabb)} bounding boxes from mesh metadata")
-            else:
-                aabb = None
-                print(f"[X-Part Generate] No bounding boxes found, will auto-detect")
+            # Read bounding boxes from mesh metadata (set by P3SAMSegmentMesh)
+            if 'part_bboxes' not in mesh_with_features.metadata:
+                raise ValueError(
+                    "mesh_with_features has no bounding boxes. "
+                    "Ensure the mesh passed through P3-SAM Segment Mesh before X-Part Generate Parts."
+                )
+            aabb = mesh_with_features.metadata['part_bboxes']
+            print(f"[X-Part Generate] Using {len(aabb)} bounding boxes from mesh metadata")
 
             # Load models from config (returns ModelPatcher-wrapped models)
             models = _get_xpart_models(xpart_config, pc_size=pc_size)

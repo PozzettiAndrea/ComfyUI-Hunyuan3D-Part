@@ -29,9 +29,6 @@ class ExplodedMeshViewer:
             "required": {
                 "part_meshes": ("TRIMESH",),
             },
-            "optional": {
-                "face_ids": ("FACE_IDS",),
-            },
         }
 
     RETURN_TYPES = ()
@@ -39,13 +36,14 @@ class ExplodedMeshViewer:
     FUNCTION = "create_exploded_view"
     CATEGORY = "Hunyuan3D/Visualization"
 
-    def create_exploded_view(self, part_meshes, face_ids=None):
+    def create_exploded_view(self, part_meshes):
         """
         Create exploded mesh visualization.
 
         Args:
-            part_meshes: List of trimesh.Trimesh parts, single Trimesh, or Scene
-            face_ids: (optional) numpy array mapping each face to its segment ID
+            part_meshes: List of trimesh.Trimesh parts (from XPartGenerateParts),
+                         a trimesh.Scene, or a single Trimesh with face_attributes['part_id']
+                         (from P3SAMSegmentMesh).
 
         Returns:
             dict: UI data for frontend widget with scene file path and metadata
@@ -61,29 +59,21 @@ class ExplodedMeshViewer:
             print(f"[ExplodedViewer] Processing Scene with {len(part_meshes.geometry)} parts")
             scene = part_meshes
             mesh_obj = trimesh.util.concatenate(list(part_meshes.geometry.values()))
-        elif face_ids is not None:
-            # Single mesh with face_ids — split into parts
-            if isinstance(part_meshes, trimesh.Trimesh):
-                mesh_obj = part_meshes
-            elif isinstance(part_meshes, str):
-                mesh_obj = load_mesh(part_meshes)
-            else:
-                mesh_obj = load_mesh(part_meshes)
-
-            # Handle face_ids input
-            if isinstance(face_ids, dict) and 'face_ids' in face_ids:
-                face_ids_array = face_ids['face_ids']
-            elif isinstance(face_ids, np.ndarray):
-                face_ids_array = face_ids
-            else:
-                face_ids_array = np.array(face_ids)
-
-            print(f"[ExplodedViewer] Processing mesh: {len(mesh_obj.vertices)} vertices, {len(mesh_obj.faces)} faces")
-
-            # Split mesh into separate parts based on face_ids
+        elif isinstance(part_meshes, trimesh.Trimesh):
+            # Single mesh — read part_id from face_attributes (set by P3SAMSegmentMesh)
+            mesh_obj = part_meshes
+            face_ids_array = None
+            if hasattr(mesh_obj, 'face_attributes') and mesh_obj.face_attributes is not None:
+                face_ids_array = mesh_obj.face_attributes.get('part_id')
+            if face_ids_array is None:
+                raise ValueError(
+                    "[ExplodedViewer] Single mesh has no part_id face attribute. "
+                    "Ensure the mesh passed through P3-SAM Segment Mesh first."
+                )
+            print(f"[ExplodedViewer] Splitting mesh by part_id: {len(mesh_obj.vertices)} vertices, {len(mesh_obj.faces)} faces")
             scene = self._split_mesh_by_face_ids(mesh_obj, face_ids_array)
         else:
-            raise ValueError("[ExplodedViewer] Either provide a list of parts or a single mesh with face_ids")
+            raise ValueError("[ExplodedViewer] Unsupported input type for part_meshes")
 
         # Calculate part centers and global center for explosion
         part_info = self._calculate_part_info(scene)
