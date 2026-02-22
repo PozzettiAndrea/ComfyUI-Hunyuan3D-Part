@@ -176,7 +176,7 @@ def smart_load_model(
         os.environ.get("HY3DGEN_MODELS", default_base)
     )
 
-    # repo path → flat local name
+    # repo path -> flat local name
     required_files = {
         "model/model.safetensors": "model.safetensors",
         "shapevae/shapevae.safetensors": "shapevae.safetensors",

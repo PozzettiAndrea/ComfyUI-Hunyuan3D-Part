@@ -195,7 +195,7 @@ class PartFormerPipeline(TokenAllocMixin):
                 ckpt[model_name][new_key] = value
         else:
             # ckpt = torch.load(ckpt_path, map_location="cuda", weights_only=True)
-            ckpt = torch.load(ckpt_path, map_location="cuda", weights_only=False)
+            ckpt = comfy.utils.load_torch_file(ckpt_path, safe_load=False)
         # load model
         model = instantiate_from_config(config["model"])
         # model.load_state_dict(ckpt["model"])
@@ -252,7 +252,7 @@ class PartFormerPipeline(TokenAllocMixin):
             # Old format: load monolithic checkpoint
             import time
             t0 = time.time()
-            ckpt = torch.load(old_ckpt_file, map_location="cuda", weights_only=False)
+            ckpt = comfy.utils.load_torch_file(old_ckpt_file, safe_load=False)
             print(f"[X-Part] [OK] Loaded checkpoint ({time.time()-t0:.2f}s)")
 
             # load model

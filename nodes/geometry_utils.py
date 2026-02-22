@@ -12,6 +12,7 @@ import pymeshlab
 import tempfile
 import comfy.model_management
 import comfy.utils
+import comfy.ops
 
 
 def _auto_num_chunks(device, bytes_per_point=4096):
@@ -575,7 +576,7 @@ def extract_geometry_fast(
     bbox_max = np.array(bounds[3:6])
     bbox_size = bbox_max - bbox_min
 
-    dilate = nn.Conv3d(1, 1, 3, padding=1, bias=False, device=device, dtype=dtype)
+    dilate = comfy.ops.disable_weight_init.Conv3d(1, 1, 3, padding=1, bias=False, device=device, dtype=dtype)
     dilate.weight = torch.nn.Parameter(
         torch.ones(dilate.weight.shape, dtype=dtype, device=device)
     )

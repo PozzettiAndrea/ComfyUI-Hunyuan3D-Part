@@ -92,6 +92,8 @@ from huggingface_hub import hf_hub_download, PyTorchModelHubMixin
 from addict import Dict
 import torch
 import torch.nn as nn
+import comfy.utils
+import comfy.ops
 from torch.nn.init import trunc_normal_
 import spconv.pytorch as spconv
 import torch_scatter
@@ -198,8 +200,8 @@ class SerializedAttention(PointModule):
             self.patch_size = 0
             self.attn_drop = torch.nn.Dropout(attn_drop)
 
-        self.qkv = torch.nn.Linear(channels, channels * 3, bias=qkv_bias)
-        self.proj = torch.nn.Linear(channels, channels)
+        self.qkv = comfy.ops.disable_weight_init.Linear(channels, channels * 3, bias=qkv_bias)
+        self.proj = comfy.ops.disable_weight_init.Linear(channels, channels)
         self.proj_drop = torch.nn.Dropout(proj_drop)
         self.softmax = torch.nn.Softmax(dim=-1)
         self.rpe = RPE(patch_size, num_heads) if self.enable_rpe else None
@@ -332,9 +334,9 @@ class MLP(nn.Module):
         super().__init__()
         out_channels = out_channels or in_channels
         hidden_channels = hidden_channels or in_channels
-        self.fc1 = nn.Linear(in_channels, hidden_channels)
+        self.fc1 = comfy.ops.disable_weight_init.Linear(in_channels, hidden_channels)
         self.act = act_layer()
-        self.fc2 = nn.Linear(hidden_channels, out_channels)
+        self.fc2 = comfy.ops.disable_weight_init.Linear(hidden_channels, out_channels)
         self.drop = nn.Dropout(drop)
 
     def forward(self, x):
@@ -381,7 +383,7 @@ class Block(PointModule):
                 bias=True,
                 indice_key=cpe_indice_key,
             ),
-            nn.Linear(channels, channels),
+            comfy.ops.disable_weight_init.Linear(channels, channels),
             norm_layer(channels),
         )
 
@@ -469,7 +471,7 @@ class GridPooling(PointModule):
         self.shuffle_orders = shuffle_orders
         self.traceable = traceable
 
-        self.proj = nn.Linear(in_channels, out_channels)
+        self.proj = comfy.ops.disable_weight_init.Linear(in_channels, out_channels)
         if norm_layer is not None:
             self.norm = PointSequential(norm_layer(out_channels))
         if act_layer is not None:
@@ -558,8 +560,8 @@ class GridUnpooling(PointModule):
         traceable=False,  # record parent and cluster
     ):
         super().__init__()
-        self.proj = PointSequential(nn.Linear(in_channels, out_channels))
-        self.proj_skip = PointSequential(nn.Linear(skip_channels, out_channels))
+        self.proj = PointSequential(comfy.ops.disable_weight_init.Linear(in_channels, out_channels))
+        self.proj_skip = PointSequential(comfy.ops.disable_weight_init.Linear(skip_channels, out_channels))
 
         if norm_layer is not None:
             self.proj.add(norm_layer(out_channels))
@@ -601,7 +603,7 @@ class Embedding(PointModule):
         self.in_channels = in_channels
         self.embed_channels = embed_channels
 
-        self.stem = PointSequential(linear=nn.Linear(in_channels, embed_channels))
+        self.stem = PointSequential(linear=comfy.ops.disable_weight_init.Linear(in_channels, embed_channels))
         if norm_layer is not None:
             self.stem.add(norm_layer(embed_channels), name="norm")
         if act_layer is not None:
@@ -847,27 +849,27 @@ def load(
     else:
         raise RuntimeError(f"Model {name} not found; available models = {MODELS}")
 
-    if version.parse(torch.__version__) >= version.parse("2.4"):
-        ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=False)
-    else:
-        ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=False)
+    # comfy.utils.load_torch_file extracts the "state_dict" key automatically,
+    # so we use SONATA_CONFIG for the model architecture config.
+    state_dict = comfy.utils.load_torch_file(ckpt_path, safe_load=False)
+    config = dict(SONATA_CONFIG)
     if custom_config is not None:
         for key, value in custom_config.items():
-            ckpt["config"][key] = value
+            config[key] = value
 
     if ckpt_only:
-        return ckpt
+        return {"config": config, "state_dict": state_dict}
 
     # Disable flash attention if not available
     try:
         import flash_attn
     except ImportError:
-        if ckpt["config"].get('enable_flash', False):
+        if config.get('enable_flash', False):
             print("[Sonata] flash_attn not installed, disabling flash attention")
-            ckpt["config"]['enable_flash'] = False
+            config['enable_flash'] = False
 
-    model = PointTransformerV3(**ckpt["config"])
-    model.load_state_dict(ckpt["state_dict"])
+    model = PointTransformerV3(**config)
+    model.load_state_dict(state_dict)
     n_parameters = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"Model params: {n_parameters / 1e6:.2f}M {n_parameters}")
     return model

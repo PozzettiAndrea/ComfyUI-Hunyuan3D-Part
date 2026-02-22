@@ -1,2 +1,5 @@
 [node_reqs]
 ComfyUI-GeometryPack = "PozzettiAndrea/ComfyUI-GeometryPack"
+
+[cuda]
+packages = ["flash-attn","sageattention"]
