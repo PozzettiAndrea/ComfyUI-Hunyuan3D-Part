@@ -5,7 +5,7 @@ publish = true
 [test.workflows]
 timeout = 300
 cpu = []
-gpu = ["H3DPART-segment", "H3DPART-segment-partgen"]
+gpu = ['H3DPART-segment', 'H3DPART-segment-partgen']
 
 [test.platforms]
 linux = true
