@@ -1143,6 +1143,7 @@ class XPartGenerateParts:
             export_pbar = comfy.utils.ProgressBar(len(latents))
             parts_list = []
             for i, part_latent in enumerate(latents):
+                _vram_dbg(f"before export part {i}")
                 try:
                     part_mesh = pipeline._export(
                         latents=part_latent.unsqueeze(0),
@@ -1159,6 +1160,9 @@ class XPartGenerateParts:
                     parts_list.append(part_mesh)
                 except Exception as e:
                     print(f"[X-Part Generate] Failed to export part {i}: {e}")
+                # Marching cubes allocates large temporary grids; release them between parts
+                comfy.model_management.soft_empty_cache()
+                _vram_dbg(f"after export part {i} (cache cleared)")
                 export_pbar.update(1)
 
             # Denormalize

@@ -15,14 +15,23 @@ import comfy.utils
 import comfy.ops
 
 
-def _auto_num_chunks(device, bytes_per_point=4096):
-    """Auto-determine chunk size using try-descending-sizes pattern from ComfyUI attention split."""
+def _auto_num_chunks(device, bytes_per_point=16384):
+    """Auto-determine chunk size for marching cubes grid evaluation.
+
+    Each query point passes through cross-attention decoder (Fourier embed →
+    Linear → cross-attn with 1024 latents → MLP), so intermediate activations
+    are ~16KB/point in fp16.  We target 20% of free VRAM to leave headroom for
+    the octree grids and marching cubes buffers.
+    """
     free_mem = comfy.model_management.get_free_memory(device)
-    for num_chunks in [500000, 250000, 125000, 62500, 30000, 15000]:
+    print(f"[MC chunks] free_mem={free_mem / (1024**3):.2f}GB, bytes_per_point={bytes_per_point}")
+    for num_chunks in [500000, 250000, 125000, 62500, 30000, 15000, 5000]:
         mem_needed = num_chunks * bytes_per_point
-        if mem_needed < free_mem * 0.25:
+        if mem_needed < free_mem * 0.2:
+            print(f"[MC chunks] Selected num_chunks={num_chunks} (needs {mem_needed / (1024**3):.2f}GB, budget={free_mem * 0.2 / (1024**3):.2f}GB)")
             return num_chunks
-    return 10000
+    print(f"[MC chunks] Using minimum num_chunks=5000")
+    return 5000
 
 
 def random_sample_pointcloud(mesh: trimesh.Trimesh, num=30000, seed=42):
@@ -637,6 +646,8 @@ def extract_geometry_fast(
           f"(mc_level={mc_level})")
 
     for octree_depth_now in resolutions[1:]:
+        # Free cached intermediates from previous level before allocating new grids
+        comfy.model_management.soft_empty_cache()
         grid_size = np.array([octree_depth_now + 1] * 3)
         resolution = bbox_size / octree_depth_now
         next_index = torch.zeros(tuple(grid_size), dtype=dtype, device=device)
