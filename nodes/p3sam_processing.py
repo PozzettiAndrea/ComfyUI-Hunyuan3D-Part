@@ -52,39 +52,34 @@ def get_feat(model, points, normals, device=None):
 
 
 @torch.no_grad()
-def get_mask(model, feats, points, point_prompt, iter=1, device=None):
+def get_mask(model, feats, points, point_prompt, iter=1, device=None, model_dtype=None):
     """
-    feats: [N, 512]
-    points: [N, 3]
-    point_prompt: [K, 3]
+    feats: [N, 512] — GPU tensor (pre-uploaded by caller)
+    points: [N, 3] — GPU tensor (pre-uploaded by caller)
+    point_prompt: [K, 3] — numpy array (uploaded here, tiny per batch)
+
+    Returns GPU tensors: mask_1 [N,K], mask_2 [N,K], mask_3 [N,K], pred_iou [K,3]
     """
     if device is None:
         device = comfy.model_management.get_torch_device()
-    model_dtype = next(model.parameters()).dtype
-    point_num = points.shape[0]
+    if model_dtype is None:
+        model_dtype = next(model.parameters()).dtype
+    point_num = feats.shape[0]
     prompt_num = point_prompt.shape[0]
-    # expand creates zero-copy views instead of repeat's full allocation
-    feats = feats.unsqueeze(1).expand(-1, prompt_num, -1).to(device=device, dtype=model_dtype)
-    points = torch.from_numpy(points).to(device=device, dtype=model_dtype).unsqueeze(1).expand(-1, prompt_num, -1)
-    prompt_coord = torch.from_numpy(point_prompt).to(device=device, dtype=model_dtype).unsqueeze(0).expand(point_num, -1, -1)
 
-    feats = feats.transpose(0, 1).contiguous()          # [K, N, 512]
-    points = points.transpose(0, 1).contiguous()         # [K, N, 3]
-    prompt_coord = prompt_coord.transpose(0, 1).contiguous()  # [K, N, 3]
+    # expand creates zero-copy views — feats/points already on GPU
+    feats_exp = feats.unsqueeze(1).expand(-1, prompt_num, -1)       # [N, K, 512] view
+    points_exp = points.unsqueeze(1).expand(-1, prompt_num, -1)     # [N, K, 3] view
+    # Only point_prompt is uploaded per call (K*3 elements, tiny)
+    prompt_coord = torch.from_numpy(point_prompt).to(
+        device=device, dtype=model_dtype
+    ).unsqueeze(0).expand(point_num, -1, -1)  # [N, K, 3] view
 
-    mask_1, mask_2, mask_3, pred_iou = model(feats, points, prompt_coord, iter)
+    # Model accepts [N, K, *] directly — no transpose/contiguous needed
+    mask_1, mask_2, mask_3, pred_iou = model(feats_exp, points_exp, prompt_coord, iter)
 
-    mask_1 = mask_1.transpose(0, 1)  # [N, K]
-    mask_2 = mask_2.transpose(0, 1)  # [N, K]
-    mask_3 = mask_3.transpose(0, 1)  # [N, K]
-
-    mask_1 = mask_1.detach().cpu().numpy() > 0.5
-    mask_2 = mask_2.detach().cpu().numpy() > 0.5
-    mask_3 = mask_3.detach().cpu().numpy() > 0.5
-
-    org_iou = pred_iou.detach().cpu().numpy()  # [K, 3]
-
-    return mask_1, mask_2, mask_3, org_iou
+    # Return GPU tensors — caller handles transfer
+    return mask_1, mask_2, mask_3, pred_iou
 
 
 def cal_iou(m1, m2):

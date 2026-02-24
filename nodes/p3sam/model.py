@@ -143,15 +143,14 @@ class MultiHeadSegment(nn.Module):
 
     def forward(self, feats, points, point_prompt, iter=1):
         '''
-        feats: [K, N, 512]
-        points: [K, N, 3]
-        point_prompt: [K, N, 3]
+        feats: [N, K, 512]
+        points: [N, K, 3]
+        point_prompt: [N, K, 3]
+
+        Returns: mask_1 [N, K], mask_2 [N, K], mask_3 [N, K], pred_iou [K, 3]
         '''
-        point_num = points.shape[1]
-        feats = feats.transpose(0, 1)  # [N, K, 512]
-        points = points.transpose(0, 1)  # [N, K, 3]
-        point_prompt = point_prompt.transpose(0, 1)  # [N, K, 3]
-        feats_seg = torch.cat([feats, points, point_prompt], dim=-1)  # [N, K, 512+3+3]
+        point_num = feats.shape[0]
+        feats_seg = torch.cat([feats, points, point_prompt], dim=-1)  # [N, K, 518]
 
         # Predict mask stage-1
         pred_mask_1 = self.seg_mlp_1(feats_seg).squeeze(-1)  # [N, K]
@@ -163,15 +162,15 @@ class MultiHeadSegment(nn.Module):
 
         for _ in range(iter):
             # Predict mask stage-2
-            feats_seg_2 = torch.cat([feats_seg, pred_mask], dim=-1)  # [N, K, 512+3+3+3]
+            feats_seg_2 = torch.cat([feats_seg, pred_mask], dim=-1)  # [N, K, 521]
             feats_seg_global = self.seg_s2_mlp_g(feats_seg_2)  # [N, K, 256]
             feats_seg_global = torch.max(feats_seg_global, dim=0).values  # [K, 256]
-            feats_seg_global = feats_seg_global.unsqueeze(0).repeat(
-                point_num, 1, 1
-            )  # [N, K, 256]
+            feats_seg_global = feats_seg_global.unsqueeze(0).expand(
+                point_num, -1, -1
+            )  # [N, K, 256] zero-copy view
             feats_seg_3 = torch.cat(
                 [feats_seg_global, feats_seg_2], dim=-1
-            )  # [N, K, 256+512+3+3+3]
+            )  # [N, K, 777]
             pred_mask_s2_1 = self.seg_s2_mlp_1(feats_seg_3).squeeze(-1)  # [N, K]
             pred_mask_s2_2 = self.seg_s2_mlp_2(feats_seg_3).squeeze(-1)  # [N, K]
             pred_mask_s2_3 = self.seg_s2_mlp_3(feats_seg_3).squeeze(-1)  # [N, K]
@@ -186,14 +185,10 @@ class MultiHeadSegment(nn.Module):
 
         feats_iou = torch.cat(
             [feats_seg_global, feats_seg, pred_mask_s2], dim=-1
-        )  # [N, K, 256+512+3+3+3]
+        )  # [N, K, 777]
         feats_iou = self.iou_mlp(feats_iou)  # [N, K, 256]
         feats_iou = torch.max(feats_iou, dim=0).values  # [K, 256]
         pred_iou = self.iou_mlp_out(feats_iou)  # [K, 3]
         pred_iou = torch.sigmoid(pred_iou).to(dtype=torch.float32)  # [K, 3]
-
-        mask_1 = mask_1.transpose(0, 1)  # [K, N]
-        mask_2 = mask_2.transpose(0, 1)  # [K, N]
-        mask_3 = mask_3.transpose(0, 1)  # [K, N]
 
         return mask_1, mask_2, mask_3, pred_iou

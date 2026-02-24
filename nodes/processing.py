@@ -27,6 +27,19 @@ def _dbg(*args, **kwargs):
         print("[P3-SAM DEBUG]", *args, **kwargs)
 
 
+def _vram_dbg(label=""):
+    """Always print VRAM usage stats."""
+    try:
+        device = comfy.model_management.get_torch_device()
+        if device.type == "cuda":
+            alloc = torch.cuda.memory_allocated(device) / (1024 ** 3)
+            reserved = torch.cuda.memory_reserved(device) / (1024 ** 3)
+            total = torch.cuda.get_device_properties(device).total_mem / (1024 ** 3)
+            print(f"[VRAM] {label}: allocated={alloc:.2f}GB, reserved={reserved:.2f}GB, total={total:.2f}GB")
+    except Exception as e:
+        print(f"[VRAM] {label}: could not read VRAM stats: {e}")
+
+
 # Worker-process model caches (persist across node executions, same as TRELLIS2 pattern)
 _p3sam_model_cache = {}
 _xpart_model_cache = {}
@@ -597,6 +610,13 @@ class P3SAMSegmentMesh:
                     "default": True,
                     "tooltip": "Enable post-processing."
                 }),
+                "batch_size": ("INT", {
+                    "default": 1,
+                    "min": 1,
+                    "max": 64,
+                    "step": 1,
+                    "tooltip": "Number of prompt points processed per forward pass. Higher values use more VRAM but speed up inference significantly. Start with 8-16 and increase if VRAM allows."
+                }),
             },
         }
 
@@ -605,7 +625,7 @@ class P3SAMSegmentMesh:
     FUNCTION = "segment"
     CATEGORY = "Hunyuan3D/Processing"
 
-    def segment(self, mesh_with_features, p3sam_config, prompt_num, threshold, post_process):
+    def segment(self, mesh_with_features, p3sam_config, prompt_num, threshold, post_process, batch_size=1):
         """Segment mesh into parts using P3-SAM."""
         try:
             import fpsample
@@ -621,11 +641,13 @@ class P3SAMSegmentMesh:
             points = mesh_with_features.metadata['points']
             seed = mesh_with_features.metadata['seed']
 
-            print(f"[P3-SAM Segment] Running segmentation with {prompt_num} prompts...")
+            print(f"[P3-SAM Segment] Running segmentation with {prompt_num} prompts, batch_size={batch_size}...")
+            _vram_dbg("before model load")
 
             # Load model from config (ModelPatcher handles GPU placement)
             p3sam = _get_p3sam_model(p3sam_config)
             device = comfy.model_management.get_torch_device()
+            _vram_dbg("after model load")
 
             # Import functions from core
             from .p3sam_processing import (
@@ -641,25 +663,42 @@ class P3SAMSegmentMesh:
             _point_prompts = points[fps_idx]
             _dbg(f"FPS done, {len(fps_idx)} prompt points selected")
 
-            bs = 1
-            step_num = prompt_num // bs + 1
+            # Pre-upload invariant tensors to GPU once (instead of per-batch)
+            model_dtype = next(p3sam.parameters()).dtype
+            feats_gpu = feats.to(device=device, dtype=model_dtype)       # [N, 512]
+            points_gpu = torch.from_numpy(points).to(device=device, dtype=model_dtype)  # [N, 3]
+            _vram_dbg("after tensor pre-upload")
+
+            bs = batch_size
+            step_num = (prompt_num + bs - 1) // bs
             mask_res = []
             iou_res = []
+            print(f"[P3-SAM Segment] {prompt_num} prompts / batch_size {bs} = {step_num} steps")
+            _vram_dbg("before inference loop")
             comfy_pbar = comfy.utils.ProgressBar(step_num)
             for i in tqdm(range(step_num), desc="P3-SAM Inference"):
                 cur_prompt = _point_prompts[bs * i : bs * (i + 1)]
                 if len(cur_prompt) == 0:
                     continue
-                pred_mask_1, pred_mask_2, pred_mask_3, pred_iou = get_mask(
-                    p3sam, feats, points, cur_prompt
+                # get_mask returns GPU tensors: masks [N,K], pred_iou [K,3]
+                mask_1, mask_2, mask_3, pred_iou = get_mask(
+                    p3sam, feats_gpu, points_gpu, cur_prompt,
+                    device=device, model_dtype=model_dtype
                 )
-                pred_mask = np.stack([pred_mask_1, pred_mask_2, pred_mask_3], axis=-1)
-                max_idx = np.argmax(pred_iou, axis=-1)
+                if i == 0:
+                    _vram_dbg(f"after first batch (bs={len(cur_prompt)})")
+                # Select best mask on GPU, transfer only 1x[N] bool per prompt
+                pred_iou_cpu = pred_iou.detach().cpu().numpy()  # [K, 3] — tiny
+                max_idx = np.argmax(pred_iou_cpu, axis=-1)      # [K]
+                masks_stacked = torch.stack([mask_1, mask_2, mask_3], dim=-1)  # [N, K, 3] GPU
                 for j in range(max_idx.shape[0]):
-                    mask_res.append(pred_mask[:, j, max_idx[j]])
-                    iou_res.append(pred_iou[j, max_idx[j]])
+                    best_mask = (masks_stacked[:, j, max_idx[j]] > 0.5)  # [N] bool, GPU
+                    mask_res.append(best_mask.cpu().numpy())
+                    iou_res.append(pred_iou_cpu[j, max_idx[j]])
                 _dbg(f"Batch {i + 1}/{step_num}, masks so far: {len(mask_res)}")
                 comfy_pbar.update(1)
+            _vram_dbg("after inference loop")
+            del feats_gpu, points_gpu
 
             mask_res = np.stack(mask_res, axis=-1)
 
