@@ -1,7 +1,7 @@
 [project]
 name = "ComfyUI-Hunyuan3D-Part"
 description = "Hunyuan3D-Part nodes for ComfyUI: 3D part segmentation with P3-SAM and high-fidelity part generation with X-Part diffusion."
-version = "0.1.4"
+version = "0.1.5"
 license = {file = "LICENSE"}
 
 [project.urls]

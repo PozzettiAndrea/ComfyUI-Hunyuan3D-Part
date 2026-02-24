@@ -1,5 +1,12 @@
 # ComfyUI-Hunyuan3D-Part
 
+<div align="center">
+<a href="https://pozzettiandrea.github.io/ComfyUI-Hunyuan3D-Part/">
+<img src="https://pozzettiandrea.github.io/ComfyUI-Hunyuan3D-Part/gallery-preview.png" alt="Workflow Test Gallery" width="800">
+</a>
+<br>
+<b><a href="https://pozzettiandrea.github.io/ComfyUI-Hunyuan3D-Part/">View Live Test Gallery →</a></b>
+</div>
 
 ComfyUI custom nodes for Hunyuan3D-Part: 3D part segmentation and generation.
 
@@ -11,26 +18,6 @@ ComfyUI custom nodes for Hunyuan3D-Part: 3D part segmentation and generation.
 **X-Part Generation**: Generate high-quality part meshes using diffusion
 ![segment](docs/teapot_partgen.png)
 
-## Performance & Troubleshooting
-
-### Memory Issues
-If X-Part workflows crash or freeze your machine:
-- See **[MEMORY_OPTIMIZATION.md](MEMORY_OPTIMIZATION.md)** for detailed solutions
-- Quick fix: Lower `octree_resolution` to 256 in XPartGenerateParts node
-- Set `cache_on_gpu=False` in LoadXPartModels to free VRAM after generation
-
-### Speed Improvements
-✅ **Flash Attention is now enabled by default** (~10-20% speedup)
-- Automatically used if `flash-attn` package is available
-- To disable: Edit `nodes/core/config/sonata.json`, set `"enable_flash": false`
-
-### Configuring Point Cloud Density (num_points)
-Current default: **40,960 points** per object/part
-- To adjust: Edit `nodes/core/config/infer.yaml`, lines 26 and 62
-- Lower values = less VRAM, potential quality loss
-- Restart ComfyUI after changing
-
-See **[MEMORY_OPTIMIZATION.md](MEMORY_OPTIMIZATION.md)** for complete tuning guide.
 
 ## Community
 
