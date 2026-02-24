@@ -34,7 +34,7 @@ def _vram_dbg(label=""):
         if device.type == "cuda":
             alloc = torch.cuda.memory_allocated(device) / (1024 ** 3)
             reserved = torch.cuda.memory_reserved(device) / (1024 ** 3)
-            total = torch.cuda.get_device_properties(device).total_mem / (1024 ** 3)
+            total = torch.cuda.get_device_properties(device).total_memory / (1024 ** 3)
             print(f"[VRAM] {label}: allocated={alloc:.2f}GB, reserved={reserved:.2f}GB, total={total:.2f}GB")
     except Exception as e:
         print(f"[VRAM] {label}: could not read VRAM stats: {e}")
@@ -43,6 +43,83 @@ def _vram_dbg(label=""):
 # Worker-process model caches (persist across node executions, same as TRELLIS2 pattern)
 _p3sam_model_cache = {}
 _xpart_model_cache = {}
+
+
+def _enable_lowvram_cast(model):
+    """Swap leaf modules to comfy.ops.disable_weight_init versions for lowvram support.
+
+    ComfyUI's ModelPatcher can only partially-load modules that have the
+    comfy_cast_weights attribute. Native ComfyUI models use comfy.ops layers,
+    but third-party models use plain torch.nn.*. This retroactively swaps
+    __class__ on every leaf module so ModelPatcher's lowvram streaming works.
+
+    Also installs forward pre-hooks on non-leaf modules that own direct
+    parameters or buffers (e.g. part_embed, pos_embed, non-persistent buffers)
+    so they get moved to the input device on-the-fly during lowvram inference.
+    """
+    try:
+        from comfy.ops import disable_weight_init
+    except ImportError:
+        return
+
+    _CLASS_MAP = {
+        torch.nn.Linear: disable_weight_init.Linear,
+        torch.nn.Conv1d: disable_weight_init.Conv1d,
+        torch.nn.Conv2d: disable_weight_init.Conv2d,
+        torch.nn.Conv3d: disable_weight_init.Conv3d,
+        torch.nn.GroupNorm: disable_weight_init.GroupNorm,
+        torch.nn.LayerNorm: disable_weight_init.LayerNorm,
+        torch.nn.ConvTranspose2d: disable_weight_init.ConvTranspose2d,
+        torch.nn.ConvTranspose1d: disable_weight_init.ConvTranspose1d,
+        torch.nn.Embedding: disable_weight_init.Embedding,
+    }
+
+    cast_count = 0
+    for _name, module in model.named_modules():
+        comfy_cls = _CLASS_MAP.get(type(module))
+        if comfy_cls is not None:
+            module.__class__ = comfy_cls
+            cast_count += 1
+
+    hook_count = 0
+    for _name, module in model.named_modules():
+        if hasattr(module, 'comfy_cast_weights'):
+            continue
+        direct_params = list(module.named_parameters(recurse=False))
+        direct_bufs = list(module.named_buffers(recurse=False))
+        if not direct_params and not direct_bufs:
+            continue
+
+        def _move_orphans_hook(mod, args, kwargs=None):
+            device = None
+            for a in args:
+                if isinstance(a, torch.Tensor):
+                    device = a.device
+                    break
+            if device is None and kwargs:
+                for v in kwargs.values():
+                    if isinstance(v, torch.Tensor):
+                        device = v.device
+                        break
+            if device is None:
+                for p in mod.parameters():
+                    if p.device.type == 'cuda':
+                        device = p.device
+                        break
+            if device is None:
+                return
+            for _, p in mod.named_parameters(recurse=False):
+                if p.data.device != device:
+                    p.data = p.data.to(device)
+            for _, b in mod.named_buffers(recurse=False):
+                if b.device != device:
+                    b.data = b.data.to(device)
+
+        module.register_forward_pre_hook(_move_orphans_hook, with_kwargs=True)
+        hook_count += 1
+
+    if cast_count or hook_count:
+        print(f"[lowvram] Enabled: {cast_count} cast modules, {hook_count} orphan-param hooks")
 
 
 def _get_p3sam_model(config):
@@ -93,6 +170,7 @@ def _get_p3sam_model(config):
     model.load_state_dict(state_dict, strict=False)
     model.eval()
     model.to(model_dtype)
+    _enable_lowvram_cast(model)
 
     # Wrap in ModelPatcher for ComfyUI VRAM management
     patcher = comfy.model_patcher.ModelPatcher(
@@ -151,6 +229,7 @@ def _get_sonata_model(config):
     mlp_state = {k.removeprefix("mlp."): v for k, v in state_dict.items() if k.startswith("mlp.")}
     model.mlp.load_state_dict(mlp_state, strict=True)
     model.eval()
+    _enable_lowvram_cast(model)
 
     weight_dtype = next(iter(mlp_state.values())).dtype
     if precision == 'auto':
@@ -288,9 +367,6 @@ def _get_xpart_models(config, pc_size=40960):
 
     if cache_key in _xpart_model_cache:
         cached = _xpart_model_cache[cache_key]
-        comfy.model_management.load_models_gpu(
-            [cached['dit'], cached['vae'], cached['conditioner']]
-        )
         print(f"[X-Part Models] Using cached models")
         return cached
 
@@ -323,6 +399,7 @@ def _get_xpart_models(config, pc_size=40960):
         _fix_meta_buffers(model, device)
         model.to(dtype=model_dtype)
         model.eval()
+        _enable_lowvram_cast(model)
         print(f"[X-Part Models] DiT loaded")
         return model
 
@@ -335,6 +412,7 @@ def _get_xpart_models(config, pc_size=40960):
         _fix_meta_buffers(vae, device)
         vae.to(dtype=model_dtype)
         vae.eval()
+        _enable_lowvram_cast(vae)
         print(f"[X-Part Models] VAE loaded")
         return vae
 
@@ -393,6 +471,7 @@ def _get_xpart_models(config, pc_size=40960):
             conditioner.seg_feat_encoder = conditioner.seg_feat_encoder.to(dtype=torch.float32)
 
         conditioner.eval()
+        _enable_lowvram_cast(conditioner)
         print(f"[X-Part Models] Conditioner loaded")
         return conditioner
 
@@ -407,12 +486,10 @@ def _get_xpart_models(config, pc_size=40960):
     total_time = time.time() - t0
     print(f"[X-Part Models] All models loaded in {total_time:.2f}s")
 
-    # Wrap in ModelPatcher for ComfyUI VRAM management
+    # Wrap in ModelPatcher for ComfyUI VRAM management (caller stages GPU loading)
     dit_patcher = comfy.model_patcher.ModelPatcher(dit, load_device=device, offload_device=offload_device)
     vae_patcher = comfy.model_patcher.ModelPatcher(vae, load_device=device, offload_device=offload_device)
     cond_patcher = comfy.model_patcher.ModelPatcher(cond, load_device=device, offload_device=offload_device)
-
-    comfy.model_management.load_models_gpu([dit_patcher, vae_patcher, cond_patcher])
 
     result = {
         'dit': dit_patcher,
@@ -885,25 +962,29 @@ class XPartGenerateParts:
             aabb = bounding_boxes['bboxes']
             print(f"[X-Part Generate] Using {len(aabb)} bounding boxes")
 
-            # Load models from config (returns ModelPatcher-wrapped models)
+            # Load models from config (returns ModelPatcher-wrapped models, NOT on GPU yet)
             models = _get_xpart_models(xpart_config, pc_size=pc_size)
-            dit = models['dit'].model
-            vae = models['vae'].model
-            conditioner = models['conditioner'].model
+            dit_patcher = models['dit']
+            vae_patcher = models['vae']
+            cond_patcher = models['conditioner']
+            dit = dit_patcher.model
+            vae = vae_patcher.model
+            conditioner = cond_patcher.model
             xpart_cfg = models['config']
             dtype = models['dtype']
 
             print(f"[X-Part Generate] Using {dtype} precision")
 
             # Import from core
-            from .xpart_pipeline import PartFormerPipeline
-            from pathlib import Path
+            from .xpart_pipeline import PartFormerPipeline, retrieve_timesteps, export_to_trimesh
+            from .misc_utils import synchronize_timer
+            from .geometry_utils import explode_mesh
 
             # Create scheduler directly
             scheduler_params = dict(xpart_cfg["scheduler"]["params"])
             scheduler = FlowMatchEulerDiscreteScheduler(**scheduler_params)
 
-            # Create minimal pipeline instance
+            # Create minimal pipeline instance (references models, doesn't move them)
             pipeline = PartFormerPipeline(
                 vae=vae,
                 model=dit,
@@ -934,20 +1015,176 @@ class XPartGenerateParts:
                 'normals': torch.as_tensor(sonata_normals).to(device=device, dtype=dtype),
             }
 
-            # Run generation with precomputed Sonata features
-            # obj_mesh is now a list of trimesh.Trimesh (not a Scene)
-            result = pipeline(
-                mesh_path=mesh_path,
-                aabb=aabb_tensor,
-                octree_resolution=octree_resolution,
-                num_inference_steps=num_inference_steps,
-                guidance_scale=guidance_scale,
-                seed=seed,
-                output_type="trimesh",
-                precomputed_sonata_features=precomputed_sonata
+            # ── Staged generation: load each model to GPU only when needed ──
+
+            do_classifier_free_guidance = guidance_scale >= 0 and not (
+                hasattr(dit, "guidance_embed") and dit.guidance_embed is True
             )
-            parts_list = result[0]  # list[trimesh.Trimesh]
-            viz_tuple = result[1]   # (out_bbox, mesh_gt_bbox, explode_object) or None
+
+            # 1. Check inputs and prepare geometry (CPU-side, no model needed)
+            obj_surface, aabb_t, part_surface_inbbox, mesh_loaded, center, scale = pipeline.check_inputs(
+                obj_surface=None, obj_surface_raw=None,
+                mesh_path=mesh_path, mesh=None,
+                aabb=aabb_tensor, part_surface_inbbox=None,
+                seed=seed,
+            )
+
+            # Bbox visualization (before we move to GPU dtype)
+            if pipeline.verbose:
+                mesh_bbox = trimesh.Scene()
+                if mesh_loaded is not None:
+                    mesh_bbox.add_geometry(mesh_loaded)
+                for bbox in aabb_t[0]:
+                    box = trimesh.path.creation.box_outline()
+                    box.vertices *= (bbox[1] - bbox[0]).float().cpu().numpy()
+                    box.vertices += (bbox[0] + bbox[1]).float().cpu().numpy() / 2
+                    mesh_bbox.add_geometry(box)
+
+            obj_surface = obj_surface.to(device=device, dtype=dtype)
+            aabb_t = aabb_t.to(device=device, dtype=dtype)
+            part_surface_inbbox = part_surface_inbbox.to(device=device, dtype=dtype)
+            batch_size, num_parts, N, dim = part_surface_inbbox.shape
+
+            # Prepare latents and tokens (uses vae.latent_shape but no GPU compute)
+            num_tokens = torch.tensor(
+                [pipeline.allocate_tokens(x, vae.latent_shape[0]) for x in aabb_t],
+                device=device,
+            )
+            generator = torch.Generator(device='cpu').manual_seed(seed)
+            latents = pipeline.prepare_latents(
+                num_parts, vae.latent_shape, dtype, device, generator
+            )
+
+            # ── Stage 1: Conditioning (load conditioner to GPU) ──
+            print(f"[X-Part Generate] Stage 1: Conditioning")
+            _vram_dbg("before conditioner load")
+            comfy.model_management.load_models_gpu([cond_patcher])
+            _vram_dbg("after conditioner load")
+
+            cond = pipeline.encode_cond(
+                part_surface_inbbox.reshape(batch_size * num_parts, N, dim),
+                obj_surface.expand(batch_size * num_parts, -1, -1),
+                do_classifier_free_guidance,
+                precomputed_sonata_features=precomputed_sonata,
+            )
+
+            # Free conditioner inputs we no longer need
+            del part_surface_inbbox, obj_surface, precomputed_sonata
+            _vram_dbg("after conditioning")
+
+            # ── Stage 2: Diffusion (load DiT to GPU, conditioner auto-evicted) ──
+            print(f"[X-Part Generate] Stage 2: Diffusion ({num_inference_steps} steps)")
+            comfy.model_management.load_models_gpu([dit_patcher])
+            _vram_dbg("after DiT load")
+
+            # Guidance conditioning
+            guidance_cond = None
+            if getattr(dit, "guidance_cond_proj_dim", None) is not None:
+                guidance_scale_tensor = torch.tensor(guidance_scale - 1, device=device).repeat(batch_size)
+                guidance_cond = pipeline.get_guidance_scale_embedding(
+                    guidance_scale_tensor, embedding_dim=dit.guidance_cond_proj_dim
+                ).to(device=device, dtype=latents.dtype)
+
+            # Prepare timesteps
+            sigmas = np.linspace(0, 1, num_inference_steps)
+            timesteps, num_inference_steps = retrieve_timesteps(
+                scheduler, num_inference_steps, device, sigmas=sigmas,
+            )
+
+            comfy.model_management.soft_empty_cache()
+            aabb_orig = aabb_t
+
+            # Denoising loop
+            diffusion_pbar = comfy.utils.ProgressBar(len(timesteps))
+            from tqdm import tqdm
+            with synchronize_timer("Diffusion Sampling"):
+                for i, t in enumerate(
+                    tqdm(timesteps, desc="Diffusion Sampling:")
+                ):
+                    if do_classifier_free_guidance:
+                        latent_model_input = torch.cat([latents] * 2)
+                        aabb_input = torch.repeat_interleave(aabb_orig, 2, dim=0)
+                    else:
+                        latent_model_input = latents
+                        aabb_input = aabb_orig
+
+                    timestep = t.expand(latent_model_input.shape[0]).to(latents.dtype)
+                    timestep = timestep / scheduler.config.num_train_timesteps
+                    noise_pred = dit(
+                        latent_model_input, timestep, cond,
+                        aabb=aabb_input, num_tokens=num_tokens,
+                        guidance_cond=guidance_cond,
+                    )
+
+                    if do_classifier_free_guidance:
+                        noise_pred_cond, noise_pred_uncond = noise_pred.chunk(2)
+                        noise_pred = noise_pred_uncond + guidance_scale * (
+                            noise_pred_cond - noise_pred_uncond
+                        )
+
+                    outputs = scheduler.step(noise_pred, t, latents)
+                    latents = outputs.prev_sample
+
+                    del noise_pred
+                    if do_classifier_free_guidance:
+                        del latent_model_input, aabb_input
+
+                    diffusion_pbar.update(1)
+
+            # Free diffusion-only tensors
+            del cond, guidance_cond
+            _vram_dbg("after diffusion")
+
+            # ── Stage 3: VAE decode + marching cubes (load VAE to GPU) ──
+            print(f"[X-Part Generate] Stage 3: VAE decode ({len(latents)} parts)")
+            comfy.model_management.load_models_gpu([vae_patcher])
+            _vram_dbg("after VAE load")
+
+            export_pbar = comfy.utils.ProgressBar(len(latents))
+            parts_list = []
+            for i, part_latent in enumerate(latents):
+                try:
+                    part_mesh = pipeline._export(
+                        latents=part_latent.unsqueeze(0),
+                        output_type="trimesh",
+                        box_v=1.01,
+                        mc_level=-1 / 512,
+                        num_chunks=0,
+                        octree_resolution=octree_resolution,
+                        mc_algo="mc",
+                        enable_pbar=True,
+                    )[0]
+                    random_color = np.random.randint(0, 255, size=3)
+                    part_mesh.visual.face_colors = random_color
+                    parts_list.append(part_mesh)
+                except Exception as e:
+                    print(f"[X-Part Generate] Failed to export part {i}: {e}")
+                export_pbar.update(1)
+
+            # Denormalize
+            print(f"Denormalize mesh: {center}, {scale}")
+            for part_mesh in parts_list:
+                part_mesh.vertices = part_mesh.vertices * scale + center
+
+            # Build viz
+            viz_tuple = None
+            if pipeline.verbose:
+                import copy as _copy
+                temp_scene = trimesh.Scene()
+                for p in parts_list:
+                    temp_scene.add_geometry(p)
+                explode_object = explode_mesh(_copy.deepcopy(temp_scene), explosion_scale=0.2)
+                out_bbox = trimesh.Scene()
+                out_bbox.add_geometry(temp_scene)
+                for bbox in aabb_t[0]:
+                    box = trimesh.path.creation.box_outline()
+                    box.vertices *= (bbox[1] - bbox[0]).float().cpu().numpy()
+                    box.vertices += (bbox[0] + bbox[1]).float().cpu().numpy() / 2
+                    box.vertices = box.vertices * scale + center
+                    out_bbox.add_geometry(box)
+                viz_tuple = (out_bbox, mesh_bbox, explode_object)
+
+            _vram_dbg("after VAE decode")
 
             print(f"[X-Part Generate] Generation complete! {len(parts_list)} parts")
 

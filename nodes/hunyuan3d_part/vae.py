@@ -195,7 +195,7 @@ class FourierEmbedder(nn.Module):
 
     def forward(self, x):
         if self.num_freqs > 0:
-            embed = (x[..., None].contiguous() * self.frequencies).view(*x.shape[:-1], -1)
+            embed = (x[..., None].contiguous() * self.frequencies.to(x.device)).view(*x.shape[:-1], -1)
             if self.include_input:
                 return torch.cat((x, embed.sin(), embed.cos()), dim=-1)
             else:
