@@ -1,0 +1,96 @@
+Capturing execution frames: H3DPART-segment.json
+  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+  [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+  [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui.js" is deprecated and will be removed in v1.34.
+  [Console-warning] WARNING: Multiple instances of Three.js being imported.
+  [Console-warning] [MaskEditor] ComfyApp.open_maskeditor is deprecated. Plugins should migrate to using the command system or direct node context menu integration.
+  [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/buttonGroup.js" is deprecated and will be removed in v1.34.
+  [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/button.js" is deprecated and will be removed in v1.34.
+  [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+  [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+  [Console-error] No input!
+  [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+  [Console-error] No input!
+  Frame 1 saved (frame_000.jpg, t=0.0s)
+  Validating workflow...
+  Queuing workflow for execution...
+  Frame 2 saved (frame_001.jpg, t=2.8s)
+  [capture-periodic] freeze=18ms shot=423ms unfreeze=49ms saved=True
+  [capture-loop] iter=50 t=9.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=23
+  [capture-loop] iter=100 t=17.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=20
+  [capture-loop] iter=150 t=26.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=21
+  [capture-loop] iter=200 t=34.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=24
+  Frame 3 saved (frame_002.jpg, t=35.5s)
+  [capture-periodic] freeze=20ms shot=355ms unfreeze=20ms saved=True
+  [capture-loop] iter=250 t=43.1s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=22
+  Frame 4 saved (frame_003.jpg, t=43.1s)
+  [capture-periodic] freeze=16ms shot=390ms unfreeze=23ms saved=True
+  [capture-loop] iter=300 t=51.8s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=18
+  [capture-loop] iter=350 t=60.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=22
+  [capture-loop] iter=400 t=68.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=24
+  [capture-loop] iter=450 t=76.9s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=19
+  Frame 5 saved (frame_004.jpg, t=83.2s)
+  [capture-periodic] freeze=20ms shot=398ms unfreeze=39ms saved=True
+  [Console-error] No input!
+  Node executed (1 total), capturing...
+  Frame 6 saved (frame_005.jpg, t=84.1s)
+  [capture-node] freeze=22ms shot=361ms unfreeze=25ms saved=True
+  [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+  [Console-error] No input!
+  [capture-loop] iter=500 t=86.6s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=22
+  Frame 7 saved (frame_006.jpg, t=86.7s)
+  [capture-periodic] freeze=23ms shot=376ms unfreeze=20ms saved=True
+  [capture-loop] iter=550 t=95.5s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=23
+  Frame 8 saved (frame_007.jpg, t=99.2s)
+  [capture-periodic] freeze=23ms shot=447ms unfreeze=36ms saved=True
+  Frame 9 saved (frame_008.jpg, t=101.8s)
+  [capture-periodic] freeze=19ms shot=395ms unfreeze=18ms saved=True
+  [capture-loop] iter=600 t=104.2s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=23
+  Frame 10 saved (frame_009.jpg, t=104.5s)
+  [capture-periodic] freeze=38ms shot=442ms unfreeze=35ms saved=True
+  Frame 11 saved (frame_010.jpg, t=107.1s)
+  [capture-periodic] freeze=19ms shot=400ms unfreeze=20ms saved=True
+  Frame 12 saved (frame_011.jpg, t=109.7s)
+  [capture-periodic] freeze=27ms shot=374ms unfreeze=19ms saved=True
+  Frame 13 saved (frame_012.jpg, t=112.3s)
+  [capture-periodic] freeze=26ms shot=352ms unfreeze=18ms saved=True
+  [capture-loop] iter=650 t=113.6s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=22
+  Frame 14 saved (frame_013.jpg, t=114.8s)
+  [capture-periodic] freeze=24ms shot=395ms unfreeze=27ms saved=True
+  Frame 15 saved (frame_014.jpg, t=119.8s)
+  [capture-periodic] freeze=18ms shot=373ms unfreeze=26ms saved=True
+  [Console-error] No input!
+  [Console-error] No input!
+  [Console-error] No input!
+  Node executed (2 total), capturing...
+  Frame 16 saved (frame_015.jpg, t=121.5s)
+  [capture-node] freeze=59ms shot=373ms unfreeze=21ms saved=True
+  [capture-loop] iter=700 t=123.0s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=19
+  [Console-error] No input!
+  Node executed (3 total), capturing...
+  Frame 17 saved (frame_016.jpg, t=130.4s)
+  [capture-node] freeze=19ms shot=348ms unfreeze=0ms saved=True
+  Execution complete (t=130.4s)
+  [3d-wait] Phase 1: Waiting for 'Loading 3D Model' text to disappear...
+  [3d-wait] Phase 1 done in 0.1s
+  [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+  [Console-error] No input!
+  [3d-wait] Phase 2: iframes=3
+  [3d-wait] iframe viewer_ready=False (matched 0 console logs)
+  [3d-wait] Waiting for 'Loaded successfully' console message (timeout=60s)...
+  [3d-wait] iframe wait exception: Timeout 60000ms exceeded while waiting for event "console"
+=========================== logs ===========================
+waiting for event "console"
+============================================================
+  [3d-wait] Total 3D wait: 60.6s
+  Captured 17 unique frames over 191.62s
+  [debug] iframes: 3
+  [debug]   iframe[0]: src=http://127.0.0.1:8188/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=17719472, canvas=588x553, rafFrozen=True
+  [debug]   iframe[1]: src=http://127.0.0.1:8188/extensions/ComfyUI-Hunyuan3D-Part/viewer_vtk.html?v=177194, canvas=1176x1244, rafFrozen=True
+  [debug]   iframe[2]: src=http://127.0.0.1:8188/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=17719473, canvas=588x553, rafFrozen=True
+  [timing] trigger_3d_previews: 0.0s
+  Saved high-quality screenshot: H3DPART-segment_executed.png
+  [timing] final_screenshot: 2.1s
+    Captured 18 video frames

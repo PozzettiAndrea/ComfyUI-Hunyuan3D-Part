@@ -1,0 +1,290 @@
+[00:00] Crash dump logging enabled: C:\github-runners\PozzettiAndrea-ComfyUI-Hunyuan3D-Part-portable\_work\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\comfy-test-logs\Hunyuan3D-Part-0924\windows_portable-gpu\crash_dump.log
+[00:00] 
+[00:00] [1/3] REGISTRATION
+[00:00] ----------------------------------------
+[00:00] [DEBUG] server=None, server_url=http://127.0.0.1:8188, api=None
+[00:00] 
+Connecting to existing server at http://127.0.0.1:8188...
+[00:00] Connecting to existing server at http://127.0.0.1:8188...
+[00:00] Connected to server! (attempt 1, 0.0s)
+[00:00] Checking for import errors in server logs...
+[00:00] No import errors detected
+[00:00] Found 682 registered nodes
+[00:00] [REGISTRATION] PASSED
+[00:00] 
+[00:00] [2/3] INSTANTIATION
+[00:00] ----------------------------------------
+[00:00] [DEBUG] server=<comfy_test.comfyui.server.ExternalComfyUIServer object at 0x000002674EF24EC0>, server_url=http://127.0.0.1:8188, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x000002674EF25010>
+[00:00] Testing node constructors...
+[00:12] All 11 node(s) instantiated successfully!
+[00:12] [INSTANTIATION] PASSED
+[00:12] 
+[00:12] [3/3] EXECUTION
+[00:12] ----------------------------------------
+[00:12] [DEBUG] server=<comfy_test.comfyui.server.ExternalComfyUIServer object at 0x000002674EF24EC0>, server_url=http://127.0.0.1:8188, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x000002674EF25010>
+[00:12] GPU runner - will execute 2 workflow(s)
+[00:12] Running 2 workflow(s) (all with videos)...
+[00:13] Starting headless browser...
+[00:22]   GPU + Vulkan detected — using ANGLE/Vulkan rendering
+[00:29] Capturing execution frames: H3DPART-segment-partgen.json
+[00:31]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[00:31]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[00:35]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[00:35]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[00:37]   [Console-warning] WARNING: Multiple instances of Three.js being imported.
+[00:37]   [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui.js" is deprecated and will be removed in v1.34.
+[00:38]   [Console-warning] [MaskEditor] ComfyApp.open_maskeditor is deprecated. Plugins should migrate to using the command system or direct node context menu integration.
+[00:40]   [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/buttonGroup.js" is deprecated and will be removed in v1.34.
+[00:40]   [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/button.js" is deprecated and will be removed in v1.34.
+[00:47]   [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
+[00:47]   [Console-error] Error loading model: zy: fetch for "http://127.0.0.1:8188/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
+    at http://127.0.0.1:8188/assets/vendor-three-DH0o8VQ7.js:3824:114758
+[00:49]   [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
+[00:49]   [Console-error] Error loading model: zy: fetch for "http://127.0.0.1:8188/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
+    at http://127.0.0.1:8188/assets/vendor-three-DH0o8VQ7.js:3824:114758
+[00:49]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[00:50]   [Console-error] No input!
+[00:50]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[00:50]   [Console-error] No input!
+[00:51]   Frame 1 saved (frame_000.jpg, t=0.0s)
+[00:51]   Validating workflow...
+[00:51]   Queuing workflow for execution...
+[00:54]   Frame 2 saved (frame_001.jpg, t=3.7s)
+[00:54]   [capture-periodic] freeze=24ms shot=418ms unfreeze=22ms saved=True
+[01:00]   [capture-loop] iter=50 t=10.3s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=19
+[01:09]   [capture-loop] iter=100 t=19.3s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=19
+[01:18]   [capture-loop] iter=150 t=27.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=25
+[01:27]   [capture-loop] iter=200 t=37.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=22
+[01:36]   [capture-loop] iter=250 t=45.8s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=18
+[01:45]   [capture-loop] iter=300 t=54.8s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=22
+[01:54]   [capture-loop] iter=350 t=63.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=29
+[02:02]   [capture-loop] iter=400 t=72.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=23
+[02:11]   [capture-loop] iter=450 t=81.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3
+[02:20]   [capture-loop] iter=500 t=90.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=13
+[02:29]   [capture-loop] iter=550 t=98.9s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=18
+[02:33]   Frame 3 saved (frame_002.jpg, t=102.1s)
+[02:33]   [capture-periodic] freeze=21ms shot=513ms unfreeze=23ms saved=True
+[02:35]   Frame 4 saved (frame_003.jpg, t=104.8s)
+[02:35]   [capture-periodic] freeze=18ms shot=479ms unfreeze=20ms saved=True
+[02:38]   [capture-loop] iter=600 t=108.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=26
+[02:46]   Frame 5 saved (frame_004.jpg, t=115.0s)
+[02:46]   [capture-periodic] freeze=18ms shot=432ms unfreeze=27ms saved=True
+[02:47]   [capture-loop] iter=650 t=117.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=19
+[02:48]   Frame 6 saved (frame_005.jpg, t=117.7s)
+[02:48]   [capture-periodic] freeze=19ms shot=383ms unfreeze=20ms saved=True
+[02:56]   [capture-loop] iter=700 t=125.9s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=21
+[03:04]   [capture-loop] iter=750 t=134.3s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=22
+[03:13]   [capture-loop] iter=800 t=142.8s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=22
+[03:22]   [capture-loop] iter=850 t=151.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=24
+[03:30]   [capture-loop] iter=900 t=160.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=18
+[03:34]   Frame 7 saved (frame_006.jpg, t=163.3s)
+[03:34]   [capture-periodic] freeze=23ms shot=469ms unfreeze=25ms saved=True
+[03:36]   [Console-error] No input!
+[03:37]   Frame 8 saved (frame_007.jpg, t=165.9s)
+[03:37]   [capture-periodic] freeze=18ms shot=719ms unfreeze=19ms saved=True
+[03:37]   Node executed (1 total), capturing...
+[03:38]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[03:38]   [Console-error] No input!
+[03:38]   Frame 9 saved (frame_008.jpg, t=167.1s)
+[03:38]   [capture-node] freeze=27ms shot=597ms unfreeze=341ms saved=True
+[03:41]   Frame 10 saved (frame_009.jpg, t=170.3s)
+[03:41]   [capture-periodic] freeze=23ms shot=455ms unfreeze=21ms saved=True
+[03:41]   [capture-loop] iter=950 t=171.3s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=24
+[03:50]   [capture-loop] iter=1000 t=179.8s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=19
+[03:56]   Frame 11 saved (frame_010.jpg, t=185.7s)
+[03:56]   [capture-periodic] freeze=15ms shot=485ms unfreeze=24ms saved=True
+[03:59]   Frame 12 saved (frame_011.jpg, t=188.3s)
+[03:59]   [capture-periodic] freeze=21ms shot=425ms unfreeze=20ms saved=True
+[03:59]   [capture-loop] iter=1050 t=189.2s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=38
+[04:02]   Frame 13 saved (frame_012.jpg, t=191.0s)
+[04:02]   [capture-periodic] freeze=22ms shot=418ms unfreeze=29ms saved=True
+[04:04]   Frame 14 saved (frame_013.jpg, t=193.6s)
+[04:04]   [capture-periodic] freeze=25ms shot=518ms unfreeze=25ms saved=True
+[04:07]   Frame 15 saved (frame_014.jpg, t=196.3s)
+[04:07]   [capture-periodic] freeze=16ms shot=477ms unfreeze=21ms saved=True
+[04:08]   [capture-loop] iter=1100 t=198.3s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=45
+[04:10]   Frame 16 saved (frame_015.jpg, t=198.9s)
+[04:10]   [capture-periodic] freeze=19ms shot=482ms unfreeze=19ms saved=True
+[04:12]   Frame 17 saved (frame_016.jpg, t=201.6s)
+[04:12]   [capture-periodic] freeze=21ms shot=431ms unfreeze=23ms saved=True
+[04:15]   Frame 18 saved (frame_017.jpg, t=204.2s)
+[04:15]   [capture-periodic] freeze=27ms shot=394ms unfreeze=20ms saved=True
+[04:18]   [capture-loop] iter=1150 t=207.8s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=32
+[04:20]   Frame 19 saved (frame_018.jpg, t=209.4s)
+[04:20]   [capture-periodic] freeze=20ms shot=489ms unfreeze=23ms saved=True
+[04:20]   [Console-error] No input!
+[04:20]   Node executed (2 total), capturing...
+[04:21]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[04:21]   [Console-error] No input!
+[04:21]   Frame 20 saved (frame_019.jpg, t=210.4s)
+[04:21]   [capture-node] freeze=73ms shot=756ms unfreeze=20ms saved=True
+[04:24]   Frame 21 saved (frame_020.jpg, t=213.5s)
+[04:24]   [capture-periodic] freeze=19ms shot=437ms unfreeze=20ms saved=True
+[04:27]   Frame 22 saved (frame_021.jpg, t=216.0s)
+[04:27]   [capture-periodic] freeze=18ms shot=399ms unfreeze=21ms saved=True
+[04:28]   [capture-loop] iter=1200 t=218.3s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=19
+[04:37]   [capture-loop] iter=1250 t=227.2s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=22
+[04:46]   [capture-loop] iter=1300 t=235.6s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=21
+[04:55]   [capture-loop] iter=1350 t=244.5s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=20
+[05:03]   [capture-loop] iter=1400 t=253.0s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=22
+[05:11]   [capture-loop] iter=1450 t=261.4s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=18
+[05:21]   [capture-loop] iter=1500 t=270.4s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=21
+[05:29]   [capture-loop] iter=1550 t=278.9s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=20
+[05:38]   [capture-loop] iter=1600 t=288.2s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=20
+[05:47]   [capture-loop] iter=1650 t=296.7s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=20
+[05:51]   Frame 23 saved (frame_022.jpg, t=300.2s)
+[05:51]   [capture-periodic] freeze=22ms shot=454ms unfreeze=19ms saved=True
+[05:53]   Frame 24 saved (frame_023.jpg, t=302.8s)
+[05:53]   [capture-periodic] freeze=20ms shot=431ms unfreeze=22ms saved=True
+[05:56]   Frame 25 saved (frame_024.jpg, t=305.4s)
+[05:56]   [capture-periodic] freeze=19ms shot=470ms unfreeze=19ms saved=True
+[05:56]   [capture-loop] iter=1700 t=306.1s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=18
+[05:59]   Frame 26 saved (frame_025.jpg, t=308.0s)
+[05:59]   [capture-periodic] freeze=21ms shot=502ms unfreeze=59ms saved=True
+[06:01]   Frame 27 saved (frame_026.jpg, t=310.7s)
+[06:01]   [capture-periodic] freeze=17ms shot=459ms unfreeze=20ms saved=True
+[06:04]   Frame 28 saved (frame_027.jpg, t=313.3s)
+[06:04]   [capture-periodic] freeze=18ms shot=469ms unfreeze=19ms saved=True
+[06:05]   [capture-loop] iter=1750 t=315.2s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=22
+[06:07]   Frame 29 saved (frame_028.jpg, t=316.1s)
+[06:07]   [capture-periodic] freeze=20ms shot=439ms unfreeze=22ms saved=True
+[06:10]   Frame 30 saved (frame_029.jpg, t=318.8s)
+[06:10]   [capture-periodic] freeze=21ms shot=525ms unfreeze=23ms saved=True
+[06:12]   Frame 31 saved (frame_030.jpg, t=321.5s)
+[06:12]   [capture-periodic] freeze=19ms shot=467ms unfreeze=19ms saved=True
+[06:15]   Frame 32 saved (frame_031.jpg, t=324.1s)
+[06:15]   [capture-periodic] freeze=21ms shot=448ms unfreeze=23ms saved=True
+[06:15]   [capture-loop] iter=1800 t=324.9s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=30
+[06:17]   Frame 33 saved (frame_032.jpg, t=326.7s)
+[06:17]   [capture-periodic] freeze=18ms shot=408ms unfreeze=21ms saved=True
+[06:20]   Frame 34 saved (frame_033.jpg, t=329.4s)
+[06:20]   [capture-periodic] freeze=18ms shot=456ms unfreeze=36ms saved=True
+[06:23]   Frame 35 saved (frame_034.jpg, t=332.0s)
+[06:23]   [capture-periodic] freeze=29ms shot=442ms unfreeze=87ms saved=True
+[06:24]   [capture-loop] iter=1850 t=333.8s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=26
+[06:32]   Node executed (3 total), capturing...
+[06:34]   Frame 36 saved (frame_035.jpg, t=342.6s)
+[06:34]   [capture-node] freeze=95ms shot=992ms unfreeze=19ms saved=True
+[06:34]   Node executed (4 total), capturing...
+[06:35]   Frame 37 saved (frame_036.jpg, t=344.1s)
+[06:35]   [capture-node] freeze=28ms shot=501ms unfreeze=0ms saved=True
+[06:35]   Execution complete (t=344.1s)
+[06:35]   [3d-wait] Phase 1: Waiting for 'Loading 3D Model' text to disappear...
+[07:35]   [3d-wait] Phase 1 exception after 60.1s: Page.wait_for_function: Timeout 60000ms exceeded.
+[07:35]   [3d-wait] Phase 2: iframes=3
+[07:35]   [3d-wait] iframe viewer_ready=False (matched 0 console logs)
+[07:35]   [3d-wait] Waiting for 'Loaded successfully' console message (timeout=60s)...
+[08:35]   [3d-wait] iframe wait exception: Timeout 60000ms exceeded while waiting for event "console"
+=========================== logs ===========================
+waiting for event "console"
+============================================================
+[08:35]   [3d-wait] Total 3D wait: 120.2s
+[08:35]   Captured 37 unique frames over 464.97s
+[08:35]   [debug] iframes: 3
+[08:35]   [debug]   iframe[0]: src=http://127.0.0.1:8188/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=17719469, canvas=588x553, rafFrozen=True
+[08:35]   [debug]   iframe[1]: src=http://127.0.0.1:8188/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=17719468, canvas=588x553, rafFrozen=True
+[08:35]   [debug]   iframe[2]: src=http://127.0.0.1:8188/extensions/ComfyUI-Hunyuan3D-Part/exploded_viewer.html?v=1, canvas=1388x1408, rafFrozen=True
+[08:35]   [timing] trigger_3d_previews: 0.0s
+[08:40]   Saved high-quality screenshot: H3DPART-segment-partgen_executed.png
+[08:40]   [timing] final_screenshot: 2.6s
+[08:41] Capturing execution frames: H3DPART-segment.json
+[08:43]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[08:43]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[08:45]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[08:45]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[08:46]   [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui.js" is deprecated and will be removed in v1.34.
+[08:46]   [Console-warning] WARNING: Multiple instances of Three.js being imported.
+[08:48]   [Console-warning] [MaskEditor] ComfyApp.open_maskeditor is deprecated. Plugins should migrate to using the command system or direct node context menu integration.
+[08:50]   [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/buttonGroup.js" is deprecated and will be removed in v1.34.
+[08:50]   [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/button.js" is deprecated and will be removed in v1.34.
+[08:57]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[08:57]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[08:58]   [Console-error] No input!
+[08:58]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[08:58]   [Console-error] No input!
+[08:59]   Frame 1 saved (frame_000.jpg, t=0.0s)
+[08:59]   Validating workflow...
+[08:59]   Queuing workflow for execution...
+[09:01]   Frame 2 saved (frame_001.jpg, t=2.8s)
+[09:01]   [capture-periodic] freeze=18ms shot=423ms unfreeze=49ms saved=True
+[09:07]   [capture-loop] iter=50 t=9.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=23
+[09:16]   [capture-loop] iter=100 t=17.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=20
+[09:25]   [capture-loop] iter=150 t=26.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=21
+[09:33]   [capture-loop] iter=200 t=34.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=24
+[09:34]   Frame 3 saved (frame_002.jpg, t=35.5s)
+[09:34]   [capture-periodic] freeze=20ms shot=355ms unfreeze=20ms saved=True
+[09:41]   [capture-loop] iter=250 t=43.1s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=22
+[09:42]   Frame 4 saved (frame_003.jpg, t=43.1s)
+[09:42]   [capture-periodic] freeze=16ms shot=390ms unfreeze=23ms saved=True
+[09:50]   [capture-loop] iter=300 t=51.8s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=18
+[09:58]   [capture-loop] iter=350 t=60.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=22
+[10:06]   [capture-loop] iter=400 t=68.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=24
+[10:15]   [capture-loop] iter=450 t=76.9s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=19
+[10:22]   Frame 5 saved (frame_004.jpg, t=83.2s)
+[10:22]   [capture-periodic] freeze=20ms shot=398ms unfreeze=39ms saved=True
+[10:22]   [Console-error] No input!
+[10:22]   Node executed (1 total), capturing...
+[10:23]   Frame 6 saved (frame_005.jpg, t=84.1s)
+[10:23]   [capture-node] freeze=22ms shot=361ms unfreeze=25ms saved=True
+[10:23]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[10:24]   [Console-error] No input!
+[10:25]   [capture-loop] iter=500 t=86.6s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=22
+[10:25]   Frame 7 saved (frame_006.jpg, t=86.7s)
+[10:25]   [capture-periodic] freeze=23ms shot=376ms unfreeze=20ms saved=True
+[10:34]   [capture-loop] iter=550 t=95.5s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=23
+[10:38]   Frame 8 saved (frame_007.jpg, t=99.2s)
+[10:38]   [capture-periodic] freeze=23ms shot=447ms unfreeze=36ms saved=True
+[10:40]   Frame 9 saved (frame_008.jpg, t=101.8s)
+[10:40]   [capture-periodic] freeze=19ms shot=395ms unfreeze=18ms saved=True
+[10:42]   [capture-loop] iter=600 t=104.2s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=23
+[10:43]   Frame 10 saved (frame_009.jpg, t=104.5s)
+[10:43]   [capture-periodic] freeze=38ms shot=442ms unfreeze=35ms saved=True
+[10:46]   Frame 11 saved (frame_010.jpg, t=107.1s)
+[10:46]   [capture-periodic] freeze=19ms shot=400ms unfreeze=20ms saved=True
+[10:48]   Frame 12 saved (frame_011.jpg, t=109.7s)
+[10:48]   [capture-periodic] freeze=27ms shot=374ms unfreeze=19ms saved=True
+[10:51]   Frame 13 saved (frame_012.jpg, t=112.3s)
+[10:51]   [capture-periodic] freeze=26ms shot=352ms unfreeze=18ms saved=True
+[10:52]   [capture-loop] iter=650 t=113.6s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=22
+[10:53]   Frame 14 saved (frame_013.jpg, t=114.8s)
+[10:53]   [capture-periodic] freeze=24ms shot=395ms unfreeze=27ms saved=True
+[10:58]   Frame 15 saved (frame_014.jpg, t=119.8s)
+[10:58]   [capture-periodic] freeze=18ms shot=373ms unfreeze=26ms saved=True
+[10:59]   [Console-error] No input!
+[10:59]   [Console-error] No input!
+[10:59]   [Console-error] No input!
+[10:59]   Node executed (2 total), capturing...
+[11:00]   Frame 16 saved (frame_015.jpg, t=121.5s)
+[11:00]   [capture-node] freeze=59ms shot=373ms unfreeze=21ms saved=True
+[11:01]   [capture-loop] iter=700 t=123.0s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=19
+[11:08]   [Console-error] No input!
+[11:08]   Node executed (3 total), capturing...
+[11:09]   Frame 17 saved (frame_016.jpg, t=130.4s)
+[11:09]   [capture-node] freeze=19ms shot=348ms unfreeze=0ms saved=True
+[11:09]   Execution complete (t=130.4s)
+[11:09]   [3d-wait] Phase 1: Waiting for 'Loading 3D Model' text to disappear...
+[11:09]   [3d-wait] Phase 1 done in 0.1s
+[11:09]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[11:10]   [Console-error] No input!
+[11:10]   [3d-wait] Phase 2: iframes=3
+[11:10]   [3d-wait] iframe viewer_ready=False (matched 0 console logs)
+[11:10]   [3d-wait] Waiting for 'Loaded successfully' console message (timeout=60s)...
+[12:10]   [3d-wait] iframe wait exception: Timeout 60000ms exceeded while waiting for event "console"
+=========================== logs ===========================
+waiting for event "console"
+============================================================
+[12:10]   [3d-wait] Total 3D wait: 60.6s
+[12:10]   Captured 17 unique frames over 191.62s
+[12:10]   [debug] iframes: 3
+[12:10]   [debug]   iframe[0]: src=http://127.0.0.1:8188/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=17719472, canvas=588x553, rafFrozen=True
+[12:10]   [debug]   iframe[1]: src=http://127.0.0.1:8188/extensions/ComfyUI-Hunyuan3D-Part/viewer_vtk.html?v=177194, canvas=1176x1244, rafFrozen=True
+[12:10]   [debug]   iframe[2]: src=http://127.0.0.1:8188/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=17719473, canvas=588x553, rafFrozen=True
+[12:10]   [timing] trigger_3d_previews: 0.0s
+[12:14]   Saved high-quality screenshot: H3DPART-segment_executed.png
+[12:14]   [timing] final_screenshot: 2.1s
+[12:16] Results saved to C:\github-runners\PozzettiAndrea-ComfyUI-Hunyuan3D-Part-portable\_work\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\comfy-test-logs\Hunyuan3D-Part-0924\windows_portable-gpu\results.json
+[12:16] Model report: 15 files, 9.3 GB -> C:\github-runners\PozzettiAndrea-ComfyUI-Hunyuan3D-Part-portable\_work\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\comfy-test-logs\Hunyuan3D-Part-0924\windows_portable-gpu\models.json
+[12:16] Saved: C:\github-runners\PozzettiAndrea-ComfyUI-Hunyuan3D-Part-portable\_work\ComfyUI-Hunyuan3D-Part\ComfyUI-Hunyuan3D-Part\comfy-test-logs\Hunyuan3D-Part-0924\windows_portable-gpu\index.html
+[12:16] [EXECUTION] PASSED
+[12:16] 
+windows_portable: PASSED

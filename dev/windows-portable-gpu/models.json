@@ -1,0 +1,112 @@
+{
+  "models_dir": "E:\\ComfyUI_windows_portable\\ComfyUI\\models",
+  "summary": {
+    "total_files": 15,
+    "total_size_bytes": 9946667514,
+    "total_size_human": "9.3 GB"
+  },
+  "folders": {
+    "hunyuan3d-part": {
+      "total_size_bytes": 9492999106,
+      "total_size_human": "8.8 GB",
+      "source": {
+        "type": "unknown"
+      },
+      "files": [
+        {
+          "path": "model.safetensors",
+          "size_bytes": 6630571584,
+          "size_human": "6.2 GB"
+        },
+        {
+          "path": "conditioner.safetensors",
+          "size_bytes": 1755920004,
+          "size_human": "1.6 GB"
+        },
+        {
+          "path": "shapevae.safetensors",
+          "size_bytes": 655539474,
+          "size_human": "625.2 MB"
+        },
+        {
+          "path": "p3sam.safetensors",
+          "size_bytes": 450968044,
+          "size_human": "430.1 MB"
+        }
+      ]
+    },
+    "sonata": {
+      "total_size_bytes": 434008416,
+      "total_size_human": "413.9 MB",
+      "source": {
+        "type": "unknown"
+      },
+      "files": [
+        {
+          "path": "sonata.pth",
+          "size_bytes": 434008287,
+          "size_human": "413.9 MB"
+        },
+        {
+          "path": ".cache\\huggingface\\download\\sonata.pth.metadata",
+          "size_bytes": 128,
+          "size_human": "128.0 B"
+        },
+        {
+          "path": ".cache\\huggingface\\.gitignore",
+          "size_bytes": 1,
+          "size_human": "1.0 B"
+        }
+      ]
+    },
+    "vae_approx": {
+      "total_size_bytes": 19659992,
+      "total_size_human": "18.7 MB",
+      "source": {
+        "type": "unknown"
+      },
+      "files": [
+        {
+          "path": "taef1_encoder.safetensors",
+          "size_bytes": 2464424,
+          "size_human": "2.4 MB"
+        },
+        {
+          "path": "taesd3_encoder.safetensors",
+          "size_bytes": 2464424,
+          "size_human": "2.4 MB"
+        },
+        {
+          "path": "taef1_decoder.safetensors",
+          "size_bytes": 2464414,
+          "size_human": "2.4 MB"
+        },
+        {
+          "path": "taesd3_decoder.safetensors",
+          "size_bytes": 2464414,
+          "size_human": "2.4 MB"
+        },
+        {
+          "path": "taesdxl_decoder.safetensors",
+          "size_bytes": 2450590,
+          "size_human": "2.3 MB"
+        },
+        {
+          "path": "taesd_decoder.safetensors",
+          "size_bytes": 2450590,
+          "size_human": "2.3 MB"
+        },
+        {
+          "path": "taesdxl_encoder.safetensors",
+          "size_bytes": 2450568,
+          "size_human": "2.3 MB"
+        },
+        {
+          "path": "taesd_encoder.safetensors",
+          "size_bytes": 2450568,
+          "size_human": "2.3 MB"
+        }
+      ]
+    }
+  }
+}

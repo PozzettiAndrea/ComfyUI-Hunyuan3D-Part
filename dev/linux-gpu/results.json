@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-02-24T15:25:48.187596+00:00",
+  "platform": "linux",
+  "hardware": {
+    "os": "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
+    "cpu": "Intel(R) Xeon(R) Gold 6238R CPU @ 2.20GHz",
+    "gpu": "NVIDIA RTX A6000"
+  },
+  "commit_hash": "42956de143c834b6e164babff18f13946528093a",
+  "success": true,
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0
+  },
+  "workflows": [
+    {
+      "name": "H3DPART-segment-partgen",
+      "status": "pass",
+      "duration_seconds": 233.61,
+      "error": null,
+      "hardware": {
+        "os": "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
+        "cpu": "Intel(R) Xeon(R) Gold 6238R CPU @ 2.20GHz",
+        "gpu": "NVIDIA RTX A6000"
+      },
+      "resources": {
+        "ram": {
+          "peak": 8.84,
+          "avg": 4.31
+        },
+        "total_ram_gb": 62.9,
+        "samples": 207,
+        "vram": {
+          "peak": 12.4,
+          "avg": 8.15
+        }
+      }
+    },
+    {
+      "name": "H3DPART-segment",
+      "status": "pass",
+      "duration_seconds": 103.12,
+      "error": null,
+      "hardware": {
+        "os": "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
+        "cpu": "Intel(R) Xeon(R) Gold 6238R CPU @ 2.20GHz",
+        "gpu": "NVIDIA RTX A6000"
+      },
+      "resources": {
+        "ram": {
+          "peak": 6.46,
+          "avg": 4.89
+        },
+        "total_ram_gb": 62.9,
+        "samples": 94,
+        "vram": {
+          "peak": 11.77,
+          "avg": 4.87
+        }
+      }
+    }
+  ]
+}
