@@ -6,7 +6,7 @@
     "cpu": "Intel(R) Xeon(R) Gold 6238R CPU @ 2.20GHz",
     "gpu": "NVIDIA RTX A6000"
   },
-  "commit_hash": "42956de143c834b6e164babff18f13946528093a",
+  "commit_hash": "9cf275fdab6ee49e639c380458c01a12932e3344",
   "success": true,
   "summary": {
     "total": 2,
