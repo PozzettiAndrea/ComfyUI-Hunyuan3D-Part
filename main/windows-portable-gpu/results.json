@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-02-24T15:36:52.931211+00:00",
+  "platform": "windows_portable",
+  "hardware": {
+    "os": "Windows-11-10.0.26100-SP0",
+    "cpu": "Intel64 Family 6 Model 58 Stepping 9, GenuineIntel",
+    "gpu": "NVIDIA RTX A4000"
+  },
+  "commit_hash": "9cf275fdab6ee49e639c380458c01a12932e3344",
+  "success": true,
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0
+  },
+  "workflows": [
+    {
+      "name": "H3DPART-segment-partgen",
+      "status": "pass",
+      "duration_seconds": 490.83,
+      "error": null,
+      "hardware": {
+        "os": "Windows-11-10.0.26100-SP0",
+        "cpu": "Intel64 Family 6 Model 58 Stepping 9, GenuineIntel",
+        "gpu": "NVIDIA RTX A4000"
+      },
+      "resources": {
+        "ram": {
+          "peak": 18.11,
+          "avg": 10.5
+        },
+        "total_ram_gb": 30.0,
+        "samples": 404,
+        "vram": {
+          "peak": 10.55,
+          "avg": 4.55
+        }
+      }
+    },
+    {
+      "name": "H3DPART-segment",
+      "status": "pass",
+      "duration_seconds": 213.36,
+      "error": null,
+      "hardware": {
+        "os": "Windows-11-10.0.26100-SP0",
+        "cpu": "Intel64 Family 6 Model 58 Stepping 9, GenuineIntel",
+        "gpu": "NVIDIA RTX A4000"
+      },
+      "resources": {
+        "ram": {
+          "peak": 11.78,
+          "avg": 10.04
+        },
+        "total_ram_gb": 30.0,
+        "samples": 177,
+        "vram": {
+          "peak": 9.74,
+          "avg": 2.2
+        }
+      }
+    }
+  ]
+}
