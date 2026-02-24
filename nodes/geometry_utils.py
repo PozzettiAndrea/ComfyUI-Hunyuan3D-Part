@@ -18,8 +18,8 @@ import comfy.ops
 def _auto_num_chunks(device, bytes_per_point=16384):
     """Auto-determine chunk size for marching cubes grid evaluation.
 
-    Each query point passes through cross-attention decoder (Fourier embed →
-    Linear → cross-attn with 1024 latents → MLP), so intermediate activations
+    Each query point passes through cross-attention decoder (Fourier embed ->
+    Linear -> cross-attn with 1024 latents -> MLP), so intermediate activations
     are ~16KB/point in fp16.  We target 20% of free VRAM to leave headroom for
     the octree grids and marching cubes buffers.
     """

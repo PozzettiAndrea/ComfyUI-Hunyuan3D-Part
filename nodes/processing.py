@@ -1022,7 +1022,7 @@ class XPartGenerateParts:
                 'normals': torch.as_tensor(sonata_normals).to(device=device, dtype=dtype),
             }
 
-            # ── Staged generation: load each model to GPU only when needed ──
+            # -- Staged generation: load each model to GPU only when needed --
 
             do_classifier_free_guidance = guidance_scale >= 0 and not (
                 hasattr(dit, "guidance_embed") and dit.guidance_embed is True
@@ -1062,7 +1062,7 @@ class XPartGenerateParts:
                 num_parts, vae.latent_shape, dtype, device, generator
             )
 
-            # ── Stage 1: Conditioning (load conditioner to GPU) ──
+            # -- Stage 1: Conditioning (load conditioner to GPU) --
             print(f"[X-Part Generate] Stage 1: Conditioning")
             _vram_dbg("before conditioner load")
             comfy.model_management.load_models_gpu([cond_patcher])
@@ -1079,7 +1079,7 @@ class XPartGenerateParts:
             del part_surface_inbbox, obj_surface, precomputed_sonata
             _vram_dbg("after conditioning")
 
-            # ── Stage 2: Diffusion (load DiT to GPU, conditioner auto-evicted) ──
+            # -- Stage 2: Diffusion (load DiT to GPU, conditioner auto-evicted) --
             print(f"[X-Part Generate] Stage 2: Diffusion ({num_inference_steps} steps)")
             comfy.model_management.load_models_gpu([dit_patcher])
             _vram_dbg("after DiT load")
@@ -1142,7 +1142,7 @@ class XPartGenerateParts:
             del cond, guidance_cond
             _vram_dbg("after diffusion")
 
-            # ── Stage 3: VAE decode + marching cubes (load VAE to GPU) ──
+            # -- Stage 3: VAE decode + marching cubes (load VAE to GPU) --
             print(f"[X-Part Generate] Stage 3: VAE decode ({len(latents)} parts)")
             comfy.model_management.load_models_gpu([vae_patcher])
             _vram_dbg("after VAE load")
