@@ -918,6 +918,13 @@ class XPartGenerateParts:
                     "step": 1024,
                     "tooltip": "Points per object/part. 40960=trained default, <20480=quality loss, <5120=very poor. Model reloads on change."
                 }),
+                "num_sdf_chunks": ("INT", {
+                    "default": 30000,
+                    "min": 5000,
+                    "max": 500000,
+                    "step": 5000,
+                    "tooltip": "Grid points per batch during SDF evaluation (marching cubes). Lower = less VRAM, slower. 30000=safe for 8GB, 500000=fast on 24GB+."
+                }),
                 "output_coordinate_system": (["Y-up (default)", "Z-up"], {
                     "default": "Y-up (default)",
                     "tooltip": "Output coordinate system. Use Z-up if your input mesh is Z-up (CAD convention like STL)."
@@ -931,7 +938,7 @@ class XPartGenerateParts:
     CATEGORY = "Hunyuan3D/Processing"
 
     def generate(self, mesh_with_features, bounding_boxes, xpart_config, octree_resolution, num_inference_steps,
-                guidance_scale, seed, pc_size, output_coordinate_system):
+                guidance_scale, seed, pc_size, num_sdf_chunks, output_coordinate_system):
         """Generate part meshes."""
         device = comfy.model_management.get_torch_device()
         try:
@@ -1140,17 +1147,20 @@ class XPartGenerateParts:
             comfy.model_management.load_models_gpu([vae_patcher])
             _vram_dbg("after VAE load")
 
+            from tqdm import tqdm as _tqdm
             export_pbar = comfy.utils.ProgressBar(len(latents))
             parts_list = []
-            for i, part_latent in enumerate(latents):
-                _vram_dbg(f"before export part {i}")
+            for i, part_latent in enumerate(_tqdm(latents, desc="VAE decode")):
+                alloc = torch.cuda.memory_allocated(device) / (1024**3) if device.type == "cuda" else 0
+                res = torch.cuda.memory_reserved(device) / (1024**3) if device.type == "cuda" else 0
+                print(f"[VAE decode] Part {i}/{len(latents)} — alloc={alloc:.2f}GB, reserved={res:.2f}GB, chunks={num_sdf_chunks}")
                 try:
                     part_mesh = pipeline._export(
                         latents=part_latent.unsqueeze(0),
                         output_type="trimesh",
                         box_v=1.01,
                         mc_level=-1 / 512,
-                        num_chunks=0,
+                        num_chunks=num_sdf_chunks,
                         octree_resolution=octree_resolution,
                         mc_algo="mc",
                         enable_pbar=True,
@@ -1162,7 +1172,9 @@ class XPartGenerateParts:
                     print(f"[X-Part Generate] Failed to export part {i}: {e}")
                 # Marching cubes allocates large temporary grids; release them between parts
                 comfy.model_management.soft_empty_cache()
-                _vram_dbg(f"after export part {i} (cache cleared)")
+                alloc = torch.cuda.memory_allocated(device) / (1024**3) if device.type == "cuda" else 0
+                res = torch.cuda.memory_reserved(device) / (1024**3) if device.type == "cuda" else 0
+                print(f"[VAE decode] Part {i} done — alloc={alloc:.2f}GB, reserved={res:.2f}GB (cache cleared)")
                 export_pbar.update(1)
 
             # Denormalize
