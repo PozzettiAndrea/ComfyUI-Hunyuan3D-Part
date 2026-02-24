@@ -4,3 +4,6 @@ ComfyUI-Env-Manager = "PozzettiAndrea/ComfyUI-Env-Manager"
 
 [cuda]
 packages = ["flash-attn","sageattention"]
+
+[apt]
+packages = ["python3-dev"]

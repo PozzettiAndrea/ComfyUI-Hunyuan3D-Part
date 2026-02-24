@@ -1,5 +1,4 @@
-[apt]
-packages = ["python3-dev"]
+python = "3.12"
 
 [cuda]
 packages = ["flash-attn", "torch-scatter", "torch-cluster", "torch", "torchvision", "spconv", "cumm"]
