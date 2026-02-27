@@ -11,6 +11,7 @@ import uuid
 import trimesh as trimesh_module
 
 from .mesh_utils import create_bbox_visualization, export_scene_to_vtp
+from comfy_api.latest import io
 
 # ComfyUI folder paths
 try:
@@ -20,7 +21,7 @@ except ImportError:
     COMFYUI_OUTPUT_FOLDER = None
 
 
-class PreviewBoundingBoxesNode:
+class PreviewBoundingBoxesNode(io.ComfyNode):
     """
     Preview mesh with bounding boxes using VTK.js viewer.
 
@@ -29,28 +30,24 @@ class PreviewBoundingBoxesNode:
     """
 
     @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "trimesh": ("TRIMESH",),
-                "bboxes": ("BBOXES_3D",),
-                "line_width": ("FLOAT", {
-                    "default": 2.0,
-                    "min": 0.5,
-                    "max": 10.0,
-                    "step": 0.5,
-                    "display": "slider",
-                    "tooltip": "Thickness of bounding box wireframe lines in pixels. Rendered by VTK.js."
-                }),
-            },
-        }
+    def define_schema(cls):
+        return io.Schema(
+            node_id="Hunyuan3DPreviewBoundingBoxes",
+            display_name="Preview Bounding Boxes",
+            category="Hunyuan3D/Visualization",
+            is_output_node=True,
+            inputs=[
+                io.Custom("TRIMESH").Input("trimesh"),
+                io.Custom("BBOXES_3D").Input("bboxes"),
+                io.Float.Input("line_width", default=2.0, min=0.5, max=10.0, step=0.5,
+                    display_name="slider",
+                    tooltip="Thickness of bounding box wireframe lines in pixels. Rendered by VTK.js."),
+            ],
+            outputs=[],
+        )
 
-    RETURN_TYPES = ()
-    OUTPUT_NODE = True
-    FUNCTION = "preview_bboxes"
-    CATEGORY = "Hunyuan3D/Visualization"
-
-    def preview_bboxes(self, trimesh, bboxes, line_width):
+    @classmethod
+    def execute(cls, trimesh, bboxes, line_width):
         """
         Export mesh with bounding boxes to VTP and prepare for VTK.js preview.
 
@@ -60,7 +57,7 @@ class PreviewBoundingBoxesNode:
             line_width: Thickness of wireframe lines in pixels (for VTK.js rendering)
 
         Returns:
-            dict: UI data for frontend widget
+            io.NodeOutput: UI data for frontend widget
         """
         # Extract bboxes array from BBOXES_3D dictionary
         if isinstance(bboxes, dict):
@@ -126,7 +123,7 @@ class PreviewBoundingBoxesNode:
 
         print(f"[PreviewBoundingBoxes] Created visualization with {num_parts} bounding boxes")
 
-        return {"ui": ui_data}
+        return io.NodeOutput(ui=ui_data)
 
 
 NODE_CLASS_MAPPINGS = {

@@ -16,6 +16,7 @@ import time
 import concurrent.futures
 import comfy.model_management
 import comfy.utils
+from comfy_api.latest import io
 
 # Import utilities from core
 from .mesh_utils import load_mesh, save_mesh, colorize_segmentation, get_temp_mesh_path
@@ -504,7 +505,7 @@ def _get_xpart_models(config, pc_size=40960):
     return result
 
 
-class ComputeMeshFeatures:
+class ComputeMeshFeatures(io.ComfyNode):
     """
     Compute mesh features for P3-SAM segmentation.
 
@@ -515,38 +516,28 @@ class ComputeMeshFeatures:
     """
 
     @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "mesh": ("TRIMESH",),
-                "sonata_config": ("SONATA_CONFIG",),
-                "all_points": ("BOOLEAN", {
-                    "default": False,
-                    "tooltip": "Use ALL mesh vertices instead of sampling. Enable for X-Part generation."
-                }),
-                "point_num": ("INT", {
-                    "default": 100000,
-                    "min": 1000,
-                    "max": 500000,
-                    "step": 1000,
-                    "tooltip": "Number of points to sample (ignored if all_points=True)."
-                }),
-                "seed": ("INT", {
-                    "default": 42,
-                    "min": 0,
-                    "max": 0xffffffff,
-                    "step": 1,
-                    "tooltip": "Random seed for point sampling (ignored if all_points=True)."
-                }),
-            },
-        }
+    def define_schema(cls):
+        return io.Schema(
+            node_id="ComputeMeshFeatures",
+            display_name="Compute Mesh Features",
+            category="Hunyuan3D/Processing",
+            inputs=[
+                io.Custom("TRIMESH").Input("mesh"),
+                io.Custom("SONATA_CONFIG").Input("sonata_config"),
+                io.Boolean.Input("all_points", default=False,
+                    tooltip="Use ALL mesh vertices instead of sampling. Enable for X-Part generation."),
+                io.Int.Input("point_num", default=100000, min=1000, max=500000, step=1000,
+                    tooltip="Number of points to sample (ignored if all_points=True)."),
+                io.Int.Input("seed", default=42, min=0, max=0xffffffff, step=1,
+                    tooltip="Random seed for point sampling (ignored if all_points=True)."),
+            ],
+            outputs=[
+                io.Custom("TRIMESH").Output(display_name="mesh_with_features"),
+            ],
+        )
 
-    RETURN_TYPES = ("TRIMESH",)
-    RETURN_NAMES = ("mesh_with_features",)
-    FUNCTION = "compute_features"
-    CATEGORY = "Hunyuan3D/Processing"
-
-    def compute_features(self, mesh, sonata_config, all_points, point_num, seed):
+    @classmethod
+    def execute(cls, mesh, sonata_config, all_points, point_num, seed):
         """Compute mesh features using Sonata encoder."""
         try:
             # Load mesh if needed
@@ -646,7 +637,7 @@ class ComputeMeshFeatures:
                 mesh_loaded.vertex_attributes = {}
             mesh_loaded.vertex_attributes['features_pca4_debug'] = pca4_verts
 
-            return (mesh_loaded,)
+            return io.NodeOutput(mesh_loaded)
 
         except Exception as e:
             print(f"[Compute Features] Error: {e}")
@@ -656,7 +647,7 @@ class ComputeMeshFeatures:
 
 
 
-class P3SAMSegmentMesh:
+class P3SAMSegmentMesh(io.ComfyNode):
     """
     Segment mesh into semantic parts using P3-SAM.
 
@@ -664,49 +655,34 @@ class P3SAMSegmentMesh:
     """
 
     @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "mesh_with_features": ("TRIMESH",),
-                "p3sam_config": ("P3SAM_CONFIG",),
-                "prompt_num": ("INT", {
-                    "default": 400,
-                    "min": 50,
-                    "max": 1000,
-                    "step": 10,
-                    "tooltip": "Number of prompt points sampled across the mesh surface. More prompts improve coverage: small or thin parts that receive no prompt point will be missed. Increase if parts are being skipped; decrease to speed up inference."
-                }),
-                "threshold": ("FLOAT", {
-                    "default": 0.95,
-                    "min": 0.7,
-                    "max": 0.999,
-                    "step": 0.01,
-                    "tooltip": "Merge threshold."
-                }),
-                "post_process": ("BOOLEAN", {
-                    "default": True,
-                    "tooltip": "Enable post-processing."
-                }),
-                "batch_size": ("INT", {
-                    "default": 1,
-                    "min": 1,
-                    "max": 64,
-                    "step": 1,
-                    "tooltip": "Number of prompt points processed per forward pass. Higher values use more VRAM but speed up inference significantly. Start with 8-16 and increase if VRAM allows."
-                }),
-            },
-        }
+    def define_schema(cls):
+        return io.Schema(
+            node_id="P3SAMSegmentMesh",
+            display_name="P3-SAM Segment Mesh",
+            category="Hunyuan3D/Processing",
+            inputs=[
+                io.Custom("TRIMESH").Input("mesh_with_features"),
+                io.Custom("P3SAM_CONFIG").Input("p3sam_config"),
+                io.Int.Input("prompt_num", default=400, min=50, max=1000, step=10,
+                    tooltip="Number of prompt points sampled across the mesh surface. More prompts improve coverage: small or thin parts that receive no prompt point will be missed. Increase if parts are being skipped; decrease to speed up inference."),
+                io.Float.Input("threshold", default=0.95, min=0.7, max=0.999, step=0.01,
+                    tooltip="Merge threshold."),
+                io.Boolean.Input("post_process", default=True,
+                    tooltip="Enable post-processing."),
+                io.Int.Input("batch_size", default=1, min=1, max=64, step=1,
+                    tooltip="Number of prompt points processed per forward pass. Higher values use more VRAM but speed up inference significantly. Start with 8-16 and increase if VRAM allows."),
+            ],
+            outputs=[
+                io.Custom("TRIMESH").Output(display_name="mesh"),
+                io.Custom("BBOXES_3D").Output(display_name="bounding_boxes"),
+            ],
+        )
 
-    RETURN_TYPES = ("TRIMESH", "BBOXES_3D")
-    RETURN_NAMES = ("mesh", "bounding_boxes")
-    FUNCTION = "segment"
-    CATEGORY = "Hunyuan3D/Processing"
-
-    def segment(self, mesh_with_features, p3sam_config, prompt_num, threshold, post_process, batch_size=1):
+    @classmethod
+    def execute(cls, mesh_with_features, p3sam_config, prompt_num, threshold, post_process, batch_size=1):
         """Segment mesh into parts using P3-SAM."""
         try:
             import fpsample
-            from tqdm import tqdm
             from collections import defaultdict
             from concurrent.futures import ThreadPoolExecutor
 
@@ -753,7 +729,8 @@ class P3SAMSegmentMesh:
             print(f"[P3-SAM Segment] {prompt_num} prompts / batch_size {bs} = {step_num} steps")
             _vram_dbg("before inference loop")
             comfy_pbar = comfy.utils.ProgressBar(step_num)
-            for i in tqdm(range(step_num), desc="P3-SAM Inference"):
+            for i in range(step_num):
+                comfy.model_management.throw_exception_if_processing_interrupted()
                 cur_prompt = _point_prompts[bs * i : bs * (i + 1)]
                 if len(cur_prompt) == 0:
                     continue
@@ -788,7 +765,8 @@ class P3SAMSegmentMesh:
             # NMS
             clusters = defaultdict(list)
             with ThreadPoolExecutor(max_workers=20) as executor:
-                for i in tqdm(range(len(mask_sorted)), desc="NMS"):
+                for i in range(len(mask_sorted)):
+                    comfy.model_management.throw_exception_if_processing_interrupted()
                     _mask = mask_sorted[i]
                     futures = []
                     for j in clusters.keys():
@@ -822,6 +800,7 @@ class P3SAMSegmentMesh:
             # Calculate point labels
             point_labels = np.zeros(len(points), dtype=np.int32) - 1
             for idx, cluster_id in enumerate(merged_clusters):
+                comfy.model_management.throw_exception_if_processing_interrupted()
                 mask = mask_sorted[cluster_id] > 0.5
                 point_labels[mask] = idx
 
@@ -835,6 +814,7 @@ class P3SAMSegmentMesh:
             _dbg(f"Face labels: {np.sum(face_labels >= 0)}/{len(face_labels)} assigned")
 
             # Fix unlabeled faces
+            comfy.model_management.throw_exception_if_processing_interrupted()
             if post_process:
                 face_ids = fix_label(face_labels, adjacent_faces, use_aabb=True, mesh=mesh_loaded, show_info=True)
             else:
@@ -858,7 +838,7 @@ class P3SAMSegmentMesh:
                 'num_parts': len(aabb)
             }
 
-            return (processed_mesh, bboxes_output)
+            return io.NodeOutput(processed_mesh, bboxes_output)
 
         except Exception as e:
             print(f"[P3-SAM Segment] Error: {e}")
@@ -867,7 +847,7 @@ class P3SAMSegmentMesh:
             raise
 
 
-class XPartGenerateParts:
+class XPartGenerateParts(io.ComfyNode):
     """
     Generate high-quality part meshes using X-Part.
 
@@ -876,68 +856,42 @@ class XPartGenerateParts:
     """
 
     @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "mesh_with_features": ("TRIMESH",),
-                "bounding_boxes": ("BBOXES_3D",),
-                "xpart_config": ("XPART_CONFIG",),
-                "octree_resolution": ("INT", {
-                    "default": 256,
-                    "min": 256,
-                    "max": 1024,
-                    "step": 64,
-                    "tooltip": "Mesh quality. 256=~8GB, 512=~12-16GB, 1024=~24GB+ VRAM"
-                }),
-                "num_inference_steps": ("INT", {
-                    "default": 25,
-                    "min": 10,
-                    "max": 100,
-                    "step": 5,
-                    "tooltip": "Diffusion steps. 25=fast default, 50=high quality"
-                }),
-                "guidance_scale": ("FLOAT", {
-                    "default": -1.0,
-                    "min": -1.0,
-                    "max": 10.0,
-                    "step": 0.5,
-                    "tooltip": "-1.0 = disabled (fastest). 0-10 = enabled (slower, doubles compute)."
-                }),
-                "seed": ("INT", {
-                    "default": 42,
-                    "min": 0,
-                    "max": 0xffffffffffffffff,
-                    "step": 1,
-                    "control_after_generate": "fixed",
-                    "tooltip": "Random seed for reproducibility."
-                }),
-                "pc_size": ("INT", {
-                    "default": 40960,
-                    "min": 1024,
-                    "max": 81920,
-                    "step": 1024,
-                    "tooltip": "Points per object/part. 40960=trained default, <20480=quality loss, <5120=very poor. Model reloads on change."
-                }),
-                "num_sdf_chunks": ("INT", {
-                    "default": 30000,
-                    "min": 5000,
-                    "max": 500000,
-                    "step": 5000,
-                    "tooltip": "Grid points per batch during SDF evaluation (marching cubes). Lower = less VRAM, slower. 30000=safe for 8GB, 500000=fast on 24GB+."
-                }),
-                "output_coordinate_system": (["Y-up (default)", "Z-up"], {
-                    "default": "Y-up (default)",
-                    "tooltip": "Output coordinate system. Use Z-up if your input mesh is Z-up (CAD convention like STL)."
-                }),
-            },
-        }
+    def define_schema(cls):
+        return io.Schema(
+            node_id="XPartGenerateParts",
+            display_name="X-Part Generate Parts",
+            category="Hunyuan3D/Processing",
+            inputs=[
+                io.Custom("TRIMESH").Input("mesh_with_features"),
+                io.Custom("BBOXES_3D").Input("bounding_boxes"),
+                io.Custom("XPART_CONFIG").Input("xpart_config"),
+                io.Int.Input("octree_resolution", default=256, min=256, max=1024, step=64,
+                    tooltip="Mesh quality. 256=~8GB, 512=~12-16GB, 1024=~24GB+ VRAM"),
+                io.Int.Input("num_inference_steps", default=25, min=10, max=100, step=5,
+                    tooltip="Diffusion steps. 25=fast default, 50=high quality"),
+                io.Float.Input("guidance_scale", default=-1.0, min=-1.0, max=10.0, step=0.5,
+                    tooltip="-1.0 = disabled (fastest). 0-10 = enabled (slower, doubles compute)."),
+                io.Int.Input("seed", default=42, min=0, max=0xffffffffffffffff, step=1,
+                    control_after_generate="fixed",
+                    tooltip="Random seed for reproducibility."),
+                io.Int.Input("pc_size", default=40960, min=1024, max=81920, step=1024,
+                    tooltip="Points per object/part. 40960=trained default, <20480=quality loss, <5120=very poor. Model reloads on change."),
+                io.Int.Input("num_sdf_chunks", default=30000, min=5000, max=500000, step=5000,
+                    tooltip="Grid points per batch during SDF evaluation (marching cubes). Lower = less VRAM, slower. 30000=safe for 8GB, 500000=fast on 24GB+."),
+                io.Combo.Input("output_coordinate_system", options=["Y-up (default)", "Z-up"],
+                    default="Y-up (default)",
+                    tooltip="Output coordinate system. Use Z-up if your input mesh is Z-up (CAD convention like STL)."),
+            ],
+            outputs=[
+                io.Custom("TRIMESH").Output(display_name="part_meshes"),
+                io.String.Output(display_name="parts_path"),
+                io.String.Output(display_name="bbox_path"),
+                io.String.Output(display_name="exploded_path"),
+            ],
+        )
 
-    RETURN_TYPES = ("TRIMESH", "STRING", "STRING", "STRING")
-    RETURN_NAMES = ("part_meshes", "parts_path", "bbox_path", "exploded_path")
-    FUNCTION = "generate"
-    CATEGORY = "Hunyuan3D/Processing"
-
-    def generate(self, mesh_with_features, bounding_boxes, xpart_config, octree_resolution, num_inference_steps,
+    @classmethod
+    def execute(cls, mesh_with_features, bounding_boxes, xpart_config, octree_resolution, num_inference_steps,
                 guidance_scale, seed, pc_size, num_sdf_chunks, output_coordinate_system):
         """Generate part meshes."""
         device = comfy.model_management.get_torch_device()
@@ -1103,11 +1057,9 @@ class XPartGenerateParts:
 
             # Denoising loop
             diffusion_pbar = comfy.utils.ProgressBar(len(timesteps))
-            from tqdm import tqdm
             with synchronize_timer("Diffusion Sampling"):
-                for i, t in enumerate(
-                    tqdm(timesteps, desc="Diffusion Sampling:")
-                ):
+                for i, t in enumerate(timesteps):
+                    comfy.model_management.throw_exception_if_processing_interrupted()
                     if do_classifier_free_guidance:
                         latent_model_input = torch.cat([latents] * 2)
                         aabb_input = torch.repeat_interleave(aabb_orig, 2, dim=0)
@@ -1147,10 +1099,10 @@ class XPartGenerateParts:
             comfy.model_management.load_models_gpu([vae_patcher])
             _vram_dbg("after VAE load")
 
-            from tqdm import tqdm as _tqdm
             export_pbar = comfy.utils.ProgressBar(len(latents))
             parts_list = []
-            for i, part_latent in enumerate(_tqdm(latents, desc="VAE decode")):
+            for i, part_latent in enumerate(latents):
+                comfy.model_management.throw_exception_if_processing_interrupted()
                 alloc = torch.cuda.memory_allocated(device) / (1024**3) if device.type == "cuda" else 0
                 res = torch.cuda.memory_reserved(device) / (1024**3) if device.type == "cuda" else 0
                 print(f"[VAE decode] Part {i}/{len(latents)} — alloc={alloc:.2f}GB, reserved={res:.2f}GB, chunks={num_sdf_chunks}")
@@ -1260,7 +1212,7 @@ class XPartGenerateParts:
 
             # VRAM is managed by ComfyUI via ModelPatcher/load_models_gpu
 
-            return (parts_list, parts_path, bbox_path, exploded_path)
+            return io.NodeOutput(parts_list, parts_path, bbox_path, exploded_path)
 
         except Exception as e:
             print(f"[X-Part Generate] Error: {e}")

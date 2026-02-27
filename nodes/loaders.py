@@ -7,11 +7,18 @@ the consuming nodes (within the worker process).
 """
 
 import os
+import folder_paths
+from comfy_api.latest import io
+
+# Register model folder with ComfyUI's folder_paths system
+_hunyuan3d_part_models_dir = os.path.join(folder_paths.models_dir, "hunyuan3d-part")
+os.makedirs(_hunyuan3d_part_models_dir, exist_ok=True)
+folder_paths.add_model_folder_path("hunyuan3d_part", _hunyuan3d_part_models_dir)
 
 ATTN_BACKENDS = ['auto', 'flash_attn', 'xformers', 'sdpa']
 
 
-class LoadP3SAMSegmentor:
+class LoadP3SAMSegmentor(io.ComfyNode):
     """
     Download and configure P3-SAM segmentation model.
 
@@ -20,27 +27,26 @@ class LoadP3SAMSegmentor:
     """
 
     @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {},
-            "optional": {
-                "precision": (["auto", "bf16", "fp16", "fp32"], {
-                    "default": "auto",
-                    "tooltip": "Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older)."
-                }),
-                "attn_backend": (ATTN_BACKENDS, {
-                    "default": "auto",
-                    "tooltip": "Attention backend. auto = best available (flash_attn > xformers > sdpa)."
-                }),
-            },
-        }
+    def define_schema(cls):
+        return io.Schema(
+            node_id="LoadP3SAMSegmentor",
+            display_name="(Down)Load P3-SAM Segmentor",
+            category="Hunyuan3D/Models",
+            inputs=[
+                io.Combo.Input("precision", options=["auto", "bf16", "fp16", "fp32"],
+                    default="auto", optional=True,
+                    tooltip="Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older)."),
+                io.Combo.Input("attn_backend", options=ATTN_BACKENDS,
+                    default="auto", optional=True,
+                    tooltip="Attention backend. auto = best available (flash_attn > xformers > sdpa)."),
+            ],
+            outputs=[
+                io.Custom("P3SAM_CONFIG").Output(display_name="p3sam_config"),
+            ],
+        )
 
-    RETURN_TYPES = ("P3SAM_CONFIG",)
-    RETURN_NAMES = ("p3sam_config",)
-    FUNCTION = "load_model"
-    CATEGORY = "Hunyuan3D/Models"
-
-    def load_model(self, precision="auto", attn_backend="auto", **kwargs):
+    @classmethod
+    def execute(cls, precision="auto", attn_backend="auto", **kwargs):
         """Download model files and return config dict."""
         from .misc_utils import smart_load_model
 
@@ -53,16 +59,16 @@ class LoadP3SAMSegmentor:
 
         print(f"[Load P3-SAM] Model files ready at {ckpt_path}")
 
-        return ({
+        return io.NodeOutput({
             "type": "p3sam",
             "ckpt_path": p3sam_ckpt_path,
             "model_path": ckpt_path,
             "precision": precision,
             "attn_backend": attn_backend,
-        },)
+        })
 
 
-class LoadSonataEncoder:
+class LoadSonataEncoder(io.ComfyNode):
     """
     Load the Sonata encoder (feature extraction only).
 
@@ -71,27 +77,26 @@ class LoadSonataEncoder:
     """
 
     @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {},
-            "optional": {
-                "precision": (["auto", "bf16", "fp16", "fp32"], {
-                    "default": "auto",
-                    "tooltip": "Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older)."
-                }),
-                "attn_backend": (ATTN_BACKENDS, {
-                    "default": "auto",
-                    "tooltip": "Attention backend. auto = best available (flash_attn > xformers > sdpa)."
-                }),
-            },
-        }
+    def define_schema(cls):
+        return io.Schema(
+            node_id="LoadSonataEncoder",
+            display_name="(Down)Load Sonata Encoder",
+            category="Hunyuan3D/Models",
+            inputs=[
+                io.Combo.Input("precision", options=["auto", "bf16", "fp16", "fp32"],
+                    default="auto", optional=True,
+                    tooltip="Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older)."),
+                io.Combo.Input("attn_backend", options=ATTN_BACKENDS,
+                    default="auto", optional=True,
+                    tooltip="Attention backend. auto = best available (flash_attn > xformers > sdpa)."),
+            ],
+            outputs=[
+                io.Custom("SONATA_CONFIG").Output(display_name="sonata_config"),
+            ],
+        )
 
-    RETURN_TYPES = ("SONATA_CONFIG",)
-    RETURN_NAMES = ("sonata_config",)
-    FUNCTION = "load_model"
-    CATEGORY = "Hunyuan3D/Models"
-
-    def load_model(self, precision="auto", attn_backend="auto", **kwargs):
+    @classmethod
+    def execute(cls, precision="auto", attn_backend="auto", **kwargs):
         from .misc_utils import smart_load_model
 
         print("[Load Sonata Encoder] Ensuring model files are downloaded...")
@@ -103,15 +108,15 @@ class LoadSonataEncoder:
 
         print(f"[Load Sonata Encoder] Model files ready at {ckpt_path}")
 
-        return ({
+        return io.NodeOutput({
             "type": "sonata",
             "ckpt_path": p3sam_ckpt_path,
             "precision": precision,
             "attn_backend": attn_backend,
-        },)
+        })
 
 
-class LoadXPartModels:
+class LoadXPartModels(io.ComfyNode):
     """
     Download and configure X-Part generation models.
 
@@ -120,27 +125,26 @@ class LoadXPartModels:
     """
 
     @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {},
-            "optional": {
-                "precision": (["auto", "bf16", "fp16", "fp32"], {
-                    "default": "auto",
-                    "tooltip": "Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older)."
-                }),
-                "attn_backend": (ATTN_BACKENDS, {
-                    "default": "auto",
-                    "tooltip": "Attention backend. auto = best available (flash_attn > xformers > sdpa)."
-                }),
-            },
-        }
+    def define_schema(cls):
+        return io.Schema(
+            node_id="LoadXPartModels",
+            display_name="(Down)Load X-Part Models",
+            category="Hunyuan3D/Models",
+            inputs=[
+                io.Combo.Input("precision", options=["auto", "bf16", "fp16", "fp32"],
+                    default="auto", optional=True,
+                    tooltip="Model precision. auto = best for your GPU (bf16 on Ampere+, fp16 on Volta/Turing, fp32 on older)."),
+                io.Combo.Input("attn_backend", options=ATTN_BACKENDS,
+                    default="auto", optional=True,
+                    tooltip="Attention backend. auto = best available (flash_attn > xformers > sdpa)."),
+            ],
+            outputs=[
+                io.Custom("XPART_CONFIG").Output(display_name="xpart_config"),
+            ],
+        )
 
-    RETURN_TYPES = ("XPART_CONFIG",)
-    RETURN_NAMES = ("xpart_config",)
-    FUNCTION = "load_models"
-    CATEGORY = "Hunyuan3D/Models"
-
-    def load_models(self, precision="auto", attn_backend="auto", **kwargs):
+    @classmethod
+    def execute(cls, precision="auto", attn_backend="auto", **kwargs):
         """Download model files and return config dict."""
         from .misc_utils import smart_load_model
 
@@ -158,7 +162,7 @@ class LoadXPartModels:
 
         print(f"[Load X-Part Models] Model files ready at {ckpt_path}")
 
-        return ({
+        return io.NodeOutput({
             "type": "xpart_models",
             "ckpt_path": ckpt_path,
             "model_file": model_file,
@@ -166,7 +170,7 @@ class LoadXPartModels:
             "cond_file": cond_file,
             "precision": precision,
             "attn_backend": attn_backend,
-        },)
+        })
 
 
 # Node mappings
@@ -177,7 +181,7 @@ NODE_CLASS_MAPPINGS = {
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "LoadP3SAMSegmentor": "Load P3-SAM Segmentor",
-    "LoadSonataEncoder": "Load Sonata Encoder",
-    "LoadXPartModels": "Load X-Part Models",
+    "LoadP3SAMSegmentor": "(Down)Load P3-SAM Segmentor",
+    "LoadSonataEncoder": "(Down)Load Sonata Encoder",
+    "LoadXPartModels": "(Down)Load X-Part Models",
 }

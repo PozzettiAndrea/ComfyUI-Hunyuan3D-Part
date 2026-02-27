@@ -5,7 +5,6 @@ import torch.nn.functional as F
 from skimage import measure
 from typing import Callable, Tuple, List, Union
 from torch import nn
-from tqdm import tqdm
 from einops import repeat
 import traceback
 import pymeshlab
@@ -615,12 +614,8 @@ def extract_geometry_fast(
     batch_logits = []
     initial_steps = len(range(0, xyz_samples.shape[0], num_chunks))
     geo_pbar = comfy.utils.ProgressBar(initial_steps)
-    for start in tqdm(
-        range(0, xyz_samples.shape[0], num_chunks),
-        desc=f"MC Level {mc_level} Implicit Function:",
-        disable=disable,
-        leave=False,
-    ):
+    for start in range(0, xyz_samples.shape[0], num_chunks):
+        comfy.model_management.throw_exception_if_processing_interrupted()
         queries = xyz_samples[start : start + num_chunks, :]
         batch_queries = repeat(queries, "p c -> b p c", b=batch_size)
         logits = geometric_func(batch_queries)
@@ -646,6 +641,7 @@ def extract_geometry_fast(
           f"(mc_level={mc_level})")
 
     for octree_depth_now in resolutions[1:]:
+        comfy.model_management.throw_exception_if_processing_interrupted()
         # Free cached intermediates from previous level before allocating new grids
         comfy.model_management.soft_empty_cache()
         grid_size = np.array([octree_depth_now + 1] * 3)
@@ -683,12 +679,8 @@ def extract_geometry_fast(
         batch_logits = []
         refine_steps = len(range(0, next_points.shape[0], num_chunks))
         refine_pbar = comfy.utils.ProgressBar(refine_steps)
-        for start in tqdm(
-            range(0, next_points.shape[0], num_chunks),
-            desc=f"MC Level {octree_depth_now + 1} Implicit Function:",
-            disable=disable,
-            leave=False,
-        ):
+        for start in range(0, next_points.shape[0], num_chunks):
+            comfy.model_management.throw_exception_if_processing_interrupted()
             queries = next_points[start : start + num_chunks, :]
             batch_queries = repeat(queries, "p c -> b p c", b=batch_size)
             logits = geometric_func(batch_queries)
@@ -712,6 +704,7 @@ def extract_geometry_fast(
     mesh_v_f = []
     has_surface = np.zeros((batch_size,), dtype=np.bool_)
     for i in range(batch_size):
+        comfy.model_management.throw_exception_if_processing_interrupted()
         try:
             if mc_mode == "mc":
                 if len(resolutions) > 1:

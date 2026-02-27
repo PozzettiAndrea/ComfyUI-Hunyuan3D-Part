@@ -6,7 +6,6 @@ import inspect
 from typing import List, Optional
 import trimesh
 import numpy as np
-from tqdm import tqdm
 import copy
 from typing import List, Optional, Union
 import os
@@ -33,6 +32,7 @@ def export_to_trimesh(mesh_output):
     if isinstance(mesh_output, list):
         outputs = []
         for mesh in mesh_output:
+            comfy.model_management.throw_exception_if_processing_interrupted()
             if mesh is None:
                 outputs.append(None)
             else:
@@ -774,9 +774,8 @@ class PartFormerPipeline(TokenAllocMixin):
         # 6. Denoising loop
         diffusion_pbar = comfy.utils.ProgressBar(len(timesteps))
         with synchronize_timer("Diffusion Sampling"):
-            for i, t in enumerate(
-                tqdm(timesteps, disable=not enable_pbar, desc="Diffusion Sampling:")
-            ):
+            for i, t in enumerate(timesteps):
+                comfy.model_management.throw_exception_if_processing_interrupted()
                 # expand the latents if we are doing classifier free guidance
                 if do_classifier_free_guidance:
                     latent_model_input = torch.cat([latents] * 2)
@@ -821,6 +820,7 @@ class PartFormerPipeline(TokenAllocMixin):
         export_pbar = comfy.utils.ProgressBar(len(latents))
         parts = []
         for i, part_latent in enumerate(latents):
+            comfy.model_management.throw_exception_if_processing_interrupted()
             try:
                 part_mesh = self._export(
                     latents=part_latent.unsqueeze(0),
