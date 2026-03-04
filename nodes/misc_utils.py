@@ -166,15 +166,8 @@ def smart_load_model(
     ComfyUI/models/hunyuan3d-part/{model,shapevae,conditioner,p3sam}.safetensors.
     Returns the local directory path.
     """
-    try:
-        import folder_paths
-        default_base = os.path.join(folder_paths.models_dir, "hunyuan3d-part")
-    except Exception:
-        default_base = "~/.cache/xpart"
-
-    model_dir = os.path.expanduser(
-        os.environ.get("HY3DGEN_MODELS", default_base)
-    )
+    import folder_paths
+    model_dir = os.path.join(folder_paths.models_dir, "hunyuan3d-part")
 
     # repo path -> flat local name
     required_files = {
