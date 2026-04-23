@@ -1,4 +1,4 @@
-[00:00] Crash dump logging enabled: /home/shadeform/logs/Hunyuan3D-Part-1519/dev/linux-gpu/crash_dump.log
+[00:00] Crash dump logging enabled: /logs/node-2332/dev/linux-gpu/crash_dump.log
 [00:00] 
 [00:00] [1/5] SYNTAX
 [00:00] ----------------------------------------
@@ -14,1323 +14,191 @@
 [00:00] [DEBUG] server=None, server_url=None, api=None
 [00:00] Setting up ComfyUI...
 [00:00] Creating virtual environment...
-[00:00] Running: uv venv /home/shadeform/workspaces/Hunyuan3D-Part-1519/.venv --python 3.10
+[00:00] Running: uv venv /workspaces/node-2332/.venv --python 3.10
 [00:00] Cloning ComfyUI (latest)...
-[00:00] Running: git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI
+[00:00] Running: git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git /workspaces/node-2332/ComfyUI
 [00:01] Installing ComfyUI requirements...
-[00:01] Running: uv pip install --python /home/shadeform/workspaces/Hunyuan3D-Part-1519/.venv/bin/python --index-url https://download.pytorch.org/whl/cu128 --extra-index-url https://pypi.org/simple -r /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/requirements.txt
-[00:01] Installing local comfy-env (editable)...
-[00:01] Running: uv pip install -e /home/shadeform/utils/comfy-env --python /home/shadeform/workspaces/Hunyuan3D-Part-1519/.venv/bin/python
-[00:02] Installing local comfy-test (editable)...
-[00:02] Running: uv pip install -e /home/shadeform/utils/comfy-test --python /home/shadeform/workspaces/Hunyuan3D-Part-1519/.venv/bin/python
-[00:02] Installing local comfy-3d-viewers (editable)...
-[00:02] Running: uv pip install -e /home/shadeform/utils/comfy-3d-viewers --python /home/shadeform/workspaces/Hunyuan3D-Part-1519/.venv/bin/python
-[00:02] Installing custom node...
-[00:02] Copying ComfyUI-Hunyuan3D-Part to custom_nodes/...
-[00:02] Installing node requirements...
-[00:02] Running: uv pip install --python /home/shadeform/workspaces/Hunyuan3D-Part-1519/.venv/bin/python --index-url https://download.pytorch.org/whl/cu128 --extra-index-url https://pypi.org/simple -r /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/requirements.txt
-[00:03] Running install.py...
-[00:03] Running: /home/shadeform/workspaces/Hunyuan3D-Part-1519/.venv/bin/python /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/install.py
-[00:15]   [apt] Installing: python3-dev
-[00:15]   [apt] Requested packages: ['python3-dev']
-[00:15]   [apt] All packages already installed
-[00:15]   
-[00:15]   Installing 2 node dependencies...
-[00:15]     Cloning ComfyUI-GeometryPack...
-[00:15]     Installing requirements for ComfyUI-GeometryPack...
-[00:15]     Running install.py for ComfyUI-GeometryPack...
-[00:15]     Cloning ComfyUI-Env-Manager...
-[00:15]     Installing requirements for ComfyUI-Env-Manager...
-[00:15]   
-[00:15]   [requirements] Re-installing main package requirements...
-[00:15]     Installing requirements for ComfyUI-Hunyuan3D-Part...
-[00:15]   
-[00:15]   [cuda] Installing to host Python: flash-attn, sageattention
-[00:15]   [cuda] Host: Python 3.10, PyTorch 2.10.0, CUDA 12.8
-[00:15]     flash-attn: looking up in cuda-wheels index (cu128 torch210 cp310)
-[00:15]     flash-attn: found in cuda-wheels index
-[00:15]     /home/shadeform/workspaces/Hunyuan3D-Part-1519/.venv/bin/uv pip install --python /home/shadeform/workspaces/Hunyuan3D-Part-1519/.venv/bin/python --no-deps --no-cache https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.12/flash_attn-2.8.3%2Bcu128torch2.10-cp310-cp310-linux_x86_64.whl
-[00:15]     sageattention: looking up in cuda-wheels index (cu128 torch210 cp310)
-[00:15]     sageattention: found in cuda-wheels index
-[00:15]     /home/shadeform/workspaces/Hunyuan3D-Part-1519/.venv/bin/uv pip install --python /home/shadeform/workspaces/Hunyuan3D-Part-1519/.venv/bin/python --no-deps --no-cache https://github.com/PozzettiAndrea/cuda-wheels/releases/download/sageattention-latest/sageattention-2.2.0%2Bcu128torch210-cp310-cp310-manylinux_2_34_x86_64.manylinux_2_35_x86_64.whl
-[00:15]   
-[00:15]   [isolated] nodes
-[00:15]   
-[00:15]   Installing via pixi:
-[00:15]     CUDA: flash-attn, torch-scatter, torch-cluster, torch, torchvision, spconv, cumm
-[00:15]     PyPI: 20
-[00:15]   [comfy-env] build_dir=/home/shadeform/.ce/_env_1490da
-[00:15]   [comfy-env] env_path=/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da
-[00:15]   [comfy-env] Found existing env for _env_1490da, skipping install (/home/shadeform/.ce/_env_1490da/env)
-[00:15]   Env: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da -> /home/shadeform/.ce/_env_1490da/env
-[00:15]   
-[00:15]   Installation complete!
-[00:15] Installing 2 node dependency(ies)...
-[00:15]   ComfyUI-GeometryPack from PozzettiAndrea/ComfyUI-GeometryPack
-[00:15]   ComfyUI-GeometryPack already exists, skipping...
-[00:15]   ComfyUI-Env-Manager from PozzettiAndrea/ComfyUI-Env-Manager
-[00:15]   ComfyUI-Env-Manager already exists, skipping...
-[00:15] Installing validation endpoint...
-[00:15]   Cloning PozzettiAndrea/ComfyUI-validate-endpoint...
-[00:15] Running: git clone --depth 1 https://github.com/PozzettiAndrea/ComfyUI-validate-endpoint.git /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-validate-endpoint
-[00:16] COMFY_TEST_GPU env var = '1'
-[00:16] GPU mode: using real CUDA (no mocking)
-[00:16] [INSTALL] PASSED
-[00:16] 
-[00:16] [3/5] REGISTRATION
-[00:16] ----------------------------------------
-[00:16] [DEBUG] server=None, server_url=None, api=None
-[00:16] 
+[00:01] Running: uv pip install --python /workspaces/node-2332/.venv/bin/python --index-url https://download.pytorch.org/whl/cu128 --extra-index-url https://pypi.org/simple --index-strategy unsafe-best-match -r /workspaces/node-2332/ComfyUI/requirements.txt
+[00:44] Installing custom node...
+[00:44] Copying node to custom_nodes/...
+[00:44] Installing node requirements...
+[00:44] Running: uv pip install --python /workspaces/node-2332/.venv/bin/python --index-url https://download.pytorch.org/whl/cu128 --extra-index-url https://pypi.org/simple --index-strategy unsafe-best-match -r /workspaces/node-2332/ComfyUI/custom_nodes/node/requirements.txt
+[00:46] Running install.py...
+[00:46] Running: /workspaces/node-2332/.venv/bin/python /workspaces/node-2332/ComfyUI/custom_nodes/node/install.py
+[00:46]   
+[00:46]   [apt] Installing: python3-dev
+[00:46]   [apt] Requested packages: ['python3-dev']
+[00:46]   [apt] Missing packages: ['python3-dev']
+[00:46]   [apt] Running: sudo apt-get update
+[00:46] Warning: install.py failed (exit code 1), continuing...
+[00:46] Installing 2 node dependency(ies)...
+[00:46]   ComfyUI-GeometryPack from PozzettiAndrea/ComfyUI-GeometryPack
+[00:46]   Cloning PozzettiAndrea/ComfyUI-GeometryPack...
+[00:46] Running: git clone --depth 1 https://github.com/PozzettiAndrea/ComfyUI-GeometryPack.git /workspaces/node-2332/ComfyUI/custom_nodes/ComfyUI-GeometryPack
+[00:48]   Installing ComfyUI-GeometryPack requirements...
+[00:48] Running: uv pip install --python /workspaces/node-2332/.venv/bin/python --index-url https://download.pytorch.org/whl/cu128 --extra-index-url https://pypi.org/simple --index-strategy unsafe-best-match -r /workspaces/node-2332/ComfyUI/custom_nodes/ComfyUI-GeometryPack/requirements.txt
+[00:51]   Running ComfyUI-GeometryPack install.py...
+[00:51] Running: /workspaces/node-2332/.venv/bin/python /workspaces/node-2332/ComfyUI/custom_nodes/ComfyUI-GeometryPack/install.py
+[00:51]   
+[00:51]   [apt] Installing: libgl1-mesa-glx, libgl1, libopengl0, libglu1-mesa
+[00:51]   [apt] Requested packages: ['libgl1-mesa-glx', 'libgl1', 'libopengl0', 'libglu1-mesa']
+[00:51]   [apt] Missing packages: ['libopengl0', 'libglu1-mesa']
+[00:51]   [apt] Running: sudo apt-get update
+[00:51] Warning: ComfyUI-GeometryPack install.py failed (exit code 1), continuing...
+[00:51]   ComfyUI-Env-Manager from PozzettiAndrea/ComfyUI-Env-Manager
+[00:51]   Cloning PozzettiAndrea/ComfyUI-Env-Manager...
+[00:51] Running: git clone --depth 1 https://github.com/PozzettiAndrea/ComfyUI-Env-Manager.git /workspaces/node-2332/ComfyUI/custom_nodes/ComfyUI-Env-Manager
+[00:52]   Installing ComfyUI-Env-Manager requirements...
+[00:52] Running: uv pip install --python /workspaces/node-2332/.venv/bin/python --index-url https://download.pytorch.org/whl/cu128 --extra-index-url https://pypi.org/simple --index-strategy unsafe-best-match -r /workspaces/node-2332/ComfyUI/custom_nodes/ComfyUI-Env-Manager/requirements.txt
+[00:53] Installing validation endpoint...
+[00:53]   Cloning PozzettiAndrea/ComfyUI-validate-endpoint...
+[00:53] Running: git clone --depth 1 https://github.com/PozzettiAndrea/ComfyUI-validate-endpoint.git /workspaces/node-2332/ComfyUI/custom_nodes/ComfyUI-validate-endpoint
+[00:54] COMFY_TEST_GPU env var = '1'
+[00:54] GPU mode: using real CUDA (no mocking)
+[00:54] [INSTALL] PASSED
+[00:54] 
+[00:54] [3/5] REGISTRATION
+[00:54] ----------------------------------------
+[00:54] [DEBUG] server=None, server_url=None, api=None
+[00:54] 
 Starting ComfyUI server...
-[00:16] Starting ComfyUI server on port 41889...
-[00:16] Starting ComfyUI server on port 41889...
-[00:16] Waiting for server to be ready (timeout: 300s)...
-[00:17]   [ComfyUI] [comfy-env] ComfyUI-GeometryPack: root config found but env not built yet
-[00:17]   [ComfyUI] [comfy-env] 3 isolation env(s):
-[00:17]   [ComfyUI] [comfy-env]   _env_6f15f8 -> /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/gpu/_env_6f15f8
-[00:17]   [ComfyUI] [comfy-env]   _env_726b32 -> /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/blender/_env_726b32
-[00:17]   [ComfyUI] [comfy-env]   _env_12709f -> /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f
-[00:17]   [ComfyUI] [comfy-env] Library paths (main process):
-[00:17]   [ComfyUI] [comfy-env]   PATH=/home/shadeform/.local/bin:/home/shadeform/.local/bin:/home/shadeform/.local/bin:/home/shadeform/.venv/bin:/usr/local/bin:/usr/bin:/bin:/snap/bin
-[00:17]   [ComfyUI] [comfy-env] prestartup complete
-[00:19]   [ComfyUI] [comfy-env] Auto-enabled sage attention
-[00:19]   [ComfyUI] [comfy-env] Auto-enabled flash attention
-[00:19]   [ComfyUI] [comfy-env] ComfyUI-Hunyuan3D-Part: root config found but env not built yet
-[00:19]   [ComfyUI] [comfy-env] 1 isolation env(s):
-[00:19]   [ComfyUI] [comfy-env]   _env_1490da -> /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da
-[00:19]   [ComfyUI] [comfy-env] Library paths (main process):
-[00:19]   [ComfyUI] [comfy-env]   PATH=/home/shadeform/.local/bin:/home/shadeform/.local/bin:/home/shadeform/.local/bin:/home/shadeform/.venv/bin:/usr/local/bin:/usr/bin:/bin:/snap/bin
-[00:19]   [ComfyUI] [comfy-env] prestartup complete
-[00:19]   [ComfyUI] 
-[00:19]   [ComfyUI] Prestartup times for custom nodes:
-[00:19]   [ComfyUI]    0.0 seconds: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part
-[00:19]   [ComfyUI]    1.8 seconds: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack
-[00:19]   [ComfyUI] 
-[00:19]   [ComfyUI] WARNING: Potential Error in code: Torch already imported, torch should never be imported before this point.
-[00:22]   [ComfyUI] WARNING: You need pytorch with cu130 or higher to use optimized CUDA operations.
-[00:22]   [ComfyUI] Found comfy_kitchen backend triton: {'available': True, 'disabled': True, 'unavailable_reason': None, 'capabilities': ['apply_rope', 'apply_rope1', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8']}
-[00:22]   [ComfyUI] Found comfy_kitchen backend cuda: {'available': True, 'disabled': True, 'unavailable_reason': None, 'capabilities': ['apply_rope', 'apply_rope1', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8']}
-[00:22]   [ComfyUI] Found comfy_kitchen backend eager: {'available': True, 'disabled': False, 'unavailable_reason': None, 'capabilities': ['apply_rope', 'apply_rope1', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8', 'scaled_mm_nvfp4']}
-[00:22]   [ComfyUI] Checkpoint files will always be loaded safely.
-[00:22]   [ComfyUI] Total VRAM 48539 MB, total RAM 64395 MB
-[00:22]   [ComfyUI] pytorch version: 2.10.0+cu128
-[00:22]   [ComfyUI] Set vram state to: NORMAL_VRAM
-[00:22]   [ComfyUI] Device: cuda:0 NVIDIA RTX A6000 : cudaMallocAsync
-[00:22]   [ComfyUI] Using async weight offloading with 2 streams
-[00:22]   [ComfyUI] Enabled pinned memory 61174.0
-[00:22]   [ComfyUI] working around nvidia conv3d memory bug.
-[00:23]   [ComfyUI] Using sage attention
-[00:27]   [ComfyUI] Python version: 3.10.12 (main, Jan  8 2026, 06:52:19) [GCC 11.4.0]
-[00:27]   [ComfyUI] ComfyUI version: 0.14.1
-[00:27]   [ComfyUI] ComfyUI frontend version: 1.39.16
-[00:27]   [ComfyUI] [Prompt Server] web root: /home/shadeform/workspaces/Hunyuan3D-Part-1519/.venv/lib/python3.10/site-packages/comfyui_frontend_package/static
-[00:29]   [ComfyUI] [geompack] loading...
-[00:29]   [ComfyUI] [geompack] calling register_nodes
-[00:29]   [ComfyUI] [comfy-env] Version: 0.2.15
-[00:29]   [ComfyUI] [comfy-env] register_nodes: pkg_dir=/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack, caller=/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack
-[00:29]   [ComfyUI] [comfy-env] Found 3 isolation env(s)
-[00:29]   [ComfyUI] [comfy-env] Importing nodes (root)...
-[00:29]   [ComfyUI] [comfy-env] Imported nodes root: 0 nodes
-[00:29]   [ComfyUI] [comfy-env] Cache hit for nodes.blender: 5 nodes
-[00:29]   [ComfyUI] [comfy-env] Cache hit for nodes.main: 57 nodes
-[00:29]   [ComfyUI] [comfy-env] Registered 5 isolation nodes from blender
-[00:29]   [ComfyUI] [comfy-env] Registered 57 isolation nodes from main
-[00:29]   [ComfyUI] [comfy-env] Cache hit for nodes.gpu: 1 nodes
-[00:29]   [ComfyUI] [comfy-env] Registered 1 isolation nodes from gpu
-[00:29]   [ComfyUI] [comfy-env] Registered 63 total nodes
-[00:29]   [ComfyUI] ComfyUI-Env-Manager v0.1.0 routes registered
-[00:29]   [ComfyUI] [comfy-env] Version: 0.2.15
-[00:29]   [ComfyUI] [comfy-env] register_nodes: pkg_dir=/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part, caller=/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part
-[00:29]   [ComfyUI] [comfy-env] Found 1 isolation env(s)
-[00:29]   [ComfyUI] [comfy-env] Importing nodes (isolation root)...
-[00:29]   [ComfyUI] [comfy-env] Cache hit for nodes: 11 nodes
-[00:29]   [ComfyUI] [comfy-env] Imported nodes root: 11 nodes (isolation)
-[00:29]   [ComfyUI] [comfy-env] Registered 11 total nodes
-[00:29]   [ComfyUI] 
-[00:29]   [ComfyUI] Import times for custom nodes:
-[00:29]   [ComfyUI]    0.0 seconds: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/websocket_image_save.py
-[00:29]   [ComfyUI]    0.0 seconds: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-validate-endpoint
-[00:29]   [ComfyUI]    0.0 seconds: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Env-Manager
-[00:29]   [ComfyUI]    0.0 seconds: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part
-[00:29]   [ComfyUI]    0.2 seconds: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack
-[00:29]   [ComfyUI] 
-[00:29]   [ComfyUI] Context impl SQLiteImpl.
-[00:29]   [ComfyUI] Will assume non-transactional DDL.
-[00:29]   [ComfyUI] Context impl SQLiteImpl.
-[00:29]   [ComfyUI] Will assume non-transactional DDL.
-[00:29]   [ComfyUI] Running upgrade  -> 0001_assets, Initial assets schema
-[00:29]   [ComfyUI] Revision ID: 0001_assets
-[00:29]   [ComfyUI] Revises: None
-[00:29]   [ComfyUI] Create Date: 2025-12-10 00:00:00
-[00:29]   [ComfyUI] Database upgraded from None to 0001_assets
-[00:29]   [ComfyUI] Assets scan(roots=['models']) completed in 0.046s (created=11, skipped_existing=0, orphans_pruned=0, total_seen=11)
-[00:29]   [ComfyUI] Starting server
-[00:29]   [ComfyUI] 
-[00:29]   [ComfyUI] To see the GUI go to: http://127.0.0.1:41889
-[00:30] Server responding, waiting for nodes to load...
-[00:50] Server is ready!
-[00:50] Checking for import errors in server logs...
-[00:50] No import errors detected
-[00:50] Found 712 registered nodes
-[00:50] [REGISTRATION] PASSED
-[00:50] 
-[00:50] [4/5] INSTANTIATION
-[00:50] ----------------------------------------
-[00:50] [DEBUG] server=<comfy_test.comfyui.server.ComfyUIServer object at 0x737951a5b1d0>, server_url=None, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x73795147fdd0>
-[00:50] Testing node constructors...
-[00:50] All 11 node(s) instantiated successfully!
-[00:50] [INSTANTIATION] PASSED
-[00:50] 
-[00:50] [5/5] EXECUTION
-[00:50] ----------------------------------------
-[00:50] [DEBUG] server=<comfy_test.comfyui.server.ComfyUIServer object at 0x737951a5b1d0>, server_url=None, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x73795147fdd0>
-[00:50] GPU runner - will execute 2 workflow(s)
-[00:50] Running 2 workflow(s) (all with videos)...
-[00:50] Starting headless browser...
-[00:51]   GPU + Vulkan detected — using ANGLE/Vulkan rendering
-[00:51] Capturing execution frames: H3DPART-segment-partgen.json
-[00:51]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-[00:51]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-[00:52]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-[00:52]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-[00:52]   [Console-warning] WARNING: Multiple instances of Three.js being imported.
-[00:52]   [ComfyUI] [DEPRECATION WARNING] Detected import of deprecated legacy API: /scripts/ui.js. This is likely caused by a custom node extension using outdated APIs. Please update your extensions or contact the extension author for an updated version.
-[00:53]   [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui.js" is deprecated and will be removed in v1.34.
-[00:53]   [Console-warning] [MaskEditor] ComfyApp.open_maskeditor is deprecated. Plugins should migrate to using the command system or direct node context menu integration.
-[00:53]   [ComfyUI] [DEPRECATION WARNING] Detected import of deprecated legacy API: /scripts/ui/components/buttonGroup.js. This is likely caused by a custom node extension using outdated APIs. Please update your extensions or contact the extension author for an updated version.
-[00:53]   [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/buttonGroup.js" is deprecated and will be removed in v1.34.
-[00:53]   [ComfyUI] [DEPRECATION WARNING] Detected import of deprecated legacy API: /scripts/ui/components/button.js. This is likely caused by a custom node extension using outdated APIs. Please update your extensions or contact the extension author for an updated version.
-[00:53]   [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/button.js" is deprecated and will be removed in v1.34.
-[00:55]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-[00:55]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-[00:55]   [Console-error] No input!
-[00:55]   [Console-error] No input!
-[00:55]   [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
-[00:55]   [Console-error] Error loading model: HttpError: fetch for "http://127.0.0.1:41889/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
-    at http://127.0.0.1:41889/assets/vendor-three-CHi1XwmR.js:3824:116004
-[00:55]   [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
-[00:55]   [Console-error] Error loading model: HttpError: fetch for "http://127.0.0.1:41889/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
-    at http://127.0.0.1:41889/assets/vendor-three-CHi1XwmR.js:3824:116004
-[00:55]   [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
-[00:59]   Frame 1 saved (frame_000.jpg, t=0.0s)
-[00:59]   Validating workflow...
-[00:59]   [ComfyUI] === /validate endpoint called ===
-[00:59]   [ComfyUI] Received JSON with keys: ['prompt']
-[00:59]   [ComfyUI] Prompt has 12 nodes
-[00:59]   Queuing workflow for execution...
-[00:59]   [ComfyUI]   Node 27: LoadP3SAMSegmentor
-[00:59]   [ComfyUI]     Inputs: {"precision": "auto", "attn_backend": "auto"}
-[00:59]   [ComfyUI]   Node 31: ComputeMeshFeatures
-[00:59]   [ComfyUI]     Inputs: {"all_points": false, "point_num": 100000, "seed": 42, "mesh": ["33", 0], "sonata_config": ["35", 0]}
-[00:59]   [ComfyUI]   Node 33: GeomPackLoadMesh
-[00:59]   [ComfyUI]     Inputs: {"file_path": "3d/utah_teapot.stl"}
-[00:59]   [ComfyUI]   Node 35: LoadSonataEncoder
-[00:59]   [ComfyUI]     Inputs: {"precision": "auto", "attn_backend": "auto"}
-[00:59]   [ComfyUI]   Node 37: GeomPackPreviewMeshVTK
-[00:59]   [ComfyUI]     Inputs: {"mode": "fields", "preview_vtk": "{\"show_edges\":false,\"camera_state\":\"{\\\"position\\\":[-7.604755600050631,-29.909936116088403,14.071233436954898],\\\"focalPoint\\\":[0.6242384910583496,0.09375
-[00:59]   [ComfyUI]   Node 38: GeomPackPreviewMeshVTK
-[00:59]   [ComfyUI]     Inputs: {"mode": "fields", "preview_vtk": "{\"show_edges\":false,\"camera_state\":\"{\\\"position\\\":[-7.604755600050631,-29.909936116088403,14.071233436954898],\\\"focalPoint\\\":[0.6242384910583496,0.09375
-[00:59]   [ComfyUI]   Node 39: LoadXPartModels
-[00:59]   [ComfyUI] [comfy-env] Removed stale socket: /dev/shm/comfy_worker_0fa10b83c4b8.sock
-[00:59]   [ComfyUI]     Inputs: {"precision": "auto", "attn_backend": "auto"}
-[00:59]   [ComfyUI] [comfy-env] Removed stale socket: /dev/shm/comfy_worker_e40f1c11c082.sock
-[00:59]   [ComfyUI]   Node 42: XPartGenerateParts
-[00:59]   [ComfyUI] [comfy-env] SubprocessWorker: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/bin/python
-[00:59]   [ComfyUI]     Inputs: {"octree_resolution": 256, "num_inference_steps": 25, "guidance_scale": -1, "seed": 42, "pc_size": 40960, "num_sdf_chunks": 30000, "output_coordinate_system": "Y-up (default)", "mesh_with_features": [
-[00:59]   [ComfyUI] [comfy-env] env_vars: {'COMFYUI_BASE': '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI'}
-[00:59]   [ComfyUI]   Node 43: P3SAMSegmentMesh
-[00:59]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] python: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/bin/python
-[00:59]   [ComfyUI]     Inputs: {"prompt_num": 400, "threshold": 0.95, "post_process": true, "batch_size": 1, "mesh_with_features": ["31", 0], "p3sam_config": ["27", 0]}
-[00:59]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] sys_path sent to worker: ['/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/lib/python3.1/site-packages', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part']
-[00:59]   [ComfyUI]   Node 44: ExplodedMeshViewer
-[00:59]   [ComfyUI] [SubprocessWorker] is_pixi=False, python=/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/bin/python
-[00:59]   [ComfyUI]     Inputs: {"preview": "", "part_meshes": ["42", 0]}
-[00:59]   [ComfyUI] [SubprocessWorker] launching cmd=['/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/bin/python', '/tmp/comfyui_pvenv_4y_7g70k/persistent_worker.py', 'unix:///dev/shm/comfy_worker_d7dd51eb374f.sock']...
-[00:59]   [ComfyUI]   Node 46: Preview3D
-[00:59]   [ComfyUI] [SubprocessWorker] PATH has 8 entries:
-[00:59]   [ComfyUI]     Inputs: {"model_file": ["42", 3], "image": ""}
-[00:59]   [ComfyUI] [SubprocessWorker]   [0] /home/shadeform/.local/bin
-[00:59]   [ComfyUI]   Node 47: ComputeMeshFeatures
-[00:59]   [ComfyUI] [SubprocessWorker]   [1] /home/shadeform/.local/bin
-[00:59]   [ComfyUI]     Inputs: {"all_points": 1000, "point_num": 100000, "seed": 42, "mesh": ["43", 0], "sonata_config": ["35", 0]}
-[00:59]   [ComfyUI] [SubprocessWorker]   [2] /home/shadeform/.local/bin
-[00:59]   [ComfyUI] Generated prompt_id: eb3982a4-a952-49b5-ae2e-b63be84ad89f
-[00:59]   [ComfyUI] [SubprocessWorker]   [3] /home/shadeform/.venv/bin
-[00:59]   [ComfyUI] Calling execution.validate_prompt()...
-[00:59]   [ComfyUI] [SubprocessWorker]   [4] /usr/local/bin
-[00:59]   [ComfyUI] Validation result: valid=True
-[00:59]   [ComfyUI] [SubprocessWorker]   [5] /usr/bin
-[00:59]   [ComfyUI] === Validation PASSED ===
-[00:59]   [ComfyUI] [SubprocessWorker]   [6] /bin
-[00:59]   [ComfyUI] got prompt
-[00:59]   [ComfyUI] [SubprocessWorker]   [7] /snap/bin
-[00:59]   [ComfyUI] [SubprocessWorker] call_method: nodes.loaders.LoadP3SAMSegmentor.load_model
-[00:59]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[00:59]   [ComfyUI] [worker] PATH has 8 entries:
-[00:59]   [ComfyUI] [worker]   [0] /home/shadeform/.local/bin
-[00:59]   [ComfyUI] [worker]   [1] /home/shadeform/.local/bin
-[00:59]   [ComfyUI] [worker]   [2] /home/shadeform/.local/bin
-[00:59]   [ComfyUI] [worker]   [3] /home/shadeform/.venv/bin
-[00:59]   [ComfyUI] [worker]   [4] /usr/local/bin
-[00:59]   [ComfyUI] [worker]   [5] /usr/bin
-[00:59]   [ComfyUI] [worker]   [6] /bin
-[00:59]   [ComfyUI] [worker]   [7] /snap/bin
-[01:00]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] ERROR: Failed to import comfy_kitchen, Error: No module named 'comfy_kitchen', fp8 and fp4 support will not be available.
-[01:00]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[01:00]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[01:00]   [ComfyUI] [SubprocessWorker] created 0 shm blocks
-[01:00]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[01:01]   Frame 2 saved (frame_001.jpg, t=2.3s)
-[01:01]   [capture-periodic] freeze=2ms shot=122ms unfreeze=2ms saved=True
-[01:02]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load P3-SAM] Ensuring model files are downloaded...
-[01:02]   [ComfyUI] 2026-02-24 15:20:22,462 - hy3dgen.partgen - INFO - Downloading models to /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part...
-[01:02]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Downloading models to /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part...
-[01:02]   [ComfyUI] 2026-02-24 15:20:22,463 - hy3dgen.partgen - INFO - Downloading model.safetensors...
-[01:02]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Downloading model.safetensors...
-[01:04]   [capture-loop] iter=50 t=5.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=2
-[01:10]   [capture-loop] iter=100 t=11.3s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3
-[01:15]   [capture-loop] iter=150 t=16.9s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=2
-[01:16]   [ComfyUI] 2026-02-24 15:20:36,030 - hy3dgen.partgen - INFO - Downloading shapevae.safetensors...
-[01:16]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Downloading shapevae.safetensors...
-[01:19]   [ComfyUI] 2026-02-24 15:20:39,465 - hy3dgen.partgen - INFO - Downloading conditioner.safetensors...
-[01:21]   [capture-loop] iter=200 t=22.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3
-[01:23]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Downloading conditioner.safetensors...
-[01:28]   [ComfyUI] 2026-02-24 15:20:47,564 - hy3dgen.partgen - INFO - Downloading p3sam.safetensors...
-[01:28]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Downloading p3sam.safetensors...
-[01:28]   [ComfyUI] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-[01:28]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] WARNING: Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-[01:29]   [capture-loop] iter=250 t=30.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=2
-[01:30]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load P3-SAM] Model files ready at /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[01:30]   [ComfyUI] [SubprocessWorker] got response: ok
-[01:30]   [ComfyUI] [SubprocessWorker] call_method: nodes.loaders.LoadSonataEncoder.load_model
-[01:30]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[01:30]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-[01:30]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-[01:30]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[01:30]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[01:30]   [ComfyUI] [SubprocessWorker] created 0 shm blocks
-[01:30]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[01:30]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load Sonata Encoder] Ensuring model files are downloaded...
-[01:30]   [ComfyUI] 2026-02-24 15:20:49,862 - hy3dgen.partgen - INFO - Using local models at: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[01:30]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Using local models at: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[01:30]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load Sonata Encoder] Model files ready at /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[01:30]   [ComfyUI] [SubprocessWorker] got response: ok
-[01:30]   [ComfyUI] [SubprocessWorker] call_method: nodes.main.io.load_mesh.LoadMesh.load_mesh
-[01:30]   [ComfyUI] [comfy-env] SubprocessWorker: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f/bin/python
-[01:30]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[01:30]   [ComfyUI] [comfy-env] env_vars: {'KMP_DUPLICATE_LIB_OK': 'TRUE', 'OMP_NUM_THREADS': '1', 'COMFYUI_BASE': '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI'}
-[01:30]   [ComfyUI] [ComfyUI-GeometryPack] python: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f/bin/python
-[01:30]   [ComfyUI] [ComfyUI-GeometryPack] sys_path sent to worker: ['/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f/lib/python3.1/site-packages', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack']
-[01:30]   [ComfyUI] [SubprocessWorker] is_pixi=False, python=/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f/bin/python
-[01:30]   [ComfyUI] [SubprocessWorker] launching cmd=['/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f/bin/python', '/tmp/comfyui_pvenv_2ljgtbt3/persistent_worker.py', 'unix:///dev/shm/comfy_worker_0ba81ea868c2.sock']...
-[01:30]   [ComfyUI] [SubprocessWorker] PATH has 8 entries:
-[01:30]   [ComfyUI] [SubprocessWorker]   [0] /home/shadeform/.local/bin
-[01:30]   [ComfyUI] [SubprocessWorker]   [1] /home/shadeform/.local/bin
-[01:30]   [ComfyUI] [SubprocessWorker]   [2] /home/shadeform/.local/bin
-[01:30]   [ComfyUI] [SubprocessWorker]   [3] /home/shadeform/.venv/bin
-[01:30]   [ComfyUI] [SubprocessWorker]   [4] /usr/local/bin
-[01:30]   [ComfyUI] [SubprocessWorker]   [5] /usr/bin
-[01:30]   [ComfyUI] [SubprocessWorker]   [6] /bin
-[01:30]   [ComfyUI] [SubprocessWorker]   [7] /snap/bin
-[01:30]   [ComfyUI] [worker] PATH has 8 entries:
-[01:30]   [ComfyUI] [worker]   [0] /home/shadeform/.local/bin
-[01:30]   [ComfyUI] [worker]   [1] /home/shadeform/.local/bin
-[01:30]   [ComfyUI] [worker]   [2] /home/shadeform/.local/bin
-[01:30]   [ComfyUI] [worker]   [3] /home/shadeform/.venv/bin
-[01:30]   [ComfyUI] [worker]   [4] /usr/local/bin
-[01:30]   [ComfyUI] [worker]   [5] /usr/bin
-[01:30]   [ComfyUI] [worker]   [6] /bin
-[01:30]   [ComfyUI] [worker]   [7] /snap/bin
-[01:30]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[01:30]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[01:30]   [ComfyUI] [SubprocessWorker] created 0 shm blocks
-[01:30]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[01:30]   Frame 3 saved (frame_002.jpg, t=31.6s)
-[01:30]   [capture-periodic] freeze=2ms shot=134ms unfreeze=2ms saved=True
-[01:31]   [ComfyUI] [worker:ComfyUI-GeometryPack] [LoadMesh] Found mesh in input folder: 3d/utah_teapot.stl
-[01:31]   [ComfyUI] [worker:ComfyUI-GeometryPack] [load_mesh_file] Loading: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/input/3d/utah_teapot.stl
-[01:31]   [ComfyUI] [worker:ComfyUI-GeometryPack] [load_mesh_file] Loaded type: Trimesh
-[01:31]   [ComfyUI] [worker:ComfyUI-GeometryPack] [load_mesh_file] Initial mesh: 4719 vertices, 9438 faces
-[01:31]   [ComfyUI] [worker:ComfyUI-GeometryPack] [load_mesh_file] Successfully loaded: 4719 vertices, 9438 faces
-[01:31]   [ComfyUI] [worker:ComfyUI-GeometryPack] [LoadMesh] Loaded: 4719 vertices, 9438 faces
-[01:31]   [ComfyUI] [worker:ComfyUI-GeometryPack] [LoadMesh] No texture found in mesh
-[01:31]   [ComfyUI] [SubprocessWorker] got response: ok
-[01:31]   [ComfyUI] [SubprocessWorker] call_method: nodes.processing.ComputeMeshFeatures.compute_features
-[01:31]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[01:31]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-[01:31]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-[01:31]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[01:31]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[01:31]   [ComfyUI] [SubprocessWorker] created 1 shm blocks
-[01:31]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[01:31]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Computing mesh features...
-[01:32]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] WARNING: No comfy kitchen, using old apply_rope functions.
-[01:32]   Frame 4 saved (frame_003.jpg, t=33.8s)
-[01:32]   [capture-periodic] freeze=2ms shot=213ms unfreeze=2ms saved=True
-[01:35]   Frame 5 saved (frame_004.jpg, t=36.2s)
-[01:35]   [capture-periodic] freeze=2ms shot=252ms unfreeze=2ms saved=True
-[01:35]   [capture-loop] iter=300 t=36.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=2
-[01:38]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Sonata Encoder] Building model (precision=auto, attn_backend=auto)...
-[01:38]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Downloading sonata from HuggingFace (first time)...
-[01:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Downloaded to: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/sonata/sonata.pth
-[01:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] flash attention: True
-[01:40]   [capture-loop] iter=350 t=42.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=2
-[01:42]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Model params: 108.46M 108461376
-[01:42]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Sonata Encoder] Loaded 453 Sonata backbone weights from P3-SAM checkpoint
-[01:42]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [lowvram] Enabled: 80 cast modules, 25 orphan-param hooks
-[01:42]   [ComfyUI] [comfy-env] VRAM request: 0.22GB, free before eviction: 47.75GB
-[01:42]   [ComfyUI] [comfy-env] VRAM after eviction: 47.75GB
-[01:42]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Sonata Encoder] Loaded on cuda:0, dtype=torch.bfloat16
-[01:42]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Cleaning mesh...
-[01:42]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Building adjacent faces...
-[01:42]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Sampling 100000 points...
-[01:42]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Extracting Sonata features...
-[01:43]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Features computed (0.44s)
-[01:43]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Computing PCA4 debug field...
-[01:44]   [ComfyUI] [SubprocessWorker] got response: ok
-[01:45]   [ComfyUI] [SubprocessWorker] call_method: nodes.main.visualization.preview_mesh_vtk.PreviewMeshVTKNode.preview_mesh_vtk
-[01:45]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[01:45]   [ComfyUI] [ComfyUI-GeometryPack] Health check: ping (timeout=5.0s)...
-[01:45]   [ComfyUI] [ComfyUI-GeometryPack] Health check: ok
-[01:45]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[01:45]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[01:45]   [ComfyUI] [SubprocessWorker] created 1 shm blocks
-[01:45]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Preparing preview: Mesh - 4719 vertices, 9438 faces
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - hasattr vertex_attributes: True
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - hasattr face_attributes: True
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - vertex_attributes: {'features_pca4_debug': array([[ 2.9833302e+00,  1.7860725e+00,  5.7464200e-01, -2.3673502e-01],
-[01:46]   [ComfyUI]        [ 2.9791441e+00,  1.7997681e+00,  5.5016559e-01, -2.7611294e-01],
-[01:46]   [ComfyUI]        [ 2.9517012e+00,  1.8625133e+00,  3.8932553e-01, -1.3492003e-03],
-[01:46]   [ComfyUI]        ...,
-[01:46]   [ComfyUI]        [ 3.9735024e+00,  5.3686216e-02, -2.5746169e+00, -1.0629033e+00],
-[01:46]   [ComfyUI]        [ 3.7725196e+00,  4.0430967e-02, -2.6851254e+00, -9.7775447e-01],
-[01:46]   [ComfyUI]        [-4.8414898e-01, -5.8603060e-01, -7.6294595e-01,  1.4081037e-01]],
-[01:46]   [ComfyUI]       shape=(4719, 4), dtype=float32)}
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - len(vertex_attributes): 1
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - face_attributes: {}
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - len(face_attributes): 0
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - has_vertex_attrs: True
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - has_face_attrs: False
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - has_fields: True
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Mode: fields
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Visual data - has_visual: True, kind: None, texture: False, vertex_colors: False
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Using VTP format (fields=True, point_cloud=False)
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Using fields mode - VTP/STL export
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp] Exporting mesh to VTP: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/preview_vtk_087eeaf1.vtp
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp]   Adding scalar field: features_pca4_debug
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp] Export complete: 4719 vertices, 9438 faces
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Exported VTP to: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/preview_vtk_087eeaf1.vtp
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Vertex attributes: ['features_pca4_debug']
-[01:46]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Fields mode info: watertight=True, volume=526.507402589034, area=388.60625943857985, fields=['features_pca4_debug']
-[01:46]   [ComfyUI] [SubprocessWorker] got response: ok
-[01:46]   [ComfyUI] [SubprocessWorker] call_method: nodes.processing.P3SAMSegmentMesh.segment
-[01:46]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[01:46]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-[01:46]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-[01:46]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[01:46]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[01:46]   Node executed (1 total), capturing...
-[01:46]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-[01:46]   [Console-error] No input!
-[01:46]   Frame 6 saved (frame_005.jpg, t=47.9s)
-[01:46]   [capture-node] freeze=34ms shot=142ms unfreeze=2ms saved=True
-[01:46]   [capture-loop] iter=400 t=48.2s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=2
-[01:47]   [ComfyUI] [SubprocessWorker] created 1 shm blocks
-[01:47]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[01:47]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] Running segmentation with 400 prompts, batch_size=1...
-[01:47]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] before model load: allocated=0.21GB, reserved=0.84GB, total=47.40GB
-[01:47]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM] Building model (precision=auto, attn_backend=auto)...
-[01:47]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Loading sonata from cache: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/sonata/sonata.pth
-[01:47]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] flash attention: True
-[01:49]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Model params: 108.46M 108461376
-[01:49]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM] precision=auto, dtype=torch.bfloat16
-[01:49]   Frame 7 saved (frame_006.jpg, t=50.1s)
-[01:49]   [capture-periodic] freeze=2ms shot=109ms unfreeze=2ms saved=True
-[01:49]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [lowvram] Enabled: 107 cast modules, 25 orphan-param hooks
-[01:49]   [ComfyUI] [comfy-env] VRAM request: 0.23GB, free before eviction: 46.75GB
-[01:49]   [ComfyUI] [comfy-env] VRAM after eviction: 46.75GB
-[01:49]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM] Model loaded on cuda:0
-[01:49]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after model load: allocated=0.42GB, reserved=0.44GB, total=47.40GB
-[01:49]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after tensor pre-upload: allocated=0.52GB, reserved=0.53GB, total=47.40GB
-[01:49]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] 400 prompts / batch_size 1 = 400 steps
-[01:49]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] before inference loop: allocated=0.52GB, reserved=0.53GB, total=47.40GB
-[01:49]   [ComfyUI] 
-[01:49]   [ComfyUI] P3-SAM Inference:   0%|                                                                                                                                      | 0/400 [00:00<?, ?it/s][worker:ComfyUI-Hunyuan3D-Part] [VRAM] after first batch (bs=1): allocated=0.52GB, reserved=1.41GB, total=47.40GB
-[01:49]   [ComfyUI] 
-[01:49]   [ComfyUI] P3-SAM Inference:   2%|█▉                                                                                                                            | 6/400 [00:00<00:06, 57.38it/s]
-[01:49]   [ComfyUI] P3-SAM Inference:   3%|████                                                                                                                         | 13/400 [00:00<00:06, 62.15it/s]
-[01:50]   [ComfyUI] P3-SAM Inference:   5%|██████▎                                                                                                                      | 20/400 [00:00<00:05, 63.50it/s]
-[01:50]   [ComfyUI] P3-SAM Inference:   7%|████████▍                                                                                                                    | 27/400 [00:00<00:05, 64.11it/s]
-[01:50]   [ComfyUI] P3-SAM Inference:   8%|██████████▋                                                                                                                  | 34/400 [00:00<00:05, 64.49it/s]
-[01:50]   [ComfyUI] P3-SAM Inference:  10%|████████████▊                                                                                                                | 41/400 [00:00<00:05, 63.65it/s]
-[01:50]   [ComfyUI] P3-SAM Inference:  12%|███████████████                                                                                                              | 48/400 [00:00<00:05, 63.97it/s]
-[01:50]   [ComfyUI] P3-SAM Inference:  14%|█████████████████▏                                                                                                           | 55/400 [00:00<00:05, 64.44it/s]
-[01:50]   [ComfyUI] P3-SAM Inference:  16%|███████████████████▍                                                                                                         | 62/400 [00:00<00:05, 64.32it/s]
-[01:50]   [ComfyUI] P3-SAM Inference:  17%|█████████████████████▌                                                                                                       | 69/400 [00:01<00:05, 64.17it/s]
-[01:51]   Frame 8 saved (frame_007.jpg, t=52.4s)
-[01:51]   [ComfyUI] P3-SAM Inference:  19%|███████████████████████▊                                                                                                     | 76/400 [00:01<00:05, 63.89it/s]
-[01:51]   [capture-periodic] freeze=2ms shot=128ms unfreeze=2ms saved=True
-[01:51]   [ComfyUI] P3-SAM Inference:  21%|█████████████████████████▉                                                                                                   | 83/400 [00:01<00:04, 63.77it/s]
-[01:51]   [ComfyUI] P3-SAM Inference:  22%|████████████████████████████▏                                                                                                | 90/400 [00:01<00:04, 63.85it/s]
-[01:51]   [ComfyUI] P3-SAM Inference:  24%|██████████████████████████████▎                                                                                              | 97/400 [00:01<00:04, 63.91it/s]
-[01:51]   [ComfyUI] P3-SAM Inference:  26%|████████████████████████████████▏                                                                                           | 104/400 [00:01<00:04, 64.44it/s]
-[01:51]   [ComfyUI] P3-SAM Inference:  28%|██████████████████████████████████▍                                                                                         | 111/400 [00:01<00:04, 64.45it/s]
-[01:51]   [ComfyUI] P3-SAM Inference:  30%|████████████████████████████████████▌                                                                                       | 118/400 [00:01<00:04, 64.56it/s]
-[01:51]   [ComfyUI] P3-SAM Inference:  31%|██████████████████████████████████████▊                                                                                     | 125/400 [00:01<00:04, 64.50it/s]
-[01:51]   [ComfyUI] P3-SAM Inference:  33%|████████████████████████████████████████▉                                                                                   | 132/400 [00:02<00:04, 64.49it/s]
-[01:51]   [ComfyUI] P3-SAM Inference:  35%|███████████████████████████████████████████                                                                                 | 139/400 [00:02<00:04, 63.78it/s]
-[01:52]   [ComfyUI] P3-SAM Inference:  36%|█████████████████████████████████████████████▎                                                                              | 146/400 [00:02<00:03, 64.20it/s]
-[01:52]   [ComfyUI] P3-SAM Inference:  38%|███████████████████████████████████████████████▍                                                                            | 153/400 [00:02<00:03, 64.23it/s]
-[01:52]   [ComfyUI] P3-SAM Inference:  40%|█████████████████████████████████████████████████▌                                                                          | 160/400 [00:02<00:03, 64.42it/s]
-[01:52]   [ComfyUI] P3-SAM Inference:  42%|███████████████████████████████████████████████████▊                                                                        | 167/400 [00:02<00:03, 64.35it/s]
-[01:52]   [capture-loop] iter=450 t=53.7s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=2
-[01:52]   [ComfyUI] P3-SAM Inference:  44%|█████████████████████████████████████████████████████▉                                                                      | 174/400 [00:02<00:03, 64.57it/s]
-[01:52]   [ComfyUI] P3-SAM Inference:  45%|████████████████████████████████████████████████████████                                                                    | 181/400 [00:02<00:03, 64.48it/s]
-[01:52]   [ComfyUI] P3-SAM Inference:  47%|██████████████████████████████████████████████████████████▎                                                                 | 188/400 [00:02<00:03, 64.51it/s]
-[01:52]   [ComfyUI] P3-SAM Inference:  49%|████████████████████████████████████████████████████████████▍                                                               | 195/400 [00:03<00:03, 64.34it/s]
-[01:52]   [ComfyUI] P3-SAM Inference:  50%|██████████████████████████████████████████████████████████████▌                                                             | 202/400 [00:03<00:03, 64.51it/s]
-[01:53]   [ComfyUI] P3-SAM Inference:  52%|████████████████████████████████████████████████████████████████▊                                                           | 209/400 [00:03<00:02, 64.24it/s]
-[01:53]   [ComfyUI] P3-SAM Inference:  54%|██████████████████████████████████████████████████████████████████▉                                                         | 216/400 [00:03<00:02, 64.46it/s]
-[01:53]   [ComfyUI] P3-SAM Inference:  56%|█████████████████████████████████████████████████████████████████████▏                                                      | 223/400 [00:03<00:02, 64.25it/s]
-[01:53]   [ComfyUI] P3-SAM Inference:  57%|███████████████████████████████████████████████████████████████████████▎                                                    | 230/400 [00:03<00:02, 64.44it/s]
-[01:53]   [ComfyUI] P3-SAM Inference:  59%|█████████████████████████████████████████████████████████████████████████▍                                                  | 237/400 [00:03<00:02, 64.39it/s]
-[01:53]   Frame 9 saved (frame_008.jpg, t=54.6s)
-[01:53]   [capture-periodic] freeze=2ms shot=118ms unfreeze=3ms saved=True
-[01:53]   [ComfyUI] P3-SAM Inference:  61%|███████████████████████████████████████████████████████████████████████████▋                                                | 244/400 [00:03<00:02, 64.56it/s]
-[01:53]   [ComfyUI] P3-SAM Inference:  63%|█████████████████████████████████████████████████████████████████████████████▊                                              | 251/400 [00:03<00:02, 64.68it/s]
-[01:53]   [ComfyUI] P3-SAM Inference:  64%|███████████████████████████████████████████████████████████████████████████████▉                                            | 258/400 [00:04<00:02, 64.82it/s]
-[01:53]   [ComfyUI] P3-SAM Inference:  66%|██████████████████████████████████████████████████████████████████████████████████▏                                         | 265/400 [00:04<00:02, 64.61it/s]
-[01:54]   [ComfyUI] P3-SAM Inference:  68%|████████████████████████████████████████████████████████████████████████████████████▎                                       | 272/400 [00:04<00:01, 64.78it/s]
-[01:54]   [ComfyUI] P3-SAM Inference:  70%|██████████████████████████████████████████████████████████████████████████████████████▍                                     | 279/400 [00:04<00:01, 64.63it/s]
-[01:54]   [ComfyUI] P3-SAM Inference:  72%|████████████████████████████████████████████████████████████████████████████████████████▋                                   | 286/400 [00:04<00:01, 64.58it/s]
-[01:54]   [ComfyUI] P3-SAM Inference:  73%|██████████████████████████████████████████████████████████████████████████████████████████▊                                 | 293/400 [00:04<00:01, 64.52it/s]
-[01:54]   [ComfyUI] P3-SAM Inference:  75%|█████████████████████████████████████████████████████████████████████████████████████████████                               | 300/400 [00:04<00:01, 64.71it/s]
-[01:54]   [ComfyUI] P3-SAM Inference:  77%|███████████████████████████████████████████████████████████████████████████████████████████████▏                            | 307/400 [00:04<00:01, 64.41it/s]
-[01:54]   [ComfyUI] P3-SAM Inference:  78%|█████████████████████████████████████████████████████████████████████████████████████████████████▎                          | 314/400 [00:04<00:01, 64.54it/s]
-[01:55]   [ComfyUI] P3-SAM Inference:  80%|███████████████████████████████████████████████████████████████████████████████████████████████████▌                        | 321/400 [00:05<00:02, 34.13it/s]
-[01:55]   [ComfyUI] P3-SAM Inference:  82%|█████████████████████████████████████████████████████████████████████████████████████████████████████▋                      | 328/400 [00:05<00:01, 39.67it/s]
-[01:55]   [ComfyUI] P3-SAM Inference:  84%|███████████████████████████████████████████████████████████████████████████████████████████████████████▊                    | 335/400 [00:05<00:01, 44.96it/s]
-[01:55]   [ComfyUI] P3-SAM Inference:  86%|██████████████████████████████████████████████████████████████████████████████████████████████████████████                  | 342/400 [00:05<00:01, 49.31it/s]
-[01:55]   [ComfyUI] P3-SAM Inference:  87%|████████████████████████████████████████████████████████████████████████████████████████████████████████████▏               | 349/400 [00:05<00:00, 53.09it/s]
-[01:55]   [ComfyUI] P3-SAM Inference:  89%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████▎             | 356/400 [00:05<00:00, 55.93it/s]
-[01:55]   [ComfyUI] P3-SAM Inference:  91%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌           | 363/400 [00:05<00:00, 58.18it/s]
-[01:55]   Frame 10 saved (frame_009.jpg, t=56.9s)
-[01:55]   [capture-periodic] freeze=2ms shot=162ms unfreeze=2ms saved=True
-[01:55]   [ComfyUI] P3-SAM Inference:  92%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋         | 370/400 [00:06<00:00, 60.16it/s]
-[01:55]   [ComfyUI] P3-SAM Inference:  94%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊       | 377/400 [00:06<00:00, 61.52it/s]
-[01:56]   [ComfyUI] P3-SAM Inference:  96%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████     | 384/400 [00:06<00:00, 62.17it/s]
-[01:56]   [ComfyUI] P3-SAM Inference:  98%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏  | 391/400 [00:06<00:00, 62.92it/s]
-[01:56]   [ComfyUI] P3-SAM Inference: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍| 398/400 [00:06<00:00, 63.50it/s]
-[01:56]   [ComfyUI] P3-SAM Inference: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 400/400 [00:06<00:00, 61.16it/s]
-[01:56]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after inference loop: allocated=0.52GB, reserved=1.53GB, total=47.40GB
-[01:56]   [ComfyUI] 
-[01:56]   [ComfyUI] NMS:   0%|                                                                                                                                                   | 0/400 [00:00<?, ?it/s]
-[01:58]   [ComfyUI] NMS:  14%|██████████████████▊                                                                                                                      | 55/400 [00:00<00:00, 546.16it/s]
-[01:58]   [ComfyUI] NMS:  28%|█████████████████████████████████████▍                                                                                                  | 110/400 [00:00<00:00, 490.65it/s]
-[01:58]   [ComfyUI] NMS:  40%|██████████████████████████████████████████████████████▍                                                                                 | 160/400 [00:00<00:00, 364.60it/s]
-[01:58]   [ComfyUI] NMS:  50%|████████████████████████████████████████████████████████████████████                                                                    | 200/400 [00:00<00:00, 371.26it/s]
-[01:58]   [ComfyUI] NMS:  60%|█████████████████████████████████████████████████████████████████████████████████▌                                                      | 240/400 [00:00<00:00, 361.65it/s]
-[01:58]   [ComfyUI] NMS:  70%|██████████████████████████████████████████████████████████████████████████████████████████████▌                                         | 278/400 [00:00<00:00, 357.49it/s]
-[01:58]   [ComfyUI] NMS:  79%|███████████████████████████████████████████████████████████████████████████████████████████████████████████                             | 315/400 [00:00<00:00, 357.10it/s]
-[01:58]   [ComfyUI] NMS:  88%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋                | 352/400 [00:00<00:00, 350.53it/s]
-[01:58]   [ComfyUI] NMS:  97%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉    | 388/400 [00:01<00:00, 350.93it/s]
-[01:58]   [ComfyUI] NMS: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 400/400 [00:01<00:00, 367.96it/s]
-[01:58]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] NMS complete: 4 clusters
-[01:58]   Frame 11 saved (frame_010.jpg, t=59.2s)
-[01:58]   [capture-periodic] freeze=3ms shot=144ms unfreeze=3ms saved=True
-[01:58]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] >>>>>> compute aabb runtime: 0.0213 seconds
-[01:58]   [ComfyUI] 
-[01:58]   [ComfyUI] 0it [00:00, ?it/s][worker:ComfyUI-Hunyuan3D-Part] >>>>>> merge mesh runtime: 0.0051 seconds
-[01:58]   [ComfyUI] 
-[01:58]   [ComfyUI] 3it [00:00, 457.06it/s]
-[01:58]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] Segmentation complete: found 3 parts
-[01:58]   [capture-loop] iter=500 t=60.0s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=2
-[01:59]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]
-[01:59]   [ComfyUI] === WATCHDOG TICK 1 ===
-[01:59]   [ComfyUI] [SubprocessWorker] got response: ok
-[01:59]   [ComfyUI] [SubprocessWorker] call_method: nodes.main.visualization.preview_mesh_vtk.PreviewMeshVTKNode.preview_mesh_vtk
-[01:59]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[01:59]   [ComfyUI] [ComfyUI-GeometryPack] Health check: ping (timeout=5.0s)...
-[01:59]   [ComfyUI] [ComfyUI-GeometryPack] Health check: ok
-[01:59]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[01:59]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[02:00]   [ComfyUI] [SubprocessWorker] created 1 shm blocks
-[02:00]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[02:00]   Frame 12 saved (frame_011.jpg, t=61.4s)
-[02:00]   [capture-periodic] freeze=2ms shot=118ms unfreeze=2ms saved=True
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Preparing preview: Mesh - 4719 vertices, 9438 faces
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - hasattr vertex_attributes: True
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - hasattr face_attributes: True
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - vertex_attributes: {'features_pca4_debug': array([[ 2.9833302e+00,  1.7860725e+00,  5.7464200e-01, -2.3673502e-01],
-[02:00]   [ComfyUI]        [ 2.9791441e+00,  1.7997681e+00,  5.5016559e-01, -2.7611294e-01],
-[02:00]   [ComfyUI]        [ 2.9517012e+00,  1.8625133e+00,  3.8932553e-01, -1.3492003e-03],
-[02:00]   [ComfyUI]        ...,
-[02:00]   [ComfyUI]        [ 3.9735024e+00,  5.3686216e-02, -2.5746169e+00, -1.0629033e+00],
-[02:00]   [ComfyUI]        [ 3.7725196e+00,  4.0430967e-02, -2.6851254e+00, -9.7775447e-01],
-[02:00]   [ComfyUI]        [-4.8414898e-01, -5.8603060e-01, -7.6294595e-01,  1.4081037e-01]],
-[02:00]   [ComfyUI]       shape=(4719, 4), dtype=float32)}
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - len(vertex_attributes): 1
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - face_attributes: {'part_id': array([2, 2, 2, ..., 1, 1, 1], shape=(9438,), dtype=int32)}
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - len(face_attributes): 1
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - has_vertex_attrs: True
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - has_face_attrs: True
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - has_fields: True
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Mode: fields
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Visual data - has_visual: True, kind: None, texture: False, vertex_colors: False
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Using VTP format (fields=True, point_cloud=False)
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Using fields mode - VTP/STL export
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp] Exporting mesh to VTP: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/preview_vtk_b8cb15af.vtp
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp]   Adding scalar field: features_pca4_debug
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp]   Adding face field: part_id
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp] Export complete: 4719 vertices, 9438 faces
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Exported VTP to: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/preview_vtk_b8cb15af.vtp
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Vertex attributes: ['features_pca4_debug']
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Face attributes: ['part_id']
-[02:00]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Fields mode info: watertight=True, volume=526.507402589034, area=388.60625943857985, fields=['features_pca4_debug', 'face.part_id']
-[02:00]   [ComfyUI] [SubprocessWorker] got response: ok
-[02:00]   [ComfyUI] [SubprocessWorker] call_method: nodes.loaders.LoadXPartModels.load_models
-[02:00]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[02:00]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-[02:00]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: failed
-[02:00]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Socket unhealthy, restarting worker...
-[02:00]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/lib/python3.12/multiprocessing/resource_tracker.py:279: UserWarning: resource_tracker: There appear to be 2 leaked shared_memory objects to clean up at shutdown
-[02:00]   [ComfyUI]   warnings.warn('resource_tracker: There appear to be %d '
-[02:00]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/lib/python3.12/multiprocessing/resource_tracker.py:292: UserWarning: resource_tracker: '/psm_170e35cc': [Errno 2] No such file or directory: '/psm_170e35cc'
-[02:00]   [ComfyUI]   warnings.warn('resource_tracker: %r: %s' % (name, e))
-[02:00]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/lib/python3.12/multiprocessing/resource_tracker.py:292: UserWarning: resource_tracker: '/psm_14292cc8': [Errno 2] No such file or directory: '/psm_14292cc8'
-[02:00]   [ComfyUI]   warnings.warn('resource_tracker: %r: %s' % (name, e))
-[02:00]   [Console-error] No input!
-[02:00]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-[02:00]   Node executed (2 total), capturing...
-[02:00]   [Console-error] No input!
-[02:01]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] python: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/bin/python
-[02:01]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] sys_path sent to worker: ['/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/lib/python3.1/site-packages', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part']
-[02:01]   [ComfyUI] [SubprocessWorker] is_pixi=False, python=/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/bin/python
-[02:01]   [ComfyUI] [SubprocessWorker] launching cmd=['/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/bin/python', '/tmp/comfyui_pvenv_4y_7g70k/persistent_worker.py', 'unix:///dev/shm/comfy_worker_89f522ab626e.sock']...
-[02:01]   [ComfyUI] [SubprocessWorker] PATH has 8 entries:
-[02:01]   [ComfyUI] [SubprocessWorker]   [0] /home/shadeform/.local/bin
-[02:01]   [ComfyUI] [SubprocessWorker]   [1] /home/shadeform/.local/bin
-[02:01]   [ComfyUI] [SubprocessWorker]   [2] /home/shadeform/.local/bin
-[02:01]   [ComfyUI] [SubprocessWorker]   [3] /home/shadeform/.venv/bin
-[02:01]   [ComfyUI] [SubprocessWorker]   [4] /usr/local/bin
-[02:01]   [ComfyUI] [SubprocessWorker]   [5] /usr/bin
-[02:01]   [ComfyUI] [SubprocessWorker]   [6] /bin
-[02:01]   [ComfyUI] [SubprocessWorker]   [7] /snap/bin
-[02:01]   [ComfyUI] [worker] PATH has 8 entries:
-[02:01]   [ComfyUI] [worker]   [0] /home/shadeform/.local/bin
-[02:01]   [ComfyUI] [worker]   [1] /home/shadeform/.local/bin
-[02:01]   [ComfyUI] [worker]   [2] /home/shadeform/.local/bin
-[02:01]   [ComfyUI] [worker]   [3] /home/shadeform/.venv/bin
-[02:01]   [ComfyUI] [worker]   [4] /usr/local/bin
-[02:01]   [ComfyUI] [worker]   [5] /usr/bin
-[02:01]   [ComfyUI] [worker]   [6] /bin
-[02:01]   [ComfyUI] [worker]   [7] /snap/bin
-[02:01]   Frame 13 saved (frame_012.jpg, t=62.2s)
-[02:01]   [capture-node] freeze=3ms shot=156ms unfreeze=4ms saved=True
-[02:02]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] ERROR: Failed to import comfy_kitchen, Error: No module named 'comfy_kitchen', fp8 and fp4 support will not be available.
-[02:03]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[02:03]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[02:03]   [ComfyUI] [SubprocessWorker] created 0 shm blocks
-[02:03]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[02:04]   [capture-loop] iter=550 t=65.9s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=2
-[02:05]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load X-Part Models] Ensuring model files are downloaded...
-[02:05]   [ComfyUI] 2026-02-24 15:21:24,786 - hy3dgen.partgen - INFO - Using local models at: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[02:05]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Using local models at: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[02:05]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load X-Part Models] Model files ready at /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[02:05]   [ComfyUI] [SubprocessWorker] got response: ok
-[02:05]   [ComfyUI] [SubprocessWorker] call_method: nodes.processing.ComputeMeshFeatures.compute_features
-[02:05]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[02:05]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-[02:05]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-[02:05]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[02:05]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[02:05]   Frame 14 saved (frame_013.jpg, t=66.7s)
-[02:05]   [capture-periodic] freeze=2ms shot=139ms unfreeze=2ms saved=True
-[02:05]   [ComfyUI] [SubprocessWorker] created 1 shm blocks
-[02:05]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[02:06]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Computing mesh features...
-[02:06]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] WARNING: No comfy kitchen, using old apply_rope functions.
-[02:10]   [capture-loop] iter=600 t=71.5s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=2
-[02:12]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Sonata Encoder] Building model (precision=auto, attn_backend=auto)...
-[02:12]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Loading sonata from cache: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/sonata/sonata.pth
-[02:12]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] flash attention: True
-[02:14]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Model params: 108.46M 108461376
-[02:14]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Sonata Encoder] Loaded 453 Sonata backbone weights from P3-SAM checkpoint
-[02:14]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [lowvram] Enabled: 80 cast modules, 25 orphan-param hooks
-[02:14]   [ComfyUI] [comfy-env] VRAM request: 0.22GB, free before eviction: 47.82GB
-[02:14]   [ComfyUI] [comfy-env] VRAM after eviction: 47.82GB
-[02:15]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Sonata Encoder] Loaded on cuda:0, dtype=torch.bfloat16
-[02:15]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Cleaning mesh...
-[02:15]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Building adjacent faces...
-[02:15]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Using ALL 4719 mesh vertices...
-[02:15]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Extracting Sonata features...
-[02:15]   [capture-loop] iter=650 t=77.0s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=6
-[02:15]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Features computed (0.68s)
-[02:15]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Computing PCA4 debug field...
-[02:15]   [ComfyUI] [SubprocessWorker] got response: ok
-[02:15]   [ComfyUI] [SubprocessWorker] call_method: nodes.processing.XPartGenerateParts.generate
-[02:15]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[02:15]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-[02:15]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-[02:15]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[02:15]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[02:15]   [ComfyUI] [SubprocessWorker] created 1 shm blocks
-[02:15]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[02:15]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [comfy-env] _from_shm got dict with keys: ['__type__', 'strategy', 'manager_path', 'storage_key', 'storage_size']
-[02:15]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [comfy-env] DESERIALIZE TensorRef: tensor_size=[3, 2, 3]
-[02:15]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [comfy-env] DESERIALIZED tensor shape: torch.Size([3, 2, 3])
-[02:15]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Generate] Using pre-computed Sonata features (4719 points)
-[02:16]   Frame 15 saved (frame_014.jpg, t=77.8s)
-[02:16]   [capture-periodic] freeze=2ms shot=109ms unfreeze=2ms saved=True
-[02:18]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Generate] Using 3 bounding boxes
-[02:18]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Models] precision=auto, dtype=torch.bfloat16, attn_backend=auto, ops=disable_weight_init
-[02:18]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Models] Overriding pc_size in config: 40960
-[02:18]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Models] Loading DiT, VAE, and Conditioner (torch.bfloat16, meta-device)...
-[02:18]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] PointCrossAttentionEncoder INFO: pc_sharpedge_size is not given, using pc_size as pc_sharpedge_size
-[02:18]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] PointCrossAttentionEncoder INFO: pc_sharpedge_size is not given, using pc_size as pc_sharpedge_size
-[02:18]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [lowvram] Enabled: 0 cast modules, 1 orphan-param hooks
-[02:18]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] PointCrossAttentionEncoder INFO: pc_sharpedge_size is not given, using pc_size as pc_sharpedge_size
-[02:18]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Models] VAE loaded
-[02:18]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [lowvram] Enabled: 0 cast modules, 7 orphan-param hooks
-[02:18]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Models] DiT loaded
-[02:18]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] flash attention: True
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Model params: 108.46M 108461376
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [lowvram] Enabled: 77 cast modules, 27 orphan-param hooks
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Models] Conditioner loaded
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Models] All models loaded in 2.04s
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Generate] Using torch.bfloat16 precision
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Generate] Running generation...
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   - Octree resolution: 256
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   - Inference steps: 25
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   - Guidance scale: -1.0
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   - Seed: 42
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part] DEBUG: Config values from vae.encoder - pc_size=40960, pc_sharpedge_size=0, total=40960
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part] DEBUG: obj_encoder.encoder.pc_size = 40960
-[02:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part] DEBUG: geo_encoder local_encoder.encoder.pc_size = 40960
-[02:21]   [capture-loop] iter=700 t=82.6s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=2
-[02:22]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Normalize mesh: [0.62423849 0.09375858 4.28576375], 10.98516047000885
-[02:22]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part] DEBUG: Loading object surface with 40960 total points
-[02:23]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part] DEBUG: Object surface loaded, shape=torch.Size([1, 40960, 7]) (expected: [1, 40960, 7])
-[02:23]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Check DEBUG] Normalized AABB (mesh in ~[-0.8,0.8]): torch.Size([3, 2, 3])
-[02:23]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   Part 0: min=[0.4182470738887787, -0.13370387256145477, -0.22585706412792206], max=[0.8022878170013428, 0.13370230793952942, 0.22716884315013885]
-[02:23]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   Part 1: min=[-0.8021492958068848, -0.49783146381378174, -0.39014118909835815], max=[0.43247082829475403, 0.4978298842906952, 0.23001359403133392]
-[02:23]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   Part 2: min=[-0.39961758255958557, -0.34848225116729736, 0.20725561678409576], max=[0.29165586829185486, 0.32145559787750244, 0.38931939005851746]
-[02:23]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part] DEBUG: Sampling bbox points with num_points=40960
-[02:24]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py:1056: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at /pytorch/torch/csrc/utils/tensor_new.cpp:253.)
-[02:24]   [ComfyUI]   num_tokens = torch.tensor(
-[02:24]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Generate] Stage 1: Conditioning
-[02:24]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] before conditioner load: allocated=1.45GB, reserved=1.47GB, total=47.40GB
-[02:25]   [ComfyUI] [comfy-env] VRAM request: 1.76GB, free before eviction: 46.15GB
-[02:25]   [ComfyUI] [comfy-env] VRAM after eviction: 46.15GB
-[02:25]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after conditioner load: allocated=1.85GB, reserved=1.88GB, total=47.40GB
-[02:25]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part] DEBUG: Clamped input_random_pc_size from 81920 to 40960 (available: 40960)
-[02:25]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Conditioner] Using precomputed Sonata features (4719 -> 40960 points)
-[02:25]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after conditioning: allocated=1.88GB, reserved=3.44GB, total=47.40GB
-[02:25]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Generate] Stage 2: Diffusion (25 steps)
-[02:25]   [ComfyUI] [comfy-env] VRAM request: 6.63GB, free before eviction: 44.04GB
-[02:25]   [ComfyUI] [comfy-env] VRAM after eviction: 44.04GB
-[02:26]   [capture-loop] iter=750 t=88.0s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=3
-[02:28]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after DiT load: allocated=8.06GB, reserved=8.06GB, total=47.40GB
-[02:28]   [ComfyUI] 
-[02:28]   [ComfyUI] Diffusion Sampling::   0%|                                                                                                                                    | 0/25 [00:00<?, ?it/s]
-[02:29]   [ComfyUI] Diffusion Sampling::   4%|████▉                                                                                                                       | 1/25 [00:00<00:12,  1.86it/s]
-[02:29]   [ComfyUI] Diffusion Sampling::   8%|█████████▉                                                                                                                  | 2/25 [00:00<00:09,  2.48it/s]
-[02:29]   [ComfyUI] Diffusion Sampling::  12%|██████████████▉                                                                                                             | 3/25 [00:01<00:08,  2.75it/s]
-[02:30]   Frame 16 saved (frame_015.jpg, t=91.1s)
-[02:30]   [capture-periodic] freeze=5ms shot=139ms unfreeze=5ms saved=True
-[02:30]   [ComfyUI] Diffusion Sampling::  16%|███████████████████▊                                                                                                        | 4/25 [00:01<00:07,  2.92it/s]
-[02:30]   [ComfyUI] Diffusion Sampling::  20%|████████████████████████▊                                                                                                   | 5/25 [00:01<00:06,  3.00it/s]
-[02:30]   [ComfyUI] Diffusion Sampling::  24%|█████████████████████████████▊                                                                                              | 6/25 [00:02<00:06,  3.06it/s]
-[02:31]   [ComfyUI] Diffusion Sampling::  28%|██████████████████████████████████▋                                                                                         | 7/25 [00:02<00:05,  3.12it/s]
-[02:31]   [ComfyUI] Diffusion Sampling::  32%|███████████████████████████████████████▋                                                                                    | 8/25 [00:02<00:05,  3.14it/s]
-[02:31]   [ComfyUI] Diffusion Sampling::  36%|████████████████████████████████████████████▋                                                                               | 9/25 [00:03<00:05,  3.15it/s]
-[02:32]   [ComfyUI] Diffusion Sampling::  40%|█████████████████████████████████████████████████▏                                                                         | 10/25 [00:03<00:04,  3.16it/s]
-[02:32]   Frame 17 saved (frame_016.jpg, t=93.4s)
-[02:32]   [capture-periodic] freeze=2ms shot=143ms unfreeze=2ms saved=True
-[02:32]   [ComfyUI] Diffusion Sampling::  44%|██████████████████████████████████████████████████████                                                                     | 11/25 [00:03<00:04,  3.17it/s]
-[02:32]   [capture-loop] iter=800 t=93.8s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=2
-[02:32]   [ComfyUI] Diffusion Sampling::  48%|███████████████████████████████████████████████████████████                                                                | 12/25 [00:03<00:04,  3.18it/s]
-[02:32]   [ComfyUI] Diffusion Sampling::  52%|███████████████████████████████████████████████████████████████▉                                                           | 13/25 [00:04<00:03,  3.18it/s]
-[02:33]   [ComfyUI] Diffusion Sampling::  56%|████████████████████████████████████████████████████████████████████▉                                                      | 14/25 [00:04<00:03,  3.19it/s]
-[02:33]   [ComfyUI] Diffusion Sampling::  60%|█████████████████████████████████████████████████████████████████████████▊                                                 | 15/25 [00:04<00:03,  3.19it/s]
-[02:33]   [ComfyUI] Diffusion Sampling::  64%|██████████████████████████████████████████████████████████████████████████████▋                                            | 16/25 [00:05<00:02,  3.19it/s]
-[02:34]   [ComfyUI] Diffusion Sampling::  68%|███████████████████████████████████████████████████████████████████████████████████▋                                       | 17/25 [00:05<00:02,  3.19it/s]
-[02:34]   [ComfyUI] Diffusion Sampling::  72%|████████████████████████████████████████████████████████████████████████████████████████▌                                  | 18/25 [00:05<00:02,  3.19it/s]
-[02:34]   Frame 18 saved (frame_017.jpg, t=95.6s)
-[02:34]   [capture-periodic] freeze=2ms shot=138ms unfreeze=2ms saved=True
-[02:34]   [ComfyUI] Diffusion Sampling::  76%|█████████████████████████████████████████████████████████████████████████████████████████████▍                             | 19/25 [00:06<00:01,  3.19it/s]
-[02:35]   [ComfyUI] Diffusion Sampling::  80%|██████████████████████████████████████████████████████████████████████████████████████████████████▍                        | 20/25 [00:06<00:01,  3.19it/s]
-[02:35]   [ComfyUI] Diffusion Sampling::  84%|███████████████████████████████████████████████████████████████████████████████████████████████████████▎                   | 21/25 [00:06<00:01,  3.19it/s]
-[02:35]   [ComfyUI] Diffusion Sampling::  88%|████████████████████████████████████████████████████████████████████████████████████████████████████████████▏              | 22/25 [00:07<00:01,  2.96it/s]
-[02:36]   [ComfyUI] Diffusion Sampling::  92%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏         | 23/25 [00:07<00:00,  3.02it/s]
-[02:36]   [ComfyUI] Diffusion Sampling::  96%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████     | 24/25 [00:07<00:00,  3.07it/s]
-[02:36]   [ComfyUI] Diffusion Sampling:: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 25/25 [00:08<00:00,  3.10it/s]
-[02:36]   [ComfyUI] Diffusion Sampling:: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 25/25 [00:08<00:00,  3.07it/s]
-[02:36]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after diffusion: allocated=8.02GB, reserved=8.88GB, total=47.40GB
-[02:36]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Generate] Stage 3: VAE decode (3 parts)
-[02:36]   [ComfyUI] [comfy-env] VRAM request: 0.66GB, free before eviction: 38.20GB
-[02:36]   [ComfyUI] [comfy-env] VRAM after eviction: 38.20GB
-[02:36]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after VAE load: allocated=8.63GB, reserved=8.66GB, total=47.40GB
-[02:36]   [ComfyUI] 
-[02:36]   [ComfyUI] VAE decode:   0%|                                                                                                                                              | 0/3 [00:00<?, ?it/s][worker:ComfyUI-Hunyuan3D-Part] [VAE decode] Part 0/3 — alloc=8.63GB, reserved=8.66GB, chunks=30000
-[02:36]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Export DEBUG] pre-vae latent: shape=torch.Size([1, 1024, 64]), min=-3.3438, max=3.3125, mean=-0.0093, std=0.9375, scale_factor=1.0039506158752403
-[02:36]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Export DEBUG] post-vae latent: shape=torch.Size([1, 1024, 1024]), min=-268.0000, max=328.0000, mean=-0.0075, std=4.5000
-[02:36]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] VAE Trained with Occupancy, inference with marching cubes level -0.001953125.
-[02:36]   [ComfyUI] 
-[02:36]   [ComfyUI] 
-[02:36]   Frame 19 saved (frame_018.jpg, t=97.9s)
-[02:36]   [capture-periodic] freeze=2ms shot=129ms unfreeze=3ms saved=True
-[02:36]   [ComfyUI] MC Level -0.001953125 Implicit Function::   0%|                                                                                                               | 0/72 [00:00<?, ?it/s][A
-[02:36]   [ComfyUI] 
-[02:37]   [ComfyUI] MC Level -0.001953125 Implicit Function::  67%|███████████████████████████████████████████████████████████████████▎                                 | 48/72 [00:00<00:00, 470.68it/s][A
-[02:37]   [ComfyUI] 
-[02:37]   [ComfyUI]                                                                                                                                                                                      [A[worker:ComfyUI-Hunyuan3D-Part] [MC DEBUG] Initial grid_logits: shape=torch.Size([1, 129, 129, 129]), min=-1.0156, max=0.9062, mean=-0.9995, frac_below_threshold=0.9997 (mc_level=-0.001953125)
-[02:37]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/geometry_utils.py:481: UserWarning: Using a non-tuple sequence for multidimensional indexing is deprecated and will be changed in pytorch 2.9; use x[tuple(seq)] instead of x[seq]. In pytorch 2.9 this will be interpreted as tensor index, x[torch.tensor(seq)], which will result either in an error or a different result (Triggered internally at /pytorch/torch/csrc/autograd/python_variable_indexing.cpp:306.)
-[02:37]   [ComfyUI]   sliced = padded[slice_dims]
-[02:37]   [ComfyUI] 
-[02:37]   [ComfyUI] 
-[02:37]   [ComfyUI] MC Level 257 Implicit Function::   0%|                                                                                                                         | 0/2 [00:00<?, ?it/s][A
-[02:37]   [ComfyUI] 
-[02:37]   [ComfyUI]                                                                                                                                                                                      [A[worker:ComfyUI-Hunyuan3D-Part] [VAE decode] Part 0 done — alloc=8.63GB, reserved=8.66GB (cache cleared)
-[02:38]   [ComfyUI] 
-[02:38]   [ComfyUI] VAE decode:  33%|████████████████████████████████████████████▋                                                                                         | 1/3 [00:01<00:02,  1.24s/it][worker:ComfyUI-Hunyuan3D-Part] [VAE decode] Part 1/3 — alloc=8.63GB, reserved=8.66GB, chunks=30000
-[02:38]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Export DEBUG] pre-vae latent: shape=torch.Size([1, 1024, 64]), min=-3.5781, max=4.0000, mean=0.0002, std=0.9453, scale_factor=1.0039506158752403
-[02:38]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Export DEBUG] post-vae latent: shape=torch.Size([1, 1024, 1024]), min=-250.0000, max=308.0000, mean=-0.0151, std=4.3438
-[02:38]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] VAE Trained with Occupancy, inference with marching cubes level -0.001953125.
-[02:38]   [ComfyUI] 
-[02:38]   [ComfyUI] 
-[02:38]   [capture-loop] iter=850 t=99.3s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=2
-[02:38]   [ComfyUI] MC Level -0.001953125 Implicit Function::   0%|                                                                                                               | 0/72 [00:00<?, ?it/s][A
-[02:38]   [ComfyUI] 
-[02:38]   [ComfyUI] MC Level -0.001953125 Implicit Function::  67%|███████████████████████████████████████████████████████████████████▎                                 | 48/72 [00:00<00:00, 476.23it/s][A
-[02:38]   [ComfyUI] 
-[02:38]   [ComfyUI]                                                                                                                                                                                      [A[worker:ComfyUI-Hunyuan3D-Part] [MC DEBUG] Initial grid_logits: shape=torch.Size([1, 129, 129, 129]), min=-1.0234, max=1.0234, mean=-0.9893, frac_below_threshold=0.9945 (mc_level=-0.001953125)
-[02:38]   [ComfyUI] 
-[02:38]   [ComfyUI] 
-[02:38]   [ComfyUI] MC Level 257 Implicit Function::   0%|                                                                                                                        | 0/17 [00:00<?, ?it/s][A
-[02:38]   [ComfyUI] 
-[02:39]   Frame 20 saved (frame_019.jpg, t=100.2s)
-[02:39]   [capture-periodic] freeze=2ms shot=125ms unfreeze=2ms saved=True
-[02:39]   [ComfyUI]                                                                                                                                                                                      [A[worker:ComfyUI-Hunyuan3D-Part] [VAE decode] Part 1 done — alloc=8.63GB, reserved=8.66GB (cache cleared)
-[02:39]   [ComfyUI] 
-[02:39]   [ComfyUI] VAE decode:  67%|█████████████████████████████████████████████████████████████████████████████████████████▎                                            | 2/3 [00:02<00:01,  1.42s/it][worker:ComfyUI-Hunyuan3D-Part] [VAE decode] Part 2/3 — alloc=8.63GB, reserved=8.66GB, chunks=30000
-[02:39]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Export DEBUG] pre-vae latent: shape=torch.Size([1, 1024, 64]), min=-3.3281, max=3.3438, mean=0.0298, std=0.9414, scale_factor=1.0039506158752403
-[02:39]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Export DEBUG] post-vae latent: shape=torch.Size([1, 1024, 1024]), min=-249.0000, max=320.0000, mean=0.0100, std=4.4688
-[02:39]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] VAE Trained with Occupancy, inference with marching cubes level -0.001953125.
-[02:39]   [ComfyUI] 
-[02:39]   [ComfyUI] 
-[02:39]   [ComfyUI] MC Level -0.001953125 Implicit Function::   0%|                                                                                                               | 0/72 [00:00<?, ?it/s][A
-[02:39]   [ComfyUI] 
-[02:39]   [ComfyUI] MC Level -0.001953125 Implicit Function::  67%|███████████████████████████████████████████████████████████████████▎                                 | 48/72 [00:00<00:00, 472.22it/s][A
-[02:39]   [ComfyUI] 
-[02:40]   [ComfyUI]                                                                                                                                                                                      [A[worker:ComfyUI-Hunyuan3D-Part] [MC DEBUG] Initial grid_logits: shape=torch.Size([1, 129, 129, 129]), min=-1.0234, max=1.0078, mean=-0.9985, frac_below_threshold=0.9993 (mc_level=-0.001953125)
-[02:40]   [ComfyUI] 
-[02:40]   [ComfyUI] 
-[02:40]   [ComfyUI] MC Level 257 Implicit Function::   0%|                                                                                                                         | 0/3 [00:00<?, ?it/s][A
-[02:40]   [ComfyUI] 
-[02:40]   [ComfyUI]                                                                                                                                                                                      [A[worker:ComfyUI-Hunyuan3D-Part] [VAE decode] Part 2 done — alloc=8.63GB, reserved=8.66GB (cache cleared)
-[02:40]   [ComfyUI] 
-[02:40]   [ComfyUI] VAE decode: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:03<00:00,  1.24s/it]
-[02:40]   [ComfyUI] VAE decode: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [00:03<00:00,  1.27s/it]
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Denormalize mesh: [0.62423849 0.09375858 4.28576375], 10.98516047000885
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [EXPLODE_MESH] Starting mesh explosion with scale 0.2
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [EXPLODE_MESH] Processing 3 parts
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [EXPLODE_MESH] Part tmpb95yokzu.ply: center = [6.62986539 0.09473173 4.08888628]
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [EXPLODE_MESH] Part tmp08lzx71o.ply: center = [-0.24199893  0.09419384  3.04959393]
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [EXPLODE_MESH] Part tmpot8hksnr.ply: center = [0.03279805 0.1314625  6.98369927]
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [EXPLODE_MESH] Global center: [2.14022151 0.10679602 4.70739316]
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [EXPLODE_MESH] Part tmpb95yokzu.ply: moved by 0.2000
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [EXPLODE_MESH] Part tmp08lzx71o.ply: moved by 0.2000
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [EXPLODE_MESH] Part tmpot8hksnr.ply: moved by 0.2000
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [EXPLODE_MESH] Mesh explosion complete
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after VAE decode: allocated=8.63GB, reserved=8.66GB, total=47.40GB
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Generate] Generation complete! 3 parts
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Generate] Saved parts to: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/xpart_parts_42.glb
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Generate] Saved bbox viz to: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/xpart_bbox_42.glb
-[02:40]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [X-Part Generate] Saved exploded view to: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/xpart_exploded_42.glb
-[02:40]   [ComfyUI] [SubprocessWorker] got response: ok
-[02:40]   [ComfyUI] [SubprocessWorker] call_method: nodes.exploded_viewer.ExplodedMeshViewer.create_exploded_view
-[02:40]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[02:40]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-[02:40]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-[02:40]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[02:40]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[02:40]   Node executed (3 total), capturing...
-[02:40]   [ComfyUI] [SubprocessWorker] created 3 shm blocks
-[02:40]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[02:41]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [ExplodedViewer] Processing list of 3 parts
-[02:41]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-[02:41]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [ExplodedViewer] Exported to: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/exploded_view_cd0dbf16.glb
-[02:41]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [ExplodedViewer] Created scene with 3 parts
-[02:41]   [ComfyUI] [SubprocessWorker] got response: ok
-[02:41]   [ComfyUI] Prompt executed in 102.11 seconds
-[02:41]   Frame 21 saved (frame_020.jpg, t=102.3s)
-[02:41]   [capture-node] freeze=8ms shot=239ms unfreeze=2ms saved=True
-[02:41]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-[02:41]   Node executed (4 total), capturing...
-[02:41]   Frame 22 saved (frame_021.jpg, t=102.9s)
-[02:41]   [capture-node] freeze=10ms shot=165ms unfreeze=0ms saved=True
-[02:41]   Execution complete (t=102.9s)
-[02:41]   [3d-wait] Phase 1: Waiting for 'Loading 3D Model' text to disappear...
-[03:41]   [3d-wait] Phase 1 exception after 60.0s: Page.wait_for_function: Timeout 60000ms exceeded.
-[03:41]   [3d-wait] Phase 2: iframes=3
-[03:41]   [3d-wait] iframe viewer_ready=False (matched 0 console logs)
-[03:41]   [3d-wait] Waiting for 'Loaded successfully' console message (timeout=60s)...
-[04:41]   [3d-wait] iframe wait exception: Timeout 60000ms exceeded while waiting for event "console"
-=========================== logs ===========================
-waiting for event "console"
-============================================================
-[04:41]   [3d-wait] Total 3D wait: 120.1s
-[04:41]   Captured 22 unique frames over 223.23s
-[04:42]   [debug] iframes: 3
-[04:42]   [debug]   iframe[0]: src=http://127.0.0.1:41889/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=1771946, canvas=588x517, rafFrozen=True
-[04:42]   [debug]   iframe[1]: src=http://127.0.0.1:41889/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=1771946, canvas=588x517, rafFrozen=True
-[04:42]   [debug]   iframe[2]: src=http://127.0.0.1:41889/extensions/ComfyUI-Hunyuan3D-Part/exploded_viewer.html?v=, canvas=1388x1408, rafFrozen=True
-[04:42]   [timing] trigger_3d_previews: 0.0s
-[04:44]   Saved high-quality screenshot: H3DPART-segment-partgen_executed.png
-[04:44]   [timing] final_screenshot: 1.0s
-[04:45] Capturing execution frames: H3DPART-segment.json
-[04:45]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-[04:45]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-[04:46]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-[04:46]   [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
-[04:46]   [Console-warning] WARNING: Multiple instances of Three.js being imported.
-[04:46]   [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui.js" is deprecated and will be removed in v1.34.
-[04:46]   [Console-warning] [MaskEditor] ComfyApp.open_maskeditor is deprecated. Plugins should migrate to using the command system or direct node context menu integration.
-[04:47]   [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/buttonGroup.js" is deprecated and will be removed in v1.34.
-[04:47]   [Console-warning] [ComfyUI Deprecated] Importing from "scripts/ui/components/button.js" is deprecated and will be removed in v1.34.
-[04:48]   [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
-[04:48]   [Console-error] Error loading model: HttpError: fetch for "http://127.0.0.1:41889/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
-    at http://127.0.0.1:41889/assets/vendor-three-CHi1XwmR.js:3824:116004
-[04:48]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-[04:48]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-[04:48]   [Console-error] No input!
-[04:48]   [Console-error] No input!
-[04:48]   [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
-[04:48]   [Console-error] Error loading model: HttpError: fetch for "http://127.0.0.1:41889/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
-    at http://127.0.0.1:41889/assets/vendor-three-CHi1XwmR.js:3824:116004
-[04:48]   [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
-[04:49]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-[04:49]   [Console-error] No input!
-[04:49]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-[04:49]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-[04:49]   [Console-error] No input!
-[04:52]   Frame 1 saved (frame_000.jpg, t=0.0s)
-[04:52]   Validating workflow...
-[04:52]   [ComfyUI] === /validate endpoint called ===
-[04:52]   [ComfyUI] Received JSON with keys: ['prompt']
-[04:52]   [ComfyUI] Prompt has 8 nodes
-[04:52]   Queuing workflow for execution...
-[04:52]   [ComfyUI]   Node 20: Hunyuan3DPreviewBoundingBoxes
-[04:52]   [ComfyUI]     Inputs: {"line_width": 2, "preview_bbox": "", "trimesh": ["32", 0], "bboxes": ["32", 1]}
-[04:52]   [ComfyUI]   Node 27: LoadP3SAMSegmentor
-[04:52]   [ComfyUI]     Inputs: {"precision": "auto", "attn_backend": "auto"}
-[04:52]   [ComfyUI]   Node 31: ComputeMeshFeatures
-[04:52]   [ComfyUI]     Inputs: {"all_points": false, "point_num": 100000, "seed": 42, "mesh": ["33", 0], "sonata_config": ["35", 0]}
-[04:52]   [ComfyUI]   Node 32: P3SAMSegmentMesh
-[04:52]   [ComfyUI]     Inputs: {"prompt_num": 400, "threshold": 0.95, "post_process": true, "batch_size": 1, "mesh_with_features": ["31", 0], "p3sam_config": ["27", 0]}
-[04:52]   [ComfyUI]   Node 33: GeomPackLoadMesh
-[04:52]   [ComfyUI]     Inputs: {"file_path": "3d/utah_teapot.stl"}
-[04:52]   [ComfyUI]   Node 35: LoadSonataEncoder
-[04:52]   [ComfyUI]     Inputs: {"precision": "auto", "attn_backend": "auto"}
-[04:52]   [ComfyUI]   Node 37: GeomPackPreviewMeshVTK
-[04:52]   [ComfyUI]     Inputs: {"mode": "fields", "preview_vtk": "{\"show_edges\":false,\"camera_state\":\"{\\\"position\\\":[10.636114639523552,29.121889105824472,15.277734942277156],\\\"focalPoint\\\":[0.6242384910583496,0.093758
-[04:52]   [ComfyUI]   Node 38: GeomPackPreviewMeshVTK
-[04:52]   [ComfyUI]     Inputs: {"mode": "fields", "preview_vtk": "{\"show_edges\":false,\"camera_state\":\"{\\\"position\\\":[10.636114639523552,29.121889105824472,15.277734942277156],\\\"focalPoint\\\":[0.6242384910583496,0.093758
-[04:52]   [ComfyUI] Generated prompt_id: 4fc8424a-13ba-4888-90c9-b1bbff6a76bf
-[04:52]   [ComfyUI] Calling execution.validate_prompt()...
-[04:52]   [ComfyUI] Validation result: valid=True
-[04:52]   [ComfyUI] === Validation PASSED ===
-[04:52]   [ComfyUI] got prompt
-[04:52]   [ComfyUI] [SubprocessWorker] call_method: nodes.loaders.LoadP3SAMSegmentor.load_model
-[04:52]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[04:52]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-[04:52]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: failed
-[04:52]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Socket unhealthy, restarting worker...
-[04:52]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/lib/python3.12/multiprocessing/resource_tracker.py:279: UserWarning: resource_tracker: There appear to be 4 leaked shared_memory objects to clean up at shutdown
-[04:52]   [ComfyUI]   warnings.warn('resource_tracker: There appear to be %d '
-[04:52]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/lib/python3.12/multiprocessing/resource_tracker.py:292: UserWarning: resource_tracker: '/psm_25ca4339': [Errno 2] No such file or directory: '/psm_25ca4339'
-[04:52]   [ComfyUI]   warnings.warn('resource_tracker: %r: %s' % (name, e))
-[04:52]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/lib/python3.12/multiprocessing/resource_tracker.py:292: UserWarning: resource_tracker: '/psm_f134e35f': [Errno 2] No such file or directory: '/psm_f134e35f'
-[04:52]   [ComfyUI]   warnings.warn('resource_tracker: %r: %s' % (name, e))
-[04:52]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/lib/python3.12/multiprocessing/resource_tracker.py:292: UserWarning: resource_tracker: '/psm_0e4a6a7c': [Errno 2] No such file or directory: '/psm_0e4a6a7c'
-[04:52]   [ComfyUI]   warnings.warn('resource_tracker: %r: %s' % (name, e))
-[04:52]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/lib/python3.12/multiprocessing/resource_tracker.py:292: UserWarning: resource_tracker: '/psm_4db92e11': [Errno 2] No such file or directory: '/psm_4db92e11'
-[04:52]   [ComfyUI]   warnings.warn('resource_tracker: %r: %s' % (name, e))
-[04:53]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] python: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/bin/python
-[04:53]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] sys_path sent to worker: ['/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/lib/python3.1/site-packages', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part']
-[04:53]   [ComfyUI] [SubprocessWorker] is_pixi=False, python=/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/bin/python
-[04:53]   [ComfyUI] [SubprocessWorker] launching cmd=['/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/_env_1490da/bin/python', '/tmp/comfyui_pvenv_4y_7g70k/persistent_worker.py', 'unix:///dev/shm/comfy_worker_ed41d0178ebf.sock']...
-[04:53]   [ComfyUI] [SubprocessWorker] PATH has 8 entries:
-[04:53]   [ComfyUI] [SubprocessWorker]   [0] /home/shadeform/.local/bin
-[04:53]   [ComfyUI] [SubprocessWorker]   [1] /home/shadeform/.local/bin
-[04:53]   [ComfyUI] [SubprocessWorker]   [2] /home/shadeform/.local/bin
-[04:53]   [ComfyUI] [SubprocessWorker]   [3] /home/shadeform/.venv/bin
-[04:53]   [ComfyUI] [SubprocessWorker]   [4] /usr/local/bin
-[04:53]   [ComfyUI] [SubprocessWorker]   [5] /usr/bin
-[04:53]   [ComfyUI] [SubprocessWorker]   [6] /bin
-[04:53]   [ComfyUI] [SubprocessWorker]   [7] /snap/bin
-[04:53]   [ComfyUI] [worker] PATH has 8 entries:
-[04:53]   [ComfyUI] [worker]   [0] /home/shadeform/.local/bin
-[04:53]   [ComfyUI] [worker]   [1] /home/shadeform/.local/bin
-[04:53]   [ComfyUI] [worker]   [2] /home/shadeform/.local/bin
-[04:53]   [ComfyUI] [worker]   [3] /home/shadeform/.venv/bin
-[04:53]   [ComfyUI] [worker]   [4] /usr/local/bin
-[04:53]   [ComfyUI] [worker]   [5] /usr/bin
-[04:53]   [ComfyUI] [worker]   [6] /bin
-[04:53]   [ComfyUI] [worker]   [7] /snap/bin
-[04:54]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] ERROR: Failed to import comfy_kitchen, Error: No module named 'comfy_kitchen', fp8 and fp4 support will not be available.
-[04:54]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[04:54]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[04:54]   [ComfyUI] [SubprocessWorker] created 0 shm blocks
-[04:54]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[04:54]   Frame 2 saved (frame_001.jpg, t=2.2s)
-[04:54]   [capture-periodic] freeze=2ms shot=100ms unfreeze=2ms saved=True
-[04:57]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load P3-SAM] Ensuring model files are downloaded...
-[04:57]   [ComfyUI] 2026-02-24 15:24:16,613 - hy3dgen.partgen - INFO - Using local models at: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[04:57]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Using local models at: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[04:57]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load P3-SAM] Model files ready at /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[04:57]   [ComfyUI] [SubprocessWorker] got response: ok
-[04:57]   [ComfyUI] [SubprocessWorker] call_method: nodes.loaders.LoadSonataEncoder.load_model
-[04:57]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[04:57]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-[04:57]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-[04:57]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[04:57]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[04:57]   [ComfyUI] [SubprocessWorker] created 0 shm blocks
-[04:57]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[04:57]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load Sonata Encoder] Ensuring model files are downloaded...
-[04:57]   [ComfyUI] 2026-02-24 15:24:16,630 - hy3dgen.partgen - INFO - Using local models at: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[04:57]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Using local models at: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[04:57]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load Sonata Encoder] Model files ready at /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/hunyuan3d-part
-[04:57]   [ComfyUI] [SubprocessWorker] got response: ok
-[04:57]   [ComfyUI] [SubprocessWorker] call_method: nodes.main.io.load_mesh.LoadMesh.load_mesh
-[04:57]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[04:57]   [ComfyUI] [ComfyUI-GeometryPack] Health check: ping (timeout=5.0s)...
-[04:57]   [ComfyUI] [ComfyUI-GeometryPack] Health check: failed
-[04:57]   [ComfyUI] [ComfyUI-GeometryPack] Socket unhealthy, restarting worker...
-[04:57]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f/lib/python3.12/multiprocessing/resource_tracker.py:279: UserWarning: resource_tracker: There appear to be 2 leaked shared_memory objects to clean up at shutdown
-[04:57]   [ComfyUI]   warnings.warn('resource_tracker: There appear to be %d '
-[04:57]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f/lib/python3.12/multiprocessing/resource_tracker.py:292: UserWarning: resource_tracker: '/psm_d4864291': [Errno 2] No such file or directory: '/psm_d4864291'
-[04:57]   [ComfyUI]   warnings.warn('resource_tracker: %r: %s' % (name, e))
-[04:57]   [ComfyUI] /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f/lib/python3.12/multiprocessing/resource_tracker.py:292: UserWarning: resource_tracker: '/psm_0a79e587': [Errno 2] No such file or directory: '/psm_0a79e587'
-[04:57]   [ComfyUI]   warnings.warn('resource_tracker: %r: %s' % (name, e))
-[04:57]   [ComfyUI] [ComfyUI-GeometryPack] python: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f/bin/python
-[04:57]   [ComfyUI] [ComfyUI-GeometryPack] sys_path sent to worker: ['/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f/lib/python3.1/site-packages', '/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack']
-[04:57]   [ComfyUI] [SubprocessWorker] is_pixi=False, python=/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f/bin/python
-[04:57]   [ComfyUI] [SubprocessWorker] launching cmd=['/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/custom_nodes/ComfyUI-GeometryPack/nodes/main/_env_12709f/bin/python', '/tmp/comfyui_pvenv_2ljgtbt3/persistent_worker.py', 'unix:///dev/shm/comfy_worker_5f8665d02c08.sock']...
-[04:57]   [ComfyUI] [SubprocessWorker] PATH has 8 entries:
-[04:57]   [ComfyUI] [SubprocessWorker]   [0] /home/shadeform/.local/bin
-[04:57]   [ComfyUI] [SubprocessWorker]   [1] /home/shadeform/.local/bin
-[04:57]   [ComfyUI] [SubprocessWorker]   [2] /home/shadeform/.local/bin
-[04:57]   [ComfyUI] [SubprocessWorker]   [3] /home/shadeform/.venv/bin
-[04:57]   [ComfyUI] [SubprocessWorker]   [4] /usr/local/bin
-[04:57]   [ComfyUI] [SubprocessWorker]   [5] /usr/bin
-[04:57]   [ComfyUI] [SubprocessWorker]   [6] /bin
-[04:57]   [ComfyUI] [SubprocessWorker]   [7] /snap/bin
-[04:57]   [ComfyUI] [worker] PATH has 8 entries:
-[04:57]   [ComfyUI] [worker]   [0] /home/shadeform/.local/bin
-[04:57]   [ComfyUI] [worker]   [1] /home/shadeform/.local/bin
-[04:57]   [ComfyUI] [worker]   [2] /home/shadeform/.local/bin
-[04:57]   [ComfyUI] [worker]   [3] /home/shadeform/.venv/bin
-[04:57]   [ComfyUI] [worker]   [4] /usr/local/bin
-[04:57]   [ComfyUI] [worker]   [5] /usr/bin
-[04:57]   [ComfyUI] [worker]   [6] /bin
-[04:57]   [ComfyUI] [worker]   [7] /snap/bin
-[04:57]   Frame 3 saved (frame_002.jpg, t=4.4s)
-[04:57]   [capture-periodic] freeze=2ms shot=127ms unfreeze=3ms saved=True
-[04:57]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[04:57]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[04:57]   [ComfyUI] [SubprocessWorker] created 0 shm blocks
-[04:57]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[04:57]   [ComfyUI] [worker:ComfyUI-GeometryPack] [LoadMesh] Found mesh in input folder: 3d/utah_teapot.stl
-[04:57]   [ComfyUI] [worker:ComfyUI-GeometryPack] [load_mesh_file] Loading: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/input/3d/utah_teapot.stl
-[04:57]   [ComfyUI] [worker:ComfyUI-GeometryPack] [load_mesh_file] Loaded type: Trimesh
-[04:57]   [ComfyUI] [worker:ComfyUI-GeometryPack] [load_mesh_file] Initial mesh: 4719 vertices, 9438 faces
-[04:57]   [ComfyUI] [worker:ComfyUI-GeometryPack] [load_mesh_file] Successfully loaded: 4719 vertices, 9438 faces
-[04:57]   [ComfyUI] [worker:ComfyUI-GeometryPack] [LoadMesh] Loaded: 4719 vertices, 9438 faces
-[04:58]   [ComfyUI] [worker:ComfyUI-GeometryPack] [LoadMesh] No texture found in mesh
-[04:58]   [ComfyUI] [SubprocessWorker] got response: ok
-[04:58]   [ComfyUI] [SubprocessWorker] call_method: nodes.processing.ComputeMeshFeatures.compute_features
-[04:58]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[04:58]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-[04:58]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-[04:58]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[04:58]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[04:58]   [ComfyUI] [SubprocessWorker] created 1 shm blocks
-[04:58]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[04:58]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Computing mesh features...
-[04:58]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] WARNING: No comfy kitchen, using old apply_rope functions.
-[04:58]   [capture-loop] iter=50 t=5.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3
-[04:59]   Frame 4 saved (frame_003.jpg, t=6.7s)
-[04:59]   [capture-periodic] freeze=2ms shot=111ms unfreeze=2ms saved=True
-[05:04]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Sonata Encoder] Building model (precision=auto, attn_backend=auto)...
-[05:04]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Loading sonata from cache: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/sonata/sonata.pth
-[05:04]   [capture-loop] iter=100 t=11.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3
-[05:04]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] flash attention: True
-[05:05]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Model params: 108.46M 108461376
-[05:05]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Sonata Encoder] Loaded 453 Sonata backbone weights from P3-SAM checkpoint
-[05:05]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [lowvram] Enabled: 80 cast modules, 25 orphan-param hooks
-[05:06]   [ComfyUI] [comfy-env] VRAM request: 0.22GB, free before eviction: 47.77GB
-[05:06]   [ComfyUI] [comfy-env] VRAM after eviction: 47.77GB
-[05:06]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Sonata Encoder] Loaded on cuda:0, dtype=torch.bfloat16
-[05:06]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Cleaning mesh...
-[05:06]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Building adjacent faces...
-[05:06]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Sampling 100000 points...
-[05:06]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Extracting Sonata features...
-[05:07]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Features computed (0.85s)
-[05:07]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Computing PCA4 debug field...
-[05:08]   [ComfyUI] [SubprocessWorker] got response: ok
-[05:08]   [ComfyUI] [SubprocessWorker] call_method: nodes.main.visualization.preview_mesh_vtk.PreviewMeshVTKNode.preview_mesh_vtk
-[05:08]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[05:08]   [ComfyUI] [ComfyUI-GeometryPack] Health check: ping (timeout=5.0s)...
-[05:08]   [ComfyUI] [ComfyUI-GeometryPack] Health check: ok
-[05:08]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[05:08]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[05:09]   [ComfyUI] [SubprocessWorker] created 1 shm blocks
-[05:09]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[05:09]   [capture-loop] iter=150 t=16.8s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Preparing preview: Mesh - 4719 vertices, 9438 faces
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - hasattr vertex_attributes: True
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - hasattr face_attributes: True
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - vertex_attributes: {'features_pca4_debug': array([[ 3.1093607 ,  1.6127566 ,  0.5541205 ,  0.30950567],
-[05:09]   [ComfyUI]        [ 3.1167436 ,  1.6181356 ,  0.52777535,  0.35178688],
-[05:09]   [ComfyUI]        [ 3.0849824 ,  1.6633626 ,  0.39065817,  0.06245534],
-[05:09]   [ComfyUI]        ...,
-[05:09]   [ComfyUI]        [ 4.1701684 , -0.14303492, -2.4747517 ,  1.0305065 ],
-[05:09]   [ComfyUI]        [ 3.9392745 , -0.13774459, -2.6085525 ,  0.92219293],
-[05:09]   [ComfyUI]        [-0.442605  , -0.64182246, -0.95569384,  0.10686319]],
-[05:09]   [ComfyUI]       shape=(4719, 4), dtype=float32)}
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - len(vertex_attributes): 1
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - face_attributes: {}
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - len(face_attributes): 0
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - has_vertex_attrs: True
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - has_face_attrs: False
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - has_fields: True
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Mode: fields
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Visual data - has_visual: True, kind: None, texture: False, vertex_colors: False
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Using VTP format (fields=True, point_cloud=False)
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Using fields mode - VTP/STL export
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp] Exporting mesh to VTP: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/preview_vtk_8db2aa61.vtp
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp]   Adding scalar field: features_pca4_debug
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp] Export complete: 4719 vertices, 9438 faces
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Exported VTP to: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/preview_vtk_8db2aa61.vtp
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Vertex attributes: ['features_pca4_debug']
-[05:09]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Fields mode info: watertight=True, volume=526.507402589034, area=388.60625943857985, fields=['features_pca4_debug']
-[05:09]   [ComfyUI] [SubprocessWorker] got response: ok
-[05:09]   [ComfyUI] [SubprocessWorker] call_method: nodes.processing.P3SAMSegmentMesh.segment
-[05:09]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[05:09]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-[05:09]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-[05:09]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[05:09]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[05:09]   [Console-error] No input!
-[05:09]   Node executed (1 total), capturing...
-[05:09]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-[05:09]   [Console-error] No input!
-[05:10]   Frame 5 saved (frame_004.jpg, t=17.3s)
-[05:10]   [capture-node] freeze=3ms shot=99ms unfreeze=2ms saved=True
-[05:10]   [ComfyUI] [SubprocessWorker] created 1 shm blocks
-[05:10]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[05:10]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] Running segmentation with 400 prompts, batch_size=1...
-[05:10]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] before model load: allocated=0.21GB, reserved=0.84GB, total=47.40GB
-[05:10]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM] Building model (precision=auto, attn_backend=auto)...
-[05:10]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Loading sonata from cache: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models/sonata/sonata.pth
-[05:11]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] flash attention: True
-[05:12]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Model params: 108.46M 108461376
-[05:12]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM] precision=auto, dtype=torch.bfloat16
-[05:12]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [lowvram] Enabled: 107 cast modules, 25 orphan-param hooks
-[05:12]   [ComfyUI] [comfy-env] VRAM request: 0.23GB, free before eviction: 46.77GB
-[05:12]   [ComfyUI] [comfy-env] VRAM after eviction: 46.77GB
-[05:12]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM] Model loaded on cuda:0
-[05:12]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after model load: allocated=0.42GB, reserved=0.44GB, total=47.40GB
-[05:12]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after tensor pre-upload: allocated=0.52GB, reserved=0.53GB, total=47.40GB
-[05:12]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] 400 prompts / batch_size 1 = 400 steps
-[05:12]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] before inference loop: allocated=0.52GB, reserved=0.53GB, total=47.40GB
-[05:12]   [ComfyUI] 
-[05:13]   [ComfyUI] P3-SAM Inference:   0%|                                                                                                                                      | 0/400 [00:00<?, ?it/s][worker:ComfyUI-Hunyuan3D-Part] [VRAM] after first batch (bs=1): allocated=0.52GB, reserved=1.41GB, total=47.40GB
-[05:13]   [ComfyUI] 
-[05:13]   [ComfyUI] P3-SAM Inference:   2%|█▉                                                                                                                            | 6/400 [00:00<00:06, 58.97it/s]
-[05:13]   [ComfyUI] P3-SAM Inference:   3%|████                                                                                                                         | 13/400 [00:00<00:06, 63.47it/s]
-[05:13]   [ComfyUI] P3-SAM Inference:   5%|██████▎                                                                                                                      | 20/400 [00:00<00:05, 65.12it/s]
-[05:13]   [ComfyUI] P3-SAM Inference:   7%|████████▍                                                                                                                    | 27/400 [00:00<00:05, 65.92it/s]
-[05:13]   [ComfyUI] P3-SAM Inference:   8%|██████████▋                                                                                                                  | 34/400 [00:00<00:05, 65.78it/s]
-[05:13]   [ComfyUI] P3-SAM Inference:  10%|████████████▊                                                                                                                | 41/400 [00:00<00:05, 65.77it/s]
-[05:13]   [ComfyUI] P3-SAM Inference:  12%|███████████████                                                                                                              | 48/400 [00:00<00:05, 65.80it/s]
-[05:13]   [ComfyUI] P3-SAM Inference:  14%|█████████████████▏                                                                                                           | 55/400 [00:00<00:05, 65.61it/s]
-[05:14]   [ComfyUI] P3-SAM Inference:  16%|███████████████████▍                                                                                                         | 62/400 [00:00<00:05, 65.60it/s]
-[05:14]   [ComfyUI] P3-SAM Inference:  17%|█████████████████████▌                                                                                                       | 69/400 [00:01<00:05, 65.41it/s]
-[05:14]   [ComfyUI] P3-SAM Inference:  19%|███████████████████████▊                                                                                                     | 76/400 [00:01<00:04, 65.52it/s]
-[05:14]   [ComfyUI] P3-SAM Inference:  21%|█████████████████████████▉                                                                                                   | 83/400 [00:01<00:04, 65.57it/s]
-[05:14]   [ComfyUI] P3-SAM Inference:  22%|████████████████████████████▏                                                                                                | 90/400 [00:01<00:04, 65.59it/s]
-[05:14]   Frame 6 saved (frame_005.jpg, t=21.7s)
-[05:14]   [capture-periodic] freeze=2ms shot=138ms unfreeze=2ms saved=True
-[05:14]   [ComfyUI] P3-SAM Inference:  24%|██████████████████████████████▎                                                                                              | 97/400 [00:01<00:04, 65.49it/s]
-[05:14]   [ComfyUI] P3-SAM Inference:  26%|████████████████████████████████▏                                                                                           | 104/400 [00:01<00:04, 65.76it/s]
-[05:14]   [ComfyUI] P3-SAM Inference:  28%|██████████████████████████████████▍                                                                                         | 111/400 [00:01<00:04, 65.75it/s]
-[05:14]   [ComfyUI] P3-SAM Inference:  30%|████████████████████████████████████▌                                                                                       | 118/400 [00:01<00:04, 65.80it/s]
-[05:15]   [ComfyUI] P3-SAM Inference:  31%|██████████████████████████████████████▊                                                                                     | 125/400 [00:01<00:04, 65.58it/s]
-[05:15]   [ComfyUI] P3-SAM Inference:  33%|████████████████████████████████████████▉                                                                                   | 132/400 [00:02<00:04, 65.60it/s]
-[05:15]   [ComfyUI] P3-SAM Inference:  35%|███████████████████████████████████████████                                                                                 | 139/400 [00:02<00:03, 65.51it/s]
-[05:15]   [capture-loop] iter=200 t=22.6s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=3
-[05:15]   [ComfyUI] P3-SAM Inference:  36%|█████████████████████████████████████████████▎                                                                              | 146/400 [00:02<00:03, 65.53it/s]
-[05:15]   [ComfyUI] P3-SAM Inference:  38%|███████████████████████████████████████████████▍                                                                            | 153/400 [00:02<00:03, 65.69it/s]
-[05:15]   [ComfyUI] P3-SAM Inference:  40%|█████████████████████████████████████████████████▌                                                                          | 160/400 [00:02<00:03, 65.53it/s]
-[05:15]   [ComfyUI] P3-SAM Inference:  42%|███████████████████████████████████████████████████▊                                                                        | 167/400 [00:02<00:03, 65.55it/s]
-[05:15]   [ComfyUI] P3-SAM Inference:  44%|█████████████████████████████████████████████████████▉                                                                      | 174/400 [00:02<00:03, 65.43it/s]
-[05:15]   [ComfyUI] P3-SAM Inference:  45%|████████████████████████████████████████████████████████                                                                    | 181/400 [00:02<00:03, 65.47it/s]
-[05:15]   [ComfyUI] P3-SAM Inference:  47%|██████████████████████████████████████████████████████████▎                                                                 | 188/400 [00:02<00:03, 65.60it/s]
-[05:16]   [ComfyUI] P3-SAM Inference:  49%|████████████████████████████████████████████████████████████▍                                                               | 195/400 [00:02<00:03, 65.43it/s]
-[05:16]   [ComfyUI] P3-SAM Inference:  50%|██████████████████████████████████████████████████████████████▌                                                             | 202/400 [00:03<00:03, 65.45it/s]
-[05:16]   [ComfyUI] P3-SAM Inference:  52%|████████████████████████████████████████████████████████████████▊                                                           | 209/400 [00:03<00:02, 65.36it/s]
-[05:16]   [ComfyUI] P3-SAM Inference:  54%|██████████████████████████████████████████████████████████████████▉                                                         | 216/400 [00:03<00:02, 65.48it/s]
-[05:16]   [ComfyUI] P3-SAM Inference:  56%|█████████████████████████████████████████████████████████████████████▏                                                      | 223/400 [00:03<00:02, 65.36it/s]
-[05:16]   [ComfyUI] P3-SAM Inference:  57%|███████████████████████████████████████████████████████████████████████▎                                                    | 230/400 [00:03<00:02, 65.31it/s]
-[05:16]   [ComfyUI] P3-SAM Inference:  59%|█████████████████████████████████████████████████████████████████████████▍                                                  | 237/400 [00:03<00:02, 65.44it/s]
-[05:16]   Frame 7 saved (frame_006.jpg, t=24.0s)
-[05:16]   [capture-periodic] freeze=2ms shot=113ms unfreeze=2ms saved=True
-[05:16]   [ComfyUI] P3-SAM Inference:  61%|███████████████████████████████████████████████████████████████████████████▋                                                | 244/400 [00:03<00:02, 65.25it/s]
-[05:16]   [ComfyUI] P3-SAM Inference:  63%|█████████████████████████████████████████████████████████████████████████████▊                                              | 251/400 [00:03<00:02, 65.53it/s]
-[05:17]   [ComfyUI] P3-SAM Inference:  64%|███████████████████████████████████████████████████████████████████████████████▉                                            | 258/400 [00:03<00:02, 65.55it/s]
-[05:17]   [ComfyUI] P3-SAM Inference:  66%|██████████████████████████████████████████████████████████████████████████████████▏                                         | 265/400 [00:04<00:02, 65.56it/s]
-[05:17]   [ComfyUI] P3-SAM Inference:  68%|████████████████████████████████████████████████████████████████████████████████████▎                                       | 272/400 [00:04<00:01, 65.45it/s]
-[05:17]   [ComfyUI] P3-SAM Inference:  70%|██████████████████████████████████████████████████████████████████████████████████████▍                                     | 279/400 [00:04<00:01, 65.47it/s]
-[05:17]   [ComfyUI] P3-SAM Inference:  72%|████████████████████████████████████████████████████████████████████████████████████████▋                                   | 286/400 [00:04<00:01, 65.55it/s]
-[05:17]   [ComfyUI] P3-SAM Inference:  73%|██████████████████████████████████████████████████████████████████████████████████████████▊                                 | 293/400 [00:04<00:01, 65.45it/s]
-[05:17]   [ComfyUI] P3-SAM Inference:  75%|█████████████████████████████████████████████████████████████████████████████████████████████                               | 300/400 [00:04<00:01, 65.53it/s]
-[05:17]   [ComfyUI] P3-SAM Inference:  77%|███████████████████████████████████████████████████████████████████████████████████████████████▏                            | 307/400 [00:04<00:01, 65.35it/s]
-[05:17]   [ComfyUI] P3-SAM Inference:  78%|█████████████████████████████████████████████████████████████████████████████████████████████████▎                          | 314/400 [00:04<00:01, 65.45it/s]
-[05:17]   [ComfyUI] P3-SAM Inference:  80%|███████████████████████████████████████████████████████████████████████████████████████████████████▌                        | 321/400 [00:04<00:01, 65.43it/s]
-[05:18]   [ComfyUI] P3-SAM Inference:  82%|█████████████████████████████████████████████████████████████████████████████████████████████████████▋                      | 328/400 [00:05<00:01, 65.42it/s]
-[05:18]   [ComfyUI] P3-SAM Inference:  84%|███████████████████████████████████████████████████████████████████████████████████████████████████████▊                    | 335/400 [00:05<00:00, 65.42it/s]
-[05:18]   [ComfyUI] P3-SAM Inference:  86%|██████████████████████████████████████████████████████████████████████████████████████████████████████████                  | 342/400 [00:05<00:00, 65.20it/s]
-[05:18]   [ComfyUI] P3-SAM Inference:  87%|████████████████████████████████████████████████████████████████████████████████████████████████████████████▏               | 349/400 [00:05<00:00, 64.56it/s]
-[05:18]   [ComfyUI] P3-SAM Inference:  89%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████▎             | 356/400 [00:05<00:00, 64.83it/s]
-[05:18]   [ComfyUI] P3-SAM Inference:  91%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌           | 363/400 [00:05<00:00, 65.08it/s]
-[05:18]   [ComfyUI] P3-SAM Inference:  92%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋         | 370/400 [00:05<00:00, 65.08it/s]
-[05:18]   [ComfyUI] P3-SAM Inference:  94%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊       | 377/400 [00:05<00:00, 65.28it/s]
-[05:18]   [ComfyUI] P3-SAM Inference:  96%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████     | 384/400 [00:05<00:00, 65.30it/s]
-[05:19]   Frame 8 saved (frame_007.jpg, t=26.2s)
-[05:19]   [capture-periodic] freeze=2ms shot=147ms unfreeze=2ms saved=True
-[05:19]   [ComfyUI] P3-SAM Inference:  98%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏  | 391/400 [00:05<00:00, 65.04it/s]
-[05:19]   [ComfyUI] P3-SAM Inference: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍| 398/400 [00:06<00:00, 65.34it/s]
-[05:19]   [ComfyUI] P3-SAM Inference: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 400/400 [00:06<00:00, 65.39it/s]
-[05:19]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after inference loop: allocated=0.52GB, reserved=1.53GB, total=47.40GB
-[05:19]   [ComfyUI] 
-[05:19]   [ComfyUI] NMS:   0%|                                                                                                                                                   | 0/400 [00:00<?, ?it/s]
-[05:19]   [ComfyUI] NMS:  12%|████████████████▍                                                                                                                        | 48/400 [00:00<00:00, 477.11it/s]
-[05:19]   [ComfyUI] NMS:  25%|██████████████████████████████████                                                                                                      | 100/400 [00:00<00:00, 500.43it/s]
-[05:19]   [ComfyUI] NMS:  38%|███████████████████████████████████████████████████▋                                                                                    | 152/400 [00:00<00:00, 506.02it/s]
-[05:19]   [ComfyUI] NMS:  51%|█████████████████████████████████████████████████████████████████████▎                                                                  | 204/400 [00:00<00:00, 510.15it/s]
-[05:19]   [ComfyUI] NMS:  64%|███████████████████████████████████████████████████████████████████████████████████████                                                 | 256/400 [00:00<00:00, 471.13it/s]
-[05:20]   [ComfyUI] NMS:  76%|███████████████████████████████████████████████████████████████████████████████████████████████████████▎                                | 304/400 [00:00<00:00, 459.74it/s]
-[05:20]   [ComfyUI] NMS:  88%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋                | 352/400 [00:00<00:00, 462.60it/s]
-[05:20]   [ComfyUI] NMS: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋| 399/400 [00:00<00:00, 457.32it/s]
-[05:20]   [ComfyUI] NMS: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 400/400 [00:00<00:00, 471.35it/s]
-[05:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] NMS complete: 4 clusters
-[05:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] >>>>>> compute aabb runtime: 0.0169 seconds
-[05:20]   [ComfyUI] 
-[05:20]   [ComfyUI] 0it [00:00, ?it/s][worker:ComfyUI-Hunyuan3D-Part] >>>>>> merge mesh runtime: 0.0037 seconds
-[05:20]   [ComfyUI] 
-[05:20]   [ComfyUI] 4it [00:00, 862.85it/s]
-[05:20]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] Segmentation complete: found 3 parts
-[05:20]   [capture-loop] iter=250 t=28.2s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=3
-[05:21]   Frame 9 saved (frame_008.jpg, t=28.5s)
-[05:21]   [capture-periodic] freeze=2ms shot=113ms unfreeze=2ms saved=True
-[05:21]   [ComfyUI] [SubprocessWorker] got response: ok
-[05:21]   [ComfyUI] [SubprocessWorker] call_method: nodes.main.visualization.preview_mesh_vtk.PreviewMeshVTKNode.preview_mesh_vtk
-[05:21]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[05:21]   [ComfyUI] [ComfyUI-GeometryPack] Health check: ping (timeout=5.0s)...
-[05:21]   [ComfyUI] [ComfyUI-GeometryPack] Health check: ok
-[05:21]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[05:21]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[05:22]   [ComfyUI] [SubprocessWorker] created 1 shm blocks
-[05:22]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Preparing preview: Mesh - 4719 vertices, 9438 faces
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - hasattr vertex_attributes: True
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - hasattr face_attributes: True
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - vertex_attributes: {'features_pca4_debug': array([[ 3.1093607 ,  1.6127566 ,  0.5541205 ,  0.30950567],
-[05:23]   [ComfyUI]        [ 3.1167436 ,  1.6181356 ,  0.52777535,  0.35178688],
-[05:23]   [ComfyUI]        [ 3.0849824 ,  1.6633626 ,  0.39065817,  0.06245534],
-[05:23]   [ComfyUI]        ...,
-[05:23]   [ComfyUI]        [ 4.1701684 , -0.14303492, -2.4747517 ,  1.0305065 ],
-[05:23]   [ComfyUI]        [ 3.9392745 , -0.13774459, -2.6085525 ,  0.92219293],
-[05:23]   [ComfyUI]        [-0.442605  , -0.64182246, -0.95569384,  0.10686319]],
-[05:23]   [ComfyUI]       shape=(4719, 4), dtype=float32)}
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - len(vertex_attributes): 1
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - face_attributes: {'part_id': array([2, 2, 2, ..., 1, 1, 1], shape=(9438,), dtype=int32)}
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - len(face_attributes): 1
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - has_vertex_attrs: True
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - has_face_attrs: True
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] DEBUG - has_fields: True
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Mode: fields
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Visual data - has_visual: True, kind: None, texture: False, vertex_colors: False
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Using VTP format (fields=True, point_cloud=False)
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Using fields mode - VTP/STL export
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp] Exporting mesh to VTP: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/preview_vtk_c66e8b56.vtp
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp]   Adding scalar field: features_pca4_debug
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp]   Adding face field: part_id
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [_export_mesh_with_scalars_vtp] Export complete: 4719 vertices, 9438 faces
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Exported VTP to: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/preview_vtk_c66e8b56.vtp
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Vertex attributes: ['features_pca4_debug']
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Face attributes: ['part_id']
-[05:23]   [ComfyUI] [worker:ComfyUI-GeometryPack] [PreviewMeshVTK] Fields mode info: watertight=True, volume=526.507402589034, area=388.60625943857985, fields=['features_pca4_debug', 'face.part_id']
-[05:23]   [ComfyUI] [SubprocessWorker] got response: ok
-[05:23]   [ComfyUI] [SubprocessWorker] call_method: nodes.bbox_visualization.PreviewBoundingBoxesNode.preview_bboxes
-[05:23]   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-[05:23]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-[05:23]   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-[05:23]   [ComfyUI] [SubprocessWorker] worker started/confirmed
-[05:23]   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-[05:23]   [Console-error] No input!
-[05:23]   [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
-[05:23]   [Console-error] No input!
-[05:23]   Node executed (2 total), capturing...
-[05:23]   Frame 10 saved (frame_009.jpg, t=30.9s)
-[05:23]   [capture-node] freeze=3ms shot=127ms unfreeze=3ms saved=True
-[05:24]   [ComfyUI] [SubprocessWorker] created 1 shm blocks
-[05:24]   [ComfyUI] [SubprocessWorker] sending request via socket...
-[05:24]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [comfy-env] _from_shm got dict with keys: ['__type__', 'strategy', 'manager_path', 'storage_key', 'storage_size']
-[05:24]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [comfy-env] DESERIALIZE TensorRef: tensor_size=[3, 2, 3]
-[05:24]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [comfy-env] DESERIALIZED tensor shape: torch.Size([3, 2, 3])
-[05:24]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [PreviewBoundingBoxes] Preparing preview with 3 bounding boxes
-[05:24]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [PreviewBoundingBoxes] Mesh: 4719 vertices, 9438 faces
-[05:24]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [PreviewBoundingBoxes] Line width: 2.0px
-[05:24]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [export_scene_to_vtp] Exported: 4743 vertices, 9438 polygons, 36 lines
-[05:24]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [PreviewBoundingBoxes] Exported scene with 3 bounding boxes to: /home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/output/preview_bboxes_a7e20d29.vtp
-[05:24]   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [PreviewBoundingBoxes] Created visualization with 3 bounding boxes
-[05:24]   [ComfyUI] [SubprocessWorker] got response: ok
-[05:24]   [ComfyUI] Prompt executed in 31.77 seconds
-[05:25]   [Console-error] No input!
-[05:25]   [Console-error] No input!
-[05:25]   [Console-error] No input!
-[05:25]   Node executed (3 total), capturing...
-[05:25]   Frame 11 saved (frame_010.jpg, t=32.7s)
-[05:25]   [capture-node] freeze=3ms shot=119ms unfreeze=0ms saved=True
-[05:25]   Execution complete (t=32.7s)
-[05:25]   [3d-wait] Phase 1: Waiting for 'Loading 3D Model' text to disappear...
-[05:25]   [3d-wait] Phase 1 done in 0.0s
-[05:25]   [3d-wait] Phase 2: iframes=3
-[05:25]   [3d-wait] iframe viewer_ready=False (matched 0 console logs)
-[05:25]   [3d-wait] Waiting for 'Loaded successfully' console message (timeout=60s)...
-[06:25]   [3d-wait] iframe wait exception: Timeout 60000ms exceeded while waiting for event "console"
-=========================== logs ===========================
-waiting for event "console"
-============================================================
-[06:25]   [3d-wait] Total 3D wait: 60.0s
-[06:25]   Captured 11 unique frames over 92.89s
-[06:25]   [debug] iframes: 3
-[06:25]   [debug]   iframe[0]: src=http://127.0.0.1:41889/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=1771946, canvas=588x517, rafFrozen=True
-[06:25]   [debug]   iframe[1]: src=http://127.0.0.1:41889/extensions/ComfyUI-Hunyuan3D-Part/viewer_vtk.html?v=17719, canvas=1176x1244, rafFrozen=True
-[06:25]   [debug]   iframe[2]: src=http://127.0.0.1:41889/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=1771946, canvas=588x517, rafFrozen=True
-[06:25]   [timing] trigger_3d_previews: 0.0s
-[06:28]   Saved high-quality screenshot: H3DPART-segment_executed.png
-[06:28]   [timing] final_screenshot: 0.8s
-[06:28] Results saved to /home/shadeform/logs/Hunyuan3D-Part-1519/dev/linux-gpu/results.json
-[06:28] Model report: 7 files, 9.2 GB -> /home/shadeform/logs/Hunyuan3D-Part-1519/dev/linux-gpu/models.json
-[06:28] Saved: /home/shadeform/logs/Hunyuan3D-Part-1519/dev/linux-gpu/index.html
-[06:28] [EXECUTION] PASSED
-[06:28] 
-linux: PASSED
-[06:28] Stopping ComfyUI server...
+[00:54] Starting ComfyUI server on port 41899...
+[00:54] Starting ComfyUI server on port 41899...
+[00:54] Waiting for server to be ready (timeout: 600s)...
+[00:56]   [ComfyUI] setup plugin alembic.autogenerate.schemas
+[00:56]   [ComfyUI] setup plugin alembic.autogenerate.tables
+[00:56]   [ComfyUI] setup plugin alembic.autogenerate.types
+[00:56]   [ComfyUI] setup plugin alembic.autogenerate.constraints
+[00:56]   [ComfyUI] setup plugin alembic.autogenerate.defaults
+[00:56]   [ComfyUI] setup plugin alembic.autogenerate.comments
+[00:56]   [ComfyUI] [comfy-env] node: no isolation envs
+[00:56]   [ComfyUI] [comfy-env] prestartup complete
+[00:56]   [ComfyUI] [comfy-env] ComfyUI-GeometryPack: no isolation envs
+[00:56]   [ComfyUI] [comfy-env] prestartup complete
+[00:56]   [ComfyUI] 
+[00:56]   [ComfyUI] Prestartup times for custom nodes:
+[00:56]   [ComfyUI]    0.1 seconds: /workspaces/node-2332/ComfyUI/custom_nodes/ComfyUI-GeometryPack
+[00:56]   [ComfyUI]    0.2 seconds: /workspaces/node-2332/ComfyUI/custom_nodes/node
+[00:56]   [ComfyUI] 
+[01:02]   [ComfyUI] WARNING: You need pytorch with cu130 or higher to use optimized CUDA operations.
+[01:02]   [ComfyUI] Found comfy_kitchen backend cuda: {'available': True, 'disabled': True, 'unavailable_reason': None, 'capabilities': ['apply_rope', 'apply_rope1', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'quantize_mxfp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8']}
+[01:02]   [ComfyUI] Found comfy_kitchen backend triton: {'available': True, 'disabled': True, 'unavailable_reason': None, 'capabilities': ['apply_rope', 'apply_rope1', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'quantize_mxfp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8']}
+[01:02]   [ComfyUI] Found comfy_kitchen backend eager: {'available': True, 'disabled': False, 'unavailable_reason': None, 'capabilities': ['apply_rope', 'apply_rope1', 'dequantize_mxfp8', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'quantize_mxfp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8', 'scaled_mm_mxfp8', 'scaled_mm_nvfp4']}
+[01:02]   [ComfyUI] Checkpoint files will always be loaded safely.
+[01:03]   [ComfyUI] Total VRAM 7783 MB, total RAM 31983 MB
+[01:03]   [ComfyUI] pytorch version: 2.11.0+cu128
+[01:03]   [ComfyUI] Set vram state to: NORMAL_VRAM
+[01:03]   [ComfyUI] Device: cuda:0 NVIDIA GeForce RTX 2060 SUPER : cudaMallocAsync
+[01:03]   [ComfyUI] Using async weight offloading with 2 streams
+[01:03]   [ComfyUI] Enabled pinned memory 28784.0
+[01:03]   [ComfyUI] Using pytorch attention
+[01:08]   [ComfyUI] aimdo: src/control.c:68:INFO:comfy-aimdo inited for GPU: NVIDIA GeForce RTX 2060 SUPER (VRAM: 7782 MB)
+[01:08]   [ComfyUI] DynamicVRAM support detected and enabled
+[01:08]   [ComfyUI] Python version: 3.10.20 (main, Apr 14 2026, 14:28:08) [Clang 22.1.3 ]
+[01:08]   [ComfyUI] ComfyUI version: 0.19.3
+[01:08]   [ComfyUI] comfy-aimdo version: 0.2.14
+[01:08]   [ComfyUI] comfy-kitchen version: 0.2.8
+[01:08]   [ComfyUI] ComfyUI frontend version: 1.42.14
+[01:08]   [ComfyUI] [Prompt Server] web root: /workspaces/node-2332/.venv/lib/python3.10/site-packages/comfyui_frontend_package/static
+[01:08]   [ComfyUI] Asset seeder disabled
+[01:10]   [ComfyUI] [comfy-env] Version: 0.2.79
+[01:10]   [ComfyUI] [comfy-env] register_nodes: pkg_dir=/workspaces/node-2332/ComfyUI/custom_nodes/node, caller=/workspaces/node-2332/ComfyUI/custom_nodes/node
+[01:10]   [ComfyUI] [comfy-env] Found 0 isolation env(s)
+[01:10]   [ComfyUI] [comfy-env] Importing nodes (root)...
+[01:11]   [ComfyUI] [comfy-env] Failed to import nodes root: No module named 'diffusers'
+[01:11]   [ComfyUI] [comfy-env] Importing sonata...
+[01:11]   [ComfyUI] [comfy-env] Failed to import .nodes.sonata: No module named 'diffusers'
+[01:11]   [ComfyUI] [comfy-env] No env for nodes -- run 'comfy-env install'
+[01:11]   [ComfyUI] [comfy-env] Registered 0 total nodes
+[01:11]   [ComfyUI] [geompack] loading...
+[01:11]   [ComfyUI] [geompack] calling register_nodes
+[01:11]   [ComfyUI] [comfy-env] Version: 0.2.79
+[01:11]   [ComfyUI] [comfy-env] register_nodes: pkg_dir=/workspaces/node-2332/ComfyUI/custom_nodes/ComfyUI-GeometryPack, caller=/workspaces/node-2332/ComfyUI/custom_nodes/ComfyUI-GeometryPack
+[01:11]   [ComfyUI] [comfy-env] Found 0 isolation env(s)
+[01:11]   [ComfyUI] [comfy-env] Importing nodes (root)...
+[01:11]   [ComfyUI] [comfy-env] Imported nodes root: 0 nodes
+[01:11]   [ComfyUI] [comfy-env] Importing blender...
+[01:11]   [ComfyUI] [comfy-env] Imported blender: 5 nodes
+[01:11]   [ComfyUI] [comfy-env] Importing gpu...
+[01:11]   [ComfyUI] [comfy-env] Imported gpu: 1 nodes
+[01:11]   [ComfyUI] [comfy-env] Importing main...
+[01:11]   [ComfyUI] [comfy-env] Imported main: 57 nodes
+[01:11]   [ComfyUI] [comfy-env] No env for blender -- run 'comfy-env install'
+[01:11]   [ComfyUI] [comfy-env] No env for gpu -- run 'comfy-env install'
+[01:11]   [ComfyUI] [comfy-env] No env for main -- run 'comfy-env install'
+[01:11]   [ComfyUI] [comfy-env] Registered 63 total nodes
+[01:11]   [ComfyUI] ComfyUI-Env-Manager v0.1.0 routes registered
+[01:11]   [ComfyUI] 
+[01:11]   [ComfyUI] Import times for custom nodes:
+[01:11]   [ComfyUI]    0.0 seconds: /workspaces/node-2332/ComfyUI/custom_nodes/websocket_image_save.py
+[01:11]   [ComfyUI]    0.0 seconds: /workspaces/node-2332/ComfyUI/custom_nodes/ComfyUI-validate-endpoint
+[01:11]   [ComfyUI]    0.0 seconds: /workspaces/node-2332/ComfyUI/custom_nodes/ComfyUI-Env-Manager
+[01:11]   [ComfyUI]    0.2 seconds: /workspaces/node-2332/ComfyUI/custom_nodes/ComfyUI-GeometryPack
+[01:11]   [ComfyUI]    1.0 seconds: /workspaces/node-2332/ComfyUI/custom_nodes/node
+[01:11]   [ComfyUI] 
+[01:11]   [ComfyUI] Context impl SQLiteImpl.
+[01:11]   [ComfyUI] Will assume non-transactional DDL.
+[01:11]   [ComfyUI] Context impl SQLiteImpl.
+[01:11]   [ComfyUI] Will assume non-transactional DDL.
+[01:11]   [ComfyUI] Running upgrade  -> 0001_assets, Initial assets schema
+[01:11]   [ComfyUI] Revision ID: 0001_assets
+[01:11]   [ComfyUI] Revises: None
+[01:11]   [ComfyUI] Create Date: 2025-12-10 00:00:00
+[01:13]   [ComfyUI] Running upgrade 0001_assets -> 0002_merge_to_asset_references, Merge AssetInfo and AssetCacheState into unified asset_references table.
+[01:13]   [ComfyUI] Running upgrade 0002_merge_to_asset_references -> 0003_add_metadata_job_id, Add system_metadata and job_id columns to asset_references.
+[01:13]   [ComfyUI] Change preview_id FK from assets.id to asset_references.id.
+[01:13]   [ComfyUI] Database upgraded from None to 0003_add_metadata_job_id
+[01:13]   [ComfyUI] Starting server
+[01:13]   [ComfyUI] 
+[01:13]   [ComfyUI] To see the GUI go to: http://127.0.0.1:41899
+[01:13] Server responding, waiting for nodes to load...
+[01:33] Server is ready!
+[01:33] Checking for import errors in server logs...
+[01:33] No import errors detected
+[01:34] Found 748 registered nodes
+[01:34] [REGISTRATION] PASSED
+[01:34] 
+[01:34] [4/5] INSTANTIATION
+[01:34] ----------------------------------------
+[01:34] [DEBUG] server=<comfy_test.comfyui.server.ComfyUIServer object at 0x71f3727616c0>, server_url=None, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x71f37220b4c0>
+[01:34] Testing node constructors...
+[01:38] All 0 node(s) instantiated successfully!
+[01:38] [INSTANTIATION] PASSED
+[01:38] 
+[01:38] [5/5] EXECUTION
+[01:38] ----------------------------------------
+[01:38] [DEBUG] server=<comfy_test.comfyui.server.ComfyUIServer object at 0x71f3727616c0>, server_url=None, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x71f37220b4c0>
+[01:38] GPU runner - will execute 2 workflow(s)
+[01:38] Running 2 workflow(s) (all with videos)...
+[01:38] Installing screenshot dependencies (playwright, pillow)...
+[01:39]   Packages installed, downloading chromium browser...
+[01:58]   Screenshot dependencies installed successfully
+[01:59] Starting headless browser...
+[01:59]   Installing Vulkan stack (apt)...
+[01:59]   Vulkan install error: [Errno 2] No such file or directory: 'sudo'
+[01:59]   GPU detected (no Vulkan) — using ANGLE/OpenGL rendering
+[01:59] Capturing execution frames: H3DPART-segment-partgen.json
+[02:01]   [ComfyUI] [DEPRECATION WARNING] Detected import of deprecated legacy API: /scripts/ui.js. This is likely caused by a custom node extension using outdated APIs. Please update your extensions or contact the extension author for an updated version.
+[02:02]   [ComfyUI] [DEPRECATION WARNING] Detected import of deprecated legacy API: /scripts/ui/components/buttonGroup.js. This is likely caused by a custom node extension using outdated APIs. Please update your extensions or contact the extension author for an updated version.
+[02:02]   [ComfyUI] [DEPRECATION WARNING] Detected import of deprecated legacy API: /scripts/ui/components/button.js. This is likely caused by a custom node extension using outdated APIs. Please update your extensions or contact the extension author for an updated version.
+[02:09]   Frame 1 saved (frame_000.jpg, t=0.0s)
+[02:09]   Validating workflow...
+[02:09]   Validation failed: graphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [27,31,35,39,42,43,44,47], sample: {"inputs":{"UNKNOWN":"auto"},"_meta":{}}
+[02:10] Capturing execution frames: H3DPART-segment.json
+[02:18]   Frame 1 saved (frame_000.jpg, t=0.0s)
+[02:18]   Validating workflow...
+[02:18]   Validation failed: graphToPrompt produced nodes without class_type: graphToPrompt: 8 nodes, missing class_type: [20,27,31,32,35], sample: {"inputs":{"UNKNOWN":"","trimesh":["32",0],"bboxes":["32",1]},"_meta":{}}
+[02:19] Results saved to /logs/node-2332/dev/linux-gpu/results.json
+[02:19] Saved: /logs/node-2332/dev/linux-gpu/index.html
+[02:19] 
+linux: FAILED
+[02:19] Error: Workflow execution failed (2 error(s))
+[02:19] Details: H3DPART-segment-partgen.json: Workflow validation failed
+
+Details:
+graphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [27,31,35,39,42,43,44,47], sample: {"inputs":{"UNKNOWN":"auto"},"_meta":{}}
+H3DPART-segment.json: Workflow validation failed
+
+Details:
+graphToPrompt produced nodes without class_type: graphToPrompt: 8 nodes, missing class_type: [20,27,31,32,35], sample: {"inputs":{"UNKNOWN":"","trimesh":["32",0],"bboxes":["32",1]},"_meta":{}}
+[02:19] Stopping ComfyUI server...
