@@ -5,7 +5,6 @@ packages = ["flash-attn", "sageattention", "torch-scatter", "torch-cluster", "sp
 
 [pypi-dependencies]
 trimesh = "*"
-pymeshlab = "==2023.12.post3"
 diffusers = "*"
 timm = "*"
 einops = "*"
@@ -24,3 +23,9 @@ pccm = "*"
 hf_xet = "*"
 psutil = "*"
 comfy-aimdo = "*"
+
+[target.win-64.pypi-dependencies]
+pymeshlab = "==2023.12.post3"
+
+[target.linux-64.dependencies]
+pymeshlab = "==2023.12.post3"
