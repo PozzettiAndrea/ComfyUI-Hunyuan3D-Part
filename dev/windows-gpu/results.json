@@ -1,62 +1,62 @@
 {
-  "timestamp": "2026-02-24T15:22:03.378657+00:00",
+  "timestamp": "2026-04-28T12:41:18.413702+00:00",
   "platform": "windows",
   "hardware": {
-    "os": "Windows-11-10.0.26100-SP0",
-    "cpu": "Intel64 Family 6 Model 58 Stepping 9, GenuineIntel",
-    "gpu": "NVIDIA RTX A4000"
+    "os": "Windows-10-10.0.26200-SP0",
+    "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+    "gpu": "NVIDIA GeForce RTX 4060 Ti"
   },
-  "commit_hash": "9cf275fdab6ee49e639c380458c01a12932e3344",
-  "success": true,
+  "commit_hash": "fc8e48654ce5ac7247421beded3134c5722e74a8",
+  "success": false,
   "summary": {
     "total": 2,
-    "passed": 2,
-    "failed": 0
+    "passed": 0,
+    "failed": 2
   },
   "workflows": [
     {
       "name": "H3DPART-segment-partgen",
-      "status": "pass",
-      "duration_seconds": 603.0,
-      "error": null,
+      "status": "fail",
+      "duration_seconds": 114.08,
+      "error": "Workflow execution failed: {'prompt_id': '38592c88-a9cb-4132-a627-7644214b8b88', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['35', '33', '27'], 'exception_message': 'No module named \\'spconv\\'\\n\\nWorker traceback:\\nTraceback (most recent call last):\\n  File \"C:\\\\Users\\\\ContainerAdministrator\\\\AppData\\\\Local\\\\Temp\\\\comfyui_pvenv_buydtmvr\\\\persistent_worker.py\", line 1563, in main\\n    result = method(**inputs)\\n             ^^^^^^^^^^^^^^^^\\n  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\comfy_api\\\\latest\\\\_io.py\", line 1826, in EXECUTE_NORMALIZED\\n    to_return = cls.execute(*args, **kwargs)\\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\custom_nodes\\\\ComfyUI-Hunyuan3D-Part\\\\nodes\\\\processing.py\", line 556, in execute\\n    sonata_model = _get_sonata_model(sonata_config)\\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\custom_nodes\\\\ComfyUI-Hunyuan3D-Part\\\\nodes\\\\processing.py\", line 192, in _get_sonata_model\\n    from .p3sam.model import SonataEncoder\\n  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\custom_nodes\\\\ComfyUI-Hunyuan3D-Part\\\\nodes\\\\p3sam\\\\model.py\", line 5, in <module>\\n    from .. import sonata\\n  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\custom_nodes\\\\ComfyUI-Hunyuan3D-Part\\\\nodes\\\\sonata\\\\__init__.py\", line 16, in <module>\\n    from .model import load, load_by_config\\n  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\custom_nodes\\\\ComfyUI-Hunyuan3D-Part\\\\nodes\\\\sonata\\\\model.py\", line 98, in <module>\\n    import spconv.pytorch as spconv\\nModuleNotFoundError: No module named \\'spconv\\'\\n\\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\execution.py\", line 534, in execute\\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\execution.py\", line 334, in get_output_data\\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\execution.py\", line 308, in _async_map_node_over_list\\n    await process_inputs(input_dict, i)\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\execution.py\", line 296, in process_inputs\\n    result = f(**inputs)\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\.venv\\\\lib\\\\site-packages\\\\comfy_env\\\\isolation\\\\metadata.py\", line 531, in proxy\\n    result = worker.call_method(\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\.venv\\\\lib\\\\site-packages\\\\comfy_env\\\\isolation\\\\workers\\\\subprocess.py\", line 3235, in call_method\\n    raise WorkerError(\\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': [\"{'type': 'sonata', 'ckpt_path': 'C:\\\\\\\\workspaces\\\\\\\\Hunyuan3D-Part-1432\\\\\\\\ComfyUI\\\\\\\\models\\\\\\\\hunyuan3d-part\\\\\\\\p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}\"]}, 'current_outputs': ['39', '47', '38', '27', '44', '37', '42', '33', '31', '46', '35', '43'], 'timestamp': 1777380070850}\n\nDetails:\nWorkflow: C:\\ComfyUI-Hunyuan3D-Part\\workflows\\H3DPART-segment-partgen.json\nNode error: ComputeMeshFeatures",
       "hardware": {
-        "os": "Windows-11-10.0.26100-SP0",
-        "cpu": "Intel64 Family 6 Model 58 Stepping 9, GenuineIntel",
-        "gpu": "NVIDIA RTX A4000"
+        "os": "Windows-10-10.0.26200-SP0",
+        "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+        "gpu": "NVIDIA GeForce RTX 4060 Ti"
       },
       "resources": {
         "ram": {
-          "peak": 17.56,
-          "avg": 10.29
+          "peak": 3.89,
+          "avg": 2.13
         },
-        "total_ram_gb": 30.0,
-        "samples": 496,
+        "total_ram_gb": 15.9,
+        "samples": 103,
         "vram": {
-          "peak": 10.55,
-          "avg": 4.01
+          "peak": 1.19,
+          "avg": 1.06
         }
       }
     },
     {
       "name": "H3DPART-segment",
-      "status": "pass",
-      "duration_seconds": 207.47,
-      "error": null,
+      "status": "fail",
+      "duration_seconds": 6.76,
+      "error": "Workflow execution failed: {'prompt_id': '100138d3-1c51-4412-8642-de0dd6ca9f41', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['35', '33', '27'], 'exception_message': 'No module named \\'spconv\\'\\n\\nWorker traceback:\\nTraceback (most recent call last):\\n  File \"C:\\\\Users\\\\ContainerAdministrator\\\\AppData\\\\Local\\\\Temp\\\\comfyui_pvenv_buydtmvr\\\\persistent_worker.py\", line 1563, in main\\n    result = method(**inputs)\\n             ^^^^^^^^^^^^^^^^\\n  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\comfy_api\\\\latest\\\\_io.py\", line 1826, in EXECUTE_NORMALIZED\\n    to_return = cls.execute(*args, **kwargs)\\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\custom_nodes\\\\ComfyUI-Hunyuan3D-Part\\\\nodes\\\\processing.py\", line 556, in execute\\n    sonata_model = _get_sonata_model(sonata_config)\\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\custom_nodes\\\\ComfyUI-Hunyuan3D-Part\\\\nodes\\\\processing.py\", line 192, in _get_sonata_model\\n    from .p3sam.model import SonataEncoder\\n  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\custom_nodes\\\\ComfyUI-Hunyuan3D-Part\\\\nodes\\\\p3sam\\\\model.py\", line 5, in <module>\\n    from .. import sonata\\n  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\custom_nodes\\\\ComfyUI-Hunyuan3D-Part\\\\nodes\\\\sonata\\\\__init__.py\", line 16, in <module>\\n    from .model import load, load_by_config\\n  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\custom_nodes\\\\ComfyUI-Hunyuan3D-Part\\\\nodes\\\\sonata\\\\model.py\", line 98, in <module>\\n    import spconv.pytorch as spconv\\nModuleNotFoundError: No module named \\'spconv\\'\\n\\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\execution.py\", line 534, in execute\\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\execution.py\", line 334, in get_output_data\\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\execution.py\", line 308, in _async_map_node_over_list\\n    await process_inputs(input_dict, i)\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\ComfyUI\\\\execution.py\", line 296, in process_inputs\\n    result = f(**inputs)\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\.venv\\\\lib\\\\site-packages\\\\comfy_env\\\\isolation\\\\metadata.py\", line 531, in proxy\\n    result = worker.call_method(\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-1432\\\\.venv\\\\lib\\\\site-packages\\\\comfy_env\\\\isolation\\\\workers\\\\subprocess.py\", line 3235, in call_method\\n    raise WorkerError(\\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': [\"{'type': 'sonata', 'ckpt_path': 'C:\\\\\\\\workspaces\\\\\\\\Hunyuan3D-Part-1432\\\\\\\\ComfyUI\\\\\\\\models\\\\\\\\hunyuan3d-part\\\\\\\\p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}\"]}, 'current_outputs': ['38', '27', '37', '33', '31', '32', '35', '20'], 'timestamp': 1777380078063}\n\nDetails:\nWorkflow: C:\\ComfyUI-Hunyuan3D-Part\\workflows\\H3DPART-segment.json\nNode error: ComputeMeshFeatures",
       "hardware": {
-        "os": "Windows-11-10.0.26100-SP0",
-        "cpu": "Intel64 Family 6 Model 58 Stepping 9, GenuineIntel",
-        "gpu": "NVIDIA RTX A4000"
+        "os": "Windows-10-10.0.26200-SP0",
+        "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+        "gpu": "NVIDIA GeForce RTX 4060 Ti"
       },
       "resources": {
         "ram": {
-          "peak": 11.85,
-          "avg": 10.11
+          "peak": 2.35,
+          "avg": 2.35
         },
-        "total_ram_gb": 30.0,
-        "samples": 173,
+        "total_ram_gb": 15.9,
+        "samples": 7,
         "vram": {
-          "peak": 9.73,
-          "avg": 2.3
+          "peak": 1.3,
+          "avg": 1.21
         }
       }
     }
