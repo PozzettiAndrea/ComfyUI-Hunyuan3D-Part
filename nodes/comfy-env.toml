@@ -1,7 +1,7 @@
 python = "3.12"
 
 [cuda]
-packages = ["flash-attn", "torch-scatter", "torch-cluster", "torch", "torchvision", "spconv", "cumm"]
+packages = ["flash-attn", "sageattention", "torch-scatter", "torch-cluster", "spconv", "cumm"]
 
 [pypi-dependencies]
 trimesh = "*"
