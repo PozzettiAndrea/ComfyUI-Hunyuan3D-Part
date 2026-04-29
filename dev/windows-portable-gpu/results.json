@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-04-29T01:20:14.834641+00:00",
+  "timestamp": "2026-04-29T09:32:16.038940+00:00",
   "platform": "windows_portable",
   "hardware": {
     "os": "Windows-10-10.0.26200-SP0",
     "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
     "gpu": "NVIDIA GeForce RTX 3090"
   },
-  "commit_hash": "c2fbb13b28e9d4dbadcf58785c49c81b5d4f2f61",
+  "commit_hash": "284e00025bea21472e8e6af353d2e08c9e974226",
   "success": true,
   "summary": {
     "total": 2,
@@ -17,7 +17,7 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 273.67,
+      "duration_seconds": 317.68,
       "error": null,
       "hardware": {
         "os": "Windows-10-10.0.26200-SP0",
@@ -26,21 +26,21 @@
       },
       "resources": {
         "ram": {
-          "peak": 10.76,
-          "avg": 3.19
+          "peak": 8.66,
+          "avg": 2.96
         },
         "total_ram_gb": 31.9,
-        "samples": 239,
+        "samples": 278,
         "vram": {
-          "peak": 11.02,
-          "avg": 2.59
+          "peak": 11.22,
+          "avg": 4.16
         }
       }
     },
     {
       "name": "H3DPART-segment",
       "status": "pass",
-      "duration_seconds": 40.82,
+      "duration_seconds": 66.19,
       "error": null,
       "hardware": {
         "os": "Windows-10-10.0.26200-SP0",
@@ -49,14 +49,14 @@
       },
       "resources": {
         "ram": {
-          "peak": 7.01,
-          "avg": 5.3
+          "peak": 5.77,
+          "avg": 3.35
         },
         "total_ram_gb": 31.9,
-        "samples": 36,
+        "samples": 58,
         "vram": {
-          "peak": 11.63,
-          "avg": 10.81
+          "peak": 10.53,
+          "avg": 3.11
         }
       }
     }

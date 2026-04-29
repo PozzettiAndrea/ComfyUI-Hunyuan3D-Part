@@ -6,10 +6,6 @@
 [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
 [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
 [Console-warning] WARNING: Multiple instances of Three.js being imported.
-[Console-log] [VTK Bundle] GLTFImporter included in bundle
-[Console-log] [GeomPack] Loading UV mesh preview extension...
-[Console-log] [GeomPack] UV mesh preview extension registered
-[Console-log] [GeomPack Multi JS] Loading mesh_preview_multi.js extension
 [Console-log] [FBX Preview] Auto-registering for all known FBX preview node types...
 [Console-log] [UniRig] Loading FBX mesh preview extension...
 [Console-log] [UniRig] Detected extension folder: ComfyUI-GeometryPack
@@ -23,26 +19,30 @@
 [Console-log] [MotionCapture] Loading FBX mesh preview extension...
 [Console-log] [MotionCapture] Detected extension folder: ComfyUI-GeometryPack
 [Console-log] [MotionCapture] FBX mesh preview extension registered
-[Console-log] [UniRig Compare] Loading compare skeleton widget...
-[Console-log] [UniRig Compare] Detected extension folder: ComfyUI-GeometryPack
-[Console-log] [UniRig Compare] Compare skeleton widget registered
 [Console-log] [UniRig Debug] Loading FBX mesh preview extension...
 [Console-log] [UniRig Debug] Detected extension folder: ComfyUI-GeometryPack
 [Console-log] [UniRig Debug] FBX mesh preview extension registered
-[Console-log] [GeomPack] Loading mesh preview extension...
-[Console-log] [GeomPack] Mesh preview extension registered
+[Console-log] [UniRig Compare] Loading compare skeleton widget...
+[Console-log] [UniRig Compare] Detected extension folder: ComfyUI-GeometryPack
+[Console-log] [UniRig Compare] Compare skeleton widget registered
+[Console-log] [GeomPack Gaussian] Loading extension...
+[Console-log] [GeomPack] Loading UV mesh preview extension...
+[Console-log] [GeomPack] UV mesh preview extension registered
 [Console-log] [BVHViewer] Loading BVH Viewer extension
 [Console-log] [BVHViewer] Loading BVH viewer extension...
 [Console-log] [BVHViewer] Extension registered: comfy3d.bvhviewer
 [Console-log] [GeomPack] Loading VTK.js textured mesh preview extension...
 [Console-log] [GeomPack] VTK.js textured mesh preview extension registered
-[Console-log] [GeomPack Gaussian] Loading extension...
 [Console-log] [CompareSMPLBVH] Loading Compare SMPL BVH extension
 [Console-log] [CompareSMPLBVH] Loading Compare SMPL BVH extension...
 [Console-log] [CompareSMPLBVH] Extension registered: comfy3d.comparesmplbvh
 [Console-log] [FBXAnimationViewer] Loading FBX Animation Viewer extension
 [Console-log] [FBXAnimationViewer] Loading FBX Animation Viewer extension...
 [Console-log] [FBXAnimationViewer] Extension registered: comfy3d.fbxanimationviewer
+[Console-log] [GeomPack] Loading mesh preview extension...
+[Console-log] [GeomPack] Mesh preview extension registered
+[Console-log] [GeomPack Multi JS] Loading mesh_preview_multi.js extension
+[Console-log] [VTK Bundle] GLTFImporter included in bundle
 [Console-log] [Hunyuan3D] Loading bounding box preview extension...
 [Console-log] [Hunyuan3D] Bounding box preview extension registered
 [Console-log] [Hunyuan3D] Loading exploded viewer extension...
@@ -79,28 +79,27 @@
 [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
 [Console-log] [GeomPack VTK Viewer] Ready (unified)
 [Console-error] No input!
-[Console-log] [GeomPack VTK Viewer] Loading: /view?filename=preview_vtk_6709e5a4.vtp&type=output&subfolder=
+[Console-log] [GeomPack VTK Viewer] Loading: /view?filename=preview_vtk_c6b5891f.vtp&type=output&subfolder=
 [Console-log] [GeomPack VTK Viewer] Mesh loaded: 4719 points
 [Console-log] [GeomPack VTK Viewer] Loaded successfully
-[Console-error] No input!
 [Console-log] [VTK Bundle] GLTFImporter included in bundle
 [Console-log] [GeomPack VTK Viewer] Initializing unified viewer...
 [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
 [Console-log] [GeomPack VTK Viewer] Ready (unified)
 [Console-error] No input!
-[Console-log] [GeomPack VTK Viewer] Loading: /view?filename=preview_vtk_9e052702.vtp&type=output&subfolder=
-[Console-log] [FieldVisualization] Applied field "part_id" with range [-1.000, 3.000]
+[Console-log] [GeomPack VTK Viewer] Loading: /view?filename=preview_vtk_18c33586.vtp&type=output&subfolder=
+[Console-log] [FieldVisualization] Applied field "part_id" with range [-1.000, 2.000]
 [Console-log] [GeomPack VTK Viewer] Mesh loaded: 4719 points
 [Console-log] [GeomPack VTK Viewer] Loaded successfully
 [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
 [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
 [Console-log] [Hunyuan3D] onExecuted called with message: {scene_file: Array(1), num_parts: Array(1), global_center: Array(1), part_centers: Array(1), vertex_count: Array(1)}
-[Console-log] [Hunyuan3D] Loading scene: exploded_view_dccc775c.glb (4 parts)
-[Console-log] [Hunyuan3D] Sending postMessage to iframe: /view?filename=exploded_view_dccc775c.glb&type=output&subfolder=
-[Console-log] [Hunyuan3D Viewer] Received message: {type: LOAD_EXPLODED_SCENE, filepath: /view?filename=exploded_view_dccc775c.glb&type=output&subfolder=, numParts: 4, globalCenter: Array(3), maxExtent: 17.525618020801197}
-[Console-log] [Hunyuan3D Viewer] Loading scene: /view?filename=exploded_view_dccc775c.glb&type=output&subfolder=
-[Console-log] [Hunyuan3D Viewer] Metadata: {numParts: 4, globalCenter: Array(3), maxExtent: 17.525618020801197}
+[Console-log] [Hunyuan3D] Loading scene: exploded_view_4ad8d620.glb (3 parts)
+[Console-log] [Hunyuan3D] Sending postMessage to iframe: /view?filename=exploded_view_4ad8d620.glb&type=output&subfolder=
+[Console-log] [Hunyuan3D Viewer] Received message: {type: LOAD_EXPLODED_SCENE, filepath: /view?filename=exploded_view_4ad8d620.glb&type=output&subfolder=, numParts: 3, globalCenter: Array(3), maxExtent: 17.537621201885365}
+[Console-log] [Hunyuan3D Viewer] Loading scene: /view?filename=exploded_view_4ad8d620.glb&type=output&subfolder=
+[Console-log] [Hunyuan3D Viewer] Metadata: {numParts: 3, globalCenter: Array(3), maxExtent: 17.537621201885365}
 [Console-log] [Hunyuan3D Viewer] Scene loaded successfully
-[Console-log] [Hunyuan3D Viewer] Found 4 mesh parts
+[Console-log] [Hunyuan3D Viewer] Found 3 mesh parts
 [Console-log] [Hunyuan3D Viewer] Global center: Vector3
 [Console-log] [Hunyuan3D Viewer] Scene setup complete
