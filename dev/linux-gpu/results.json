@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-04-23T23:34:58.431214+00:00",
+  "timestamp": "2026-04-29T00:55:11.581063+00:00",
   "platform": "linux",
   "hardware": {
     "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
-    "cpu": "Intel(R) Xeon(R) CPU E5-2698 v4 @ 2.20GHz",
-    "gpu": "NVIDIA GeForce RTX 2060 SUPER"
+    "cpu": "Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz",
+    "gpu": "NVIDIA GeForce RTX 3090"
   },
-  "commit_hash": "361f8dc0fd8384889831ea47dda316a0f3c18361",
+  "commit_hash": "c2fbb13b28e9d4dbadcf58785c49c81b5d4f2f61",
   "success": false,
   "summary": {
     "total": 2,
@@ -17,46 +17,46 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "fail",
-      "duration_seconds": 10.06,
-      "error": "Workflow validation failed\n\nDetails:\ngraphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [27,31,35,39,42,43,44,47], sample: {\"inputs\":{\"UNKNOWN\":\"auto\"},\"_meta\":{}}",
+      "duration_seconds": 109.7,
+      "error": "Workflow execution failed: {'prompt_id': '4b0575af-c542-467e-bcac-237b5189e5f8', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['33', '35', '39', '27'], 'exception_message': 'No module named \\'spconv\\'\\n\\nWorker traceback:\\nTraceback (most recent call last):\\n  File \"/tmp/comfyui_pvenv__5qy0ul0/persistent_worker.py\", line 1587, in main\\n    result = method(**inputs)\\n             ^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/comfy_api/latest/_io.py\", line 1826, in EXECUTE_NORMALIZED\\n    to_return = cls.execute(*args, **kwargs)\\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py\", line 556, in execute\\n    sonata_model = _get_sonata_model(sonata_config)\\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py\", line 192, in _get_sonata_model\\n    from .p3sam.model import SonataEncoder\\n  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/p3sam/model.py\", line 5, in <module>\\n    from .. import sonata\\n  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/__init__.py\", line 16, in <module>\\n    from .model import load, load_by_config\\n  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/model.py\", line 98, in <module>\\n    import spconv.pytorch as spconv\\nModuleNotFoundError: No module named \\'spconv\\'\\n\\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py\", line 534, in execute\\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n', '  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py\", line 334, in get_output_data\\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n', '  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py\", line 308, in _async_map_node_over_list\\n    await process_inputs(input_dict, i)\\n', '  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py\", line 296, in process_inputs\\n    result = f(**inputs)\\n', '  File \"/workspaces/Hunyuan3D-Part-0047/.venv/lib/python3.10/site-packages/comfy_env/isolation/metadata.py\", line 531, in proxy\\n    result = worker.call_method(\\n', '  File \"/workspaces/Hunyuan3D-Part-0047/.venv/lib/python3.10/site-packages/comfy_env/isolation/workers/subprocess.py\", line 3259, in call_method\\n    raise WorkerError(\\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': [\"{'type': 'sonata', 'ckpt_path': '/workspaces/Hunyuan3D-Part-0047/ComfyUI/models/hunyuan3d-part/p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}\"]}, 'current_outputs': ['46', '31', '33', '39', '44', '27', '42', '47', '35', '37', '38', '43'], 'timestamp': 1777424099126}\n\nDetails:\nWorkflow: /node/ComfyUI-Hunyuan3D-Part/workflows/H3DPART-segment-partgen.json\nNode error: ComputeMeshFeatures",
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
-        "cpu": "Intel(R) Xeon(R) CPU E5-2698 v4 @ 2.20GHz",
-        "gpu": "NVIDIA GeForce RTX 2060 SUPER"
+        "cpu": "Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz",
+        "gpu": "NVIDIA GeForce RTX 3090"
       },
       "resources": {
         "ram": {
-          "peak": 0.99,
-          "avg": 0.99
+          "peak": 4.6,
+          "avg": 3.06
         },
         "total_ram_gb": 31.2,
-        "samples": 10,
+        "samples": 107,
         "vram": {
-          "peak": 0.09,
-          "avg": 0.09
+          "peak": 0.75,
+          "avg": 0.47
         }
       }
     },
     {
       "name": "H3DPART-segment",
       "status": "fail",
-      "duration_seconds": 8.71,
-      "error": "Workflow validation failed\n\nDetails:\ngraphToPrompt produced nodes without class_type: graphToPrompt: 8 nodes, missing class_type: [20,27,31,32,35], sample: {\"inputs\":{\"UNKNOWN\":\"\",\"trimesh\":[\"32\",0],\"bboxes\":[\"32\",1]},\"_meta\":{}}",
+      "duration_seconds": 11.21,
+      "error": "Workflow execution failed: {'prompt_id': 'b781c8ad-cd59-4ca2-adff-4005af681d7e', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['33', '35', '27'], 'exception_message': 'No module named \\'spconv\\'\\n\\nWorker traceback:\\nTraceback (most recent call last):\\n  File \"/tmp/comfyui_pvenv__5qy0ul0/persistent_worker.py\", line 1587, in main\\n    result = method(**inputs)\\n             ^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/comfy_api/latest/_io.py\", line 1826, in EXECUTE_NORMALIZED\\n    to_return = cls.execute(*args, **kwargs)\\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py\", line 556, in execute\\n    sonata_model = _get_sonata_model(sonata_config)\\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py\", line 192, in _get_sonata_model\\n    from .p3sam.model import SonataEncoder\\n  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/p3sam/model.py\", line 5, in <module>\\n    from .. import sonata\\n  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/__init__.py\", line 16, in <module>\\n    from .model import load, load_by_config\\n  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/model.py\", line 98, in <module>\\n    import spconv.pytorch as spconv\\nModuleNotFoundError: No module named \\'spconv\\'\\n\\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py\", line 534, in execute\\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n', '  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py\", line 334, in get_output_data\\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n', '  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py\", line 308, in _async_map_node_over_list\\n    await process_inputs(input_dict, i)\\n', '  File \"/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py\", line 296, in process_inputs\\n    result = f(**inputs)\\n', '  File \"/workspaces/Hunyuan3D-Part-0047/.venv/lib/python3.10/site-packages/comfy_env/isolation/metadata.py\", line 531, in proxy\\n    result = worker.call_method(\\n', '  File \"/workspaces/Hunyuan3D-Part-0047/.venv/lib/python3.10/site-packages/comfy_env/isolation/workers/subprocess.py\", line 3259, in call_method\\n    raise WorkerError(\\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': [\"{'type': 'sonata', 'ckpt_path': '/workspaces/Hunyuan3D-Part-0047/ComfyUI/models/hunyuan3d-part/p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}\"]}, 'current_outputs': ['31', '33', '20', '27', '32', '35', '37', '38'], 'timestamp': 1777424110981}\n\nDetails:\nWorkflow: /node/ComfyUI-Hunyuan3D-Part/workflows/H3DPART-segment.json\nNode error: ComputeMeshFeatures",
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
-        "cpu": "Intel(R) Xeon(R) CPU E5-2698 v4 @ 2.20GHz",
-        "gpu": "NVIDIA GeForce RTX 2060 SUPER"
+        "cpu": "Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz",
+        "gpu": "NVIDIA GeForce RTX 3090"
       },
       "resources": {
         "ram": {
-          "peak": 0.99,
-          "avg": 0.99
+          "peak": 4.09,
+          "avg": 4.09
         },
         "total_ram_gb": 31.2,
-        "samples": 9,
+        "samples": 11,
         "vram": {
-          "peak": 0.09,
-          "avg": 0.09
+          "peak": 0.75,
+          "avg": 0.75
         }
       }
     }
