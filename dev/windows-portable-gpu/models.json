@@ -1,9 +1,9 @@
 {
-  "models_dir": "C:\\workspaces\\Hunyuan3D-Part-1436\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\models",
+  "models_dir": "C:\\workspaces\\Hunyuan3D-Part-0305\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\models",
   "summary": {
-    "total_files": 12,
-    "total_size_bytes": 9512659098,
-    "total_size_human": "8.9 GB"
+    "total_files": 16,
+    "total_size_bytes": 9946667708,
+    "total_size_human": "9.3 GB"
   },
   "folders": {
     "hunyuan3d-part": {
@@ -32,6 +32,35 @@
           "path": "p3sam.safetensors",
           "size_bytes": 450968044,
           "size_human": "430.1 MB"
+        }
+      ]
+    },
+    "sonata": {
+      "total_size_bytes": 434008610,
+      "total_size_human": "413.9 MB",
+      "source": {
+        "type": "unknown"
+      },
+      "files": [
+        {
+          "path": "sonata.pth",
+          "size_bytes": 434008287,
+          "size_human": "413.9 MB"
+        },
+        {
+          "path": ".cache\\huggingface\\CACHEDIR.TAG",
+          "size_bytes": 195,
+          "size_human": "195.0 B"
+        },
+        {
+          "path": ".cache\\huggingface\\download\\sonata.pth.metadata",
+          "size_bytes": 127,
+          "size_human": "127.0 B"
+        },
+        {
+          "path": ".cache\\huggingface\\.gitignore",
+          "size_bytes": 1,
+          "size_human": "1.0 B"
         }
       ]
     },
