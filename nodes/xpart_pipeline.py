@@ -1,6 +1,4 @@
 import torch
-import comfy.model_management
-import comfy.utils
 from .misc_utils import logger, synchronize_timer
 import inspect
 from typing import List, Optional
@@ -29,6 +27,7 @@ from pathlib import Path
 
 @synchronize_timer("Export to trimesh")
 def export_to_trimesh(mesh_output):
+    import comfy.model_management
     if isinstance(mesh_output, list):
         outputs = []
         for mesh in mesh_output:
@@ -158,6 +157,7 @@ class PartFormerPipeline(TokenAllocMixin):
         ignore_keys=(),
         **kwargs,
     ):
+        import comfy.utils
         # prepare config
         if config is None:
             config = get_config_from_file(
@@ -233,6 +233,7 @@ class PartFormerPipeline(TokenAllocMixin):
         device="cuda",
         **kwargs,
     ):
+        import comfy.utils
         if config is None:
             config = get_config_from_file(
                 str(
@@ -689,6 +690,8 @@ class PartFormerPipeline(TokenAllocMixin):
         Returns:
             `trimesh.Scene` : single object composed of multiple parts
         """
+        import comfy.model_management
+        import comfy.utils
         callback = kwargs.pop("callback", None)
         callback_steps = kwargs.pop("callback_steps", None)
         precomputed_sonata_features = kwargs.pop("precomputed_sonata_features", None)

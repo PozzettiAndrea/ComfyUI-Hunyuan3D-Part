@@ -14,8 +14,6 @@ import os
 import tempfile
 import time
 import concurrent.futures
-import comfy.model_management
-import comfy.utils
 from comfy_api.latest import io
 
 # Import utilities from core
@@ -30,6 +28,7 @@ def _dbg(*args, **kwargs):
 
 def _vram_dbg(label=""):
     """Always print VRAM usage stats."""
+    import comfy.model_management
     try:
         device = comfy.model_management.get_torch_device()
         if device.type == "cuda":
@@ -125,6 +124,7 @@ def _enable_lowvram_cast(model):
 
 def _get_p3sam_model(config):
     """Load or return cached P3-SAM model (ComfyUI-native: auto-dtype, ModelPatcher, load_models_gpu)."""
+    import comfy.model_management
     import comfy.model_patcher
 
     precision = config.get('precision', 'auto')
@@ -188,6 +188,7 @@ def _get_p3sam_model(config):
 
 def _get_sonata_model(config):
     """Load or return cached Sonata encoder (sonata + mlp only, no segmentation heads)."""
+    import comfy.model_management
     import comfy.model_patcher
     from .p3sam.model import SonataEncoder
     from safetensors.torch import load_file
@@ -333,6 +334,7 @@ def _xpart_arch_config():
 
 def _get_xpart_models(config, pc_size=40960):
     """Load or return cached X-Part models (ComfyUI-native: auto-dtype, ModelPatcher, load_models_gpu)."""
+    import comfy.model_management
     import comfy.ops
     import comfy.model_patcher
 
@@ -681,6 +683,8 @@ class P3SAMSegmentMesh(io.ComfyNode):
     @classmethod
     def execute(cls, mesh_with_features, p3sam_config, prompt_num, threshold, post_process, batch_size=1):
         """Segment mesh into parts using P3-SAM."""
+        import comfy.model_management
+        import comfy.utils
         try:
             import fpsample
             from collections import defaultdict
@@ -894,6 +898,8 @@ class XPartGenerateParts(io.ComfyNode):
     def execute(cls, mesh_with_features, bounding_boxes, xpart_config, octree_resolution, num_inference_steps,
                 guidance_scale, seed, pc_size, num_sdf_chunks, output_coordinate_system):
         """Generate part meshes."""
+        import comfy.model_management
+        import comfy.utils
         device = comfy.model_management.get_torch_device()
         try:
             # Read Sonata features and geometry from mesh metadata

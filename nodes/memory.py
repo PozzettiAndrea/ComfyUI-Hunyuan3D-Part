@@ -6,7 +6,6 @@ Provides control over model memory allocation.
 
 import torch
 import gc
-import comfy.model_management
 from comfy_api.latest import io
 
 
@@ -35,6 +34,7 @@ class ClearAllModelCaches(io.ComfyNode):
     def execute(cls, trigger):
         """Clear all model caches."""
         try:
+            import comfy.model_management
             print("[Clear Caches] Clearing all model caches...")
 
             # Clear P3-SAM model cache

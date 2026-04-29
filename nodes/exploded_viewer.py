@@ -11,8 +11,6 @@ import folder_paths
 import os
 import uuid
 import tempfile
-import comfy.model_management
-
 from .mesh_utils import load_mesh
 from comfy_api.latest import io
 
@@ -129,6 +127,7 @@ class ExplodedMeshViewer(io.ComfyNode):
         Returns:
             trimesh.Scene with separate geometry for each part
         """
+        import comfy.model_management
         # Get unique segment IDs (excluding -1 and -2 which are no-mask)
         unique_ids = np.unique(face_ids)
         unique_ids = unique_ids[unique_ids >= 0]

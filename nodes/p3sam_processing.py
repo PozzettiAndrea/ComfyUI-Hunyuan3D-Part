@@ -3,7 +3,6 @@ import numpy as np
 import trimesh
 import time
 from concurrent.futures import ThreadPoolExecutor
-import comfy.model_management
 
 
 def normalize_pc(pc):
@@ -20,6 +19,7 @@ def normalize_pc(pc):
 
 @torch.no_grad()
 def get_feat(model, points, normals, device=None):
+    import comfy.model_management
     if device is None:
         device = comfy.model_management.get_torch_device()
     data_dict = {
@@ -59,6 +59,7 @@ def get_mask(model, feats, points, point_prompt, iter=1, device=None, model_dtyp
 
     Returns GPU tensors: mask_1 [N,K], mask_2 [N,K], mask_3 [N,K], pred_iou [K,3]
     """
+    import comfy.model_management
     if device is None:
         device = comfy.model_management.get_torch_device()
     if model_dtype is None:
@@ -198,6 +199,7 @@ def better_aabb(points):
     return [min_xyz, max_xyz]
 
 def fix_label(face_ids, adjacent_faces, use_aabb=False, mesh=None, show_info=False):
+    import comfy.model_management
     if use_aabb:
         def _cal_aabb(face_ids, i, _points_org):
             _part_mask = face_ids == i
@@ -342,6 +344,7 @@ def calculate_face_areas(mesh):
 
 
 def get_connected_region(face_ids, adjacent_faces, return_face_part_ids=False):
+    import comfy.model_management
     vis = [False] * len(face_ids)
     parts = []
     face_part_ids = np.ones_like(face_ids) * -1
@@ -412,6 +415,7 @@ def aabb_volume(aabb):
     return dx * dy * dz
 
 def find_neighbor_part(parts, adjacent_faces, parts_aabb=None, parts_ids=None):
+    import comfy.model_management
     face2part = {}
     for i, part in enumerate(parts):
         for face in part:
@@ -457,6 +461,7 @@ def find_neighbor_part(parts, adjacent_faces, parts_aabb=None, parts_ids=None):
 
 
 def do_post_process(face_areas, parts, adjacent_faces, face_ids, threshold=0.95, show_info=False):
+    import comfy.model_management
     unique_ids = np.unique(face_ids)
     if show_info:
         print(f"Connected region count: {len(parts)}")

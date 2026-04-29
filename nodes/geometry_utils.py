@@ -9,9 +9,6 @@ from einops import repeat
 import traceback
 import pymeshlab
 import tempfile
-import comfy.model_management
-import comfy.utils
-import comfy.ops
 
 
 def _auto_num_chunks(device, bytes_per_point=16384):
@@ -22,6 +19,7 @@ def _auto_num_chunks(device, bytes_per_point=16384):
     are ~16KB/point in fp16.  We target 20% of free VRAM to leave headroom for
     the octree grids and marching cubes buffers.
     """
+    import comfy.model_management
     free_mem = comfy.model_management.get_free_memory(device)
     print(f"[MC chunks] free_mem={free_mem / (1024**3):.2f}GB, bytes_per_point={bytes_per_point}")
     for num_chunks in [500000, 250000, 125000, 62500, 30000, 15000, 5000]:
@@ -559,6 +557,9 @@ def extract_geometry_fast(
     Returns:
 
     """
+    import comfy.model_management
+    import comfy.utils
+    import comfy.ops
 
     if isinstance(bounds, float):
         bounds = [-bounds, -bounds, -bounds, bounds, bounds, bounds]

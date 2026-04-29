@@ -92,8 +92,6 @@ from huggingface_hub import hf_hub_download, PyTorchModelHubMixin
 from addict import Dict
 import torch
 import torch.nn as nn
-import comfy.utils
-import comfy.ops
 from torch.nn.init import trunc_normal_
 import spconv.pytorch as spconv
 import torch_scatter
@@ -170,6 +168,7 @@ class SerializedAttention(PointModule):
         upcast_softmax=True,
     ):
         super().__init__()
+        import comfy.ops
         assert channels % num_heads == 0
         self.channels = channels
         self.num_heads = num_heads
@@ -332,6 +331,7 @@ class MLP(nn.Module):
         drop=0.0,
     ):
         super().__init__()
+        import comfy.ops
         out_channels = out_channels or in_channels
         hidden_channels = hidden_channels or in_channels
         self.fc1 = comfy.ops.disable_weight_init.Linear(in_channels, hidden_channels)
@@ -372,6 +372,7 @@ class Block(PointModule):
         upcast_softmax=True,
     ):
         super().__init__()
+        import comfy.ops
         self.channels = channels
         self.pre_norm = pre_norm
 
@@ -462,6 +463,7 @@ class GridPooling(PointModule):
         traceable=True,  # record parent and cluster
     ):
         super().__init__()
+        import comfy.ops
         self.in_channels = in_channels
         self.out_channels = out_channels
 
@@ -560,6 +562,7 @@ class GridUnpooling(PointModule):
         traceable=False,  # record parent and cluster
     ):
         super().__init__()
+        import comfy.ops
         self.proj = PointSequential(comfy.ops.disable_weight_init.Linear(in_channels, out_channels))
         self.proj_skip = PointSequential(comfy.ops.disable_weight_init.Linear(skip_channels, out_channels))
 
@@ -600,6 +603,7 @@ class Embedding(PointModule):
         mask_token=False,
     ):
         super().__init__()
+        import comfy.ops
         self.in_channels = in_channels
         self.embed_channels = embed_channels
 
@@ -826,6 +830,7 @@ def load(
     custom_config: dict = None,
     ckpt_only: bool = False,
 ):
+    import comfy.utils
     if name in MODELS:
         cache_dir = download_root or os.path.expanduser("~/.cache/sonata/ckpt")
         cached_file = os.path.join(cache_dir, f"{name}.pth")
