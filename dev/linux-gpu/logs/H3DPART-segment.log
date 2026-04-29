@@ -21,31 +21,13 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI]     Inputs: {"mode": "fields", "preview_vtk": "{\"show_edges\":false,\"camera_state\":\"{\\\"position\\\":[10.636114639523552,29.121889105824472,15.277734942277156],\\\"focalPoint\\\":[0.6242384910583496,0.093758
   [ComfyUI]   Node 38: GeomPackPreviewMeshVTK
   [ComfyUI]     Inputs: {"mode": "fields", "preview_vtk": "{\"show_edges\":false,\"camera_state\":\"{\\\"position\\\":[10.636114639523552,29.121889105824472,15.277734942277156],\\\"focalPoint\\\":[0.6242384910583496,0.093758
-  [ComfyUI] Generated prompt_id: a1963bba-5330-4301-9e0f-a7f9b97b24d2
+  [ComfyUI] Generated prompt_id: 99cee2f8-4ab0-4428-901a-8747cdfce474
   [ComfyUI] Calling execution.validate_prompt()...
   [ComfyUI] Validation result: valid=True
   [ComfyUI] === Validation PASSED ===
   [ComfyUI] got prompt
-  [ComfyUI] [comfy-env] Running LoadP3SAMSegmentor: precision: 'auto', attn_backend: 'auto'
-  [ComfyUI] [VRAM] Before LoadP3SAMSegmentor: 825 / 24124 MB
-  [ComfyUI] [SubprocessWorker] call_method: nodes.loaders.LoadP3SAMSegmentor.EXECUTE_NORMALIZED
-  [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] worker started/confirmed
-  [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-  [ComfyUI] [SubprocessWorker] created 0 shm blocks
-  [ComfyUI] [SubprocessWorker] sending request via socket...
-  [ComfyUI] [SubprocessWorker] call_id=5 sending call_method
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load P3-SAM] Ensuring model files are downloaded...
-  [ComfyUI] 2026-04-29 00:55:10,648 - hy3dgen.partgen - INFO - Using local models at: /workspaces/Hunyuan3D-Part-0047/ComfyUI/models/hunyuan3d-part
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Using local models at: /workspaces/Hunyuan3D-Part-0047/ComfyUI/models/hunyuan3d-part
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load P3-SAM] Model files ready at /workspaces/Hunyuan3D-Part-0047/ComfyUI/models/hunyuan3d-part
-  [ComfyUI] [SubprocessWorker] got response: ok
-  [ComfyUI] [comfy-env] LoadP3SAMSegmentor done (0.08s): result: NodeOutput
-  [ComfyUI] [VRAM] After LoadP3SAMSegmentor: 825 / 24124 MB
   [ComfyUI] [comfy-env] Running LoadSonataEncoder: precision: 'auto', attn_backend: 'auto'
-  [ComfyUI] [VRAM] Before LoadSonataEncoder: 825 / 24124 MB
+  [ComfyUI] [VRAM] Before LoadSonataEncoder: 316 / 7697 MB
   [ComfyUI] [SubprocessWorker] call_method: nodes.loaders.LoadSonataEncoder.EXECUTE_NORMALIZED
   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
@@ -54,131 +36,82 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
   [ComfyUI] [SubprocessWorker] created 0 shm blocks
   [ComfyUI] [SubprocessWorker] sending request via socket...
-  [ComfyUI] [SubprocessWorker] call_id=6 sending call_method
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load Sonata Encoder] Ensuring model files are downloaded...
-  [ComfyUI] 2026-04-29 00:55:10,734 - hy3dgen.partgen - INFO - Using local models at: /workspaces/Hunyuan3D-Part-0047/ComfyUI/models/hunyuan3d-part
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Using local models at: /workspaces/Hunyuan3D-Part-0047/ComfyUI/models/hunyuan3d-part
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load Sonata Encoder] Model files ready at /workspaces/Hunyuan3D-Part-0047/ComfyUI/models/hunyuan3d-part
-  [ComfyUI] [SubprocessWorker] got response: ok
-  [ComfyUI] [comfy-env] LoadSonataEncoder done (0.08s): result: NodeOutput
-  [ComfyUI] [VRAM] After LoadSonataEncoder: 825 / 24124 MB
-  [ComfyUI] [comfy-env] Running GeomPackLoadMesh: file_path: '3d/utah_teapot.stl'
-  [ComfyUI] [VRAM] Before GeomPackLoadMesh: 825 / 24124 MB
-  [ComfyUI] [SubprocessWorker] call_method: nodes.main.io.load_mesh.LoadMesh.EXECUTE_NORMALIZED
-  [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-  [ComfyUI] [ComfyUI-GeometryPack] Health check: ping (timeout=5.0s)...
-  [ComfyUI] [ComfyUI-GeometryPack] Health check: ok
-  [ComfyUI] [SubprocessWorker] worker started/confirmed
-  [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-  [ComfyUI] [SubprocessWorker] created 0 shm blocks
-  [ComfyUI] [SubprocessWorker] sending request via socket...
-  [ComfyUI] [SubprocessWorker] call_id=2 sending call_method
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Found mesh in input folder: 3d/utah_teapot.stl
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Loading: /workspaces/Hunyuan3D-Part-0047/ComfyUI/input/3d/utah_teapot.stl
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Initial mesh: 4719 vertices, 9438 faces
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Successfully loaded: 4719 vertices, 9438 faces
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Loaded: 4719 vertices, 9438 faces
-  [ComfyUI] [SubprocessWorker] got response: ok
-  [ComfyUI] [comfy-env] GeomPackLoadMesh done (0.11s): result: NodeOutput
-  [ComfyUI] [VRAM] After GeomPackLoadMesh: 825 / 24124 MB
-  [ComfyUI] [comfy-env] Running ComputeMeshFeatures: all_points: False, point_num: 100000, seed: 42, mesh: Trimesh, sonata_config: dict
-  [ComfyUI] [VRAM] Before ComputeMeshFeatures: 825 / 24124 MB
-  [ComfyUI] [SubprocessWorker] call_method: nodes.processing.ComputeMeshFeatures.EXECUTE_NORMALIZED
-  [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] worker started/confirmed
-  [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-  [ComfyUI] [SubprocessWorker] created 1 shm blocks
-  [ComfyUI] [SubprocessWorker] sending request via socket...
-  [ComfyUI] [SubprocessWorker] call_id=7 sending call_method
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Computing mesh features...
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Error: No module named 'spconv'
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Traceback (most recent call last):
-  [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 556, in execute
-  [ComfyUI]     sonata_model = _get_sonata_model(sonata_config)
-  [ComfyUI]                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 192, in _get_sonata_model
-  [ComfyUI]     from .p3sam.model import SonataEncoder
-  [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/p3sam/model.py", line 5, in <module>
-  [ComfyUI]     from .. import sonata
-  [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/__init__.py", line 16, in <module>
-  [ComfyUI]     from .model import load, load_by_config
-  [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/model.py", line 98, in <module>
-  [ComfyUI]     import spconv.pytorch as spconv
-  [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] ModuleNotFoundError: No module named 'spconv'
-  [ComfyUI] 
+  [ComfyUI] [SubprocessWorker] call_id=9 sending call_method
   [ComfyUI] [SubprocessWorker] got response: error
-  [ComfyUI] !!! Exception during processing !!! No module named 'spconv'
+  [ComfyUI] !!! Exception during processing !!! No CUDA GPUs are available
   [ComfyUI] 
   [ComfyUI] Worker traceback:
   [ComfyUI] Traceback (most recent call last):
-  [ComfyUI]   File "/tmp/comfyui_pvenv__5qy0ul0/persistent_worker.py", line 1587, in main
+  [ComfyUI]   File "/tmp/comfyui_pvenv_khz5gk7y/persistent_worker.py", line 1587, in main
   [ComfyUI]     result = method(**inputs)
   [ComfyUI]              ^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/comfy_api/latest/_io.py", line 1826, in EXECUTE_NORMALIZED
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/comfy_api/latest/_io.py", line 1826, in EXECUTE_NORMALIZED
   [ComfyUI]     to_return = cls.execute(*args, **kwargs)
   [ComfyUI]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 556, in execute
-  [ComfyUI]     sonata_model = _get_sonata_model(sonata_config)
-  [ComfyUI]                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 192, in _get_sonata_model
-  [ComfyUI]     from .p3sam.model import SonataEncoder
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/p3sam/model.py", line 5, in <module>
-  [ComfyUI]     from .. import sonata
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/__init__.py", line 16, in <module>
-  [ComfyUI]     from .model import load, load_by_config
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/model.py", line 98, in <module>
-  [ComfyUI]     import spconv.pytorch as spconv
-  [ComfyUI] ModuleNotFoundError: No module named 'spconv'
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/loaders.py", line 100, in execute
+  [ComfyUI]     from .misc_utils import smart_load_model
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/__init__.py", line 4, in <module>
+  [ComfyUI]     from .processing import NODE_CLASS_MAPPINGS as _processing, NODE_DISPLAY_NAME_MAPPINGS as _processing_d
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 17, in <module>
+  [ComfyUI]     import comfy.model_management
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/comfy/model_management.py", line 257, in <module>
+  [ComfyUI]     total_vram = get_total_memory(get_torch_device()) / (1024 * 1024)
+  [ComfyUI]                                   ^^^^^^^^^^^^^^^^^^
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/comfy/model_management.py", line 207, in get_torch_device
+  [ComfyUI]     return torch.device(torch.cuda.current_device())
+  [ComfyUI]                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/cuda/__init__.py", line 1148, in current_device
+  [ComfyUI]     _lazy_init()
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/cuda/__init__.py", line 478, in _lazy_init
+  [ComfyUI]     torch._C._cuda_init()
+  [ComfyUI] RuntimeError: No CUDA GPUs are available
   [ComfyUI] 
   [ComfyUI] Traceback (most recent call last):
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py", line 534, in execute
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/execution.py", line 534, in execute
   [ComfyUI]     output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py", line 334, in get_output_data
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/execution.py", line 334, in get_output_data
   [ComfyUI]     return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py", line 308, in _async_map_node_over_list
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/execution.py", line 308, in _async_map_node_over_list
   [ComfyUI]     await process_inputs(input_dict, i)
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py", line 296, in process_inputs
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/execution.py", line 296, in process_inputs
   [ComfyUI]     result = f(**inputs)
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/.venv/lib/python3.10/site-packages/comfy_env/isolation/metadata.py", line 531, in proxy
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/.venv/lib/python3.10/site-packages/comfy_env/isolation/metadata.py", line 531, in proxy
   [ComfyUI]     result = worker.call_method(
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/.venv/lib/python3.10/site-packages/comfy_env/isolation/workers/subprocess.py", line 3259, in call_method
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/.venv/lib/python3.10/site-packages/comfy_env/isolation/workers/subprocess.py", line 3259, in call_method
   [ComfyUI]     raise WorkerError(
-  [ComfyUI] comfy_env.isolation.workers.base.WorkerError: No module named 'spconv'
+  [ComfyUI] comfy_env.isolation.workers.base.WorkerError: No CUDA GPUs are available
   [ComfyUI] 
   [ComfyUI] Worker traceback:
   [ComfyUI] Traceback (most recent call last):
-  [ComfyUI]   File "/tmp/comfyui_pvenv__5qy0ul0/persistent_worker.py", line 1587, in main
+  [ComfyUI]   File "/tmp/comfyui_pvenv_khz5gk7y/persistent_worker.py", line 1587, in main
   [ComfyUI]     result = method(**inputs)
   [ComfyUI]              ^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/comfy_api/latest/_io.py", line 1826, in EXECUTE_NORMALIZED
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/comfy_api/latest/_io.py", line 1826, in EXECUTE_NORMALIZED
   [ComfyUI]     to_return = cls.execute(*args, **kwargs)
   [ComfyUI]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 556, in execute
-  [ComfyUI]     sonata_model = _get_sonata_model(sonata_config)
-  [ComfyUI]                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 192, in _get_sonata_model
-  [ComfyUI]     from .p3sam.model import SonataEncoder
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/p3sam/model.py", line 5, in <module>
-  [ComfyUI]     from .. import sonata
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/__init__.py", line 16, in <module>
-  [ComfyUI]     from .model import load, load_by_config
-  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/model.py", line 98, in <module>
-  [ComfyUI]     import spconv.pytorch as spconv
-  [ComfyUI] ModuleNotFoundError: No module named 'spconv'
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/loaders.py", line 100, in execute
+  [ComfyUI]     from .misc_utils import smart_load_model
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/__init__.py", line 4, in <module>
+  [ComfyUI]     from .processing import NODE_CLASS_MAPPINGS as _processing, NODE_DISPLAY_NAME_MAPPINGS as _processing_d
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 17, in <module>
+  [ComfyUI]     import comfy.model_management
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/comfy/model_management.py", line 257, in <module>
+  [ComfyUI]     total_vram = get_total_memory(get_torch_device()) / (1024 * 1024)
+  [ComfyUI]                                   ^^^^^^^^^^^^^^^^^^
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/comfy/model_management.py", line 207, in get_torch_device
+  [ComfyUI]     return torch.device(torch.cuda.current_device())
+  [ComfyUI]                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/cuda/__init__.py", line 1148, in current_device
+  [ComfyUI]     _lazy_init()
+  [ComfyUI]   File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/cuda/__init__.py", line 478, in _lazy_init
+  [ComfyUI]     torch._C._cuda_init()
+  [ComfyUI] RuntimeError: No CUDA GPUs are available
   [ComfyUI] 
   [ComfyUI] 
-  [ComfyUI] Prompt executed in 0.39 seconds
-  Execution complete (t=1.2s)
-  Execution error: {'prompt_id': 'b781c8ad-cd59-4ca2-adff-4005af681d7e', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['33', '35', '27'], 'exception_message': 'No module named \'spconv\'\n\nWorker traceback:\nTraceback (most recent call last):\n  File "/tmp/comfyui_pvenv__5qy0ul0/persistent_worker.py", line 1587, in main\n    result = method(**inputs)\n             ^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/comfy_api/latest/_io.py", line 1826, in EXECUTE_NORMALIZED\n    to_return = cls.execute(*args, **kwargs)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 556, in execute\n    sonata_model = _get_sonata_model(sonata_config)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 192, in _get_sonata_model\n    from .p3sam.model import SonataEncoder\n  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/p3sam/model.py", line 5, in <module>\n    from .. import sonata\n  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/__init__.py", line 16, in <module>\n    from .model import load, load_by_config\n  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/model.py", line 98, in <module>\n    import spconv.pytorch as spconv\nModuleNotFoundError: No module named \'spconv\'\n\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py", line 534, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py", line 334, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py", line 308, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n', '  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py", line 296, in process_inputs\n    result = f(**inputs)\n', '  File "/workspaces/Hunyuan3D-Part-0047/.venv/lib/python3.10/site-packages/comfy_env/isolation/metadata.py", line 531, in proxy\n    result = worker.call_method(\n', '  File "/workspaces/Hunyuan3D-Part-0047/.venv/lib/python3.10/site-packages/comfy_env/isolation/workers/subprocess.py", line 3259, in call_method\n    raise WorkerError(\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': ["{'type': 'sonata', 'ckpt_path': '/workspaces/Hunyuan3D-Part-0047/ComfyUI/models/hunyuan3d-part/p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}"]}, 'current_outputs': ['31', '33', '20', '27', '32', '35', '37', '38'], 'timestamp': 1777424110981}
+  [ComfyUI] Prompt executed in 0.02 seconds
+  Execution complete (t=0.5s)
+  Execution error: {'prompt_id': '4b83d900-2b16-4481-9f4c-5415e78afa3a', 'node_id': '35', 'node_type': 'LoadSonataEncoder', 'executed': [], 'exception_message': 'No CUDA GPUs are available\n\nWorker traceback:\nTraceback (most recent call last):\n  File "/tmp/comfyui_pvenv_khz5gk7y/persistent_worker.py", line 1587, in main\n    result = method(**inputs)\n             ^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/comfy_api/latest/_io.py", line 1826, in EXECUTE_NORMALIZED\n    to_return = cls.execute(*args, **kwargs)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/loaders.py", line 100, in execute\n    from .misc_utils import smart_load_model\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/__init__.py", line 4, in <module>\n    from .processing import NODE_CLASS_MAPPINGS as _processing, NODE_DISPLAY_NAME_MAPPINGS as _processing_d\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 17, in <module>\n    import comfy.model_management\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/comfy/model_management.py", line 257, in <module>\n    total_vram = get_total_memory(get_torch_device()) / (1024 * 1024)\n                                  ^^^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/comfy/model_management.py", line 207, in get_torch_device\n    return torch.device(torch.cuda.current_device())\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/cuda/__init__.py", line 1148, in current_device\n    _lazy_init()\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/cuda/__init__.py", line 478, in _lazy_init\n    torch._C._cuda_init()\nRuntimeError: No CUDA GPUs are available\n\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/execution.py", line 534, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/execution.py", line 334, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/execution.py", line 308, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n', '  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/execution.py", line 296, in process_inputs\n    result = f(**inputs)\n', '  File "/workspaces/Hunyuan3D-Part-0840/.venv/lib/python3.10/site-packages/comfy_env/isolation/metadata.py", line 531, in proxy\n    result = worker.call_method(\n', '  File "/workspaces/Hunyuan3D-Part-0840/.venv/lib/python3.10/site-packages/comfy_env/isolation/workers/subprocess.py", line 3259, in call_method\n    raise WorkerError(\n'], 'current_inputs': {'precision': ['auto'], 'attn_backend': ['auto']}, 'current_outputs': ['31', '33', '35', '20', '38', '37', '27', '32'], 'timestamp': 1777452478590}
     Status: FAILED
-    Error: Workflow execution failed: {'prompt_id': 'b781c8ad-cd59-4ca2-adff-4005af681d7e', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['33', '35', '27'], 'exception_message': 'No module named \'spconv\'\n\nWorker traceback:\nTraceback (most recent call last):\n  File "/tmp/comfyui_pvenv__5qy0ul0/persistent_worker.py", line 1587, in main\n    result = method(**inputs)\n             ^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/comfy_api/latest/_io.py", line 1826, in EXECUTE_NORMALIZED\n    to_return = cls.execute(*args, **kwargs)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 556, in execute\n    sonata_model = _get_sonata_model(sonata_config)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 192, in _get_sonata_model\n    from .p3sam.model import SonataEncoder\n  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/p3sam/model.py", line 5, in <module>\n    from .. import sonata\n  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/__init__.py", line 16, in <module>\n    from .model import load, load_by_config\n  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/model.py", line 98, in <module>\n    import spconv.pytorch as spconv\nModuleNotFoundError: No module named \'spconv\'\n\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py", line 534, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py", line 334, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py", line 308, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n', '  File "/workspaces/Hunyuan3D-Part-0047/ComfyUI/execution.py", line 296, in process_inputs\n    result = f(**inputs)\n', '  File "/workspaces/Hunyuan3D-Part-0047/.venv/lib/python3.10/site-packages/comfy_env/isolation/metadata.py", line 531, in proxy\n    result = worker.call_method(\n', '  File "/workspaces/Hunyuan3D-Part-0047/.venv/lib/python3.10/site-packages/comfy_env/isolation/workers/subprocess.py", line 3259, in call_method\n    raise WorkerError(\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': ["{'type': 'sonata', 'ckpt_path': '/workspaces/Hunyuan3D-Part-0047/ComfyUI/models/hunyuan3d-part/p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}"]}, 'current_outputs': ['31', '33', '20', '27', '32', '35', '37', '38'], 'timestamp': 1777424110981}
+    Error: Workflow execution failed: {'prompt_id': '4b83d900-2b16-4481-9f4c-5415e78afa3a', 'node_id': '35', 'node_type': 'LoadSonataEncoder', 'executed': [], 'exception_message': 'No CUDA GPUs are available\n\nWorker traceback:\nTraceback (most recent call last):\n  File "/tmp/comfyui_pvenv_khz5gk7y/persistent_worker.py", line 1587, in main\n    result = method(**inputs)\n             ^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/comfy_api/latest/_io.py", line 1826, in EXECUTE_NORMALIZED\n    to_return = cls.execute(*args, **kwargs)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/loaders.py", line 100, in execute\n    from .misc_utils import smart_load_model\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/__init__.py", line 4, in <module>\n    from .processing import NODE_CLASS_MAPPINGS as _processing, NODE_DISPLAY_NAME_MAPPINGS as _processing_d\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py", line 17, in <module>\n    import comfy.model_management\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/comfy/model_management.py", line 257, in <module>\n    total_vram = get_total_memory(get_torch_device()) / (1024 * 1024)\n                                  ^^^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/comfy/model_management.py", line 207, in get_torch_device\n    return torch.device(torch.cuda.current_device())\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/cuda/__init__.py", line 1148, in current_device\n    _lazy_init()\n  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/cuda/__init__.py", line 478, in _lazy_init\n    torch._C._cuda_init()\nRuntimeError: No CUDA GPUs are available\n\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/execution.py", line 534, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/execution.py", line 334, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/execution.py", line 308, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n', '  File "/workspaces/Hunyuan3D-Part-0840/ComfyUI/execution.py", line 296, in process_inputs\n    result = f(**inputs)\n', '  File "/workspaces/Hunyuan3D-Part-0840/.venv/lib/python3.10/site-packages/comfy_env/isolation/metadata.py", line 531, in proxy\n    result = worker.call_method(\n', '  File "/workspaces/Hunyuan3D-Part-0840/.venv/lib/python3.10/site-packages/comfy_env/isolation/workers/subprocess.py", line 3259, in call_method\n    raise WorkerError(\n'], 'current_inputs': {'precision': ['auto'], 'attn_backend': ['auto']}, 'current_outputs': ['31', '33', '35', '20', '38', '37', '27', '32'], 'timestamp': 1777452478590}
     Details: Workflow: /node/ComfyUI-Hunyuan3D-Part/workflows/H3DPART-segment.json
-Node error: ComputeMeshFeatures
+Node error: LoadSonataEncoder
