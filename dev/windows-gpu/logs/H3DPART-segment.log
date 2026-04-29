@@ -2,8 +2,8 @@ Capturing execution frames: H3DPART-segment.json
   Frame 1 saved (frame_000.jpg, t=0.0s)
   Validating workflow...
   [ComfyUI] === /validate endpoint called ===
-  Queuing workflow for execution...
   [ComfyUI] Received JSON with keys: ['prompt']
+  Queuing workflow for execution...
   [ComfyUI] Prompt has 8 nodes
   [ComfyUI]   Node 20: Hunyuan3DPreviewBoundingBoxes
   [ComfyUI]     Inputs: {"line_width": 2, "preview_bbox": "", "trimesh": ["32", 0], "bboxes": ["32", 1]}
@@ -21,13 +21,13 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI]     Inputs: {"mode": "fields", "preview_vtk": "{\"show_edges\":false,\"camera_state\":\"{\\\"position\\\":[10.636114639523552,29.121889105824472,15.277734942277156],\\\"focalPoint\\\":[0.6242384910583496,0.093758
   [ComfyUI]   Node 38: GeomPackPreviewMeshVTK
   [ComfyUI]     Inputs: {"mode": "fields", "preview_vtk": "{\"show_edges\":false,\"camera_state\":\"{\\\"position\\\":[10.636114639523552,29.121889105824472,15.277734942277156],\\\"focalPoint\\\":[0.6242384910583496,0.093758
-  [ComfyUI] Generated prompt_id: 1228a1b9-e610-4992-8cde-20b32b5a26a1
+  [ComfyUI] Generated prompt_id: 8cc07295-211f-4efc-91e8-0cc9c1becf9d
   [ComfyUI] Calling execution.validate_prompt()...
   [ComfyUI] Validation result: valid=True
   [ComfyUI] === Validation PASSED ===
   [ComfyUI] got prompt
   [ComfyUI] [comfy-env] Running LoadSonataEncoder: precision: 'auto', attn_backend: 'auto'
-  [ComfyUI] [VRAM] Before LoadSonataEncoder: 1156 / 16379 MB
+  [ComfyUI] [VRAM] Before LoadSonataEncoder: 1271 / 24575 MB
   [ComfyUI] [SubprocessWorker] call_method: nodes.loaders.LoadSonataEncoder.EXECUTE_NORMALIZED
   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
@@ -38,33 +38,45 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI] [SubprocessWorker] sending request via socket...
   [ComfyUI] [SubprocessWorker] call_id=3 sending call_method
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load Sonata Encoder] Ensuring model files are downloaded...
-  [ComfyUI] 2026-04-29 11:21:16,215 - hy3dgen.partgen - INFO - Using local models at: C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\models\hunyuan3d-part
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Using local models at: C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\models\hunyuan3d-part
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load Sonata Encoder] Model files ready at C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\models\hunyuan3d-part
+  [ComfyUI] 2026-04-29 12:15:33,650 - hy3dgen.partgen - INFO - Using local models at: C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\models\hunyuan3d-part
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Using local models at: C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\models\hunyuan3d-part
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load Sonata Encoder] Model files ready at C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\models\hunyuan3d-part
   [ComfyUI] [SubprocessWorker] got response: ok
-  [ComfyUI] [comfy-env] LoadSonataEncoder done (0.03s): result: NodeOutput
-  [ComfyUI] [VRAM] After LoadSonataEncoder: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] LoadSonataEncoder done (0.14s): result: NodeOutput
+  [ComfyUI] [VRAM] After LoadSonataEncoder: 1271 / 24575 MB
   [ComfyUI] [comfy-env] Running GeomPackLoadMesh: file_path: '3d/utah_teapot.stl'
-  [ComfyUI] [VRAM] Before GeomPackLoadMesh: 1156 / 16379 MB
+  [ComfyUI] [VRAM] Before GeomPackLoadMesh: 1271 / 24575 MB
   [ComfyUI] [SubprocessWorker] call_method: nodes.main.io.load_mesh.LoadMesh.EXECUTE_NORMALIZED
   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
   [ComfyUI] [ComfyUI-GeometryPack] Health check: ping (timeout=5.0s)...
-  [ComfyUI] [ComfyUI-GeometryPack] Health check: ok
+  [ComfyUI] [ComfyUI-GeometryPack] Health check: failed
+  [ComfyUI] [ComfyUI-GeometryPack] Socket unhealthy, restarting worker...
+  [ComfyUI] [comfy-env] geometrypack-main: Library/bin has 285 DLLs
+  [ComfyUI] [ComfyUI-GeometryPack] python: C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\geometrypack-main\python.exe
+  [ComfyUI] [ComfyUI-GeometryPack] sys_path sent to worker: ['C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI', 'C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-GeometryPack', 'C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\geometrypack-main\\Lib\\site-packages', 'C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-GeometryPack']
+  [ComfyUI] [SubprocessWorker] is_pixi=True, python=C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\geometrypack-main\python.exe
+  [ComfyUI] [SubprocessWorker] launching cmd=['C:\\Users\\ContainerAdministrator\\.local\\bin\\pixi.EXE', 'run', '--as-is']...
+  Frame 2 saved (frame_001.jpg, t=2.3s)
+  [capture-periodic] freeze=5ms shot=125ms unfreeze=3ms saved=True
+  Frame 3 saved (frame_002.jpg, t=4.5s)
+  [capture-periodic] freeze=3ms shot=116ms unfreeze=4ms saved=True
+  [ComfyUI] [worker:ComfyUI-GeometryPack] WARNING: WARNING: You need pytorch with cu130 or higher to use optimized CUDA operations.
   [ComfyUI] [SubprocessWorker] worker started/confirmed
   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
   [ComfyUI] [SubprocessWorker] created 0 shm blocks
   [ComfyUI] [SubprocessWorker] sending request via socket...
   [ComfyUI] [SubprocessWorker] call_id=2 sending call_method
+  [capture-loop] iter=50 t=6.1s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=4
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Found mesh in input folder: 3d/utah_teapot.stl
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Loading: C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\input\3d/utah_teapot.stl
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Loading: C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\input\3d/utah_teapot.stl
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Initial mesh: 4719 vertices, 9438 faces
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Successfully loaded: 4719 vertices, 9438 faces
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Loaded: 4719 vertices, 9438 faces
   [ComfyUI] [SubprocessWorker] got response: ok
-  [ComfyUI] [comfy-env] GeomPackLoadMesh done (0.04s): result: NodeOutput
-  [ComfyUI] [VRAM] After GeomPackLoadMesh: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] GeomPackLoadMesh done (7.06s): result: NodeOutput
+  [ComfyUI] [VRAM] After GeomPackLoadMesh: 1271 / 24575 MB
   [ComfyUI] [comfy-env] Running ComputeMeshFeatures: all_points: False, point_num: 100000, seed: 42, mesh: Trimesh, sonata_config: dict
-  [ComfyUI] [VRAM] Before ComputeMeshFeatures: 1156 / 16379 MB
+  [ComfyUI] [VRAM] Before ComputeMeshFeatures: 1271 / 24575 MB
   [ComfyUI] [SubprocessWorker] call_method: nodes.processing.ComputeMeshFeatures.EXECUTE_NORMALIZED
   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
@@ -76,8 +88,8 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI] [SubprocessWorker] call_id=4 sending call_method
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Computing mesh features...
   [ComfyUI] [SubprocessWorker] callback 'request_vram_budget' from call_id=4
-  [ComfyUI] [comfy-env] VRAM request: 0.22GB, free before eviction: 15.96GB
-  [ComfyUI] [comfy-env] VRAM after eviction: 15.96GB
+  [ComfyUI] [comfy-env] VRAM request: 0.22GB, free before eviction: 24.44GB
+  [ComfyUI] [comfy-env] VRAM after eviction: 24.44GB
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Cleaning mesh...
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Building adjacent faces...
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Sampling 100000 points...
@@ -240,117 +252,117 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI] 
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Traceback (most recent call last):
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\processing.py", line 600, in execute
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\processing.py", line 600, in execute
   [ComfyUI]     feats = get_feat(sonata_model, points, normals)
   [ComfyUI]             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
   [ComfyUI]     return func(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\p3sam_processing.py", line 39, in get_feat
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\p3sam_processing.py", line 39, in get_feat
   [ComfyUI]     point = model.sonata(data_dict)
   [ComfyUI]             ^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
   [ComfyUI]     return forward_call(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\model.py", line 820, in forward
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\model.py", line 820, in forward
   [ComfyUI]     point = self.enc(point)
   [ComfyUI]             ^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
   [ComfyUI]     return forward_call(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 86, in forward
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 86, in forward
   [ComfyUI]     input = module(input)
   [ComfyUI]             ^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
   [ComfyUI]     return forward_call(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 86, in forward
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 86, in forward
   [ComfyUI]     input = module(input)
   [ComfyUI]             ^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
   [ComfyUI]     return forward_call(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\model.py", line 432, in forward
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\model.py", line 432, in forward
   [ComfyUI]     point = self.cpe(point)
   [ComfyUI]             ^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
   [ComfyUI]     return forward_call(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 90, in forward
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 90, in forward
   [ComfyUI]     input.sparse_conv_feat = module(input.sparse_conv_feat)
   [ComfyUI]                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1885, in _call_impl
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1885, in _call_impl
   [ComfyUI]     return inner()
   [ComfyUI]            ^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1833, in inner
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1833, in inner
   [ComfyUI]     result = forward_call(*args, **kwargs)
   [ComfyUI]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\pytorch\conv.py", line 755, in forward
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\pytorch\conv.py", line 755, in forward
   [ComfyUI]     return self._conv_forward(self.training,
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\pytorch\conv.py", line 467, in _conv_forward
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\pytorch\conv.py", line 467, in _conv_forward
   [ComfyUI]     out_features, _, _ = ops.implicit_gemm(
   [ComfyUI]                          ^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\pytorch\ops.py", line 1513, in implicit_gemm
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\pytorch\ops.py", line 1513, in implicit_gemm
   [ComfyUI]     mask_width, tune_res_cpp = ConvGemmOps.implicit_gemm(
   [ComfyUI]                                ^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\algo.py", line 208, in cached_get_nvrtc_params
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\algo.py", line 208, in cached_get_nvrtc_params
   [ComfyUI]     mod, ker = self._compile_nvrtc_module(desp)
   [ComfyUI]                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\algo.py", line 196, in _compile_nvrtc_module
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\algo.py", line 196, in _compile_nvrtc_module
   [ComfyUI]     mod = CummNVRTCModule([kernel],
   [ComfyUI]           ^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\cumm\nvrtc\__init__.py", line 486, in __init__
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\cumm\nvrtc\__init__.py", line 486, in __init__
   [ComfyUI]     super().__init__(params.code,
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\cumm\nvrtc\__init__.py", line 295, in __init__
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\cumm\nvrtc\__init__.py", line 295, in __init__
   [ComfyUI]     super().__init__(code,
   [ComfyUI] 
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\cumm\tensorview\__init__.py", line 323, in __init__
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\cumm\tensorview\__init__.py", line 323, in __init__
   [ComfyUI]     self._mod = _NVRTCModule(code, headers, opts, program_name,
   [ComfyUI]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] 
@@ -377,95 +389,95 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI] 
   [ComfyUI] Worker traceback:
   [ComfyUI] Traceback (most recent call last):
-  [ComfyUI]   File "C:\Users\ContainerAdministrator\AppData\Local\Temp\comfyui_pvenv_xvhsxs1g\persistent_worker.py", line 1587, in main
+  [ComfyUI]   File "C:\Users\ContainerAdministrator\AppData\Local\Temp\comfyui_pvenv_qz1alsxm\persistent_worker.py", line 1587, in main
   [ComfyUI]     result = method(**inputs)
   [ComfyUI]              ^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\comfy_api\latest\_io.py", line 1826, in EXECUTE_NORMALIZED
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\comfy_api\latest\_io.py", line 1826, in EXECUTE_NORMALIZED
   [ComfyUI]     to_return = cls.execute(*args, **kwargs)
   [ComfyUI]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\processing.py", line 600, in execute
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\processing.py", line 600, in execute
   [ComfyUI]     feats = get_feat(sonata_model, points, normals)
   [ComfyUI]             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
   [ComfyUI]     return func(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\p3sam_processing.py", line 39, in get_feat
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\p3sam_processing.py", line 39, in get_feat
   [ComfyUI]     point = model.sonata(data_dict)
   [ComfyUI]             ^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
   [ComfyUI]     return forward_call(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\model.py", line 820, in forward
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\model.py", line 820, in forward
   [ComfyUI]     point = self.enc(point)
   [ComfyUI]             ^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
   [ComfyUI]     return forward_call(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 86, in forward
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 86, in forward
   [ComfyUI]     input = module(input)
   [ComfyUI]             ^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
   [ComfyUI]     return forward_call(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 86, in forward
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 86, in forward
   [ComfyUI]     input = module(input)
   [ComfyUI]             ^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
   [ComfyUI]     return forward_call(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\model.py", line 432, in forward
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\model.py", line 432, in forward
   [ComfyUI]     point = self.cpe(point)
   [ComfyUI]             ^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
   [ComfyUI]     return forward_call(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 90, in forward
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 90, in forward
   [ComfyUI]     input.sparse_conv_feat = module(input.sparse_conv_feat)
   [ComfyUI]                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1885, in _call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1885, in _call_impl
   [ComfyUI]     return inner()
   [ComfyUI]            ^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1833, in inner
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1833, in inner
   [ComfyUI]     result = forward_call(*args, **kwargs)
   [ComfyUI]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\pytorch\conv.py", line 755, in forward
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\pytorch\conv.py", line 755, in forward
   [ComfyUI]     return self._conv_forward(self.training,
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\pytorch\conv.py", line 467, in _conv_forward
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\pytorch\conv.py", line 467, in _conv_forward
   [ComfyUI]     out_features, _, _ = ops.implicit_gemm(
   [ComfyUI]                          ^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\pytorch\ops.py", line 1513, in implicit_gemm
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\pytorch\ops.py", line 1513, in implicit_gemm
   [ComfyUI]     mask_width, tune_res_cpp = ConvGemmOps.implicit_gemm(
   [ComfyUI]                                ^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\algo.py", line 208, in cached_get_nvrtc_params
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\algo.py", line 208, in cached_get_nvrtc_params
   [ComfyUI]     mod, ker = self._compile_nvrtc_module(desp)
   [ComfyUI]                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\algo.py", line 196, in _compile_nvrtc_module
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\spconv\algo.py", line 196, in _compile_nvrtc_module
   [ComfyUI]     mod = CummNVRTCModule([kernel],
   [ComfyUI]           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\cumm\nvrtc\__init__.py", line 486, in __init__
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\cumm\nvrtc\__init__.py", line 486, in __init__
   [ComfyUI]     super().__init__(params.code,
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\cumm\nvrtc\__init__.py", line 295, in __init__
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\cumm\nvrtc\__init__.py", line 295, in __init__
   [ComfyUI]     super().__init__(code,
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\cumm\tensorview\__init__.py", line 323, in __init__
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\cumm\tensorview\__init__.py", line 323, in __init__
   [ComfyUI]     self._mod = _NVRTCModule(code, headers, opts, program_name,
   [ComfyUI]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   [ComfyUI] RuntimeError: D:\a\cuda-wheels\cuda-wheels\source\include\tensorview/cuda/nvrtc.h(96)
@@ -479,17 +491,17 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI] 
   [ComfyUI] 
   [ComfyUI] Traceback (most recent call last):
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\execution.py", line 534, in execute
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\execution.py", line 534, in execute
   [ComfyUI]     output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\execution.py", line 334, in get_output_data
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\execution.py", line 334, in get_output_data
   [ComfyUI]     return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\execution.py", line 308, in _async_map_node_over_list
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\execution.py", line 308, in _async_map_node_over_list
   [ComfyUI]     await process_inputs(input_dict, i)
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\execution.py", line 296, in process_inputs
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\execution.py", line 296, in process_inputs
   [ComfyUI]     result = f(**inputs)
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\.venv\lib\site-packages\comfy_env\isolation\metadata.py", line 531, in proxy
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\.venv\lib\site-packages\comfy_env\isolation\metadata.py", line 531, in proxy
   [ComfyUI]     result = worker.call_method(
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\.venv\lib\site-packages\comfy_env\isolation\workers\subprocess.py", line 3259, in call_method
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\.venv\lib\site-packages\comfy_env\isolation\workers\subprocess.py", line 3259, in call_method
   [ComfyUI]     raise WorkerError(
   [ComfyUI] comfy_env.isolation.workers.base.WorkerError: D:\a\cuda-wheels\cuda-wheels\source\include\tensorview/cuda/nvrtc.h(96)
   [ComfyUI] compileResult == NVRTC_SUCCESS assert faild. nvrtc compile failed. log:
@@ -503,60 +515,75 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI] 
   [ComfyUI] Worker traceback:
   [ComfyUI] Traceback (most recent call last):
-  [ComfyUI]   File "C:\Users\ContainerAdministrator\AppData\Local\Temp\comfyui_pvenv_xvhsxs1g\persistent_worker.py", line 1587, in main
+  [ComfyUI]   File "C:\Users\ContainerAdministrator\AppData\Local\Temp\comfyui_pvenv_qz1alsxm\persistent_worker.py", line 1587, in main
   [ComfyUI]     result = method(**inputs)
   [ComfyUI]              ^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\comfy_api\latest\_io.py", line 1826, in EXECUTE_NORMALIZED
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\comfy_api\latest\_io.py", line 1826, in EXECUTE_NORMALIZED
   [ComfyUI]     to_return = cls.execute(*args, **kwargs)
   [ComfyUI]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\processing.py", line 600, in execute
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\processing.py", line 600, in execute
   [ComfyUI]     feats = get_feat(sonata_model, points, normals)
   [ComfyUI]             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
   [ComfyUI]     return func(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\p3sam_processing.py", line 39, in get_feat
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\p3sam_processing.py", line 39, in get_feat
   [ComfyUI]     point = model.sonata(data_dict)
   [ComfyUI]             ^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  Execution complete (t=8.5s)
   [ComfyUI]     return forward_call(*args, **kwargs)
+  Execution error: {'prompt_id': '42592871-cec6-487c-ad6d-4285eb1927fe', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['33', '35'], 'exception_message': 'D:\\a\\cuda-wheels\\cuda-wheels\\source\\include\\tensorview/cuda/nvrtc.h(96)\ncompileResult == NVRTC_SUCCESS assert faild. nvrtc compile failed. log: \n cumm/common/TensorViewNVRTC.h(2): catastrophic error: could not open source file "tensorview/core/all.h" (no directories in search list)\n  #include <tensorview/core/all.h>\n                                  ^\n\n1 catastrophic error detected in the compilation of "kernel.cu.cu".\nCompilation terminated.\n\n\nWorker traceback:\nTraceback (most recent call last):\n  File "C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\comfyui_pvenv_qz1alsxm\\persistent_worker.py", line 1587, in main\n    result = method(**inputs)\n             ^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\comfy_api\\latest\\_io.py", line 1826, in EXECUTE_NORMALIZED\n    to_return = cls.execute(*args, **kwargs)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\processing.py", line 600, in execute\n    feats = get_feat(sonata_model, points, normals)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\utils\\_contextlib.py", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\p3sam_processing.py", line 39, in get_feat\n    point = model.sonata(data_dict)\n            ^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\model.py", line 820, in forward\n    point = self.enc(point)\n            ^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\module.py", line 86, in forward\n    input = module(input)\n            ^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\module.py", line 86, in forward\n    input = module(input)\n            ^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\model.py", line 432, in forward\n    point = self.cpe(point)\n            ^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\module.py", line 90, in forward\n    input.sparse_conv_feat = module(input.sparse_conv_feat)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1885, in _call_impl\n    return inner()\n           ^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1833, in inner\n    result = forward_call(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\pytorch\\conv.py", line 755, in forward\n    return self._conv_forward(self.training,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\pytorch\\conv.py", line 467, in _conv_forward\n    out_features, _, _ = ops.implicit_gemm(\n                         ^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\pytorch\\ops.py", line 1513, in implicit_gemm\n    mask_width, tune_res_cpp = ConvGemmOps.implicit_gemm(\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\algo.py", line 208, in cached_get_nvrtc_params\n    mod, ker = self._compile_nvrtc_module(desp)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\algo.py", line 196, in _compile_nvrtc_module\n    mod = CummNVRTCModule([kernel],\n          ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\cumm\\nvrtc\\__init__.py", line 486, in __init__\n    super().__init__(params.code,\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\cumm\\nvrtc\\__init__.py", line 295, in __init__\n    super().__init__(code,\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\cumm\\tensorview\\__init__.py", line 323, in __init__\n    self._mod = _NVRTCModule(code, headers, opts, program_name,\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: D:\\a\\cuda-wheels\\cuda-wheels\\source\\include\\tensorview/cuda/nvrtc.h(96)\ncompileResult == NVRTC_SUCCESS assert faild. nvrtc compile failed. log: \n cumm/common/TensorViewNVRTC.h(2): catastrophic error: could not open source file "tensorview/core/all.h" (no directories in search list)\n  #include <tensorview/core/all.h>\n                                  ^\n\n1 catastrophic error detected in the compilation of "kernel.cu.cu".\nCompilation terminated.\n\n\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\execution.py", line 534, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\execution.py", line 334, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\execution.py", line 308, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\execution.py", line 296, in process_inputs\n    result = f(**inputs)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1200\\.venv\\lib\\site-packages\\comfy_env\\isolation\\metadata.py", line 531, in proxy\n    result = worker.call_method(\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1200\\.venv\\lib\\site-packages\\comfy_env\\isolation\\workers\\subprocess.py", line 3259, in call_method\n    raise WorkerError(\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': ["{'type': 'sonata', 'ckpt_path': 'C:\\\\workspaces\\\\Hunyuan3D-Part-1200\\\\ComfyUI\\\\models\\\\hunyuan3d-part\\\\p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}"]}, 'current_outputs': ['37', '38', '32', '33', '35', '31', '27', '20'], 'timestamp': 1777457741720}
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\model.py", line 820, in forward
-  [ComfyUI]     point = self.enc(point)
-  [ComfyUI]             ^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
-  [ComfyUI]     return self._call_impl(*args, **kwargs)
-  [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
-  [ComfyUI]     return forward_call(*args, **kwargs)
-  [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 86, in forward
-  [ComfyUI]     input = module(input)
-  [ComfyUI]             ^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
-  [ComfyUI]     return self._call_impl(*args, **kwargs)
-  [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
-  [ComfyUI]     return forward_call(*args, **kwargs)
-  [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 86, in forward
-  [ComfyUI]     input = module(input)
-  Execution complete (t=1.1s)
-  [ComfyUI]             ^^^^^^^^^^^^^
-  Execution error: {'prompt_id': '374ba1d3-5f8a-4ff3-af93-052f060b6654', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['35', '33'], 'exception_message': 'D:\\a\\cuda-wheels\\cuda-wheels\\source\\include\\tensorview/cuda/nvrtc.h(96)\ncompileResult == NVRTC_SUCCESS assert faild. nvrtc compile failed. log: \n cumm/common/TensorViewNVRTC.h(2): catastrophic error: could not open source file "tensorview/core/all.h" (no directories in search list)\n  #include <tensorview/core/all.h>\n                                  ^\n\n1 catastrophic error detected in the compilation of "kernel.cu.cu".\nCompilation terminated.\n\n\nWorker traceback:\nTraceback (most recent call last):\n  File "C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\comfyui_pvenv_xvhsxs1g\\persistent_worker.py", line 1587, in main\n    result = method(**inputs)\n             ^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\comfy_api\\latest\\_io.py", line 1826, in EXECUTE_NORMALIZED\n    to_return = cls.execute(*args, **kwargs)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\processing.py", line 600, in execute\n    feats = get_feat(sonata_model, points, normals)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\utils\\_contextlib.py", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\p3sam_processing.py", line 39, in get_feat\n    point = model.sonata(data_dict)\n            ^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\model.py", line 820, in forward\n    point = self.enc(point)\n            ^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\module.py", line 86, in forward\n    input = module(input)\n            ^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\module.py", line 86, in forward\n    input = module(input)\n            ^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\model.py", line 432, in forward\n    point = self.cpe(point)\n            ^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\module.py", line 90, in forward\n    input.sparse_conv_feat = module(input.sparse_conv_feat)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1885, in _call_impl\n    return inner()\n           ^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1833, in inner\n    result = forward_call(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\pytorch\\conv.py", line 755, in forward\n    return self._conv_forward(self.training,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\pytorch\\conv.py", line 467, in _conv_forward\n    out_features, _, _ = ops.implicit_gemm(\n                         ^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\pytorch\\ops.py", line 1513, in implicit_gemm\n    mask_width, tune_res_cpp = ConvGemmOps.implicit_gemm(\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\algo.py", line 208, in cached_get_nvrtc_params\n    mod, ker = self._compile_nvrtc_module(desp)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\algo.py", line 196, in _compile_nvrtc_module\n    mod = CummNVRTCModule([kernel],\n          ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\cumm\\nvrtc\\__init__.py", line 486, in __init__\n    super().__init__(params.code,\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\cumm\\nvrtc\\__init__.py", line 295, in __init__\n    super().__init__(code,\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\cumm\\tensorview\\__init__.py", line 323, in __init__\n    self._mod = _NVRTCModule(code, headers, opts, program_name,\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: D:\\a\\cuda-wheels\\cuda-wheels\\source\\include\\tensorview/cuda/nvrtc.h(96)\ncompileResult == NVRTC_SUCCESS assert faild. nvrtc compile failed. log: \n cumm/common/TensorViewNVRTC.h(2): catastrophic error: could not open source file "tensorview/core/all.h" (no directories in search list)\n  #include <tensorview/core/all.h>\n                                  ^\n\n1 catastrophic error detected in the compilation of "kernel.cu.cu".\nCompilation terminated.\n\n\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\execution.py", line 534, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\execution.py", line 334, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\execution.py", line 308, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\execution.py", line 296, in process_inputs\n    result = f(**inputs)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1111\\.venv\\lib\\site-packages\\comfy_env\\isolation\\metadata.py", line 531, in proxy\n    result = worker.call_method(\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1111\\.venv\\lib\\site-packages\\comfy_env\\isolation\\workers\\subprocess.py", line 3259, in call_method\n    raise WorkerError(\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': ["{'type': 'sonata', 'ckpt_path': 'C:\\\\workspaces\\\\Hunyuan3D-Part-1111\\\\ComfyUI\\\\models\\\\hunyuan3d-part\\\\p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}"]}, 'current_outputs': ['35', '38', '31', '20', '27', '32', '37', '33'], 'timestamp': 1777454477080}
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
     Status: FAILED
-    Error: Workflow execution failed: {'prompt_id': '374ba1d3-5f8a-4ff3-af93-052f060b6654', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['35', '33'], 'exception_message': 'D:\\a\\cuda-wheels\\cuda-wheels\\source\\include\\tensorview/cuda/nvrtc.h(96)\ncompileResult == NVRTC_SUCCESS assert faild. nvrtc compile failed. log: \n cumm/common/TensorViewNVRTC.h(2): catastrophic error: could not open source file "tensorview/core/all.h" (no directories in search list)\n  #include <tensorview/core/all.h>\n                                  ^\n\n1 catastrophic error detected in the compilation of "kernel.cu.cu".\nCompilation terminated.\n\n\nWorker traceback:\nTraceback (most recent call last):\n  File "C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\comfyui_pvenv_xvhsxs1g\\persistent_worker.py", line 1587, in main\n    result = method(**inputs)\n             ^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\comfy_api\\latest\\_io.py", line 1826, in EXECUTE_NORMALIZED\n    to_return = cls.execute(*args, **kwargs)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\processing.py", line 600, in execute\n    feats = get_feat(sonata_model, points, normals)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\utils\\_contextlib.py", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\p3sam_processing.py", line 39, in get_feat\n    point = model.sonata(data_dict)\n            ^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\model.py", line 820, in forward\n    point = self.enc(point)\n            ^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\module.py", line 86, in forward\n    input = module(input)\n            ^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\module.py", line 86, in forward\n    input = module(input)\n            ^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\model.py", line 432, in forward\n    point = self.cpe(point)\n            ^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\module.py", line 90, in forward\n    input.sparse_conv_feat = module(input.sparse_conv_feat)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1885, in _call_impl\n    return inner()\n           ^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1833, in inner\n    result = forward_call(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\pytorch\\conv.py", line 755, in forward\n    return self._conv_forward(self.training,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\pytorch\\conv.py", line 467, in _conv_forward\n    out_features, _, _ = ops.implicit_gemm(\n                         ^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\pytorch\\ops.py", line 1513, in implicit_gemm\n    mask_width, tune_res_cpp = ConvGemmOps.implicit_gemm(\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\algo.py", line 208, in cached_get_nvrtc_params\n    mod, ker = self._compile_nvrtc_module(desp)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\algo.py", line 196, in _compile_nvrtc_module\n    mod = CummNVRTCModule([kernel],\n          ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\cumm\\nvrtc\\__init__.py", line 486, in __init__\n    super().__init__(params.code,\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\cumm\\nvrtc\\__init__.py", line 295, in __init__\n    super().__init__(code,\n  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\cumm\\tensorview\\__init__.py", line 323, in __init__\n    self._mod = _NVRTCModule(code, headers, opts, program_name,\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: D:\\a\\cuda-wheels\\cuda-wheels\\source\\include\\tensorview/cuda/nvrtc.h(96)\ncompileResult == NVRTC_SUCCESS assert faild. nvrtc compile failed. log: \n cumm/common/TensorViewNVRTC.h(2): catastrophic error: could not open source file "tensorview/core/all.h" (no directories in search list)\n  #include <tensorview/core/all.h>\n                                  ^\n\n1 catastrophic error detected in the compilation of "kernel.cu.cu".\nCompilation terminated.\n\n\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\execution.py", line 534, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\execution.py", line 334, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\execution.py", line 308, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1111\\ComfyUI\\execution.py", line 296, in process_inputs\n    result = f(**inputs)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1111\\.venv\\lib\\site-packages\\comfy_env\\isolation\\metadata.py", line 531, in proxy\n    result = worker.call_method(\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1111\\.venv\\lib\\site-packages\\comfy_env\\isolation\\workers\\subprocess.py", line 3259, in call_method\n    raise WorkerError(\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': ["{'type': 'sonata', 'ckpt_path': 'C:\\\\workspaces\\\\Hunyuan3D-Part-1111\\\\ComfyUI\\\\models\\\\hunyuan3d-part\\\\p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}"]}, 'current_outputs': ['35', '38', '31', '20', '27', '32', '37', '33'], 'timestamp': 1777454477080}
+    Error: Workflow execution failed: {'prompt_id': '42592871-cec6-487c-ad6d-4285eb1927fe', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['33', '35'], 'exception_message': 'D:\\a\\cuda-wheels\\cuda-wheels\\source\\include\\tensorview/cuda/nvrtc.h(96)\ncompileResult == NVRTC_SUCCESS assert faild. nvrtc compile failed. log: \n cumm/common/TensorViewNVRTC.h(2): catastrophic error: could not open source file "tensorview/core/all.h" (no directories in search list)\n  #include <tensorview/core/all.h>\n                                  ^\n\n1 catastrophic error detected in the compilation of "kernel.cu.cu".\nCompilation terminated.\n\n\nWorker traceback:\nTraceback (most recent call last):\n  File "C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\comfyui_pvenv_qz1alsxm\\persistent_worker.py", line 1587, in main\n    result = method(**inputs)\n             ^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\comfy_api\\latest\\_io.py", line 1826, in EXECUTE_NORMALIZED\n    to_return = cls.execute(*args, **kwargs)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\processing.py", line 600, in execute\n    feats = get_feat(sonata_model, points, normals)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\utils\\_contextlib.py", line 124, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\p3sam_processing.py", line 39, in get_feat\n    point = model.sonata(data_dict)\n            ^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\model.py", line 820, in forward\n    point = self.enc(point)\n            ^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\module.py", line 86, in forward\n    input = module(input)\n            ^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\module.py", line 86, in forward\n    input = module(input)\n            ^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\model.py", line 432, in forward\n    point = self.cpe(point)\n            ^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1790, in _call_impl\n    return forward_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\sonata\\module.py", line 90, in forward\n    input.sparse_conv_feat = module(input.sparse_conv_feat)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1779, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1885, in _call_impl\n    return inner()\n           ^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\torch\\nn\\modules\\module.py", line 1833, in inner\n    result = forward_call(*args, **kwargs)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\pytorch\\conv.py", line 755, in forward\n    return self._conv_forward(self.training,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\pytorch\\conv.py", line 467, in _conv_forward\n    out_features, _, _ = ops.implicit_gemm(\n                         ^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\pytorch\\ops.py", line 1513, in implicit_gemm\n    mask_width, tune_res_cpp = ConvGemmOps.implicit_gemm(\n                               ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\algo.py", line 208, in cached_get_nvrtc_params\n    mod, ker = self._compile_nvrtc_module(desp)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\spconv\\algo.py", line 196, in _compile_nvrtc_module\n    mod = CummNVRTCModule([kernel],\n          ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\cumm\\nvrtc\\__init__.py", line 486, in __init__\n    super().__init__(params.code,\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\cumm\\nvrtc\\__init__.py", line 295, in __init__\n    super().__init__(code,\n  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages\\cumm\\tensorview\\__init__.py", line 323, in __init__\n    self._mod = _NVRTCModule(code, headers, opts, program_name,\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: D:\\a\\cuda-wheels\\cuda-wheels\\source\\include\\tensorview/cuda/nvrtc.h(96)\ncompileResult == NVRTC_SUCCESS assert faild. nvrtc compile failed. log: \n cumm/common/TensorViewNVRTC.h(2): catastrophic error: could not open source file "tensorview/core/all.h" (no directories in search list)\n  #include <tensorview/core/all.h>\n                                  ^\n\n1 catastrophic error detected in the compilation of "kernel.cu.cu".\nCompilation terminated.\n\n\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\execution.py", line 534, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\execution.py", line 334, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\execution.py", line 308, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1200\\ComfyUI\\execution.py", line 296, in process_inputs\n    result = f(**inputs)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1200\\.venv\\lib\\site-packages\\comfy_env\\isolation\\metadata.py", line 531, in proxy\n    result = worker.call_method(\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1200\\.venv\\lib\\site-packages\\comfy_env\\isolation\\workers\\subprocess.py", line 3259, in call_method\n    raise WorkerError(\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': ["{'type': 'sonata', 'ckpt_path': 'C:\\\\workspaces\\\\Hunyuan3D-Part-1200\\\\ComfyUI\\\\models\\\\hunyuan3d-part\\\\p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}"]}, 'current_outputs': ['37', '38', '32', '33', '35', '31', '27', '20'], 'timestamp': 1777457741720}
     Details: Workflow: C:\ComfyUI-Hunyuan3D-Part\workflows\H3DPART-segment.json
 Node error: ComputeMeshFeatures
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\model.py", line 820, in forward
+  [ComfyUI]     point = self.enc(point)
+  [ComfyUI]             ^^^^^^^^^^^^^^^
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
   [ComfyUI]     return self._call_impl(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
   [ComfyUI]     return forward_call(*args, **kwargs)
   [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1111\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\model.py", line 432, in forward
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 86, in forward
+  [ComfyUI]     input = module(input)
+  [ComfyUI]             ^^^^^^^^^^^^^
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI]     return self._call_impl(*args, **kwargs)
+  [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI]     return forward_call(*args, **kwargs)
+  [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 86, in forward
+  [ComfyUI]     input = module(input)
+  [ComfyUI]             ^^^^^^^^^^^^^
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI]     return self._call_impl(*args, **kwargs)
+  [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI]     return forward_call(*args, **kwargs)
+  [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\model.py", line 432, in forward
   [ComfyUI]     point = self.cpe(point)
   [ComfyUI]             ^^^^^^^^^^^^^^^
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI]     return self._call_impl(*args, **kwargs)
+  [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+  [ComfyUI]     return forward_call(*args, **kwargs)
+  [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\sonata\module.py", line 90, in forward
+  [ComfyUI]     input.sparse_conv_feat = module(input.sparse_conv_feat)
+  [ComfyUI]                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+  [ComfyUI]     return self._call_impl(*args, **kwargs)
+  [ComfyUI]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  [ComfyUI]   File "C:\workspaces\Hunyuan3D-Part-1200\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\Lib\site-packages\torch\nn\modules\module.py", line 1885, in _call_impl
+  [ComfyUI]     return inner()
+  [ComfyUI]            ^^^^^^^
