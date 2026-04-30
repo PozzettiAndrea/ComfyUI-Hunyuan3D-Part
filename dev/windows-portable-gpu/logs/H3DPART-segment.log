@@ -1,41 +1,39 @@
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1271 / 24575 MB
 Capturing execution frames: H3DPART-segment.json
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1156 / 16379 MB
-  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: failed
-  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Socket unhealthy, restarting worker...
-  [ComfyUI] [comfy-env] Invalidated 4 stale model patchers (will be cleaned up during next unload)
-  [ComfyUI] [ComfyUI-Hunyuan3D-Part] python: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\python.exe
-  [ComfyUI] [comfy-env] hunyuan3dpart-nodes: Library/bin has 69 DLLs
-  [ComfyUI] [ComfyUI-Hunyuan3D-Part] sys_path sent to worker: ['C:\\workspaces\\Hunyuan3D-Part-1152\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI', 'C:\\workspaces\\Hunyuan3D-Part-1152\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part', 'C:\\workspaces\\Hunyuan3D-Part-1152\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages', 'C:\\workspaces\\Hunyuan3D-Part-1152\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part']
-  [ComfyUI] [SubprocessWorker] is_pixi=True, python=C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\python.exe
-  [ComfyUI] [SubprocessWorker] launching cmd=['C:\\Users\\ContainerAdministrator\\.local\\bin\\pixi.EXE', 'run', '--as-is', '--manifest-path', 'C:\\workspaces\\Hunyuan3D-Part-1152\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\.ce\\pixi.toml', '-e', 'hunyuan3dpart-nodes', 'python', 'C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\comfyui_pvenv_z0dai4dw\\persistent_worker.py', 'tcp://127.0.0.1:58674']...
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] WARNING: WARNING: You need pytorch with cu130 or higher to use optimized CUDA operations.
-  [ComfyUI] [SubprocessWorker] call_id=33 sending model_to_device
-  [ComfyUI] Model 'SonataEncoder_1' gone from worker (restarted?), treating as offloaded
-  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'VolumeDecoderShapeVAE_4' (625 MB) -> cpu: 1156 / 16379 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=34 sending model_to_device
-  [ComfyUI] Model 'VolumeDecoderShapeVAE_4' gone from worker (restarted?), treating as offloaded
-  [ComfyUI] [comfy-env] [VRAM] After offload 'VolumeDecoderShapeVAE_4' (625 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'Conditioner_2' (1674 MB) -> cpu: 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=39 sending model_to_device
+  [ComfyUI] Exception in callback _ProactorBasePipeTransport._call_connection_lost()
+  [ComfyUI] handle: <Handle _ProactorBasePipeTransport._call_connection_lost()>
+  [ComfyUI] Traceback (most recent call last):
+  [ComfyUI]   File "asyncio\events.py", line 89, in _run
+  [ComfyUI]   File "asyncio\proactor_events.py", line 165, in _call_connection_lost
+  [ComfyUI] ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'VolumeDecoderShapeVAE_4' (625 MB) -> cpu: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=35 sending model_to_device
-  [ComfyUI] Model 'Conditioner_2' gone from worker (restarted?), treating as offloaded
-  [ComfyUI] [comfy-env] [VRAM] After offload 'Conditioner_2' (1674 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'PartFormerDITPlain_3' (6323 MB) -> cpu: 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=40 sending model_to_device
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -346MB (now 8494MB) reserved=8640MB peak=9499MB
+  [ComfyUI] [comfy-env] [VRAM] After offload 'VolumeDecoderShapeVAE_4' (625 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'Conditioner_2' (1674 MB) -> cpu: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=36 sending model_to_device
-  [ComfyUI] Model 'PartFormerDITPlain_3' gone from worker (restarted?), treating as offloaded
-  [ComfyUI] [comfy-env] [VRAM] After offload 'PartFormerDITPlain_3' (6323 MB): 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=41 sending model_to_device
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -2075MB (now 6419MB) reserved=8032MB peak=9499MB
+  [ComfyUI] [comfy-env] [VRAM] After offload 'Conditioner_2' (1674 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'PartFormerDITPlain_3' (6323 MB) -> cpu: 1271 / 24575 MB
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
+  [ComfyUI] [SubprocessWorker] call_id=42 sending model_to_device
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -2202MB (now 4218MB) reserved=6336MB peak=9499MB
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -2433MB (now 1785MB) reserved=6336MB peak=9499MB
+  [ComfyUI] [comfy-env] [VRAM] After offload 'PartFormerDITPlain_3' (6323 MB): 1271 / 24575 MB
   Frame 1 saved (frame_000.jpg, t=0.0s)
   Validating workflow...
-  Queuing workflow for execution...
   [ComfyUI] === /validate endpoint called ===
   [ComfyUI] Received JSON with keys: ['prompt']
+  Queuing workflow for execution...
   [ComfyUI] Prompt has 8 nodes
   [ComfyUI]   Node 20: Hunyuan3DPreviewBoundingBoxes
   [ComfyUI]     Inputs: {"line_width": 2, "preview_bbox": "", "trimesh": ["32", 0], "bboxes": ["32", 1]}
@@ -53,13 +51,53 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI]     Inputs: {"mode": "fields", "preview_vtk": "{\"show_edges\":false,\"camera_state\":\"{\\\"position\\\":[10.636114639523552,29.121889105824472,15.277734942277156],\\\"focalPoint\\\":[0.6242384910583496,0.093758
   [ComfyUI]   Node 38: GeomPackPreviewMeshVTK
   [ComfyUI]     Inputs: {"mode": "fields", "preview_vtk": "{\"show_edges\":false,\"camera_state\":\"{\\\"position\\\":[10.636114639523552,29.121889105824472,15.277734942277156],\\\"focalPoint\\\":[0.6242384910583496,0.093758
-  [ComfyUI] Generated prompt_id: 3e470fca-fcd4-4083-a7e7-28ced0e674e9
+  [ComfyUI] Generated prompt_id: 25726251-66a1-4e69-8880-e3bd9a22d241
   [ComfyUI] Calling execution.validate_prompt()...
   [ComfyUI] Validation result: valid=True
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] python: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\python.exe
   [ComfyUI] === Validation PASSED ===
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] sys_path sent to worker: ['C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI', 'C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part', 'C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages', 'C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part']
   [ComfyUI] got prompt
+  [ComfyUI] [SubprocessWorker] is_pixi=True, python=C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\python.exe
   [ComfyUI] [comfy-env] Running LoadSonataEncoder: precision: 'auto', attn_backend: 'auto'
-  [ComfyUI] [VRAM] Before LoadSonataEncoder: 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] launching cmd=['C:\\Users\\ContainerAdministrator\\.local\\bin\\pixi.EXE', 'run', '--as-is', '--manifest-path', 'C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\.ce\\pixi.toml', '-e', 'hunyuan3dpart-nodes', 'python', 'C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\comfyui_pvenv_hajikxct\\persistent_worker.py', 'tcp://127.0.0.1:60291']...
+  [ComfyUI] [VRAM] Before LoadSonataEncoder: 1271 / 24575 MB
+  [ComfyUI] Requested to load SubprocessModel
+  [ComfyUI] Requested to load SubprocessModel
+  [ComfyUI] Requested to load SubprocessModel
+  [ComfyUI] Requested to load SubprocessModel
+  [ComfyUI] [comfy-env] [VRAM] Before load 'PartFormerDITPlain_3' (6323 MB) -> cuda:0: 1271 / 24575 MB
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: failed
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Socket unhealthy, restarting worker...
+  [ComfyUI] [comfy-env] Invalidated 4 stale model patchers (will be cleaned up during next unload)
+  [ComfyUI] [comfy-env] hunyuan3dpart-nodes: Library/bin has 69 DLLs
+  Frame 2 saved (frame_001.jpg, t=2.3s)
+  [capture-periodic] freeze=4ms shot=112ms unfreeze=3ms saved=True
+  Frame 3 saved (frame_002.jpg, t=4.5s)
+  [capture-periodic] freeze=3ms shot=108ms unfreeze=4ms saved=True
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] WARNING: WARNING: You need pytorch with cu130 or higher to use optimized CUDA operations.
+  [ComfyUI] [SubprocessWorker] call_id=43 sending model_to_device
+  [ComfyUI] Model 'PartFormerDITPlain_3' gone from worker (restarted?), treating as offloaded
+  [ComfyUI] [comfy-env] [VRAM] After load 'PartFormerDITPlain_3' (6323 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before load 'VolumeDecoderShapeVAE_4' (625 MB) -> cuda:0: 1271 / 24575 MB
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
+  [ComfyUI] [SubprocessWorker] call_id=44 sending model_to_device
+  [ComfyUI] Model 'VolumeDecoderShapeVAE_4' gone from worker (restarted?), treating as offloaded
+  [ComfyUI] [comfy-env] [VRAM] After load 'VolumeDecoderShapeVAE_4' (625 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before load 'Conditioner_2' (1674 MB) -> cuda:0: 1271 / 24575 MB
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
+  [ComfyUI] [SubprocessWorker] call_id=45 sending model_to_device
+  [ComfyUI] Model 'Conditioner_2' gone from worker (restarted?), treating as offloaded
+  [ComfyUI] [comfy-env] [VRAM] After load 'Conditioner_2' (1674 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before load 'SonataEncoder_1' (209 MB) -> cuda:0: 1271 / 24575 MB
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
+  [ComfyUI] [SubprocessWorker] call_id=46 sending model_to_device
+  [ComfyUI] Model 'SonataEncoder_1' gone from worker (restarted?), treating as offloaded
+  [ComfyUI] [comfy-env] [VRAM] After load 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
   [ComfyUI] [SubprocessWorker] call_method: nodes.loaders.LoadSonataEncoder.EXECUTE_NORMALIZED
   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
@@ -68,71 +106,69 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
   [ComfyUI] [SubprocessWorker] created 0 shm blocks
   [ComfyUI] [SubprocessWorker] sending request via socket...
-  [ComfyUI] [SubprocessWorker] call_id=37 sending call_method
+  [ComfyUI] [SubprocessWorker] call_id=47 sending call_method
+  [capture-loop] iter=50 t=6.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load Sonata Encoder] Ensuring model files are downloaded...
-  [ComfyUI] 2026-04-30 12:05:52,776 - hy3dgen.partgen - INFO - Using local models at: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\hunyuan3d-part
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Using local models at: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\hunyuan3d-part
-  Frame 2 saved (frame_001.jpg, t=2.2s)
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load Sonata Encoder] Model files ready at C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\hunyuan3d-part
-  [capture-periodic] freeze=2ms shot=63ms unfreeze=2ms saved=True
+  [ComfyUI] 2026-04-30 21:34:43,777 - hy3dgen.partgen - INFO - Using local models at: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\hunyuan3d-part
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Using local models at: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\hunyuan3d-part
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load Sonata Encoder] Model files ready at C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\hunyuan3d-part
   [ComfyUI] [SubprocessWorker] got response: ok
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'VolumeDecoderShapeVAE_4' (625 MB) -> cpu: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'VolumeDecoderShapeVAE_4' (625 MB) -> cpu: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=38 sending model_to_device
+  [ComfyUI] [SubprocessWorker] call_id=48 sending model_to_device
   [ComfyUI] Model 'VolumeDecoderShapeVAE_4' gone from worker (restarted?), treating as offloaded
-  [ComfyUI] [comfy-env] [VRAM] After offload 'VolumeDecoderShapeVAE_4' (625 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'PartFormerDITPlain_3' (6323 MB) -> cpu: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] [VRAM] After offload 'VolumeDecoderShapeVAE_4' (625 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'PartFormerDITPlain_3' (6323 MB) -> cpu: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [ComfyUI-GeometryPack] python: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\.ce\.pixi\envs\geometrypack-main\python.exe
-  [ComfyUI] [SubprocessWorker] call_id=39 sending model_to_device
-  [ComfyUI] [ComfyUI-GeometryPack] sys_path sent to worker: ['C:\\workspaces\\Hunyuan3D-Part-1152\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI', 'C:\\workspaces\\Hunyuan3D-Part-1152\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-GeometryPack', 'C:\\workspaces\\Hunyuan3D-Part-1152\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\.ce\\.pixi\\envs\\geometrypack-main\\Lib\\site-packages', 'C:\\workspaces\\Hunyuan3D-Part-1152\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-GeometryPack']
+  [ComfyUI] [SubprocessWorker] call_id=49 sending model_to_device
   [ComfyUI] Model 'PartFormerDITPlain_3' gone from worker (restarted?), treating as offloaded
-  [ComfyUI] [SubprocessWorker] is_pixi=True, python=C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\.ce\.pixi\envs\geometrypack-main\python.exe
-  [ComfyUI] [comfy-env] [VRAM] After offload 'PartFormerDITPlain_3' (6323 MB): 1156 / 16379 MB
-  [ComfyUI] [SubprocessWorker] launching cmd=['C:\\Users\\ContainerAdministrator\\.local\\bin\\pixi.EXE', 'run', '--as-is', '--manifest-path', 'C:\\workspaces\\Hunyuan3D-Part-1152\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\.ce\\pixi.toml', '-e', 'geometrypack-main', 'python', 'C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\comfyui_pvenv_hbn4dhbu\\persistent_worker.py', 'tcp://127.0.0.1:59337']...
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'Conditioner_2' (1674 MB) -> cpu: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] [VRAM] After offload 'PartFormerDITPlain_3' (6323 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'Conditioner_2' (1674 MB) -> cpu: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=40 sending model_to_device
+  [ComfyUI] [SubprocessWorker] call_id=50 sending model_to_device
   [ComfyUI] Model 'Conditioner_2' gone from worker (restarted?), treating as offloaded
-  [ComfyUI] [comfy-env] [VRAM] After offload 'Conditioner_2' (1674 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] [VRAM] After offload 'Conditioner_2' (1674 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1271 / 24575 MB
+  [ComfyUI] [ComfyUI-GeometryPack] python: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\.ce\.pixi\envs\geometrypack-main\python.exe
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
+  [ComfyUI] [ComfyUI-GeometryPack] sys_path sent to worker: ['C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI', 'C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-GeometryPack', 'C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\.ce\\.pixi\\envs\\geometrypack-main\\Lib\\site-packages', 'C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-GeometryPack']
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=41 sending model_to_device
+  [ComfyUI] [SubprocessWorker] is_pixi=True, python=C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\.ce\.pixi\envs\geometrypack-main\python.exe
+  [ComfyUI] [SubprocessWorker] call_id=51 sending model_to_device
+  [ComfyUI] [SubprocessWorker] launching cmd=['C:\\Users\\ContainerAdministrator\\.local\\bin\\pixi.EXE', 'run', '--as-is', '--manifest-path', 'C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\.ce\\pixi.toml', '-e', 'geometrypack-main', 'python', 'C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\comfyui_pvenv_5ej1w3g7\\persistent_worker.py', 'tcp://127.0.0.1:60294']...
   [ComfyUI] Model 'SonataEncoder_1' gone from worker (restarted?), treating as offloaded
-  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] LoadSonataEncoder done (2.28s): result: NodeOutput
-  [ComfyUI] [VRAM] After LoadSonataEncoder: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] LoadSonataEncoder done (7.92s): result: NodeOutput
+  [ComfyUI] [VRAM] After LoadSonataEncoder: 1271 / 24575 MB
   [ComfyUI] [comfy-env] Running GeomPackLoadMesh: file_path: '3d/utah_teapot.stl'
-  [ComfyUI] [VRAM] Before GeomPackLoadMesh: 1156 / 16379 MB
+  [ComfyUI] [VRAM] Before GeomPackLoadMesh: 1271 / 24575 MB
   [ComfyUI] [SubprocessWorker] call_method: nodes.main.io.load_mesh.LoadMesh.EXECUTE_NORMALIZED
   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
   [ComfyUI] [ComfyUI-GeometryPack] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-GeometryPack] Health check: failed
   [ComfyUI] [ComfyUI-GeometryPack] Socket unhealthy, restarting worker...
   [ComfyUI] [comfy-env] geometrypack-main: Library/bin has 286 DLLs
-  Frame 3 saved (frame_002.jpg, t=4.4s)
-  [capture-periodic] freeze=1ms shot=69ms unfreeze=3ms saved=True
-  [ComfyUI] [worker:ComfyUI-GeometryPack] WARNING: WARNING: You need pytorch with cu130 or higher to use optimized CUDA operations.
+  Frame 4 saved (frame_003.jpg, t=9.0s)
+  [capture-periodic] freeze=4ms shot=111ms unfreeze=4ms saved=True
+  [capture-loop] iter=100 t=11.9s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3
   [ComfyUI] [SubprocessWorker] worker started/confirmed
   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
   [ComfyUI] [SubprocessWorker] created 0 shm blocks
   [ComfyUI] [SubprocessWorker] sending request via socket...
   [ComfyUI] [SubprocessWorker] call_id=4 sending call_method
-  [capture-loop] iter=50 t=5.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=2
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Found mesh in input folder: 3d/utah_teapot.stl
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Loading: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\input\3d/utah_teapot.stl
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Loading: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\input\3d/utah_teapot.stl
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Initial mesh: 4719 vertices, 9438 faces
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Successfully loaded: 4719 vertices, 9438 faces
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Loaded: 4719 vertices, 9438 faces
   [ComfyUI] [SubprocessWorker] got response: ok
-  [ComfyUI] [comfy-env] GeomPackLoadMesh done (4.11s): result: NodeOutput
-  [ComfyUI] [VRAM] After GeomPackLoadMesh: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] GeomPackLoadMesh done (6.34s): result: NodeOutput
+  [ComfyUI] [VRAM] After GeomPackLoadMesh: 1271 / 24575 MB
   [ComfyUI] [comfy-env] Running ComputeMeshFeatures: all_points: False, point_num: 100000, seed: 42, mesh: Trimesh, sonata_config: dict
-  [ComfyUI] [VRAM] Before ComputeMeshFeatures: 1156 / 16379 MB
+  [ComfyUI] [VRAM] Before ComputeMeshFeatures: 1271 / 24575 MB
   [ComfyUI] [SubprocessWorker] call_method: nodes.processing.ComputeMeshFeatures.EXECUTE_NORMALIZED
   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
@@ -141,43 +177,44 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
   [ComfyUI] [SubprocessWorker] created 1 shm blocks
   [ComfyUI] [SubprocessWorker] sending request via socket...
-  [ComfyUI] [SubprocessWorker] call_id=42 sending call_method
+  [ComfyUI] [SubprocessWorker] call_id=52 sending call_method
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Computing mesh features...
-  Frame 4 saved (frame_003.jpg, t=6.6s)
-  [capture-periodic] freeze=2ms shot=65ms unfreeze=2ms saved=True
-  Frame 5 saved (frame_004.jpg, t=8.7s)
-  [capture-periodic] freeze=2ms shot=60ms unfreeze=2ms saved=True
-  [capture-loop] iter=100 t=11.3s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=2
+  Frame 5 saved (frame_004.jpg, t=15.6s)
+  [capture-periodic] freeze=3ms shot=105ms unfreeze=3ms saved=True
+  [capture-loop] iter=150 t=17.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3
+  Frame 6 saved (frame_005.jpg, t=17.9s)
+  [capture-periodic] freeze=4ms shot=109ms unfreeze=4ms saved=True
+  [capture-loop] iter=200 t=23.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Sonata Encoder] Building model (precision=auto, attn_backend=auto)...
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Loading sonata from cache: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\sonata\sonata.pth
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Loading sonata from cache: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\sonata\sonata.pth
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] flash attention: True
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Model params: 108.46M 108461376
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Sonata Encoder] Loaded 453 Sonata backbone weights from P3-SAM checkpoint
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [lowvram] Enabled: 80 cast modules, 25 orphan-param hooks
-  [ComfyUI] [SubprocessWorker] callback 'request_vram_budget' from call_id=42
-  [ComfyUI] [comfy-env] VRAM request: 0.22GB, free before eviction: 15.96GB
-  [ComfyUI] [comfy-env] VRAM after eviction: 15.96GB
+  [ComfyUI] [SubprocessWorker] callback 'request_vram_budget' from call_id=52
+  [ComfyUI] [comfy-env] VRAM request: 0.22GB, free before eviction: 24.44GB
+  [ComfyUI] [comfy-env] VRAM after eviction: 24.44GB
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +203MB (now 203MB) reserved=224MB peak=203MB
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Sonata Encoder] Loaded on cuda:0, dtype=torch.bfloat16
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +209MB (now 209MB) reserved=224MB peak=209MB
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Cleaning mesh...
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Building adjacent faces...
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Sampling 100000 points...
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Extracting Sonata features...
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Features computed (1.27s)
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Features computed (1.07s)
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Compute Features] Computing PCA4 debug field...
   [ComfyUI] [SubprocessWorker] got response: ok
   [ComfyUI] [comfy-env] Created 1 model patchers: ['SonataEncoder_1']
   [ComfyUI] Requested to load SubprocessModel
-  [ComfyUI] [comfy-env] [VRAM] Before load 'SonataEncoder_1' (209 MB) -> cuda:0: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] [VRAM] Before load 'SonataEncoder_1' (209 MB) -> cuda:0: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=43 sending model_to_device
-  [ComfyUI] [comfy-env] [VRAM] After load 'SonataEncoder_1' (209 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] ComputeMeshFeatures done (9.34s): result: NodeOutput
-  [ComfyUI] [VRAM] After ComputeMeshFeatures: 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=53 sending model_to_device
+  [ComfyUI] [comfy-env] [VRAM] After load 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] ComputeMeshFeatures done (13.94s): result: NodeOutput
+  [ComfyUI] [VRAM] After ComputeMeshFeatures: 1271 / 24575 MB
   [ComfyUI] [VRAM] Loaded: SubprocessModel (209 MB)
   [ComfyUI] [comfy-env] Running GeomPackPreviewMeshVTK: mode: 'fields', trimesh: Trimesh
-  [ComfyUI] [VRAM] Before GeomPackPreviewMeshVTK: 1156 / 16379 MB
+  [ComfyUI] [VRAM] Before GeomPackPreviewMeshVTK: 1271 / 24575 MB
   [ComfyUI] [VRAM] Loaded: SubprocessModel (209 MB)
   [ComfyUI] [SubprocessWorker] call_method: nodes.main.visualization.preview_mesh_vtk.PreviewMeshVTKNode.EXECUTE_NORMALIZED
   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
@@ -192,32 +229,32 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Mode: fields
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Visual data - has_visual: True, kind: None, texture: False, vertex_colors: False
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Using fields mode - VTP export
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Exporting mesh to VTP: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\output\preview_vtk_175ddeea.vtp
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Exporting mesh to VTP: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\output\preview_vtk_1ec2f59d.vtp
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Adding normals field (4719 vertices)
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Adding scalar field: features_pca4_debug (components: 4)
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Export complete: 4719 vertices, 9438 faces
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Exported VTP to: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\output\preview_vtk_175ddeea.vtp
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Exported VTP to: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\output\preview_vtk_1ec2f59d.vtp
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Vertex attributes: ['features_pca4_debug']
   [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Fields mode info: watertight=True, volume=526.507402589034, area=388.60625943857985, fields=['features_pca4_debug']
   [ComfyUI] [SubprocessWorker] got response: ok
-  [ComfyUI] [comfy-env] GeomPackPreviewMeshVTK done (0.44s): result: NodeOutput
-  [ComfyUI] [VRAM] After GeomPackPreviewMeshVTK: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] GeomPackPreviewMeshVTK done (0.64s): result: NodeOutput
+  [ComfyUI] [VRAM] After GeomPackPreviewMeshVTK: 1271 / 24575 MB
   [ComfyUI] [VRAM] Loaded: SubprocessModel (209 MB)
-  Node executed (1 total), capturing...
   [ComfyUI] [comfy-env] Running LoadP3SAMSegmentor: precision: 'auto', attn_backend: 'auto'
-  [ComfyUI] [VRAM] Before LoadP3SAMSegmentor: 1156 / 16379 MB
+  [ComfyUI] [VRAM] Before LoadP3SAMSegmentor: 1271 / 24575 MB
   [ComfyUI] [VRAM] Loaded: SubprocessModel (209 MB)
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=44 sending model_to_device
-  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before load 'SonataEncoder_1' (209 MB) -> cuda:0: 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=54 sending model_to_device
+  Frame 7 saved (frame_006.jpg, t=29.0s)
+  [capture-periodic] freeze=5ms shot=113ms unfreeze=11ms saved=True
+  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before load 'SonataEncoder_1' (209 MB) -> cuda:0: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=45 sending model_to_device
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -201MB (now 8MB) reserved=64MB peak=314MB
-  [ComfyUI] [comfy-env] [VRAM] After load 'SonataEncoder_1' (209 MB): 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=55 sending model_to_device
+  [ComfyUI] [comfy-env] [VRAM] After load 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
   [ComfyUI] [SubprocessWorker] call_method: nodes.loaders.LoadP3SAMSegmentor.EXECUTE_NORMALIZED
   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
@@ -226,313 +263,205 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
   [ComfyUI] [SubprocessWorker] created 0 shm blocks
   [ComfyUI] [SubprocessWorker] sending request via socket...
-  [ComfyUI] [SubprocessWorker] call_id=46 sending call_method
+  [ComfyUI] [SubprocessWorker] call_id=56 sending call_method
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load P3-SAM] Ensuring model files are downloaded...
-  [ComfyUI] 2026-04-30 12:06:06,992 - hy3dgen.partgen - INFO - Using local models at: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\hunyuan3d-part
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Using local models at: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\hunyuan3d-part
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load P3-SAM] Model files ready at C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\hunyuan3d-part
+  [ComfyUI] 2026-04-30 21:35:05,011 - hy3dgen.partgen - INFO - Using local models at: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\hunyuan3d-part
+  Node executed (1 total), capturing...
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] INFO: Using local models at: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\hunyuan3d-part
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [Load P3-SAM] Model files ready at C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\hunyuan3d-part
   [ComfyUI] [SubprocessWorker] got response: ok
-  [ComfyUI] [comfy-env] LoadP3SAMSegmentor done (0.27s): result: NodeOutput
-  [ComfyUI] [VRAM] After LoadP3SAMSegmentor: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] LoadP3SAMSegmentor done (0.28s): result: NodeOutput
+  [ComfyUI] [VRAM] After LoadP3SAMSegmentor: 1271 / 24575 MB
   [ComfyUI] [VRAM] Loaded: SubprocessModel (209 MB)
-  Frame 6 saved (frame_005.jpg, t=16.5s)
   [ComfyUI] [comfy-env] Running P3SAMSegmentMesh: prompt_num: 400, threshold: 0.95, post_process: True, batch_size: 1, mesh_with_features: Trimesh, p3sam_config: dict
-  [capture-node] freeze=3ms shot=81ms unfreeze=4ms saved=True
-  [ComfyUI] [VRAM] Before P3SAMSegmentMesh: 1156 / 16379 MB
+  [ComfyUI] [VRAM] Before P3SAMSegmentMesh: 1271 / 24575 MB
   [ComfyUI] [VRAM] Loaded: SubprocessModel (209 MB)
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=47 sending model_to_device
-  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before load 'SonataEncoder_1' (209 MB) -> cuda:0: 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=57 sending model_to_device
+  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before load 'SonataEncoder_1' (209 MB) -> cuda:0: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=48 sending model_to_device
-  [ComfyUI] [comfy-env] [VRAM] After load 'SonataEncoder_1' (209 MB): 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=58 sending model_to_device
+  [ComfyUI] [comfy-env] [VRAM] After load 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
   [ComfyUI] [SubprocessWorker] call_method: nodes.processing.P3SAMSegmentMesh.EXECUTE_NORMALIZED
   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
   [ComfyUI] [SubprocessWorker] worker started/confirmed
   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
+  Frame 8 saved (frame_007.jpg, t=29.5s)
+  [capture-node] freeze=4ms shot=129ms unfreeze=3ms saved=True
   [ComfyUI] [SubprocessWorker] created 1 shm blocks
   [ComfyUI] [SubprocessWorker] sending request via socket...
-  [ComfyUI] [SubprocessWorker] call_id=49 sending call_method
+  [ComfyUI] [SubprocessWorker] call_id=59 sending call_method
+  [capture-loop] iter=250 t=30.0s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] Running segmentation with 400 prompts, batch_size=1...
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] before model load: allocated=0.21GB, reserved=0.25GB, total=16.00GB
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] before model load: allocated=0.21GB, reserved=0.25GB, total=24.00GB
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM] Building model (precision=auto, attn_backend=auto)...
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Loading sonata from cache: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\sonata\sonata.pth
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Loading sonata from cache: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\models\sonata\sonata.pth
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] flash attention: True
-  [capture-loop] iter=150 t=17.3s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=2
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +208MB (now 217MB) reserved=256MB peak=314MB
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] Model params: 108.46M 108461376
+  Frame 9 saved (frame_008.jpg, t=31.7s)
+  [capture-periodic] freeze=4ms shot=182ms unfreeze=4ms saved=True
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM] precision=auto, dtype=torch.bfloat16
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [lowvram] Enabled: 107 cast modules, 25 orphan-param hooks
-  [ComfyUI] [SubprocessWorker] callback 'request_vram_budget' from call_id=49
-  [ComfyUI] [comfy-env] VRAM request: 0.23GB, free before eviction: 15.96GB
-  [ComfyUI] [comfy-env] VRAM after eviction: 15.96GB
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +207MB (now 424MB) reserved=448MB peak=424MB
+  [ComfyUI] [SubprocessWorker] callback 'request_vram_budget' from call_id=59
+  [ComfyUI] [comfy-env] VRAM request: 0.23GB, free before eviction: 24.44GB
+  [ComfyUI] [comfy-env] VRAM after eviction: 24.44GB
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +214MB (now 418MB) reserved=448MB peak=418MB
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM] Model loaded on cuda:0
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after model load: allocated=0.42GB, reserved=0.44GB, total=16.00GB
-  Frame 7 saved (frame_006.jpg, t=18.7s)
-  [capture-periodic] freeze=2ms shot=81ms unfreeze=4ms saved=True
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after tensor pre-upload: allocated=0.52GB, reserved=0.53GB, total=16.00GB
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after model load: allocated=0.42GB, reserved=0.44GB, total=24.00GB
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after tensor pre-upload: allocated=0.52GB, reserved=0.53GB, total=24.00GB
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] 400 prompts / batch_size 1 = 400 steps
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] before inference loop: allocated=0.52GB, reserved=0.53GB, total=16.00GB
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after first batch (bs=1): allocated=0.52GB, reserved=1.16GB, total=16.00GB
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +457MB (now 882MB) reserved=1376MB peak=927MB
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  Frame 8 saved (frame_007.jpg, t=20.9s)
-  [capture-periodic] freeze=2ms shot=76ms unfreeze=2ms saved=True
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -350MB (now 532MB) reserved=1376MB peak=929MB
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +248MB (now 780MB) reserved=1376MB peak=929MB
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [capture-loop] iter=200 t=22.9s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=2
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  Frame 9 saved (frame_008.jpg, t=23.0s)
-  [capture-periodic] freeze=2ms shot=69ms unfreeze=2ms saved=True
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -249MB (now 532MB) reserved=1376MB peak=929MB
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +445MB (now 978MB) reserved=1376MB peak=978MB
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  Frame 10 saved (frame_009.jpg, t=25.2s)
-  [capture-periodic] freeze=4ms shot=75ms unfreeze=2ms saved=True
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -446MB (now 532MB) reserved=1376MB peak=978MB
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +349MB (now 882MB) reserved=1376MB peak=978MB
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  Frame 11 saved (frame_010.jpg, t=27.4s)
-  [capture-periodic] freeze=2ms shot=70ms unfreeze=2ms saved=True
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -350MB (now 532MB) reserved=1376MB peak=978MB
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [capture-loop] iter=250 t=28.7s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=3
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +396MB (now 929MB) reserved=1376MB peak=978MB
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  Frame 12 saved (frame_011.jpg, t=29.5s)
-  [capture-periodic] freeze=2ms shot=69ms unfreeze=2ms saved=True
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -397MB (now 532MB) reserved=1376MB peak=1127MB
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  Frame 13 saved (frame_012.jpg, t=31.7s)
-  [capture-periodic] freeze=1ms shot=70ms unfreeze=2ms saved=True
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=49
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after inference loop: allocated=0.52GB, reserved=1.34GB, total=16.00GB
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] NMS complete: 3 clusters
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] >>>>>> compute aabb runtime: 0.0101 seconds
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] >>>>>> merge mesh runtime: 0.0036 seconds
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] before inference loop: allocated=0.52GB, reserved=0.53GB, total=24.00GB
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after first batch (bs=1): allocated=0.52GB, reserved=1.41GB, total=24.00GB
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +462MB (now 881MB) reserved=1600MB peak=881MB
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  Frame 10 saved (frame_009.jpg, t=34.0s)
+  [capture-periodic] freeze=3ms shot=122ms unfreeze=3ms saved=True
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -349MB (now 532MB) reserved=1632MB peak=978MB
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +445MB (now 978MB) reserved=1632MB peak=978MB
+  [capture-loop] iter=300 t=36.0s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  Frame 11 saved (frame_010.jpg, t=36.3s)
+  [capture-periodic] freeze=3ms shot=116ms unfreeze=4ms saved=True
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -446MB (now 532MB) reserved=1632MB peak=978MB
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] +396MB (now 929MB) reserved=1632MB peak=978MB
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  Frame 12 saved (frame_011.jpg, t=38.5s)
+  [capture-periodic] freeze=3ms shot=121ms unfreeze=3ms saved=True
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -201MB (now 729MB) reserved=1632MB peak=978MB
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [SubprocessWorker] callback 'report_progress' from call_id=59
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] after inference loop: allocated=0.52GB, reserved=1.59GB, total=24.00GB
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -295MB (now 434MB) reserved=1632MB peak=978MB
+  Frame 13 saved (frame_012.jpg, t=40.8s)
+  [capture-periodic] freeze=4ms shot=122ms unfreeze=4ms saved=True
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] NMS complete: 4 clusters
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] >>>>>> compute aabb runtime: 0.0197 seconds
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] >>>>>> merge mesh runtime: 0.0065 seconds
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [P3-SAM Segment] Segmentation complete: found 3 parts
   [ComfyUI] [SubprocessWorker] got response: ok
   [ComfyUI] [comfy-env] Created 1 model patchers: ['MultiHeadSegment_2']
   [ComfyUI] Requested to load SubprocessModel
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1156 / 16379 MB
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=50 sending model_to_device
-  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before load 'SonataEncoder_1' (209 MB) -> cuda:0: 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=60 sending model_to_device
+  [capture-loop] iter=350 t=42.0s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=3
+  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before load 'MultiHeadSegment_2' (215 MB) -> cuda:0: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=51 sending model_to_device
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -257MB (now 276MB) reserved=320MB peak=1127MB
-  [ComfyUI] [comfy-env] [VRAM] After load 'SonataEncoder_1' (209 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before load 'MultiHeadSegment_2' (215 MB) -> cuda:0: 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=61 sending model_to_device
+  [ComfyUI] [comfy-env] [VRAM] After load 'MultiHeadSegment_2' (215 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before load 'SonataEncoder_1' (209 MB) -> cuda:0: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=52 sending model_to_device
-  [ComfyUI] [comfy-env] [VRAM] After load 'MultiHeadSegment_2' (215 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] P3SAMSegmentMesh done (17.31s): result: NodeOutput
-  [ComfyUI] [VRAM] After P3SAMSegmentMesh: 1156 / 16379 MB
-  [ComfyUI] [VRAM] Loaded: SubprocessModel (215 MB), SubprocessModel (209 MB)
-  [ComfyUI] [comfy-env] Running GeomPackPreviewMeshVTK: mode: 'fields', trimesh: Trimesh
-  [ComfyUI] [VRAM] Before GeomPackPreviewMeshVTK: 1156 / 16379 MB
-  [ComfyUI] [VRAM] Loaded: SubprocessModel (215 MB), SubprocessModel (209 MB)
-  [ComfyUI] [SubprocessWorker] call_method: nodes.main.visualization.preview_mesh_vtk.PreviewMeshVTKNode.EXECUTE_NORMALIZED
-  [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
-  [ComfyUI] [ComfyUI-GeometryPack] Health check: ping (timeout=5.0s)...
-  [ComfyUI] [ComfyUI-GeometryPack] Health check: ok
-  [ComfyUI] [SubprocessWorker] worker started/confirmed
-  [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-  Frame 14 saved (frame_013.jpg, t=33.9s)
-  [capture-periodic] freeze=3ms shot=78ms unfreeze=3ms saved=True
-  [ComfyUI] [SubprocessWorker] created 1 shm blocks
-  [ComfyUI] [SubprocessWorker] sending request via socket...
-  [ComfyUI] [SubprocessWorker] call_id=6 sending call_method
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Preparing preview: Mesh - 4719 vertices, 9438 faces
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Mode: fields
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Visual data - has_visual: True, kind: None, texture: False, vertex_colors: False
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Using fields mode - VTP export
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Exporting mesh to VTP: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\output\preview_vtk_a2558931.vtp
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Adding normals field (4719 vertices)
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Adding scalar field: features_pca4_debug (components: 4)
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Adding face field: part_id
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Export complete: 4719 vertices, 9438 faces
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Exported VTP to: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\output\preview_vtk_a2558931.vtp
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Vertex attributes: ['features_pca4_debug']
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Face attributes: ['part_id']
-  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Fields mode info: watertight=True, volume=526.507402589034, area=388.60625943857985, fields=['features_pca4_debug', 'face.part_id']
-  [ComfyUI] [SubprocessWorker] got response: ok
-  [ComfyUI] [comfy-env] GeomPackPreviewMeshVTK done (0.53s): result: NodeOutput
-  Node executed (2 total), capturing...
-  [ComfyUI] [VRAM] After GeomPackPreviewMeshVTK: 1156 / 16379 MB
-  [ComfyUI] [VRAM] Loaded: SubprocessModel (215 MB), SubprocessModel (209 MB)
+  [ComfyUI] [SubprocessWorker] call_id=62 sending model_to_device
+  [ComfyUI] [comfy-env] [VRAM] After load 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] P3SAMSegmentMesh done (12.81s): result: NodeOutput
+  [ComfyUI] [VRAM] After P3SAMSegmentMesh: 1271 / 24575 MB
+  [ComfyUI] [VRAM] Loaded: SubprocessModel (209 MB), SubprocessModel (215 MB)
   [ComfyUI] [comfy-env] Running Hunyuan3DPreviewBoundingBoxes: line_width: 2.0, trimesh: Trimesh, bboxes: dict
-  [ComfyUI] [VRAM] Before Hunyuan3DPreviewBoundingBoxes: 1156 / 16379 MB
-  [ComfyUI] [VRAM] Loaded: SubprocessModel (215 MB), SubprocessModel (209 MB)
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1156 / 16379 MB
+  [ComfyUI] [VRAM] Before Hunyuan3DPreviewBoundingBoxes: 1271 / 24575 MB
+  [ComfyUI] [VRAM] Loaded: SubprocessModel (209 MB), SubprocessModel (215 MB)
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'MultiHeadSegment_2' (215 MB) -> cpu: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=53 sending model_to_device
-  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'MultiHeadSegment_2' (215 MB) -> cpu: 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=63 sending model_to_device
+  [ComfyUI] [comfy-env] [VRAM] After offload 'MultiHeadSegment_2' (215 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=54 sending model_to_device
-  [ComfyUI] [comfy-env] [VRAM] After offload 'MultiHeadSegment_2' (215 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before load 'SonataEncoder_1' (209 MB) -> cuda:0: 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=64 sending model_to_device
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [VRAM] -365MB (now 70MB) reserved=256MB peak=978MB
+  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before load 'MultiHeadSegment_2' (215 MB) -> cuda:0: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=55 sending model_to_device
-  [ComfyUI] [comfy-env] [VRAM] After load 'SonataEncoder_1' (209 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before load 'MultiHeadSegment_2' (215 MB) -> cuda:0: 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=65 sending model_to_device
+  [ComfyUI] [comfy-env] [VRAM] After load 'MultiHeadSegment_2' (215 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before load 'SonataEncoder_1' (209 MB) -> cuda:0: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-  Frame 15 saved (frame_014.jpg, t=34.6s)
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [capture-node] freeze=4ms shot=87ms unfreeze=3ms saved=True
-  [ComfyUI] [SubprocessWorker] call_id=56 sending model_to_device
-  [ComfyUI] [comfy-env] [VRAM] After load 'MultiHeadSegment_2' (215 MB): 1156 / 16379 MB
+  [ComfyUI] [SubprocessWorker] call_id=66 sending model_to_device
+  [ComfyUI] [comfy-env] [VRAM] After load 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
   [ComfyUI] [SubprocessWorker] call_method: nodes.bbox_visualization.PreviewBoundingBoxesNode.EXECUTE_NORMALIZED
   [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
   [ComfyUI] [SubprocessWorker] worker started/confirmed
   [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
-  [capture-loop] iter=300 t=34.8s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=3
   [ComfyUI] [SubprocessWorker] created 1 shm blocks
   [ComfyUI] [SubprocessWorker] sending request via socket...
-  [ComfyUI] [SubprocessWorker] call_id=57 sending call_method
+  [ComfyUI] [SubprocessWorker] call_id=67 sending call_method
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [comfy-env] _from_shm got dict with keys: ['__type__', 'strategy', 'manager_path', 'storage_key', 'storage_size']
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [comfy-env] DESERIALIZE TensorRef: tensor_size=[3, 2, 3]
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [comfy-env] DESERIALIZED tensor shape: torch.Size([3, 2, 3])
@@ -540,41 +469,85 @@ Capturing execution frames: H3DPART-segment.json
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [PreviewBoundingBoxes] Mesh: 4719 vertices, 9438 faces
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [PreviewBoundingBoxes] Line width: 2.0px
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [export_scene_to_vtp] Exported: 4743 vertices, 9438 polygons, 36 lines
-  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [PreviewBoundingBoxes] Exported scene with 3 bounding boxes to: C:\workspaces\Hunyuan3D-Part-1152\portable-comfyui\ComfyUI_windows_portable\ComfyUI\output\preview_bboxes_a4d62b55.vtp
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [PreviewBoundingBoxes] Exported scene with 3 bounding boxes to: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\output\preview_bboxes_cd8edee5.vtp
   [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] [PreviewBoundingBoxes] Created visualization with 3 bounding boxes
   [ComfyUI] [SubprocessWorker] got response: ok
-  [ComfyUI] [comfy-env] Hunyuan3DPreviewBoundingBoxes done (0.81s): result: NodeOutput
-  [ComfyUI] [VRAM] After Hunyuan3DPreviewBoundingBoxes: 1156 / 16379 MB
-  [ComfyUI] [VRAM] Loaded: SubprocessModel (215 MB), SubprocessModel (209 MB)
-  [ComfyUI] Prompt executed in 35.10 seconds
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1156 / 16379 MB
+  Frame 14 saved (frame_013.jpg, t=43.1s)
+  [capture-periodic] freeze=3ms shot=126ms unfreeze=3ms saved=True
+  [ComfyUI] [comfy-env] Hunyuan3DPreviewBoundingBoxes done (1.09s): result: NodeOutput
+  [ComfyUI] [VRAM] After Hunyuan3DPreviewBoundingBoxes: 1271 / 24575 MB
+  [ComfyUI] [VRAM] Loaded: SubprocessModel (209 MB), SubprocessModel (215 MB)
+  [ComfyUI] [comfy-env] Running GeomPackPreviewMeshVTK: mode: 'fields', trimesh: Trimesh
+  [ComfyUI] [VRAM] Before GeomPackPreviewMeshVTK: 1271 / 24575 MB
+  [ComfyUI] [VRAM] Loaded: SubprocessModel (209 MB), SubprocessModel (215 MB)
+  [ComfyUI] [SubprocessWorker] call_method: nodes.main.visualization.preview_mesh_vtk.PreviewMeshVTKNode.EXECUTE_NORMALIZED
+  [ComfyUI] [SubprocessWorker] acquired lock, ensuring started...
+  [ComfyUI] [ComfyUI-GeometryPack] Health check: ping (timeout=5.0s)...
+  [ComfyUI] [ComfyUI-GeometryPack] Health check: ok
+  [ComfyUI] [SubprocessWorker] worker started/confirmed
+  [ComfyUI] [SubprocessWorker] serializing kwargs to shm...
+  Node executed (2 total), capturing...
+  [ComfyUI] [SubprocessWorker] created 1 shm blocks
+  [ComfyUI] [SubprocessWorker] sending request via socket...
+  [ComfyUI] [SubprocessWorker] call_id=6 sending call_method
+  Frame 15 saved (frame_014.jpg, t=43.5s)
+  [capture-node] freeze=4ms shot=122ms unfreeze=4ms saved=True
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Preparing preview: Mesh - 4719 vertices, 9438 faces
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Mode: fields
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Visual data - has_visual: True, kind: None, texture: False, vertex_colors: False
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Using fields mode - VTP export
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Exporting mesh to VTP: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\output\preview_vtk_39b19938.vtp
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Adding normals field (4719 vertices)
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Adding scalar field: features_pca4_debug (components: 4)
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Adding face field: part_id
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Export complete: 4719 vertices, 9438 faces
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Exported VTP to: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\output\preview_vtk_39b19938.vtp
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Vertex attributes: ['features_pca4_debug']
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Face attributes: ['part_id']
+  [ComfyUI] [worker:ComfyUI-GeometryPack] INFO: Fields mode info: watertight=True, volume=526.507402589034, area=388.60625943857985, fields=['features_pca4_debug', 'face.part_id']
+  [ComfyUI] [SubprocessWorker] got response: ok
+  [ComfyUI] [comfy-env] GeomPackPreviewMeshVTK done (0.64s): result: NodeOutput
+  [ComfyUI] [VRAM] After GeomPackPreviewMeshVTK: 1271 / 24575 MB
+  [ComfyUI] [VRAM] Loaded: SubprocessModel (209 MB), SubprocessModel (215 MB)
+  [ComfyUI] Prompt executed in 43.72 seconds
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'SonataEncoder_1' (209 MB) -> cpu: 1271 / 24575 MB
   [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=58 sending model_to_device
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: failed
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Socket unhealthy, restarting worker...
+  [ComfyUI] [comfy-env] Invalidated 2 stale model patchers (will be cleaned up during next unload)
+  [ComfyUI] [comfy-env] hunyuan3dpart-nodes: Library/bin has 69 DLLs
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] python: C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\python.exe
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] sys_path sent to worker: ['C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI', 'C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part', 'C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\.ce\\.pixi\\envs\\hunyuan3dpart-nodes\\Lib\\site-packages', 'C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part']
+  [ComfyUI] [SubprocessWorker] is_pixi=True, python=C:\workspaces\Hunyuan3D-Part-2118\portable-comfyui\ComfyUI_windows_portable\ComfyUI\.ce\.pixi\envs\hunyuan3dpart-nodes\python.exe
+  [ComfyUI] [SubprocessWorker] launching cmd=['C:\\Users\\ContainerAdministrator\\.local\\bin\\pixi.EXE', 'run', '--as-is', '--manifest-path', 'C:\\workspaces\\Hunyuan3D-Part-2118\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\.ce\\pixi.toml', '-e', 'hunyuan3dpart-nodes', 'python', 'C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\comfyui_pvenv_hajikxct\\persistent_worker.py', 'tcp://127.0.0.1:60296']...
   Node executed (3 total), capturing...
-  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1156 / 16379 MB
-  [ComfyUI] [comfy-env] [VRAM] Before offload 'MultiHeadSegment_2' (215 MB) -> cpu: 1156 / 16379 MB
-  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
-  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
-  [ComfyUI] [SubprocessWorker] call_id=59 sending model_to_device
-  [ComfyUI] [comfy-env] [VRAM] After offload 'MultiHeadSegment_2' (215 MB): 1156 / 16379 MB
-  Frame 16 saved (frame_015.jpg, t=35.4s)
-  [capture-node] freeze=2ms shot=72ms unfreeze=0ms saved=True
-  Execution complete (t=35.4s)
+  Frame 16 saved (frame_015.jpg, t=44.1s)
+  [capture-node] freeze=79ms shot=137ms unfreeze=0ms saved=True
+  Execution complete (t=44.1s)
   [3d-wait] Phase 1: Waiting for 'Loading 3D Model' text to disappear...
   [3d-wait] Phase 1 done in 0.0s
   [3d-wait] Phase 2: iframes=3
   [3d-wait] iframe viewer_ready=True (matched 2 console logs)
-  [3d-wait] Unfrozen in 0.002s, rendering for 5s...
+  [3d-wait] Unfrozen in 0.003s, rendering for 5s...
+  [ComfyUI] [worker:ComfyUI-Hunyuan3D-Part] WARNING: WARNING: You need pytorch with cu130 or higher to use optimized CUDA operations.
+  [ComfyUI] [SubprocessWorker] call_id=68 sending model_to_device
+  [ComfyUI] Model 'SonataEncoder_1' gone from worker (restarted?), treating as offloaded
+  [ComfyUI] [comfy-env] [VRAM] After offload 'SonataEncoder_1' (209 MB): 1271 / 24575 MB
+  [ComfyUI] [comfy-env] [VRAM] Before offload 'MultiHeadSegment_2' (215 MB) -> cpu: 1271 / 24575 MB
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ping (timeout=5.0s)...
+  [ComfyUI] [ComfyUI-Hunyuan3D-Part] Health check: ok
+  [ComfyUI] [SubprocessWorker] call_id=69 sending model_to_device
+  [ComfyUI] Model 'MultiHeadSegment_2' gone from worker (restarted?), treating as offloaded
+  [ComfyUI] [comfy-env] [VRAM] After offload 'MultiHeadSegment_2' (215 MB): 1271 / 24575 MB
   [3d-wait] JS halted via CDP after 5.0s
   [3d-wait] Re-frozen in 6.0s
   [3d-wait] Total 3D wait: 6.1s
-  Captured 16 unique frames over 41.69s
+  Captured 16 unique frames over 50.39s
   [debug] iframes: 3
-  [debug]   iframe[0]: src=http://127.0.0.1:41898/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=1777543, canvas=486x348, rafFrozen=True
-  [debug]   iframe[1]: src=http://127.0.0.1:41898/extensions/ComfyUI-Hunyuan3D-Part/viewer_vtk.html?v=17775, canvas=972x838, rafFrozen=True
-  [debug]   iframe[2]: src=http://127.0.0.1:41898/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=1777543, canvas=486x348, rafFrozen=True
+  [debug]   iframe[0]: src=http://127.0.0.1:41892/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=1777577, canvas=486x348, rafFrozen=True
+  [debug]   iframe[1]: src=http://127.0.0.1:41892/extensions/ComfyUI-Hunyuan3D-Part/viewer_vtk.html?v=17775, canvas=972x838, rafFrozen=True
+  [debug]   iframe[2]: src=http://127.0.0.1:41892/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=1777577, canvas=486x348, rafFrozen=True
   [timing] trigger_3d_previews: 0.0s
   Saved high-quality screenshot: H3DPART-segment_executed.png
-  [timing] final_screenshot: 0.5s
+  [timing] final_screenshot: 0.8s
     Captured 17 video frames
