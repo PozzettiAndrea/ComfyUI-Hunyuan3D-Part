@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-01T22:59:04.227654+00:00",
+  "timestamp": "2026-05-01T23:10:04.543123+00:00",
   "platform": "linux",
   "hardware": {
     "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
@@ -7,18 +7,18 @@
     "gpu": "NVIDIA GeForce RTX 5060"
   },
   "commit_hash": "e5c420a3d643b6a0a9dfa723a18c070c3cfcc743",
-  "success": false,
+  "success": true,
   "summary": {
     "total": 2,
-    "passed": 0,
-    "failed": 2
+    "passed": 2,
+    "failed": 0
   },
   "workflows": [
     {
       "name": "H3DPART-segment-partgen",
-      "status": "fail",
-      "duration_seconds": 174.52,
-      "error": "Workflow execution failed: {'prompt_id': 'e171ca05-8b5f-45e4-bc53-823b490d8bf1', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['33', '35'], 'exception_message': 'CUDA error: out of memory\\nSearch for `cudaErrorMemoryAllocation\\' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\\n\\n\\nWorker traceback:\\nTraceback (most recent call last):\\n  File \"/tmp/comfyui_pvenv_m13t1zx8/persistent_worker.py\", line 1749, in main\\n    result = method(**inputs)\\n             ^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/comfy_api/latest/_io.py\", line 1826, in EXECUTE_NORMALIZED\\n    to_return = cls.execute(*args, **kwargs)\\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py\", line 600, in execute\\n    feats = get_feat(sonata_model, points, normals)\\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\\n    return func(*args, **kwargs)\\n           ^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/p3sam_processing.py\", line 39, in get_feat\\n    point = model.sonata(data_dict)\\n            ^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1779, in _wrapped_call_impl\\n    return self._call_impl(*args, **kwargs)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1790, in _call_impl\\n    return forward_call(*args, **kwargs)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/model.py\", line 814, in forward\\n    point = Point(data_dict)\\n            ^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/structure.py\", line 60, in __init__\\n    self[\"batch\"] = offset2batch(self.offset)\\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\\n    return func(*args, **kwargs)\\n           ^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/utils.py\", line 52, in offset2batch\\n    bincount = offset2bincount(offset)\\n               ^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\\n    return func(*args, **kwargs)\\n           ^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/utils.py\", line 40, in offset2bincount\\n    return torch.diff(\\n           ^^^^^^^^^^^\\ntorch.AcceleratorError: CUDA error: out of memory\\nSearch for `cudaErrorMemoryAllocation\\' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\\n\\n\\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/execution.py\", line 534, in execute\\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n', '  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/execution.py\", line 334, in get_output_data\\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n', '  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/execution.py\", line 308, in _async_map_node_over_list\\n    await process_inputs(input_dict, i)\\n', '  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/execution.py\", line 296, in process_inputs\\n    result = f(**inputs)\\n', '  File \"/workspaces/Hunyuan3D-Part-2249/.venv/lib/python3.10/site-packages/comfy_env/isolation/metadata.py\", line 528, in proxy\\n    result = worker.call_method(\\n', '  File \"/workspaces/Hunyuan3D-Part-2249/.venv/lib/python3.10/site-packages/comfy_env/isolation/workers/subprocess.py\", line 3516, in call_method\\n    raise WorkerError(\\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': [\"{'type': 'sonata', 'ckpt_path': '/workspaces/Hunyuan3D-Part-2249/ComfyUI/models/hunyuan3d-part/p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}\"]}, 'current_outputs': ['39', '44', '27', '47', '43', '31', '37', '38', '33', '35', '42', '46'], 'timestamp': 1777676301778}\n\nDetails:\nWorkflow: /node/ComfyUI-Hunyuan3D-Part/workflows/H3DPART-segment-partgen.json\nNode error: ComputeMeshFeatures",
+      "status": "pass",
+      "duration_seconds": 258.01,
+      "error": null,
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
         "cpu": "AMD Ryzen 5 3600 6-Core Processor",
@@ -26,22 +26,22 @@
       },
       "resources": {
         "ram": {
-          "peak": 5.36,
-          "avg": 3.6
+          "peak": 16.31,
+          "avg": 8.81
         },
         "total_ram_gb": 31.3,
-        "samples": 165,
+        "samples": 250,
         "vram": {
-          "peak": 0.36,
-          "avg": 0.25
+          "peak": 7.19,
+          "avg": 2.82
         }
       }
     },
     {
       "name": "H3DPART-segment",
-      "status": "fail",
-      "duration_seconds": 39.2,
-      "error": "Workflow execution failed: {'prompt_id': 'e12c2a80-fbdc-4233-a923-4ca38da04c53', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['33', '35'], 'exception_message': 'CUDA error: out of memory\\nSearch for `cudaErrorMemoryAllocation\\' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\\n\\n\\nWorker traceback:\\nTraceback (most recent call last):\\n  File \"/tmp/comfyui_pvenv_m13t1zx8/persistent_worker.py\", line 1749, in main\\n    result = method(**inputs)\\n             ^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/comfy_api/latest/_io.py\", line 1826, in EXECUTE_NORMALIZED\\n    to_return = cls.execute(*args, **kwargs)\\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py\", line 600, in execute\\n    feats = get_feat(sonata_model, points, normals)\\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\\n    return func(*args, **kwargs)\\n           ^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/p3sam_processing.py\", line 39, in get_feat\\n    point = model.sonata(data_dict)\\n            ^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1779, in _wrapped_call_impl\\n    return self._call_impl(*args, **kwargs)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/nn/modules/module.py\", line 1790, in _call_impl\\n    return forward_call(*args, **kwargs)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/model.py\", line 814, in forward\\n    point = Point(data_dict)\\n            ^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/structure.py\", line 60, in __init__\\n    self[\"batch\"] = offset2batch(self.offset)\\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\\n    return func(*args, **kwargs)\\n           ^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/utils.py\", line 52, in offset2batch\\n    bincount = offset2bincount(offset)\\n               ^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/.ce/.pixi/envs/hunyuan3dpart-nodes/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\\n    return func(*args, **kwargs)\\n           ^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/sonata/utils.py\", line 40, in offset2bincount\\n    return torch.diff(\\n           ^^^^^^^^^^^\\ntorch.AcceleratorError: CUDA error: out of memory\\nSearch for `cudaErrorMemoryAllocation\\' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.\\nCUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.\\nFor debugging consider passing CUDA_LAUNCH_BLOCKING=1\\nCompile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.\\n\\n\\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/execution.py\", line 534, in execute\\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n', '  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/execution.py\", line 334, in get_output_data\\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n', '  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/execution.py\", line 308, in _async_map_node_over_list\\n    await process_inputs(input_dict, i)\\n', '  File \"/workspaces/Hunyuan3D-Part-2249/ComfyUI/execution.py\", line 296, in process_inputs\\n    result = f(**inputs)\\n', '  File \"/workspaces/Hunyuan3D-Part-2249/.venv/lib/python3.10/site-packages/comfy_env/isolation/metadata.py\", line 528, in proxy\\n    result = worker.call_method(\\n', '  File \"/workspaces/Hunyuan3D-Part-2249/.venv/lib/python3.10/site-packages/comfy_env/isolation/workers/subprocess.py\", line 3516, in call_method\\n    raise WorkerError(\\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': [\"{'type': 'sonata', 'ckpt_path': '/workspaces/Hunyuan3D-Part-2249/ComfyUI/models/hunyuan3d-part/p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}\"]}, 'current_outputs': ['27', '31', '37', '32', '38', '33', '20', '35'], 'timestamp': 1777676343140}\n\nDetails:\nWorkflow: /node/ComfyUI-Hunyuan3D-Part/workflows/H3DPART-segment.json\nNode error: ComputeMeshFeatures",
+      "status": "pass",
+      "duration_seconds": 51.76,
+      "error": null,
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
         "cpu": "AMD Ryzen 5 3600 6-Core Processor",
@@ -49,14 +49,14 @@
       },
       "resources": {
         "ram": {
-          "peak": 4.63,
-          "avg": 3.55
+          "peak": 5.73,
+          "avg": 4.25
         },
         "total_ram_gb": 31.3,
-        "samples": 38,
+        "samples": 51,
         "vram": {
-          "peak": 0.36,
-          "avg": 0.32
+          "peak": 1.83,
+          "avg": 0.91
         }
       }
     }
