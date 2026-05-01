@@ -29,3 +29,4 @@ pymeshlab = "==2023.12.post3"
 
 [target.linux-64.dependencies]
 pymeshlab = "==2023.12.post3"
+c-compiler = "*"
