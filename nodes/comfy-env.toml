@@ -1,11 +1,10 @@
 python = "3.12"
 
 [cuda]
-packages = ["flash-attn", "torch-scatter", "torch-cluster", "torch", "torchvision", "spconv", "cumm"]
+packages = ["flash-attn", "sageattention", "torch-scatter", "torch-cluster", "spconv", "cumm"]
 
 [pypi-dependencies]
 trimesh = "*"
-pymeshlab = "==2023.12.post3"
 diffusers = "*"
 timm = "*"
 einops = "*"
@@ -24,3 +23,10 @@ pccm = "*"
 hf_xet = "*"
 psutil = "*"
 comfy-aimdo = "*"
+
+[target.win-64.pypi-dependencies]
+pymeshlab = "==2023.12.post3"
+
+[target.linux-64.dependencies]
+pymeshlab = "==2023.12.post3"
+c-compiler = "*"

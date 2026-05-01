@@ -8,33 +8,33 @@ import numpy as np
 import folder_paths
 import os
 from pathlib import Path
+from comfy_api.latest import io
 
 
-class SaveBoundingBoxes:
+class SaveBoundingBoxes(io.ComfyNode):
     """
     Save BBOXES_3D to JSON file in ComfyUI output directory.
     Useful for caching P3-SAM segmentation results.
     """
 
     @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "bounding_boxes": ("BBOXES_3D",),
-                "filename": ("STRING", {
-                    "default": "bboxes.json",
-                    "multiline": False
-                }),
-            },
-        }
+    def define_schema(cls):
+        return io.Schema(
+            node_id="SaveBoundingBoxes",
+            display_name="Save Bounding Boxes",
+            category="Hunyuan3D/IO",
+            is_output_node=True,
+            inputs=[
+                io.Custom("BBOXES_3D").Input("bounding_boxes"),
+                io.String.Input("filename", default="bboxes.json", multiline=False),
+            ],
+            outputs=[
+                io.String.Output(display_name="file_path"),
+            ],
+        )
 
-    RETURN_TYPES = ("STRING",)
-    RETURN_NAMES = ("file_path",)
-    FUNCTION = "save"
-    CATEGORY = "Hunyuan3D/IO"
-    OUTPUT_NODE = True
-
-    def save(self, bounding_boxes, filename):
+    @classmethod
+    def execute(cls, bounding_boxes, filename):
         """Save bounding boxes to JSON file."""
         try:
             # Ensure correct extension
@@ -64,7 +64,7 @@ class SaveBoundingBoxes:
 
             print(f"[SaveBoundingBoxes] Saved {num_parts} bounding boxes to: {output_path}")
 
-            return (output_path,)
+            return io.NodeOutput(output_path)
 
         except Exception as e:
             print(f"[SaveBoundingBoxes] Error saving bounding boxes: {str(e)}")
@@ -73,29 +73,28 @@ class SaveBoundingBoxes:
             raise
 
 
-class LoadBoundingBoxes:
+class LoadBoundingBoxes(io.ComfyNode):
     """
     Load BBOXES_3D from JSON file.
     Useful for restoring cached P3-SAM segmentation results.
     """
 
     @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "file_path": ("STRING", {
-                    "default": "",
-                    "multiline": False
-                }),
-            },
-        }
+    def define_schema(cls):
+        return io.Schema(
+            node_id="LoadBoundingBoxes",
+            display_name="Load Bounding Boxes",
+            category="Hunyuan3D/IO",
+            inputs=[
+                io.String.Input("file_path", default="", multiline=False),
+            ],
+            outputs=[
+                io.Custom("BBOXES_3D").Output(display_name="bounding_boxes"),
+            ],
+        )
 
-    RETURN_TYPES = ("BBOXES_3D",)
-    RETURN_NAMES = ("bounding_boxes",)
-    FUNCTION = "load"
-    CATEGORY = "Hunyuan3D/IO"
-
-    def load(self, file_path):
+    @classmethod
+    def execute(cls, file_path):
         """Load bounding boxes from JSON file."""
         try:
             # Handle empty path
@@ -132,7 +131,7 @@ class LoadBoundingBoxes:
 
             print(f"[LoadBoundingBoxes] Loaded {num_parts} bounding boxes from: {file_path}")
 
-            return (bboxes_output,)
+            return io.NodeOutput(bboxes_output)
 
         except Exception as e:
             print(f"[LoadBoundingBoxes] Error loading bounding boxes: {str(e)}")

@@ -1,10 +1,8 @@
 import torch
 import numpy as np
 import trimesh
-from tqdm import tqdm
 import time
 from concurrent.futures import ThreadPoolExecutor
-import comfy.model_management
 
 
 def normalize_pc(pc):
@@ -21,6 +19,7 @@ def normalize_pc(pc):
 
 @torch.no_grad()
 def get_feat(model, points, normals, device=None):
+    import comfy.model_management
     if device is None:
         device = comfy.model_management.get_torch_device()
     data_dict = {
@@ -60,6 +59,7 @@ def get_mask(model, feats, points, point_prompt, iter=1, device=None, model_dtyp
 
     Returns GPU tensors: mask_1 [N,K], mask_2 [N,K], mask_3 [N,K], pred_iou [K,3]
     """
+    import comfy.model_management
     if device is None:
         device = comfy.model_management.get_torch_device()
     if model_dtype is None:
@@ -199,6 +199,7 @@ def better_aabb(points):
     return [min_xyz, max_xyz]
 
 def fix_label(face_ids, adjacent_faces, use_aabb=False, mesh=None, show_info=False):
+    import comfy.model_management
     if use_aabb:
         def _cal_aabb(face_ids, i, _points_org):
             _part_mask = face_ids == i
@@ -239,10 +240,10 @@ def fix_label(face_ids, adjacent_faces, use_aabb=False, mesh=None, show_info=Fal
     with Timer("merge mesh"):
         loop_cnt = 1
         changed = True
-        progress = tqdm(disable=not show_info)
         no_mask_ids = np.where(face_ids < 0)[0].tolist()
         faces_max = adjacent_faces.shape[0]
         while changed and loop_cnt <= 50:
+            comfy.model_management.throw_exception_if_processing_interrupted()
             changed = False
             # Get uncolored faces
             new_no_mask_ids = []
@@ -270,14 +271,13 @@ def fix_label(face_ids, adjacent_faces, use_aabb=False, mesh=None, show_info=Fal
                 face_ids[i] = _max_id
                 changed = True
             no_mask_ids = new_no_mask_ids
-            progress.update(1)
             loop_cnt += 1
     return face_ids
 
 
 def save_mesh(save_path, mesh, face_ids, color_map):
     face_colors = np.zeros((len(mesh.faces), 3), dtype=np.uint8)
-    for i in tqdm(range(len(mesh.faces)), disable=True):
+    for i in range(len(mesh.faces)):
         _max_id = face_ids[i]
         if _max_id == -2:
             continue
@@ -344,10 +344,12 @@ def calculate_face_areas(mesh):
 
 
 def get_connected_region(face_ids, adjacent_faces, return_face_part_ids=False):
+    import comfy.model_management
     vis = [False] * len(face_ids)
     parts = []
     face_part_ids = np.ones_like(face_ids) * -1
     for i in range(len(face_ids)):
+        comfy.model_management.throw_exception_if_processing_interrupted()
         if vis[i]:
             continue
         _part = []
@@ -413,12 +415,14 @@ def aabb_volume(aabb):
     return dx * dy * dz
 
 def find_neighbor_part(parts, adjacent_faces, parts_aabb=None, parts_ids=None):
+    import comfy.model_management
     face2part = {}
     for i, part in enumerate(parts):
         for face in part:
             face2part[face] = i
     neighbor_parts = []
     for i, part in enumerate(parts):
+        comfy.model_management.throw_exception_if_processing_interrupted()
         neighbor_part = set()
         for face in part:
             if not (0 <= face < adjacent_faces.shape[0]):
@@ -437,7 +441,7 @@ def find_neighbor_part(parts, adjacent_faces, parts_aabb=None, parts_ids=None):
         if parts_aabb is not None and parts_ids is not None and (parts_ids[i] == -1 or parts_ids[i] == -2) and len(neighbor_part) == 0:
             min_dis = np.inf
             min_idx = -1
-            for j, _part in tqdm(enumerate(parts)):
+            for j, _part in enumerate(parts):
                 if j == i:
                     continue
                 if parts_ids[j] == -1 or parts_ids[j] == -2:
@@ -457,6 +461,7 @@ def find_neighbor_part(parts, adjacent_faces, parts_aabb=None, parts_ids=None):
 
 
 def do_post_process(face_areas, parts, adjacent_faces, face_ids, threshold=0.95, show_info=False):
+    import comfy.model_management
     unique_ids = np.unique(face_ids)
     if show_info:
         print(f"Connected region count: {len(parts)}")
@@ -480,6 +485,7 @@ def do_post_process(face_areas, parts, adjacent_faces, face_ids, threshold=0.95,
     new_face_ids = face_ids.copy()
 
     for i, part in enumerate(parts):
+        comfy.model_management.throw_exception_if_processing_interrupted()
         if integral_part_areas[i] > threshold and part_areas[i] < 0.01:
             if len(neighbor_parts[i]) > 0:
                 max_area = 0

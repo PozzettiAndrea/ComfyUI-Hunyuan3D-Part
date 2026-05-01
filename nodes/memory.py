@@ -6,10 +6,10 @@ Provides control over model memory allocation.
 
 import torch
 import gc
-import comfy.model_management
+from comfy_api.latest import io
 
 
-class ClearAllModelCaches:
+class ClearAllModelCaches(io.ComfyNode):
     """
     Clear all cached models from worker process.
 
@@ -17,24 +17,24 @@ class ClearAllModelCaches:
     """
 
     @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "trigger": ("BOOLEAN", {
-                    "default": False,
-                    "tooltip": "Toggle this to trigger cache clearing. Changes from False->True or True->False will clear caches."
-                }),
-            },
-        }
+    def define_schema(cls):
+        return io.Schema(
+            node_id="ClearAllModelCaches",
+            display_name="Clear All Model Caches",
+            category="Hunyuan3D/Memory",
+            is_output_node=True,
+            inputs=[
+                io.Boolean.Input("trigger", default=False,
+                    tooltip="Toggle this to trigger cache clearing. Changes from False->True or True->False will clear caches."),
+            ],
+            outputs=[],
+        )
 
-    RETURN_TYPES = ()
-    OUTPUT_NODE = True
-    FUNCTION = "clear_caches"
-    CATEGORY = "Hunyuan3D/Memory"
-
-    def clear_caches(self, trigger):
+    @classmethod
+    def execute(cls, trigger):
         """Clear all model caches."""
         try:
+            import comfy.model_management
             print("[Clear Caches] Clearing all model caches...")
 
             # Clear P3-SAM model cache
@@ -63,7 +63,7 @@ class ClearAllModelCaches:
 
             print("[Clear Caches] All caches cleared successfully")
 
-            return ()
+            return io.NodeOutput()
 
         except Exception as e:
             print(f"[Clear Caches] Error: {e}")

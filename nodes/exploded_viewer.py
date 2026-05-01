@@ -11,11 +11,11 @@ import folder_paths
 import os
 import uuid
 import tempfile
-
 from .mesh_utils import load_mesh
+from comfy_api.latest import io
 
 
-class ExplodedMeshViewer:
+class ExplodedMeshViewer(io.ComfyNode):
     """
     Interactive exploded view of segmented mesh parts.
 
@@ -24,22 +24,20 @@ class ExplodedMeshViewer:
     """
 
     @classmethod
-    def INPUT_TYPES(cls):
-        return {
-            "required": {
-                "part_meshes": ("TRIMESH",),
-            },
-            "hidden": {
-                "explosion_percentage": ("FLOAT", {"default": 0.0}),
-            },
-        }
+    def define_schema(cls):
+        return io.Schema(
+            node_id="ExplodedMeshViewer",
+            display_name="Exploded Mesh Viewer",
+            category="Hunyuan3D/Visualization",
+            is_output_node=True,
+            inputs=[
+                io.Custom("TRIMESH").Input("part_meshes"),
+            ],
+            outputs=[],
+        )
 
-    RETURN_TYPES = ()
-    OUTPUT_NODE = True
-    FUNCTION = "create_exploded_view"
-    CATEGORY = "Hunyuan3D/Visualization"
-
-    def create_exploded_view(self, part_meshes, explosion_percentage=0.0):
+    @classmethod
+    def execute(cls, part_meshes, explosion_percentage=0.0, **kwargs):
         """
         Create exploded mesh visualization.
 
@@ -49,7 +47,7 @@ class ExplodedMeshViewer:
                          (from P3SAMSegmentMesh).
 
         Returns:
-            dict: UI data for frontend widget with scene file path and metadata
+            io.NodeOutput: UI data for frontend widget with scene file path and metadata
         """
         # List of Trimesh parts (from X-Part pipeline)
         if isinstance(part_meshes, list):
@@ -74,12 +72,12 @@ class ExplodedMeshViewer:
                     "Ensure the mesh passed through P3-SAM Segment Mesh first."
                 )
             print(f"[ExplodedViewer] Splitting mesh by part_id: {len(mesh_obj.vertices)} vertices, {len(mesh_obj.faces)} faces")
-            scene = self._split_mesh_by_face_ids(mesh_obj, face_ids_array)
+            scene = cls._split_mesh_by_face_ids(mesh_obj, face_ids_array)
         else:
             raise ValueError("[ExplodedViewer] Unsupported input type for part_meshes")
 
         # Calculate part centers and global center for explosion
-        part_info = self._calculate_part_info(scene)
+        part_info = cls._calculate_part_info(scene)
 
         # Generate unique filename
         filename = f"exploded_view_{uuid.uuid4().hex[:8]}.glb"
@@ -104,22 +102,21 @@ class ExplodedMeshViewer:
         print(f"[ExplodedViewer] Created scene with {len(part_info['parts'])} parts")
 
         # Return metadata for frontend widget
-        return {
-            "ui": {
-                "scene_file": [filename],
-                "num_parts": [len(part_info['parts'])],
-                "global_center": [part_info['global_center'].tolist()],
-                "part_centers": [part_info['part_centers']],
-                "vertex_count": [len(mesh_obj.vertices)],
-                "face_count": [len(mesh_obj.faces)],
-                "bounds_min": [bounds[0].tolist()],
-                "bounds_max": [bounds[1].tolist()],
-                "extents": [extents.tolist()],
-                "max_extent": [float(max_extent)],
-            }
-        }
+        return io.NodeOutput(ui={
+            "scene_file": [filename],
+            "num_parts": [len(part_info['parts'])],
+            "global_center": [part_info['global_center'].tolist()],
+            "part_centers": [part_info['part_centers']],
+            "vertex_count": [len(mesh_obj.vertices)],
+            "face_count": [len(mesh_obj.faces)],
+            "bounds_min": [bounds[0].tolist()],
+            "bounds_max": [bounds[1].tolist()],
+            "extents": [extents.tolist()],
+            "max_extent": [float(max_extent)],
+        })
 
-    def _split_mesh_by_face_ids(self, mesh, face_ids):
+    @staticmethod
+    def _split_mesh_by_face_ids(mesh, face_ids):
         """
         Split a single mesh into separate submeshes based on face_ids.
 
@@ -130,6 +127,7 @@ class ExplodedMeshViewer:
         Returns:
             trimesh.Scene with separate geometry for each part
         """
+        import comfy.model_management
         # Get unique segment IDs (excluding -1 and -2 which are no-mask)
         unique_ids = np.unique(face_ids)
         unique_ids = unique_ids[unique_ids >= 0]
@@ -140,6 +138,7 @@ class ExplodedMeshViewer:
         np.random.seed(42)  # For consistent colors
 
         for seg_id in unique_ids:
+            comfy.model_management.throw_exception_if_processing_interrupted()
             # Get faces belonging to this segment
             mask = face_ids == seg_id
             part_faces_indices = np.where(mask)[0]
@@ -178,7 +177,8 @@ class ExplodedMeshViewer:
 
         return scene
 
-    def _calculate_part_info(self, scene):
+    @staticmethod
+    def _calculate_part_info(scene):
         """
         Calculate center points for each part and global center.
 

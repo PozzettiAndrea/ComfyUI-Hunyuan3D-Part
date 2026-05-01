@@ -16,9 +16,8 @@ import torch.nn as nn
 from einops import rearrange, repeat
 from skimage import measure
 from torch import Tensor
-from tqdm import tqdm
 
-from comfy.ldm.modules.attention import optimized_attention
+from comfy.ldm.modules.attention import optimized_attention_for_device
 
 from ..misc_utils import synchronize_timer
 from ..geometry_utils import extract_geometry_fast, generate_dense_grid_points
@@ -26,7 +25,7 @@ from ..geometry_utils import extract_geometry_fast, generate_dense_grid_points
 
 def _attention(q, k, v, heads):
     """q/k/v in [B, N, heads*head_dim] format."""
-    return optimized_attention(q, k, v, heads=heads)
+    return optimized_attention_for_device(q.device)(q, k, v, heads=heads)
 
 
 # --------------------------------------------------------------------------- #
@@ -150,11 +149,7 @@ class VanillaVolumeDecoder:
         )
 
         batch_logits = []
-        for start in tqdm(
-            range(0, xyz_samples.shape[0], num_chunks),
-            desc="Volume Decoding",
-            disable=not enable_pbar,
-        ):
+        for start in range(0, xyz_samples.shape[0], num_chunks):
             chunk_queries = xyz_samples[start : start + num_chunks, :]
             chunk_queries = repeat(chunk_queries, "p c -> b p c", b=batch_size)
             logits = geo_decoder(queries=chunk_queries, latents=latents)

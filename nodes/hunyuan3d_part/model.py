@@ -15,12 +15,12 @@ import torch.nn.functional as F
 from einops import rearrange
 
 import comfy.patcher_extension
-from comfy.ldm.modules.attention import optimized_attention
+from comfy.ldm.modules.attention import optimized_attention_for_device
 
 
 def _attention(q, k, v, heads):
     """q/k/v in [B, N, heads*head_dim] format."""
-    return optimized_attention(q, k, v, heads=heads)
+    return optimized_attention_for_device(q.device)(q, k, v, heads=heads)
 
 
 # --------------------------------------------------------------------------- #

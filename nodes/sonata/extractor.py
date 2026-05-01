@@ -1,9 +1,5 @@
 import torch
 import torch.nn as nn
-import comfy.model_management
-import comfy.utils
-import comfy.ops
-
 from typing import Dict, Optional
 
 from . import load_by_config
@@ -22,6 +18,7 @@ class SonataFeatureExtractor(nn.Module):
         enable_flash: bool = True,
     ):
         super().__init__()
+        import comfy.ops
 
         # Load Sonata model with enable_flash override
         custom_config = {"enable_flash": enable_flash}
@@ -45,6 +42,7 @@ class SonataFeatureExtractor(nn.Module):
 
     def load_checkpoint(self, checkpoint_path: str):
         """Load model weights from checkpoint."""
+        import comfy.utils
         if checkpoint_path.endswith('.safetensors'):
             from safetensors.torch import load_file
             checkpoint = load_file(checkpoint_path, device="cpu")
