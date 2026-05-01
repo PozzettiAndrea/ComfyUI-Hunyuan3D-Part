@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-02-24T15:25:48.187596+00:00",
+  "timestamp": "2026-05-01T23:10:04.543123+00:00",
   "platform": "linux",
   "hardware": {
-    "os": "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
-    "cpu": "Intel(R) Xeon(R) Gold 6238R CPU @ 2.20GHz",
-    "gpu": "NVIDIA RTX A6000"
+    "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
+    "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+    "gpu": "NVIDIA GeForce RTX 5060"
   },
-  "commit_hash": "9cf275fdab6ee49e639c380458c01a12932e3344",
+  "commit_hash": "e5c420a3d643b6a0a9dfa723a18c070c3cfcc743",
   "success": true,
   "summary": {
     "total": 2,
@@ -17,46 +17,46 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 233.61,
+      "duration_seconds": 258.01,
       "error": null,
       "hardware": {
-        "os": "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
-        "cpu": "Intel(R) Xeon(R) Gold 6238R CPU @ 2.20GHz",
-        "gpu": "NVIDIA RTX A6000"
+        "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
+        "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+        "gpu": "NVIDIA GeForce RTX 5060"
       },
       "resources": {
         "ram": {
-          "peak": 8.84,
-          "avg": 4.31
+          "peak": 16.31,
+          "avg": 8.81
         },
-        "total_ram_gb": 62.9,
-        "samples": 207,
+        "total_ram_gb": 31.3,
+        "samples": 250,
         "vram": {
-          "peak": 12.4,
-          "avg": 8.15
+          "peak": 7.19,
+          "avg": 2.82
         }
       }
     },
     {
       "name": "H3DPART-segment",
       "status": "pass",
-      "duration_seconds": 103.12,
+      "duration_seconds": 51.76,
       "error": null,
       "hardware": {
-        "os": "Linux-6.8.0-90-generic-x86_64-with-glibc2.35",
-        "cpu": "Intel(R) Xeon(R) Gold 6238R CPU @ 2.20GHz",
-        "gpu": "NVIDIA RTX A6000"
+        "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
+        "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+        "gpu": "NVIDIA GeForce RTX 5060"
       },
       "resources": {
         "ram": {
-          "peak": 6.46,
-          "avg": 4.89
+          "peak": 5.73,
+          "avg": 4.25
         },
-        "total_ram_gb": 62.9,
-        "samples": 94,
+        "total_ram_gb": 31.3,
+        "samples": 51,
         "vram": {
-          "peak": 11.77,
-          "avg": 4.87
+          "peak": 1.83,
+          "avg": 0.91
         }
       }
     }

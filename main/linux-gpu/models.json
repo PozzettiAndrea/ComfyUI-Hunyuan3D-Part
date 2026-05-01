@@ -1,8 +1,8 @@
 {
-  "models_dir": "/home/shadeform/workspaces/Hunyuan3D-Part-1519/ComfyUI/models",
+  "models_dir": "/workspaces/Hunyuan3D-Part-2300/ComfyUI/models",
   "summary": {
-    "total_files": 7,
-    "total_size_bytes": 9927007518,
+    "total_files": 8,
+    "total_size_bytes": 9927007710,
     "total_size_human": "9.2 GB"
   },
   "folders": {
@@ -36,7 +36,7 @@
       ]
     },
     "sonata": {
-      "total_size_bytes": 434008412,
+      "total_size_bytes": 434008604,
       "total_size_human": "413.9 MB",
       "source": {
         "type": "unknown"
@@ -48,9 +48,14 @@
           "size_human": "413.9 MB"
         },
         {
+          "path": ".cache/huggingface/CACHEDIR.TAG",
+          "size_bytes": 191,
+          "size_human": "191.0 B"
+        },
+        {
           "path": ".cache/huggingface/download/sonata.pth.metadata",
-          "size_bytes": 124,
-          "size_human": "124.0 B"
+          "size_bytes": 125,
+          "size_human": "125.0 B"
         },
         {
           "path": ".cache/huggingface/.gitignore",

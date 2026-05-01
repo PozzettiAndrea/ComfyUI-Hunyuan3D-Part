@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-02-24T15:22:03.378657+00:00",
+  "timestamp": "2026-05-01T23:02:10.490217+00:00",
   "platform": "windows",
   "hardware": {
-    "os": "Windows-11-10.0.26100-SP0",
-    "cpu": "Intel64 Family 6 Model 58 Stepping 9, GenuineIntel",
-    "gpu": "NVIDIA RTX A4000"
+    "os": "Windows-10-10.0.26200-SP0",
+    "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+    "gpu": "NVIDIA GeForce RTX 4060 Ti"
   },
-  "commit_hash": "9cf275fdab6ee49e639c380458c01a12932e3344",
+  "commit_hash": "e5c420a3d643b6a0a9dfa723a18c070c3cfcc743",
   "success": true,
   "summary": {
     "total": 2,
@@ -17,46 +17,46 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 603.0,
+      "duration_seconds": 241.67,
       "error": null,
       "hardware": {
-        "os": "Windows-11-10.0.26100-SP0",
-        "cpu": "Intel64 Family 6 Model 58 Stepping 9, GenuineIntel",
-        "gpu": "NVIDIA RTX A4000"
+        "os": "Windows-10-10.0.26200-SP0",
+        "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+        "gpu": "NVIDIA GeForce RTX 4060 Ti"
       },
       "resources": {
         "ram": {
-          "peak": 17.56,
-          "avg": 10.29
+          "peak": 10.88,
+          "avg": 3.28
         },
-        "total_ram_gb": 30.0,
-        "samples": 496,
+        "total_ram_gb": 15.9,
+        "samples": 219,
         "vram": {
-          "peak": 10.55,
-          "avg": 4.01
+          "peak": 10.53,
+          "avg": 2.49
         }
       }
     },
     {
       "name": "H3DPART-segment",
       "status": "pass",
-      "duration_seconds": 207.47,
+      "duration_seconds": 67.96,
       "error": null,
       "hardware": {
-        "os": "Windows-11-10.0.26100-SP0",
-        "cpu": "Intel64 Family 6 Model 58 Stepping 9, GenuineIntel",
-        "gpu": "NVIDIA RTX A4000"
+        "os": "Windows-10-10.0.26200-SP0",
+        "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+        "gpu": "NVIDIA GeForce RTX 4060 Ti"
       },
       "resources": {
         "ram": {
-          "peak": 11.85,
-          "avg": 10.11
+          "peak": 11.28,
+          "avg": 3.93
         },
-        "total_ram_gb": 30.0,
-        "samples": 173,
+        "total_ram_gb": 15.9,
+        "samples": 62,
         "vram": {
-          "peak": 9.73,
-          "avg": 2.3
+          "peak": 9.68,
+          "avg": 1.83
         }
       }
     }
