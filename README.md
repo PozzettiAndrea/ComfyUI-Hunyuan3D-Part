@@ -1,5 +1,25 @@
 # ComfyUI-Hunyuan3D-Part
 
+## Installation
+
+Three options, in order of speed → reliability:
+
+1. **ComfyUI Manager (nightly, recommended)** — search for `ComfyUI-Hunyuan3D-Part` in the Manager and click Install **from the nightly version**. Do **NOT** use any numbered version like `0.2.4` — they are outdated.
+2. **Manager via Git URL** — in ComfyUI Manager: "Install via Git URL" with `https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part.git`.
+3. **Manual (most reliable)**:
+   ```bash
+   cd ComfyUI/custom_nodes
+   git clone https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part.git
+   cd ComfyUI-Hunyuan3D-Part
+   pip install -r requirements.txt --upgrade
+   python install.py
+   ```
+
+> **Please report any problems** you hit during installation or use of my nodes — open a [Discussion](https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part/discussions) or [Issue](https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part/issues). Very grateful for your help! 🙏
+
+---
+
+
 <div align="center">
 <a href="https://pozzettiandrea.github.io/ComfyUI-Hunyuan3D-Part/">
 <img src="https://pozzettiandrea.github.io/ComfyUI-Hunyuan3D-Part/gallery-preview.png" alt="Workflow Test Gallery" width="800">
@@ -10,8 +30,6 @@
 
 ComfyUI custom nodes for Hunyuan3D-Part: 3D part segmentation and generation.
 
-
-https://github.com/user-attachments/assets/e587a64e-dcb3-4ed5-8748-67baec3f700c
 
 
 ## Features
