@@ -26,6 +26,9 @@ Three options, in order of speed → reliability:
 
 ComfyUI custom nodes for Hunyuan3D-Part: 3D part segmentation and generation.
 
+---
+
+
 ## Features
 
 **P3-SAM Segmentation**: Segment 3D meshes into parts
