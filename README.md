@@ -15,6 +15,9 @@ Three options, in order of speed → reliability:
    python install.py
    ```
 
+---
+
+
 
 <div align="center">
 <a href="https://pozzettiandrea.github.io/ComfyUI-Hunyuan3D-Part/">
@@ -26,7 +29,6 @@ Three options, in order of speed → reliability:
 
 ComfyUI custom nodes for Hunyuan3D-Part: 3D part segmentation and generation.
 
----
 
 
 ## Features
