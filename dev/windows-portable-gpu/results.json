@@ -1,62 +1,62 @@
 {
-  "timestamp": "2026-05-01T23:13:39.079424+00:00",
+  "timestamp": "2026-05-05T03:29:37.606077+00:00",
   "platform": "windows_portable",
   "hardware": {
     "os": "Windows-10-10.0.26200-SP0",
-    "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
-    "gpu": "NVIDIA GeForce RTX 3090"
+    "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+    "gpu": "NVIDIA GeForce RTX 4060 Ti"
   },
-  "commit_hash": "e5c420a3d643b6a0a9dfa723a18c070c3cfcc743",
-  "success": true,
+  "commit_hash": "d8342dc17552c27c592b1ec0d4069e177dac1dfc",
+  "success": false,
   "summary": {
     "total": 2,
-    "passed": 2,
-    "failed": 0
+    "passed": 1,
+    "failed": 1
   },
   "workflows": [
     {
       "name": "H3DPART-segment-partgen",
-      "status": "pass",
-      "duration_seconds": 340.45,
-      "error": null,
+      "status": "fail",
+      "duration_seconds": 145.34,
+      "error": "Workflow execution failed: {'prompt_id': '77ce92c2-6e5a-426d-8544-ab864cd4b70b', 'node_id': '42', 'node_type': 'XPartGenerateParts', 'executed': ['38', '43', '33', '47', '37', '27', '39', '35', '31'], 'exception_message': \"ComfyUI-Hunyuan3D-Part: Socket closed but worker process still running.\\n  exit code: None\\n  worker log (C:\\\\Users\\\\ContainerAdministrator\\\\AppData\\\\Local\\\\Temp\\\\comfy_worker_debug.log, last 20 lines):\\n    05:28:45 [worker] Created 1 shm blocks for result\\n    05:28:45 [worker] Waiting for request #12...\\n    05:28:45 [worker] Waiting for request #13...\\n    05:28:45 [worker] Request: call_method nodes.processing call_id=7\\n    05:28:45 [worker] Reconstructing inputs from shm...\\n    05:28:45 [_from_shm] top-level keys: ['octree_resolution', 'num_inference_steps', 'guidance_scale', 'seed', 'pc_size', 'num_sdf_chunks', 'output_coordinate_system', 'mesh_with_features', 'bounding_boxes', 'xpart_config']\\n    05:28:45 [_from_shm] mesh_with_features: trimesh shm 'wnsm_b40fe48f' size=10307380\\n    05:28:45 [print] [comfy-env] _from_shm got dict with keys: ['__type__', 'strategy', 'manager_path', 'storage_key', 'storage_size']\\n    05:28:45 [_from_shm] bboxes: TensorRef tensor_size=[3, 2, 3]\\n    05:28:45 [print] [comfy-env] DESERIALIZE TensorRef: tensor_size=[3, 2, 3]\\n    05:28:45 [_from_shm] bboxes: TensorRef deserialized shape=torch.Size([3, 2, 3])\\n    05:28:45 [print] [comfy-env] DESERIALIZED tensor shape: torch.Size([3, 2, 3])\\n    05:28:45 [worker] Inputs ready: ['octree_resolution', 'num_inference_steps', 'guidance_scale', 'seed', 'pc_size', 'num_sdf_chunks', 'output_coordinate_system', 'mesh_with_features', 'bounding_boxes', 'xpart_config']\\n    05:28:45 [worker] Importing module nodes.processing...\\n    05:28:45 [worker] Module imported\\n    05:28:45 [worker] Getting class XPartGenerateParts...\\n    05:28:45 [worker] Creating instance...\\n    05:28:45 [worker] Calling EXECUTE_NORMALIZED...\\n    05:28:45 [print] [X-Part Generate] Using pre-computed Sonata features (4719 points)\\n    05:28:47 [print] [X-Part Generate] Using 3 bounding boxes\\n\", 'exception_type': 'RuntimeError', 'traceback': ['  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-0519\\\\portable-comfyui\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\execution.py\", line 534, in execute\\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-0519\\\\portable-comfyui\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\execution.py\", line 334, in get_output_data\\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-0519\\\\portable-comfyui\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\execution.py\", line 308, in _async_map_node_over_list\\n    await process_inputs(input_dict, i)\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-0519\\\\portable-comfyui\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\execution.py\", line 296, in process_inputs\\n    result = f(**inputs)\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-0519\\\\portable-comfyui\\\\ComfyUI_windows_portable\\\\python_embeded\\\\Lib\\\\site-packages\\\\comfy_env\\\\isolation\\\\metadata.py\", line 528, in proxy\\n    result = worker.call_method(\\n        module_name=mod,\\n    ...<4 lines>...\\n        timeout=600.0,\\n    )\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-0519\\\\portable-comfyui\\\\ComfyUI_windows_portable\\\\python_embeded\\\\Lib\\\\site-packages\\\\comfy_env\\\\isolation\\\\workers\\\\subprocess.py\", line 3511, in call_method\\n    response = self._send_request(request, timeout)\\n', '  File \"C:\\\\workspaces\\\\Hunyuan3D-Part-0519\\\\portable-comfyui\\\\ComfyUI_windows_portable\\\\python_embeded\\\\Lib\\\\site-packages\\\\comfy_env\\\\isolation\\\\workers\\\\subprocess.py\", line 3431, in _send_request\\n    raise RuntimeError(\\n        f\"{self.name}: Socket closed but worker process still running.\\\\n{diag}\"\\n    ) from e\\n'], 'current_inputs': {'octree_resolution': [256], 'num_inference_steps': [25], 'guidance_scale': [-1], 'seed': [42], 'pc_size': [40960], 'num_sdf_chunks': [30000], 'output_coordinate_system': ['Y-up (default)'], 'mesh_with_features': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3))>'], 'bounding_boxes': [\"{'bboxes': array([[[ 5.22305536e+00, -1.37329757e+00,  1.80498278e+00],\\n        [ 9.41236687e+00,  1.56081545e+00,  6.76750803e+00]],\\n\\n       [[-8.16388988e+00, -5.36976051e+00,  2.23517418e-08],\\n        [ 5.36554098e+00,  5.55727768e+00,  6.82513094e+00]],\\n\\n       [[-3.75872493e+00, -3.73070669e+00,  6.55622005e+00],\\n        [ 3.82150292e+00,  3.62775397e+00,  8.57152748e+00]]]), 'num_parts': 3}\"], 'xpart_config': [\"{'type': 'xpart_models', 'ckpt_path': 'C:\\\\\\\\workspaces\\\\\\\\Hunyuan3D-Part-0519\\\\\\\\portable-comfyui\\\\\\\\ComfyUI_windows_portable\\\\\\\\ComfyUI\\\\\\\\models\\\\\\\\hunyuan3d-part', 'model_file': 'C:\\\\\\\\workspaces\\\\\\\\Hunyuan3D-Part-0519\\\\\\\\portable-comfyui\\\\\\\\ComfyUI_windows_portable\\\\\\\\ComfyUI\\\\\\\\models\\\\\\\\hunyuan3d-part\\\\\\\\model.safetensors', 'vae_file': 'C:\\\\\\\\workspaces\\\\\\\\Hunyuan3D-Part-0519\\\\\\\\portable-comfyui\\\\\\\\ComfyUI_windows_portable\\\\\\\\ComfyUI\\\\\\\\models\\\\\\\\hunyuan3d-part\\\\\\\\shapevae.safetensors', 'cond_file': 'C:\\\\\\\\workspaces\\\\\\\\Hunyuan3D-Part-0519\\\\\\\\portable-comfyui\\\\\\\\ComfyUI_windows_portable\\\\\\\\ComfyUI\\\\\\\\models\\\\\\\\hunyuan3d-part\\\\\\\\conditioner.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}\"]}, 'current_outputs': ['38', '44', '43', '46', '33', '47', '37', '27', '42', '39', '35', '31'], 'timestamp': 1777951727751}\n\nDetails:\nWorkflow: C:\\ComfyUI-Hunyuan3D-Part\\workflows\\H3DPART-segment-partgen.json\nNode error: XPartGenerateParts",
       "hardware": {
         "os": "Windows-10-10.0.26200-SP0",
-        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
-        "gpu": "NVIDIA GeForce RTX 3090"
+        "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+        "gpu": "NVIDIA GeForce RTX 4060 Ti"
       },
       "resources": {
         "ram": {
-          "peak": 11.27,
-          "avg": 3.61
+          "peak": 5.88,
+          "avg": 2.57
         },
-        "total_ram_gb": 31.9,
-        "samples": 266,
+        "total_ram_gb": 15.9,
+        "samples": 132,
         "vram": {
-          "peak": 10.79,
-          "avg": 3.96
+          "peak": 2.4,
+          "avg": 1.06
         }
       }
     },
     {
       "name": "H3DPART-segment",
       "status": "pass",
-      "duration_seconds": 55.82,
+      "duration_seconds": 49.05,
       "error": null,
       "hardware": {
         "os": "Windows-10-10.0.26200-SP0",
-        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
-        "gpu": "NVIDIA GeForce RTX 3090"
+        "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+        "gpu": "NVIDIA GeForce RTX 4060 Ti"
       },
       "resources": {
         "ram": {
-          "peak": 5.9,
-          "avg": 3.76
+          "peak": 5.93,
+          "avg": 4.09
         },
-        "total_ram_gb": 31.9,
-        "samples": 49,
+        "total_ram_gb": 15.9,
+        "samples": 45,
         "vram": {
-          "peak": 3.0,
-          "avg": 1.71
+          "peak": 2.47,
+          "avg": 1.82
         }
       }
     }
