@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-05-01T23:10:04.543123+00:00",
+  "timestamp": "2026-05-05T21:53:11.603702+00:00",
   "platform": "linux",
   "hardware": {
     "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
     "cpu": "AMD Ryzen 5 3600 6-Core Processor",
     "gpu": "NVIDIA GeForce RTX 5060"
   },
-  "commit_hash": "e5c420a3d643b6a0a9dfa723a18c070c3cfcc743",
+  "commit_hash": "1ca0c0ecfd5c99d6754bdd28b9e5435cf576eaf5",
   "success": true,
   "summary": {
     "total": 2,
@@ -17,7 +17,7 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 258.01,
+      "duration_seconds": 254.92,
       "error": null,
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
@@ -26,21 +26,21 @@
       },
       "resources": {
         "ram": {
-          "peak": 16.31,
-          "avg": 8.81
+          "peak": 15.94,
+          "avg": 8.66
         },
         "total_ram_gb": 31.3,
-        "samples": 250,
+        "samples": 247,
         "vram": {
           "peak": 7.19,
-          "avg": 2.82
+          "avg": 2.83
         }
       }
     },
     {
       "name": "H3DPART-segment",
       "status": "pass",
-      "duration_seconds": 51.76,
+      "duration_seconds": 51.18,
       "error": null,
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
@@ -49,14 +49,14 @@
       },
       "resources": {
         "ram": {
-          "peak": 5.73,
-          "avg": 4.25
+          "peak": 15.91,
+          "avg": 4.74
         },
         "total_ram_gb": 31.3,
-        "samples": 51,
+        "samples": 50,
         "vram": {
-          "peak": 1.83,
-          "avg": 0.91
+          "peak": 6.28,
+          "avg": 1.08
         }
       }
     }
