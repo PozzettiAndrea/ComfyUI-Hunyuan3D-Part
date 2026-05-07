@@ -1,62 +1,62 @@
 {
-  "timestamp": "2026-05-05T22:19:09.547467+00:00",
+  "timestamp": "2026-05-07T13:56:28.916519+00:00",
   "platform": "windows",
   "hardware": {
     "os": "Windows-10-10.0.26200-SP0",
-    "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
-    "gpu": "NVIDIA GeForce RTX 4060 Ti"
+    "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3090"
   },
-  "commit_hash": "1ca0c0ecfd5c99d6754bdd28b9e5435cf576eaf5",
-  "success": true,
+  "commit_hash": "07bbf3b97f523af4391301fe7f29c2d5d1f0b3b9",
+  "success": false,
   "summary": {
     "total": 2,
-    "passed": 2,
-    "failed": 0
+    "passed": 0,
+    "failed": 2
   },
   "workflows": [
     {
       "name": "H3DPART-segment-partgen",
-      "status": "pass",
-      "duration_seconds": 416.63,
-      "error": null,
+      "status": "fail",
+      "duration_seconds": 6.81,
+      "error": "Workflow validation failed\n\nDetails:\ngraphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [27,31,33,35,37,38,39,42,43,44,47], sample: {\"inputs\":{\"UNKNOWN\":\"auto\"},\"_meta\":{}}",
       "hardware": {
         "os": "Windows-10-10.0.26200-SP0",
-        "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
-        "gpu": "NVIDIA GeForce RTX 4060 Ti"
+        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
+        "gpu": "NVIDIA GeForce RTX 3090"
       },
       "resources": {
         "ram": {
-          "peak": 9.9,
-          "avg": 3.19
+          "peak": 0.93,
+          "avg": 0.93
         },
-        "total_ram_gb": 15.9,
-        "samples": 379,
+        "total_ram_gb": 31.9,
+        "samples": 6,
         "vram": {
-          "peak": 10.51,
-          "avg": 3.1
+          "peak": 0.54,
+          "avg": 0.44
         }
       }
     },
     {
       "name": "H3DPART-segment",
-      "status": "pass",
-      "duration_seconds": 67.78,
-      "error": null,
+      "status": "fail",
+      "duration_seconds": 6.23,
+      "error": "Workflow validation failed\n\nDetails:\ngraphToPrompt produced nodes without class_type: graphToPrompt: 8 nodes, missing class_type: [20,27,31,32,33,35,37,38], sample: {\"inputs\":{\"UNKNOWN\":\"\",\"trimesh\":[\"32\",0],\"bboxes\":[\"32\",1]},\"_meta\":{}}",
       "hardware": {
         "os": "Windows-10-10.0.26200-SP0",
-        "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
-        "gpu": "NVIDIA GeForce RTX 4060 Ti"
+        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
+        "gpu": "NVIDIA GeForce RTX 3090"
       },
       "resources": {
         "ram": {
-          "peak": 5.26,
-          "avg": 3.11
+          "peak": 0.93,
+          "avg": 0.93
         },
-        "total_ram_gb": 15.9,
-        "samples": 62,
+        "total_ram_gb": 31.9,
+        "samples": 6,
         "vram": {
-          "peak": 2.49,
-          "avg": 1.45
+          "peak": 0.59,
+          "avg": 0.58
         }
       }
     }
