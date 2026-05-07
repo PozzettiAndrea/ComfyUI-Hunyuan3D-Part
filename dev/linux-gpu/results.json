@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-05-07T13:20:54.266116+00:00",
+  "timestamp": "2026-05-07T18:48:40.754399+00:00",
   "platform": "linux",
   "hardware": {
     "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
-    "cpu": "AMD Ryzen 5 3600 6-Core Processor",
-    "gpu": "NVIDIA GeForce RTX 5060"
+    "cpu": "Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz",
+    "gpu": "NVIDIA GeForce RTX 3090"
   },
-  "commit_hash": "07bbf3b97f523af4391301fe7f29c2d5d1f0b3b9",
+  "commit_hash": "2d86f9408b5c2b33f74b836e90736aba894f2cfc",
   "success": true,
   "summary": {
     "total": 2,
@@ -17,46 +17,46 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 256.87,
+      "duration_seconds": 315.72,
       "error": null,
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
-        "cpu": "AMD Ryzen 5 3600 6-Core Processor",
-        "gpu": "NVIDIA GeForce RTX 5060"
+        "cpu": "Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz",
+        "gpu": "NVIDIA GeForce RTX 3090"
       },
       "resources": {
         "ram": {
-          "peak": 16.3,
-          "avg": 8.8
+          "peak": 9.08,
+          "avg": 4.45
         },
-        "total_ram_gb": 31.3,
-        "samples": 249,
+        "total_ram_gb": 31.2,
+        "samples": 306,
         "vram": {
-          "peak": 7.19,
-          "avg": 2.78
+          "peak": 10.62,
+          "avg": 3.64
         }
       }
     },
     {
       "name": "H3DPART-segment",
       "status": "pass",
-      "duration_seconds": 50.6,
+      "duration_seconds": 68.25,
       "error": null,
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
-        "cpu": "AMD Ryzen 5 3600 6-Core Processor",
-        "gpu": "NVIDIA GeForce RTX 5060"
+        "cpu": "Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz",
+        "gpu": "NVIDIA GeForce RTX 3090"
       },
       "resources": {
         "ram": {
-          "peak": 6.32,
-          "avg": 4.51
+          "peak": 6.25,
+          "avg": 3.81
         },
-        "total_ram_gb": 31.3,
-        "samples": 50,
+        "total_ram_gb": 31.2,
+        "samples": 67,
         "vram": {
-          "peak": 1.83,
-          "avg": 0.93
+          "peak": 9.71,
+          "avg": 1.33
         }
       }
     }
