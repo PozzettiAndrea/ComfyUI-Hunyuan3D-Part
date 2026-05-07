@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-05-07T14:08:51.535157+00:00",
+  "timestamp": "2026-05-07T19:56:17.920541+00:00",
   "platform": "windows_portable",
   "hardware": {
     "os": "Windows-10-10.0.26200-SP0",
-    "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
-    "gpu": "NVIDIA GeForce RTX 4060 Ti"
+    "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
+    "gpu": "NVIDIA GeForce RTX 3060"
   },
-  "commit_hash": "07bbf3b97f523af4391301fe7f29c2d5d1f0b3b9",
+  "commit_hash": "2d86f9408b5c2b33f74b836e90736aba894f2cfc",
   "success": true,
   "summary": {
     "total": 2,
@@ -17,46 +17,46 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 209.68,
+      "duration_seconds": 260.07,
       "error": null,
       "hardware": {
         "os": "Windows-10-10.0.26200-SP0",
-        "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
-        "gpu": "NVIDIA GeForce RTX 4060 Ti"
+        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
+        "gpu": "NVIDIA GeForce RTX 3060"
       },
       "resources": {
         "ram": {
-          "peak": 10.6,
-          "avg": 3.32
+          "peak": 10.69,
+          "avg": 3.56
         },
-        "total_ram_gb": 15.9,
-        "samples": 189,
+        "total_ram_gb": 31.9,
+        "samples": 227,
         "vram": {
-          "peak": 10.27,
-          "avg": 2.62
+          "peak": 10.54,
+          "avg": 2.75
         }
       }
     },
     {
       "name": "H3DPART-segment",
       "status": "pass",
-      "duration_seconds": 46.59,
+      "duration_seconds": 70.46,
       "error": null,
       "hardware": {
         "os": "Windows-10-10.0.26200-SP0",
-        "cpu": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
-        "gpu": "NVIDIA GeForce RTX 4060 Ti"
+        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
+        "gpu": "NVIDIA GeForce RTX 3060"
       },
       "resources": {
         "ram": {
-          "peak": 5.52,
-          "avg": 4.04
+          "peak": 13.33,
+          "avg": 4.65
         },
-        "total_ram_gb": 15.9,
-        "samples": 43,
+        "total_ram_gb": 31.9,
+        "samples": 62,
         "vram": {
-          "peak": 2.27,
-          "avg": 1.39
+          "peak": 9.67,
+          "avg": 1.74
         }
       }
     }
