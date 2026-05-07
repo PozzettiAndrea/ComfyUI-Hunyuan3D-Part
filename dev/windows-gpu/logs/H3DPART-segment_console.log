@@ -6,9 +6,19 @@
 [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
 [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
 [Console-warning] WARNING: Multiple instances of Three.js being imported.
+[Console-log] [VTK Bundle] GLTFImporter included in bundle
 [Console-log] [GeomPack] Loading VTK.js textured mesh preview extension...
 [Console-log] [GeomPack] VTK.js textured mesh preview extension registered
-[Console-log] [GeomPack Gaussian] Loading extension...
+[Console-log] [FBXAnimationViewer] Loading FBX Animation Viewer extension
+[Console-log] [FBXAnimationViewer] Loading FBX Animation Viewer extension...
+[Console-log] [FBXAnimationViewer] Extension registered: comfy3d.fbxanimationviewer
+[Console-log] [GeomPack] Loading UV mesh preview extension...
+[Console-log] [GeomPack] UV mesh preview extension registered
+[Console-log] [GeomPack] Loading mesh preview extension...
+[Console-log] [GeomPack] Mesh preview extension registered
+[Console-log] [BVHViewer] Loading BVH Viewer extension
+[Console-log] [BVHViewer] Loading BVH viewer extension...
+[Console-log] [BVHViewer] Extension registered: comfy3d.bvhviewer
 [Console-log] [FBX Preview] Auto-registering for all known FBX preview node types...
 [Console-log] [UniRig] Loading FBX mesh preview extension...
 [Console-log] [UniRig] Detected extension folder: ComfyUI-GeometryPack
@@ -22,36 +32,86 @@
 [Console-log] [MotionCapture] Loading FBX mesh preview extension...
 [Console-log] [MotionCapture] Detected extension folder: ComfyUI-GeometryPack
 [Console-log] [MotionCapture] FBX mesh preview extension registered
+[Console-log] [GeomPack Gaussian] Loading extension...
+[Console-log] [UniRig Compare] Loading compare skeleton widget...
+[Console-log] [UniRig Compare] Detected extension folder: ComfyUI-GeometryPack
+[Console-log] [UniRig Compare] Compare skeleton widget registered
 [Console-log] [GeomPack Multi JS] Loading mesh_preview_multi.js extension
-[Console-log] [FBXAnimationViewer] Loading FBX Animation Viewer extension
-[Console-log] [FBXAnimationViewer] Loading FBX Animation Viewer extension...
-[Console-log] [FBXAnimationViewer] Extension registered: comfy3d.fbxanimationviewer
-[Console-log] [BVHViewer] Loading BVH Viewer extension
-[Console-log] [BVHViewer] Loading BVH viewer extension...
-[Console-log] [BVHViewer] Extension registered: comfy3d.bvhviewer
-[Console-log] [GeomPack] Loading UV mesh preview extension...
-[Console-log] [GeomPack] UV mesh preview extension registered
-[Console-log] [GeomPack] Loading mesh preview extension...
-[Console-log] [GeomPack] Mesh preview extension registered
 [Console-log] [UniRig Debug] Loading FBX mesh preview extension...
 [Console-log] [UniRig Debug] Detected extension folder: ComfyUI-GeometryPack
 [Console-log] [UniRig Debug] FBX mesh preview extension registered
 [Console-log] [CompareSMPLBVH] Loading Compare SMPL BVH extension
 [Console-log] [CompareSMPLBVH] Loading Compare SMPL BVH extension...
 [Console-log] [CompareSMPLBVH] Extension registered: comfy3d.comparesmplbvh
-[Console-log] [UniRig Compare] Loading compare skeleton widget...
-[Console-log] [UniRig Compare] Detected extension folder: ComfyUI-GeometryPack
-[Console-log] [UniRig Compare] Compare skeleton widget registered
-[Console-log] [VTK Bundle] GLTFImporter included in bundle
 [Console-log] [Hunyuan3D] Loading bounding box preview extension...
 [Console-log] [Hunyuan3D] Bounding box preview extension registered
 [Console-log] [Hunyuan3D] Loading exploded viewer extension...
 [Console-log] [Hunyuan3D] Exploded viewer extension registered
 [Console-warning] [MaskEditor] ComfyApp.open_maskeditor is deprecated. Plugins should migrate to using the command system or direct node context menu integration.
+[Console-log] [GeomPack] Registering Preview Mesh node
+[Console-log] [GeomPack] Registering Preview Mesh UV node
+[Console-log] [GeomPack Gaussian] Registering Preview Gaussian node
+[Console-log] [Hunyuan3D] Registering Exploded Mesh Viewer node
+[Console-log] [Hunyuan3D] Registering Preview Bounding Boxes node
+[Console-log] [Hunyuan3D] Exploded viewer node created, adding widget
+[Console-log] [VTK Bundle] GLTFImporter included in bundle
+[Console-log] [VTK Bundle] GLTFImporter included in bundle
+[Console-log] [GeomPack VTK Viewer] Initializing unified viewer...
+[Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[Console-log] [GeomPack VTK Viewer] Ready (unified)
+[Console-error] No input!
 [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
-[Console-error] Error loading model: HttpError: fetch for "http://127.0.0.1:41894/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
-    at http://127.0.0.1:41894/assets/vendor-three-Br-dHl2j.js:3824:116006
+[Console-error] Error loading model: HttpError: fetch for "http://127.0.0.1:41881/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
+    at http://127.0.0.1:41881/assets/vendor-three-Br-dHl2j.js:3824:116006
+[Console-log] [GeomPack VTK Viewer] Initializing unified viewer...
+[Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[Console-log] [GeomPack VTK Viewer] Ready (unified)
+[Console-log] [Hunyuan3D Viewer] Initializing exploded viewer...
+[Console-log] [Hunyuan3D Viewer] Ready
+[Console-error] No input!
 [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
-[Console-error] Error loading model: HttpError: fetch for "http://127.0.0.1:41894/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
-    at http://127.0.0.1:41894/assets/vendor-three-Br-dHl2j.js:3824:116006
-[Console-log] [comfy-test] graphToPrompt: 8 nodes, missing class_type: [20,27,31,32,33,35,37,38], sample: {"inputs":{"UNKNOWN":"","trimesh":["32",0],"bboxes":["32",1]},"_meta":{}}
+[Console-error] Error loading model: HttpError: fetch for "http://127.0.0.1:41881/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
+    at http://127.0.0.1:41881/assets/vendor-three-Br-dHl2j.js:3824:116006
+[Console-log] [Hunyuan3D BBox] Node created, adding widget
+[Console-log] [VTK Bundle] GLTFImporter included in bundle
+[Console-log] [VTK Bundle] GLTFImporter included in bundle
+[Console-log] [GeomPack VTK Viewer] Initializing unified viewer...
+[Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[Console-log] [GeomPack VTK Viewer] Ready (unified)
+[Console-error] No input!
+[Console-log] [GeomPack VTK Viewer] Initializing unified viewer...
+[Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[Console-log] [GeomPack VTK Viewer] Ready (unified)
+[Console-error] No input!
+[Console-log] [Hunyuan3D VTK Viewer] Initializing...
+[Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[Console-log] [Hunyuan3D VTK Viewer] Ready
+[Console-log] [Hunyuan3D BBox] Iframe loaded
+[Console-log] [comfy-test] graphToPrompt: 8 nodes, missing class_type: [], sample: {"inputs":{"line_width":2,"preview_bbox":"","trimesh":["32",0],"bboxes":["32",1]},"class_type":"Hunyuan3DPreviewBoundingBoxes","_meta":{"title":"Preview Bounding Boxes"}}
+[Console-error] No input!
+[Console-log] [VTK Bundle] GLTFImporter included in bundle
+[Console-log] [GeomPack VTK Viewer] Initializing unified viewer...
+[Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[Console-log] [GeomPack VTK Viewer] Ready (unified)
+[Console-error] No input!
+[Console-log] [GeomPack VTK Viewer] Loading: /view?filename=preview_vtk_2c8c5329.vtp&type=output&subfolder=
+[Console-log] [GeomPack VTK Viewer] Mesh loaded: 4719 points
+[Console-log] [GeomPack VTK Viewer] Loaded successfully
+[Console-log] [Hunyuan3D BBox] onExecuted called with message: {mesh_file: Array(1), vertex_count: Array(1), face_count: Array(1), bounds_min: Array(1), bounds_max: Array(1)}
+[Console-log] [Hunyuan3D BBox] Loading mesh with bboxes: preview_bboxes_72615475.vtp
+[Console-log] [Hunyuan3D BBox] Iframe already loaded, sending immediately
+[Console-log] [Hunyuan3D BBox] Sending postMessage to iframe: /view?filename=preview_bboxes_72615475.vtp&type=output&subfolder=, lineWidth: 2
+[Console-log] [Hunyuan3D VTK Viewer] Received LOAD_MESH message: /view?filename=preview_bboxes_72615475.vtp&type=output&subfolder= lineWidth: 2
+[Console-log] [Hunyuan3D VTK Viewer] Loading: /view?filename=preview_bboxes_72615475.vtp&type=output&subfolder=
+[Console-log] [Hunyuan3D VTK Viewer] Loaded mesh: 4743 points, 9438 polygons
+[Console-log] [Hunyuan3D VTK Viewer] Mesh loaded successfully
+[Console-error] No input!
+[Console-log] [VTK Bundle] GLTFImporter included in bundle
+[Console-log] [GeomPack VTK Viewer] Initializing unified viewer...
+[Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[Console-log] [GeomPack VTK Viewer] Ready (unified)
+[Console-error] No input!
+[Console-log] [GeomPack VTK Viewer] Loading: /view?filename=preview_vtk_195c670d.vtp&type=output&subfolder=
+[Console-log] [FieldVisualization] Applied field "part_id" with range [-1.000, 2.000]
+[Console-log] [GeomPack VTK Viewer] Mesh loaded: 4719 points
+[Console-log] [GeomPack VTK Viewer] Loaded successfully
