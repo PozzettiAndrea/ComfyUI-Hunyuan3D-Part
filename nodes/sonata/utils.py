@@ -31,6 +31,30 @@ from datetime import datetime
 from huggingface_hub import hf_hub_download
 
 
+def _comfy_tqdm():
+    """tqdm that shows download progress in ComfyUI's UI."""
+    try:
+        import comfy.utils
+        import tqdm as _tqdm_mod
+    except ImportError:
+        return None
+    holder = {"pbar": None, "total": 0, "done": 0}
+    class _T(_tqdm_mod.tqdm):
+        def __init__(self, *a, **kw):
+            super().__init__(*a, **kw)
+            if self.total and self.total > 0 and holder["pbar"] is None:
+                holder["total"] = self.total
+                holder["done"] = 0
+                holder["pbar"] = comfy.utils.ProgressBar(self.total)
+        def update(self, n=1):
+            ret = super().update(n)
+            if n and holder["pbar"] and holder["total"] > 0:
+                holder["done"] = min(holder["done"] + n, holder["total"])
+                holder["pbar"].update_absolute(holder["done"], holder["total"])
+            return ret
+    return _T
+
+
 # ---------------------------------------------------------------------------
 # Tensor utilities (from utils.py)
 # ---------------------------------------------------------------------------
@@ -101,6 +125,7 @@ def load(
             repo_type="dataset",
             revision="main",
             local_dir=download_root or os.path.expanduser("~/.cache/sonata/data"),
+            tqdm_class=_comfy_tqdm(),
         )
     elif os.path.isfile(name):
         print(f"Loading data in local path: {name} ...")
