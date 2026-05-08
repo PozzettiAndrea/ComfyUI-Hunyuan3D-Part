@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-05-07T19:56:17.920541+00:00",
+  "timestamp": "2026-05-08T06:52:00.055798+00:00",
   "platform": "windows_portable",
   "hardware": {
     "os": "Windows-10-10.0.26200-SP0",
     "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
-    "gpu": "NVIDIA GeForce RTX 3060"
+    "gpu": "NVIDIA GeForce RTX 3090"
   },
-  "commit_hash": "2d86f9408b5c2b33f74b836e90736aba894f2cfc",
+  "commit_hash": "238de29ddc6501122b08f90db59b3e1f65958e1c",
   "success": true,
   "summary": {
     "total": 2,
@@ -17,46 +17,46 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 260.07,
+      "duration_seconds": 233.49,
       "error": null,
       "hardware": {
         "os": "Windows-10-10.0.26200-SP0",
         "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
-        "gpu": "NVIDIA GeForce RTX 3060"
+        "gpu": "NVIDIA GeForce RTX 3090"
       },
       "resources": {
         "ram": {
-          "peak": 10.69,
-          "avg": 3.56
+          "peak": 11.04,
+          "avg": 3.39
         },
         "total_ram_gb": 31.9,
-        "samples": 227,
+        "samples": 204,
         "vram": {
-          "peak": 10.54,
-          "avg": 2.75
+          "peak": 11.05,
+          "avg": 2.68
         }
       }
     },
     {
       "name": "H3DPART-segment",
       "status": "pass",
-      "duration_seconds": 70.46,
+      "duration_seconds": 58.57,
       "error": null,
       "hardware": {
         "os": "Windows-10-10.0.26200-SP0",
         "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
-        "gpu": "NVIDIA GeForce RTX 3060"
+        "gpu": "NVIDIA GeForce RTX 3090"
       },
       "resources": {
         "ram": {
-          "peak": 13.33,
-          "avg": 4.65
+          "peak": 13.35,
+          "avg": 4.49
         },
         "total_ram_gb": 31.9,
-        "samples": 62,
+        "samples": 52,
         "vram": {
-          "peak": 9.67,
-          "avg": 1.74
+          "peak": 10.21,
+          "avg": 2.27
         }
       }
     }
