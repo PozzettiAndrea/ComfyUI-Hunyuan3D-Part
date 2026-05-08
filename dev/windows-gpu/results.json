@@ -1,24 +1,24 @@
 {
-  "timestamp": "2026-05-07T19:42:40.656429+00:00",
+  "timestamp": "2026-05-08T06:34:37.144603+00:00",
   "platform": "windows",
   "hardware": {
     "os": "Windows-10-10.0.26200-SP0",
     "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
     "gpu": "NVIDIA GeForce RTX 3090"
   },
-  "commit_hash": "2d86f9408b5c2b33f74b836e90736aba894f2cfc",
-  "success": false,
+  "commit_hash": "238de29ddc6501122b08f90db59b3e1f65958e1c",
+  "success": true,
   "summary": {
     "total": 2,
-    "passed": 0,
-    "failed": 2
+    "passed": 2,
+    "failed": 0
   },
   "workflows": [
     {
       "name": "H3DPART-segment-partgen",
-      "status": "fail",
-      "duration_seconds": 6.83,
-      "error": "Workflow validation failed\n\nDetails:\ngraphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [27,31,33,35,37,38,39,42,43,44,47], sample: {\"inputs\":{\"UNKNOWN\":\"auto\"},\"_meta\":{}}",
+      "status": "pass",
+      "duration_seconds": 330.72,
+      "error": null,
       "hardware": {
         "os": "Windows-10-10.0.26200-SP0",
         "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
@@ -26,22 +26,22 @@
       },
       "resources": {
         "ram": {
-          "peak": 0.93,
-          "avg": 0.93
+          "peak": 10.53,
+          "avg": 3.61
         },
         "total_ram_gb": 31.9,
-        "samples": 6,
+        "samples": 287,
         "vram": {
-          "peak": 0.54,
-          "avg": 0.44
+          "peak": 11.06,
+          "avg": 3.77
         }
       }
     },
     {
       "name": "H3DPART-segment",
-      "status": "fail",
-      "duration_seconds": 6.32,
-      "error": "Workflow validation failed\n\nDetails:\ngraphToPrompt produced nodes without class_type: graphToPrompt: 8 nodes, missing class_type: [20,27,31,32,33,35,37,38], sample: {\"inputs\":{\"UNKNOWN\":\"\",\"trimesh\":[\"32\",0],\"bboxes\":[\"32\",1]},\"_meta\":{}}",
+      "status": "pass",
+      "duration_seconds": 90.87,
+      "error": null,
       "hardware": {
         "os": "Windows-10-10.0.26200-SP0",
         "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
@@ -49,14 +49,14 @@
       },
       "resources": {
         "ram": {
-          "peak": 0.93,
-          "avg": 0.93
+          "peak": 5.58,
+          "avg": 3.65
         },
         "total_ram_gb": 31.9,
-        "samples": 6,
+        "samples": 80,
         "vram": {
-          "peak": 0.59,
-          "avg": 0.58
+          "peak": 2.82,
+          "avg": 1.67
         }
       }
     }
