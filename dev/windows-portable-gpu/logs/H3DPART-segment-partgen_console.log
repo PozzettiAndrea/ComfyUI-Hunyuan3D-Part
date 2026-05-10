@@ -6,12 +6,6 @@
 [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
 [Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
 [Console-warning] WARNING: Multiple instances of Three.js being imported.
-[Console-log] [GeomPack] Loading mesh preview extension...
-[Console-log] [GeomPack] Mesh preview extension registered
-[Console-log] [GeomPack Gaussian] Loading extension...
-[Console-log] [BVHViewer] Loading BVH Viewer extension
-[Console-log] [BVHViewer] Loading BVH viewer extension...
-[Console-log] [BVHViewer] Extension registered: comfy3d.bvhviewer
 [Console-log] [FBX Preview] Auto-registering for all known FBX preview node types...
 [Console-log] [UniRig] Loading FBX mesh preview extension...
 [Console-log] [UniRig] Detected extension folder: ComfyUI-GeometryPack
@@ -25,28 +19,34 @@
 [Console-log] [MotionCapture] Loading FBX mesh preview extension...
 [Console-log] [MotionCapture] Detected extension folder: ComfyUI-GeometryPack
 [Console-log] [MotionCapture] FBX mesh preview extension registered
-[Console-log] [UniRig Compare] Loading compare skeleton widget...
-[Console-log] [UniRig Compare] Detected extension folder: ComfyUI-GeometryPack
-[Console-log] [UniRig Compare] Compare skeleton widget registered
 [Console-log] [UniRig Debug] Loading FBX mesh preview extension...
 [Console-log] [UniRig Debug] Detected extension folder: ComfyUI-GeometryPack
 [Console-log] [UniRig Debug] FBX mesh preview extension registered
+[Console-log] [GeomPack Gaussian] Loading extension...
 [Console-log] [FBXAnimationViewer] Loading FBX Animation Viewer extension
 [Console-log] [FBXAnimationViewer] Loading FBX Animation Viewer extension...
 [Console-log] [FBXAnimationViewer] Extension registered: comfy3d.fbxanimationviewer
+[Console-log] [GeomPack] Loading UV mesh preview extension...
+[Console-log] [GeomPack] UV mesh preview extension registered
+[Console-log] [UniRig Compare] Loading compare skeleton widget...
+[Console-log] [UniRig Compare] Detected extension folder: ComfyUI-GeometryPack
+[Console-log] [UniRig Compare] Compare skeleton widget registered
+[Console-log] [GeomPack Multi JS] Loading mesh_preview_multi.js extension
 [Console-log] [CompareSMPLBVH] Loading Compare SMPL BVH extension
 [Console-log] [CompareSMPLBVH] Loading Compare SMPL BVH extension...
 [Console-log] [CompareSMPLBVH] Extension registered: comfy3d.comparesmplbvh
-[Console-log] [GeomPack] Loading UV mesh preview extension...
-[Console-log] [GeomPack] UV mesh preview extension registered
 [Console-log] [GeomPack] Loading VTK.js textured mesh preview extension...
 [Console-log] [GeomPack] VTK.js textured mesh preview extension registered
-[Console-log] [GeomPack Multi JS] Loading mesh_preview_multi.js extension
+[Console-log] [GeomPack] Loading mesh preview extension...
+[Console-log] [GeomPack] Mesh preview extension registered
+[Console-log] [BVHViewer] Loading BVH Viewer extension
+[Console-log] [BVHViewer] Loading BVH viewer extension...
+[Console-log] [BVHViewer] Extension registered: comfy3d.bvhviewer
 [Console-log] [VTK Bundle] GLTFImporter included in bundle
-[Console-log] [Hunyuan3D] Loading exploded viewer extension...
-[Console-log] [Hunyuan3D] Exploded viewer extension registered
 [Console-log] [Hunyuan3D] Loading bounding box preview extension...
 [Console-log] [Hunyuan3D] Bounding box preview extension registered
+[Console-log] [Hunyuan3D] Loading exploded viewer extension...
+[Console-log] [Hunyuan3D] Exploded viewer extension registered
 [Console-warning] [MaskEditor] ComfyApp.open_maskeditor is deprecated. Plugins should migrate to using the command system or direct node context menu integration.
 [Console-log] [GeomPack] Registering Preview Mesh node
 [Console-log] [GeomPack] Registering Preview Mesh UV node
@@ -64,16 +64,16 @@
 [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
 [Console-log] [GeomPack VTK Viewer] Ready (unified)
 [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
-[Console-error] Error loading model: HttpError: fetch for "http://127.0.0.1:41890/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
-    at http://127.0.0.1:41890/assets/vendor-three-ByVNcHWs.js:3824:116006
-[Console-warning] [.WebGL-0x5f8c09859400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
-[Console-warning] [.WebGL-0x5f8c0985be00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Console-error] Error loading model: HttpError: fetch for "http://127.0.0.1:41883/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
+    at http://127.0.0.1:41883/assets/vendor-three-ByVNcHWs.js:3824:116006
+[Console-warning] [.WebGL-0x2954099cb000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Console-warning] [.WebGL-0x2954099cf200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
 [Console-error] No input!
 [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
-[Console-error] Error loading model: HttpError: fetch for "http://127.0.0.1:41890/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
-    at http://127.0.0.1:41890/assets/vendor-three-ByVNcHWs.js:3824:116006
-[Console-warning] [.WebGL-0x5f8c0985e200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
-[Console-warning] [.WebGL-0x5f8c09859400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Console-error] Error loading model: HttpError: fetch for "http://127.0.0.1:41883/api/view?type=output&subfolder=%2Fhome%2Fshadeform%2Fhpart%2FComfyUI%2Foutput&filename=xpart_exploded_42.glb" responded with 403: Forbidden
+    at http://127.0.0.1:41883/assets/vendor-three-ByVNcHWs.js:3824:116006
+[Console-warning] [.WebGL-0x2954050b4800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Console-warning] [.WebGL-0x2954099cb000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
 [Console-error] Failed to load resource: the server responded with a status of 403 (Forbidden)
 [Console-log] [Hunyuan3D Viewer] Initializing exploded viewer...
 [Console-log] [Hunyuan3D Viewer] Ready
@@ -84,6 +84,27 @@
 [Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
 [Console-log] [GeomPack VTK Viewer] Ready (unified)
 [Console-error] No input!
-[Console-log] [GeomPack VTK Viewer] Loading: /view?filename=preview_vtk_e0d94d34.vtp&type=output&subfolder=
+[Console-log] [GeomPack VTK Viewer] Loading: /view?filename=preview_vtk_df02a07e.vtp&type=output&subfolder=
 [Console-log] [GeomPack VTK Viewer] Mesh loaded: 4719 points
 [Console-log] [GeomPack VTK Viewer] Loaded successfully
+[Console-log] [VTK Bundle] GLTFImporter included in bundle
+[Console-log] [GeomPack VTK Viewer] Initializing unified viewer...
+[Console-warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[Console-log] [GeomPack VTK Viewer] Ready (unified)
+[Console-error] No input!
+[Console-log] [GeomPack VTK Viewer] Loading: /view?filename=preview_vtk_a54cce34.vtp&type=output&subfolder=
+[Console-log] [FieldVisualization] Applied field "part_id" with range [-1.000, 2.000]
+[Console-log] [GeomPack VTK Viewer] Mesh loaded: 4719 points
+[Console-log] [GeomPack VTK Viewer] Loaded successfully
+[Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[Console-log] [Hunyuan3D] onExecuted called with message: {scene_file: Array(1), num_parts: Array(1), global_center: Array(1), part_centers: Array(1), vertex_count: Array(1)}
+[Console-log] [Hunyuan3D] Loading scene: exploded_view_b023f691.glb (3 parts)
+[Console-log] [Hunyuan3D] Sending postMessage to iframe: /view?filename=exploded_view_b023f691.glb&type=output&subfolder=
+[Console-error] Failed to load resource: the server responded with a status of 404 (Not Found)
+[Console-log] [Hunyuan3D Viewer] Received message: {type: LOAD_EXPLODED_SCENE, filepath: /view?filename=exploded_view_b023f691.glb&type=output&subfolder=, numParts: 3, globalCenter: Array(3), maxExtent: 17.529899539517615}
+[Console-log] [Hunyuan3D Viewer] Loading scene: /view?filename=exploded_view_b023f691.glb&type=output&subfolder=
+[Console-log] [Hunyuan3D Viewer] Metadata: {numParts: 3, globalCenter: Array(3), maxExtent: 17.529899539517615}
+[Console-log] [Hunyuan3D Viewer] Scene loaded successfully
+[Console-log] [Hunyuan3D Viewer] Found 3 mesh parts
+[Console-log] [Hunyuan3D Viewer] Global center: Vector3
+[Console-log] [Hunyuan3D Viewer] Scene setup complete
