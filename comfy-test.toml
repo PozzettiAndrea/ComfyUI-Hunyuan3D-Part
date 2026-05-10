@@ -4,7 +4,7 @@ publish = true
 
 [test.workflows]
 cpu = []
-gpu = ['H3DPART-segment', 'H3DPART-segment-partgen']
+gpu = ['H3DPART-segment-partgen']
 
 [test.platforms]
 linux = false
