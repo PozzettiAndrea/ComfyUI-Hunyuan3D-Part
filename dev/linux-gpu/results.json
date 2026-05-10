@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-05-10T20:58:03.426387+00:00",
+  "timestamp": "2026-05-10T23:35:00.994012+00:00",
   "platform": "linux",
   "hardware": {
     "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
     "cpu": "AMD Ryzen 5 3600 6-Core Processor",
     "gpu": "NVIDIA GeForce RTX 5060"
   },
-  "commit_hash": "732ef48bf43d37adc11e22aa017da60daf17123f",
-  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/25639005645",
+  "commit_hash": "46167d9aa5a43236efcbe823bf76f1d68411a1bd",
+  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/25642382364",
   "success": false,
   "summary": {
     "total": 2,
@@ -18,7 +18,7 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "fail",
-      "duration_seconds": 6.87,
+      "duration_seconds": 6.84,
       "error": "Workflow validation failed\n\nDetails:\ngraphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [27,31,35,39,42,43,44,47], sample: {\"inputs\":{\"UNKNOWN\":\"auto\"},\"_meta\":{}}",
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
