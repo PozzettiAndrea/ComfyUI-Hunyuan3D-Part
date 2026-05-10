@@ -1,64 +1,43 @@
 {
-  "timestamp": "2026-05-08T06:52:00.055798+00:00",
+  "timestamp": "2026-05-10T17:13:12.651956+00:00",
   "platform": "windows_portable",
   "hardware": {
-    "os": "Windows-10-10.0.26200-SP0",
-    "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
-    "gpu": "NVIDIA GeForce RTX 3090"
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel"
   },
-  "commit_hash": "238de29ddc6501122b08f90db59b3e1f65958e1c",
+  "commit_hash": "52a760873e57c05dbb87422e99bd98c5f3452753",
+  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/25632568176",
   "success": true,
   "summary": {
     "total": 2,
-    "passed": 2,
+    "passed": 1,
     "failed": 0
   },
   "workflows": [
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 233.49,
+      "duration_seconds": 322.88,
       "error": null,
       "hardware": {
-        "os": "Windows-10-10.0.26200-SP0",
-        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
-        "gpu": "NVIDIA GeForce RTX 3090"
+        "os": "Windows-11-10.0.26200-SP0",
+        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel"
       },
       "resources": {
         "ram": {
-          "peak": 11.04,
-          "avg": 3.39
+          "peak": 11.65,
+          "avg": 3.82
         },
         "total_ram_gb": 31.9,
-        "samples": 204,
-        "vram": {
-          "peak": 11.05,
-          "avg": 2.68
-        }
+        "samples": 286
       }
     },
     {
       "name": "H3DPART-segment",
-      "status": "pass",
-      "duration_seconds": 58.57,
-      "error": null,
-      "hardware": {
-        "os": "Windows-10-10.0.26200-SP0",
-        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
-        "gpu": "NVIDIA GeForce RTX 3090"
-      },
-      "resources": {
-        "ram": {
-          "peak": 13.35,
-          "avg": 4.49
-        },
-        "total_ram_gb": 31.9,
-        "samples": 52,
-        "vram": {
-          "peak": 10.21,
-          "avg": 2.27
-        }
-      }
+      "status": "skipped",
+      "duration_seconds": 0,
+      "error": "Not configured for GPU runner",
+      "hardware": null
     }
   ]
 }
