@@ -1,63 +1,52 @@
 {
-  "timestamp": "2026-05-08T06:34:37.144603+00:00",
+  "timestamp": "2026-05-10T08:00:27.692050+00:00",
   "platform": "windows",
   "hardware": {
-    "os": "Windows-10-10.0.26200-SP0",
-    "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
-    "gpu": "NVIDIA GeForce RTX 3090"
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel"
   },
-  "commit_hash": "238de29ddc6501122b08f90db59b3e1f65958e1c",
-  "success": true,
+  "commit_hash": "7900205444b8054b713f41136cfa1b9f67de6664",
+  "success": false,
   "summary": {
     "total": 2,
-    "passed": 2,
-    "failed": 0
+    "passed": 1,
+    "failed": 1
   },
   "workflows": [
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 330.72,
+      "duration_seconds": 335.84,
       "error": null,
       "hardware": {
-        "os": "Windows-10-10.0.26200-SP0",
-        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
-        "gpu": "NVIDIA GeForce RTX 3090"
+        "os": "Windows-11-10.0.26200-SP0",
+        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel"
       },
       "resources": {
         "ram": {
-          "peak": 10.53,
-          "avg": 3.61
+          "peak": 11.69,
+          "avg": 3.75
         },
         "total_ram_gb": 31.9,
-        "samples": 287,
-        "vram": {
-          "peak": 11.06,
-          "avg": 3.77
-        }
+        "samples": 304
       }
     },
     {
       "name": "H3DPART-segment",
-      "status": "pass",
-      "duration_seconds": 90.87,
-      "error": null,
+      "status": "fail",
+      "duration_seconds": 120.06,
+      "error": "Failed to connect to ComfyUI at http://127.0.0.1:41888\n\nDetails:\nPage.goto: Timeout 120000ms exceeded.\nCall log:\n  - navigating to \"http://127.0.0.1:41888/\", waiting until \"networkidle\"\n",
       "hardware": {
-        "os": "Windows-10-10.0.26200-SP0",
-        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel",
-        "gpu": "NVIDIA GeForce RTX 3090"
+        "os": "Windows-11-10.0.26200-SP0",
+        "cpu": "Intel64 Family 6 Model 79 Stepping 1, GenuineIntel"
       },
       "resources": {
         "ram": {
-          "peak": 5.58,
-          "avg": 3.65
+          "peak": 5.32,
+          "avg": 2.82
         },
         "total_ram_gb": 31.9,
-        "samples": 80,
-        "vram": {
-          "peak": 2.82,
-          "avg": 1.67
-        }
+        "samples": 119
       }
     }
   ]
