@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-05-10T15:08:15.768233+00:00",
+  "timestamp": "2026-05-11T06:59:21.675965+00:00",
   "platform": "linux",
   "hardware": {
     "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
-    "cpu": "Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz",
-    "gpu": "NVIDIA GeForce RTX 3090"
+    "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+    "gpu": "NVIDIA GeForce RTX 5060"
   },
-  "commit_hash": "52a760873e57c05dbb87422e99bd98c5f3452753",
-  "run_url": null,
+  "commit_hash": "0e109d0c2f1c3b35dd7467a1de117b448e1b287f",
+  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/25654559084",
   "success": true,
   "summary": {
     "total": 2,
@@ -18,23 +18,23 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 261.81,
+      "duration_seconds": 234.84,
       "error": null,
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
-        "cpu": "Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz",
-        "gpu": "NVIDIA GeForce RTX 3090"
+        "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+        "gpu": "NVIDIA GeForce RTX 5060"
       },
       "resources": {
         "ram": {
-          "peak": 9.5,
-          "avg": 5.48
+          "peak": 16.36,
+          "avg": 9.09
         },
-        "total_ram_gb": 31.2,
-        "samples": 254,
+        "total_ram_gb": 31.3,
+        "samples": 228,
         "vram": {
-          "peak": 10.62,
-          "avg": 4.05
+          "peak": 7.19,
+          "avg": 2.92
         }
       }
     },
