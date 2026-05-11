@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-05-11T06:59:21.675965+00:00",
+  "timestamp": "2026-05-11T11:13:32.926412+00:00",
   "platform": "linux",
   "hardware": {
     "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
     "cpu": "AMD Ryzen 5 3600 6-Core Processor",
     "gpu": "NVIDIA GeForce RTX 5060"
   },
-  "commit_hash": "0e109d0c2f1c3b35dd7467a1de117b448e1b287f",
-  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/25654559084",
+  "commit_hash": "5d84f7f83ee7eef8e485839bc3050a6022a3ac69",
+  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/25663924255",
   "success": true,
   "summary": {
     "total": 2,
@@ -18,7 +18,7 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 234.84,
+      "duration_seconds": 272.85,
       "error": null,
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
@@ -27,14 +27,14 @@
       },
       "resources": {
         "ram": {
-          "peak": 16.36,
-          "avg": 9.09
+          "peak": 14.73,
+          "avg": 7.96
         },
         "total_ram_gb": 31.3,
-        "samples": 228,
+        "samples": 265,
         "vram": {
           "peak": 7.19,
-          "avg": 2.92
+          "avg": 2.72
         }
       }
     },
