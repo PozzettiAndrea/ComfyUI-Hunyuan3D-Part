@@ -1,25 +1,25 @@
 {
-  "timestamp": "2026-05-11T11:13:32.926412+00:00",
+  "timestamp": "2026-05-15T12:50:43.859831+00:00",
   "platform": "linux",
   "hardware": {
     "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
     "cpu": "AMD Ryzen 5 3600 6-Core Processor",
     "gpu": "NVIDIA GeForce RTX 5060"
   },
-  "commit_hash": "5d84f7f83ee7eef8e485839bc3050a6022a3ac69",
-  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/25663924255",
-  "success": true,
+  "commit_hash": "3f92b4bdc1e865c4abcddb47d09781814d59eb06",
+  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/25915391142",
+  "success": false,
   "summary": {
     "total": 2,
-    "passed": 1,
-    "failed": 0
+    "passed": 0,
+    "failed": 1
   },
   "workflows": [
     {
       "name": "H3DPART-segment-partgen",
-      "status": "pass",
-      "duration_seconds": 272.85,
-      "error": null,
+      "status": "fail",
+      "duration_seconds": 97.65,
+      "error": "Workflow execution failed: {'prompt_id': '258e2f06-0853-4887-a8db-9b482228f06c', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['35', '39', '33', '27'], 'exception_message': 'No module named \\'transformers\\'\\n\\nWorker traceback:\\nTraceback (most recent call last):\\n  File \"/tmp/comfyui_pvenv_cax_os6q/persistent_worker.py\", line 1762, in main\\n    result = method(**inputs)\\n             ^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/comfy_api/latest/_io.py\", line 1833, in EXECUTE_NORMALIZED\\n    to_return = cls.execute(*args, **kwargs)\\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py\", line 558, in execute\\n    sonata_model = _get_sonata_model(sonata_config)\\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/custom_nodes/ComfyUI-Hunyuan3D-Part/nodes/processing.py\", line 192, in _get_sonata_model\\n    import comfy.model_patcher\\n  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/comfy/model_patcher.py\", line 32, in <module>\\n    import comfy.hooks\\n  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/comfy/hooks.py\", line 14, in <module>\\n    import comfy.lora\\n  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/comfy/lora.py\", line 23, in <module>\\n    import comfy.model_base\\n  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/comfy/model_base.py\", line 61, in <module>\\n    import comfy.ldm.hidream_o1.model\\n  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/comfy/ldm/hidream_o1/model.py\", line 20, in <module>\\n    from comfy.text_encoders.qwen35 import Qwen35VisionModel\\n  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/comfy/text_encoders/qwen35.py\", line 10, in <module>\\n    from comfy import sd1_clip\\n  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/comfy/sd1_clip.py\", line 3, in <module>\\n    from transformers import CLIPTokenizer\\nModuleNotFoundError: No module named \\'transformers\\'\\n\\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/execution.py\", line 535, in execute\\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n', '  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/execution.py\", line 335, in get_output_data\\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n', '  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/execution.py\", line 309, in _async_map_node_over_list\\n    await process_inputs(input_dict, i)\\n', '  File \"/workspaces/Hunyuan3D-Part-1244/ComfyUI/execution.py\", line 297, in process_inputs\\n    result = f(**inputs)\\n', '  File \"/workspaces/Hunyuan3D-Part-1244/.venv/lib/python3.13/site-packages/comfy_env/isolation/metadata.py\", line 556, in proxy\\n    result = worker.call_method(\\n        module_name=mod,\\n    ...<4 lines>...\\n        timeout=600.0,\\n    )\\n', '  File \"/workspaces/Hunyuan3D-Part-1244/.venv/lib/python3.13/site-packages/comfy_env/isolation/workers/subprocess.py\", line 674, in call_method\\n    raise WorkerError(\\n    ...<2 lines>...\\n    )\\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': [\"{'type': 'sonata', 'ckpt_path': '/workspaces/Hunyuan3D-Part-1244/ComfyUI/models/hunyuan3d-part/p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}\"]}, 'current_outputs': ['44', '37', '27', '35', '42', '39', '43', '46', '31', '47', '33', '38'], 'timestamp': 1778849443019}\n\nDetails:\nWorkflow: /node/ComfyUI-Hunyuan3D-Part/workflows/H3DPART-segment-partgen.json\nNode error: ComputeMeshFeatures",
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
         "cpu": "AMD Ryzen 5 3600 6-Core Processor",
@@ -27,14 +27,14 @@
       },
       "resources": {
         "ram": {
-          "peak": 14.73,
-          "avg": 7.96
+          "peak": 4.89,
+          "avg": 3.42
         },
-        "total_ram_gb": 31.3,
-        "samples": 265,
+        "total_ram_gb": 23.4,
+        "samples": 95,
         "vram": {
-          "peak": 7.19,
-          "avg": 2.72
+          "peak": 0.33,
+          "avg": 0.21
         }
       }
     },
