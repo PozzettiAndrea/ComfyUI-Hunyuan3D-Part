@@ -667,11 +667,12 @@ def extract_geometry_fast(
         else:
             expand_num = 1
         for i in range(expand_num):
-            curr_points = dilate(curr_points.unsqueeze(0).to(dtype)).squeeze(0)
+            # Conv3d needs 5D (N, C, D, H, W); curr_points is 3D (D, H, W)
+            curr_points = dilate(curr_points[None, None].to(dtype)).squeeze(0).squeeze(0)
         (cidx_x, cidx_y, cidx_z) = torch.where(curr_points > 0)
         next_index[cidx_x * 2, cidx_y * 2, cidx_z * 2] = 1
         for i in range(1):
-            next_index = dilate(next_index.unsqueeze(0)).squeeze(0)
+            next_index = dilate(next_index[None, None]).squeeze(0).squeeze(0)
         nidx = torch.where(next_index > 0)
         next_points = torch.stack(nidx, dim=1)
         next_points = next_points * torch.tensor(
