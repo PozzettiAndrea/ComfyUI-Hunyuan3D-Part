@@ -2,91 +2,171 @@ Capturing execution frames: H3DPART-segment-partgen.json
   Frame 1 saved (frame_000.jpg, t=0.0s)
   Validating workflow...
   Queuing workflow for execution...
-  Frame 2 saved (frame_001.jpg, t=2.5s)
-  [capture-periodic] freeze=10ms shot=171ms unfreeze=5ms saved=True
+  Frame 2 saved (frame_001.jpg, t=2.4s)
+  [capture-periodic] freeze=2ms shot=113ms unfreeze=3ms saved=True
   Frame 3 saved (frame_002.jpg, t=4.8s)
-  [capture-periodic] freeze=4ms shot=164ms unfreeze=4ms saved=True
-  [capture-loop] iter=50 t=6.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=4 ram=9.3/31.9GB (29%) swap=0.4/5.0GB (9%) cpu=6% browser_rss=0.84GB
-  [capture-loop] iter=100 t=13.3s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6 ram=10.4/31.9GB (32%) swap=0.4/5.0GB (9%) cpu=8% browser_rss=0.84GB
-  [capture-loop] iter=150 t=19.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5 ram=9.8/31.9GB (31%) swap=0.4/5.0GB (9%) cpu=8% browser_rss=0.84GB
-  [capture-loop] iter=200 t=25.8s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5 ram=8.6/31.9GB (27%) swap=0.4/5.0GB (9%) cpu=10% browser_rss=0.78GB
-  Frame 4 saved (frame_003.jpg, t=31.6s)
-  [capture-periodic] freeze=12ms shot=191ms unfreeze=11ms saved=True
-  [capture-loop] iter=250 t=32.3s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5 ram=9.0/31.9GB (28%) swap=0.4/5.0GB (9%) cpu=12% browser_rss=0.78GB
-  Frame 5 saved (frame_004.jpg, t=34.0s)
-  [capture-periodic] freeze=4ms shot=187ms unfreeze=8ms saved=True
-  Frame 6 saved (frame_005.jpg, t=36.3s)
-  [capture-periodic] freeze=10ms shot=207ms unfreeze=10ms saved=True
-  Frame 7 saved (frame_006.jpg, t=38.6s)
-  [capture-periodic] freeze=9ms shot=198ms unfreeze=5ms saved=True
-  [capture-loop] iter=300 t=39.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=11 ram=9.6/31.9GB (30%) swap=0.4/5.0GB (9%) cpu=23% browser_rss=0.79GB
-  Frame 8 saved (frame_007.jpg, t=41.0s)
-  [capture-periodic] freeze=5ms shot=193ms unfreeze=5ms saved=True
-  Frame 9 saved (frame_008.jpg, t=43.3s)
-  [capture-periodic] freeze=5ms shot=210ms unfreeze=5ms saved=True
-  [capture-loop] iter=350 t=45.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=11 ram=10.1/31.9GB (32%) swap=0.4/5.0GB (9%) cpu=25% browser_rss=0.79GB
-  Frame 10 saved (frame_009.jpg, t=47.9s)
-  [capture-periodic] freeze=6ms shot=187ms unfreeze=6ms saved=True
-  Frame 11 saved (frame_010.jpg, t=50.2s)
-  [capture-periodic] freeze=5ms shot=191ms unfreeze=5ms saved=True
-  [capture-loop] iter=400 t=52.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5 ram=10.4/31.9GB (33%) swap=0.4/5.0GB (9%) cpu=26% browser_rss=0.79GB
-  Frame 12 saved (frame_011.jpg, t=54.8s)
-  [capture-periodic] freeze=10ms shot=205ms unfreeze=5ms saved=True
-  [capture-loop] iter=450 t=59.1s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5 ram=10.8/31.9GB (34%) swap=0.4/5.0GB (9%) cpu=25% browser_rss=0.77GB
-  Frame 13 saved (frame_012.jpg, t=61.6s)
-  [capture-periodic] freeze=5ms shot=215ms unfreeze=11ms saved=True
-  Frame 14 saved (frame_013.jpg, t=64.0s)
-  [capture-periodic] freeze=5ms shot=189ms unfreeze=7ms saved=True
-  [capture-loop] iter=500 t=65.9s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=8 ram=11.0/31.9GB (35%) swap=0.4/5.0GB (9%) cpu=25% browser_rss=0.77GB
-  Frame 15 saved (frame_014.jpg, t=66.2s)
-  [capture-periodic] freeze=6ms shot=208ms unfreeze=5ms saved=True
-  Frame 16 saved (frame_015.jpg, t=68.6s)
-  [capture-periodic] freeze=12ms shot=201ms unfreeze=5ms saved=True
-  [capture-loop] iter=550 t=72.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5 ram=11.2/31.9GB (35%) swap=0.4/5.0GB (9%) cpu=26% browser_rss=0.77GB
-  Frame 17 saved (frame_016.jpg, t=77.7s)
-  [capture-periodic] freeze=5ms shot=205ms unfreeze=5ms saved=True
-  [capture-loop] iter=600 t=79.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5 ram=10.3/31.9GB (32%) swap=0.4/5.0GB (9%) cpu=25% browser_rss=0.77GB
-  Frame 18 saved (frame_017.jpg, t=80.0s)
-  [capture-periodic] freeze=4ms shot=170ms unfreeze=10ms saved=True
-  [capture-loop] iter=650 t=85.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5 ram=9.1/31.9GB (29%) swap=0.4/5.0GB (9%) cpu=6% browser_rss=0.77GB
-  Frame 19 saved (frame_018.jpg, t=86.8s)
-  [capture-periodic] freeze=5ms shot=171ms unfreeze=7ms saved=True
-  Frame 20 saved (frame_019.jpg, t=89.1s)
-  [capture-periodic] freeze=4ms shot=173ms unfreeze=4ms saved=True
-  Frame 21 saved (frame_020.jpg, t=91.4s)
-  [capture-periodic] freeze=4ms shot=196ms unfreeze=4ms saved=True
-  [capture-loop] iter=700 t=92.3s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=10 ram=9.2/31.9GB (29%) swap=0.4/5.0GB (9%) cpu=16% browser_rss=0.77GB
-  Frame 22 saved (frame_021.jpg, t=93.7s)
-  [capture-periodic] freeze=4ms shot=173ms unfreeze=4ms saved=True
-  Frame 23 saved (frame_022.jpg, t=95.9s)
-  [capture-periodic] freeze=14ms shot=192ms unfreeze=7ms saved=True
-  Frame 24 saved (frame_023.jpg, t=98.2s)
-  [capture-periodic] freeze=20ms shot=209ms unfreeze=4ms saved=True
-  [capture-loop] iter=750 t=99.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=12 ram=9.4/31.9GB (30%) swap=0.4/5.0GB (9%) cpu=18% browser_rss=0.78GB
-  Frame 25 saved (frame_024.jpg, t=100.5s)
-  [capture-periodic] freeze=8ms shot=199ms unfreeze=5ms saved=True
-  Frame 26 saved (frame_025.jpg, t=102.9s)
-  [capture-periodic] freeze=10ms shot=180ms unfreeze=5ms saved=True
-  Frame 27 saved (frame_026.jpg, t=105.1s)
-  [capture-periodic] freeze=14ms shot=203ms unfreeze=11ms saved=True
-  [capture-loop] iter=800 t=105.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5 ram=9.6/31.9GB (30%) swap=0.4/5.0GB (9%) cpu=24% browser_rss=0.79GB
-  Frame 28 saved (frame_027.jpg, t=107.5s)
-  [capture-periodic] freeze=10ms shot=148ms unfreeze=4ms saved=True
-  Frame 29 saved (frame_028.jpg, t=109.8s)
-  [capture-periodic] freeze=4ms shot=180ms unfreeze=6ms saved=True
-  [capture-loop] iter=850 t=112.1s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6 ram=9.5/31.9GB (30%) swap=0.4/5.0GB (9%) cpu=19% browser_rss=0.79GB
-  Frame 30 saved (frame_029.jpg, t=112.1s)
-  [capture-periodic] freeze=5ms shot=183ms unfreeze=6ms saved=True
-  Frame 31 saved (frame_030.jpg, t=114.3s)
-  [capture-periodic] freeze=4ms shot=162ms unfreeze=4ms saved=True
-  [capture-loop] iter=900 t=118.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6 ram=9.9/31.9GB (31%) swap=0.4/5.0GB (9%) cpu=10% browser_rss=0.79GB
-  Frame 32 saved (frame_031.jpg, t=121.1s)
-  [capture-periodic] freeze=4ms shot=170ms unfreeze=12ms saved=True
-  [capture-loop] iter=950 t=124.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=9 ram=9.6/31.9GB (30%) swap=0.4/5.0GB (9%) cpu=10% browser_rss=0.79GB
-  [capture-loop] iter=1000 t=131.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5 ram=9.5/31.9GB (30%) swap=0.4/5.0GB (9%) cpu=9% browser_rss=0.78GB
-  Execution complete (t=131.2s)
-  Execution error: {'prompt_id': '62181182-70d4-409d-864a-b5de585255d6', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['35', '33'], 'exception_message': 'No module named \'transformers\'\n\nWorker traceback:\nTraceback (most recent call last):\n  File "C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\comfyui_pvenv_6_s_3mtf\\persistent_worker.py", line 1762, in main\n    result = method(**inputs)\n             ^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy_api\\latest\\_io.py", line 1833, in EXECUTE_NORMALIZED\n    to_return = cls.execute(*args, **kwargs)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\processing.py", line 558, in execute\n    sonata_model = _get_sonata_model(sonata_config)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\processing.py", line 192, in _get_sonata_model\n    import comfy.model_patcher\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\model_patcher.py", line 32, in <module>\n    import comfy.hooks\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\hooks.py", line 14, in <module>\n    import comfy.lora\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\lora.py", line 23, in <module>\n    import comfy.model_base\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\model_base.py", line 61, in <module>\n    import comfy.ldm.hidream_o1.model\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\ldm\\hidream_o1\\model.py", line 20, in <module>\n    from comfy.text_encoders.qwen35 import Qwen35VisionModel\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\text_encoders\\qwen35.py", line 10, in <module>\n    from comfy import sd1_clip\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\sd1_clip.py", line 3, in <module>\n    from transformers import CLIPTokenizer\nModuleNotFoundError: No module named \'transformers\'\n\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\execution.py", line 535, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\execution.py", line 335, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\execution.py", line 309, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\execution.py", line 297, in process_inputs\n    result = f(**inputs)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\comfy_env\\isolation\\metadata.py", line 556, in proxy\n    result = worker.call_method(\n        module_name=mod,\n    ...<4 lines>...\n        timeout=600.0,\n    )\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\comfy_env\\isolation\\workers\\subprocess.py", line 674, in call_method\n    raise WorkerError(\n    ...<2 lines>...\n    )\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': ["{'type': 'sonata', 'ckpt_path': 'C:\\\\workspaces\\\\Hunyuan3D-Part-1611\\\\portable-comfyui\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\hunyuan3d-part\\\\p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}"]}, 'current_outputs': ['38', '37', '42', '44', '46', '47', '43', '33', '31', '35', '27', '39'], 'timestamp': 1778855241768}
-    Status: FAILED
-    Error: Workflow execution failed: {'prompt_id': '62181182-70d4-409d-864a-b5de585255d6', 'node_id': '31', 'node_type': 'ComputeMeshFeatures', 'executed': ['35', '33'], 'exception_message': 'No module named \'transformers\'\n\nWorker traceback:\nTraceback (most recent call last):\n  File "C:\\Users\\ContainerAdministrator\\AppData\\Local\\Temp\\comfyui_pvenv_6_s_3mtf\\persistent_worker.py", line 1762, in main\n    result = method(**inputs)\n             ^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy_api\\latest\\_io.py", line 1833, in EXECUTE_NORMALIZED\n    to_return = cls.execute(*args, **kwargs)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\processing.py", line 558, in execute\n    sonata_model = _get_sonata_model(sonata_config)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\custom_nodes\\ComfyUI-Hunyuan3D-Part\\nodes\\processing.py", line 192, in _get_sonata_model\n    import comfy.model_patcher\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\model_patcher.py", line 32, in <module>\n    import comfy.hooks\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\hooks.py", line 14, in <module>\n    import comfy.lora\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\lora.py", line 23, in <module>\n    import comfy.model_base\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\model_base.py", line 61, in <module>\n    import comfy.ldm.hidream_o1.model\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\ldm\\hidream_o1\\model.py", line 20, in <module>\n    from comfy.text_encoders.qwen35 import Qwen35VisionModel\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\text_encoders\\qwen35.py", line 10, in <module>\n    from comfy import sd1_clip\n  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\comfy\\sd1_clip.py", line 3, in <module>\n    from transformers import CLIPTokenizer\nModuleNotFoundError: No module named \'transformers\'\n\n', 'exception_type': 'comfy_env.isolation.workers.base.WorkerError', 'traceback': ['  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\execution.py", line 535, in execute\n    output_data, output_ui, has_subgraph, has_pending_tasks = await get_output_data(prompt_id, unique_id, obj, input_data_all, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\execution.py", line 335, in get_output_data\n    return_values = await _async_map_node_over_list(prompt_id, unique_id, obj, input_data_all, obj.FUNCTION, allow_interrupt=True, execution_block_cb=execution_block_cb, pre_execute_cb=pre_execute_cb, v3_data=v3_data)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\execution.py", line 309, in _async_map_node_over_list\n    await process_inputs(input_dict, i)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\ComfyUI\\execution.py", line 297, in process_inputs\n    result = f(**inputs)\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\comfy_env\\isolation\\metadata.py", line 556, in proxy\n    result = worker.call_method(\n        module_name=mod,\n    ...<4 lines>...\n        timeout=600.0,\n    )\n', '  File "C:\\workspaces\\Hunyuan3D-Part-1611\\portable-comfyui\\ComfyUI_windows_portable\\python_embeded\\Lib\\site-packages\\comfy_env\\isolation\\workers\\subprocess.py", line 674, in call_method\n    raise WorkerError(\n    ...<2 lines>...\n    )\n'], 'current_inputs': {'all_points': [False], 'point_num': [100000], 'seed': [42], 'mesh': ['<trimesh.Trimesh(vertices.shape=(4719, 3), faces.shape=(9438, 3), name=`utah_teapot.stl`)>'], 'sonata_config': ["{'type': 'sonata', 'ckpt_path': 'C:\\\\workspaces\\\\Hunyuan3D-Part-1611\\\\portable-comfyui\\\\ComfyUI_windows_portable\\\\ComfyUI\\\\models\\\\hunyuan3d-part\\\\p3sam.safetensors', 'precision': 'auto', 'attn_backend': 'auto'}"]}, 'current_outputs': ['38', '37', '42', '44', '46', '47', '43', '33', '31', '35', '27', '39'], 'timestamp': 1778855241768}
-    Details: Workflow: C:\ComfyUI-Hunyuan3D-Part\workflows\H3DPART-segment-partgen.json
-Node error: ComputeMeshFeatures
+  [capture-periodic] freeze=3ms shot=96ms unfreeze=2ms saved=True
+  [capture-loop] iter=50 t=6.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3 ram=11.0/31.9GB (34%) swap=0.0/5.0GB (0%) cpu=23% browser_rss=0.86GB
+  [capture-loop] iter=100 t=12.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3 ram=9.7/31.9GB (30%) swap=0.0/5.0GB (0%) cpu=29% browser_rss=0.86GB
+  [capture-loop] iter=150 t=17.9s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=4 ram=9.7/31.9GB (30%) swap=0.0/5.0GB (0%) cpu=28% browser_rss=0.86GB
+  [capture-loop] iter=200 t=23.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3 ram=9.8/31.9GB (31%) swap=0.0/5.0GB (0%) cpu=26% browser_rss=0.80GB
+  Frame 4 saved (frame_003.jpg, t=28.8s)
+  [capture-periodic] freeze=3ms shot=98ms unfreeze=3ms saved=True
+  [capture-loop] iter=250 t=29.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5 ram=10.2/31.9GB (32%) swap=0.0/5.0GB (0%) cpu=27% browser_rss=0.80GB
+  Frame 5 saved (frame_004.jpg, t=30.9s)
+  [capture-periodic] freeze=2ms shot=104ms unfreeze=3ms saved=True
+  Frame 6 saved (frame_005.jpg, t=33.1s)
+  [capture-periodic] freeze=3ms shot=97ms unfreeze=3ms saved=True
+  Frame 7 saved (frame_006.jpg, t=35.3s)
+  [capture-periodic] freeze=3ms shot=99ms unfreeze=5ms saved=True
+  [capture-loop] iter=300 t=35.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3 ram=10.9/31.9GB (34%) swap=0.0/5.0GB (0%) cpu=28% browser_rss=0.81GB
+  Frame 8 saved (frame_007.jpg, t=37.5s)
+  [capture-periodic] freeze=6ms shot=109ms unfreeze=3ms saved=True
+  Frame 9 saved (frame_008.jpg, t=39.6s)
+  [capture-periodic] freeze=3ms shot=104ms unfreeze=3ms saved=True
+  [capture-loop] iter=350 t=41.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=4 ram=11.3/31.9GB (35%) swap=0.0/5.0GB (0%) cpu=33% browser_rss=0.81GB
+  Frame 10 saved (frame_009.jpg, t=41.8s)
+  [capture-periodic] freeze=3ms shot=114ms unfreeze=3ms saved=True
+  Frame 11 saved (frame_010.jpg, t=46.1s)
+  [capture-periodic] freeze=3ms shot=111ms unfreeze=3ms saved=True
+  [capture-loop] iter=400 t=47.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=5 ram=11.4/31.9GB (36%) swap=0.0/5.0GB (0%) cpu=38% browser_rss=0.82GB
+  Frame 12 saved (frame_011.jpg, t=48.2s)
+  [capture-periodic] freeze=3ms shot=111ms unfreeze=3ms saved=True
+  Frame 13 saved (frame_012.jpg, t=50.4s)
+  [capture-periodic] freeze=3ms shot=102ms unfreeze=3ms saved=True
+  Frame 14 saved (frame_013.jpg, t=52.6s)
+  [capture-periodic] freeze=3ms shot=112ms unfreeze=3ms saved=True
+  [capture-loop] iter=450 t=53.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3 ram=11.7/31.9GB (37%) swap=0.0/5.0GB (0%) cpu=36% browser_rss=0.80GB
+  Frame 15 saved (frame_014.jpg, t=57.0s)
+  [capture-periodic] freeze=4ms shot=110ms unfreeze=3ms saved=True
+  [capture-loop] iter=500 t=59.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3 ram=12.2/31.9GB (38%) swap=0.0/5.0GB (0%) cpu=36% browser_rss=0.80GB
+  Frame 16 saved (frame_015.jpg, t=61.4s)
+  [capture-periodic] freeze=11ms shot=137ms unfreeze=4ms saved=True
+  Frame 17 saved (frame_016.jpg, t=63.6s)
+  [capture-periodic] freeze=3ms shot=105ms unfreeze=7ms saved=True
+  [capture-loop] iter=550 t=65.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=4 ram=11.9/31.9GB (37%) swap=0.0/5.0GB (0%) cpu=38% browser_rss=0.80GB
+  Frame 18 saved (frame_017.jpg, t=65.8s)
+  [capture-periodic] freeze=3ms shot=129ms unfreeze=4ms saved=True
+  [capture-loop] iter=600 t=71.6s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=4 ram=10.6/31.9GB (33%) swap=0.0/5.0GB (0%) cpu=35% browser_rss=0.80GB
+  Frame 19 saved (frame_018.jpg, t=72.3s)
+  [capture-periodic] freeze=3ms shot=101ms unfreeze=4ms saved=True
+  Frame 20 saved (frame_019.jpg, t=74.4s)
+  [capture-periodic] freeze=4ms shot=95ms unfreeze=3ms saved=True
+  Frame 21 saved (frame_020.jpg, t=76.6s)
+  [capture-periodic] freeze=3ms shot=96ms unfreeze=2ms saved=True
+  [capture-loop] iter=650 t=77.5s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=6 ram=10.4/31.9GB (33%) swap=0.0/5.0GB (0%) cpu=25% browser_rss=0.80GB
+  Frame 22 saved (frame_021.jpg, t=78.9s)
+  [capture-periodic] freeze=3ms shot=98ms unfreeze=3ms saved=True
+  Frame 23 saved (frame_022.jpg, t=81.0s)
+  [capture-periodic] freeze=9ms shot=100ms unfreeze=3ms saved=True
+  [capture-loop] iter=700 t=83.3s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=4 ram=10.6/31.9GB (33%) swap=0.0/5.0GB (0%) cpu=22% browser_rss=0.80GB
+  Frame 24 saved (frame_023.jpg, t=83.3s)
+  [capture-periodic] freeze=3ms shot=103ms unfreeze=9ms saved=True
+  Frame 25 saved (frame_024.jpg, t=85.5s)
+  [capture-periodic] freeze=2ms shot=90ms unfreeze=5ms saved=True
+  Frame 26 saved (frame_025.jpg, t=87.8s)
+  [capture-periodic] freeze=2ms shot=107ms unfreeze=3ms saved=True
+  [capture-loop] iter=750 t=89.2s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3 ram=10.8/31.9GB (34%) swap=0.0/5.0GB (0%) cpu=27% browser_rss=0.80GB
+  Frame 27 saved (frame_026.jpg, t=89.9s)
+  [capture-periodic] freeze=3ms shot=100ms unfreeze=4ms saved=True
+  Frame 28 saved (frame_027.jpg, t=92.0s)
+  [capture-periodic] freeze=3ms shot=107ms unfreeze=4ms saved=True
+  Frame 29 saved (frame_028.jpg, t=94.2s)
+  [capture-periodic] freeze=3ms shot=107ms unfreeze=3ms saved=True
+  [capture-loop] iter=800 t=95.1s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3 ram=10.8/31.9GB (34%) swap=0.0/5.0GB (0%) cpu=32% browser_rss=0.80GB
+  Frame 30 saved (frame_029.jpg, t=96.5s)
+  [capture-periodic] freeze=3ms shot=92ms unfreeze=3ms saved=True
+  Frame 31 saved (frame_030.jpg, t=98.7s)
+  [capture-periodic] freeze=2ms shot=100ms unfreeze=3ms saved=True
+  [capture-loop] iter=850 t=100.9s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=2 ram=10.7/31.9GB (34%) swap=0.0/5.0GB (0%) cpu=26% browser_rss=0.80GB
+  Frame 32 saved (frame_031.jpg, t=100.9s)
+  [capture-periodic] freeze=2ms shot=92ms unfreeze=2ms saved=True
+  Frame 33 saved (frame_032.jpg, t=105.2s)
+  [capture-periodic] freeze=2ms shot=85ms unfreeze=2ms saved=True
+  [capture-loop] iter=900 t=106.7s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3 ram=10.9/31.9GB (34%) swap=0.0/5.0GB (0%) cpu=22% browser_rss=0.80GB
+  [capture-loop] iter=950 t=112.4s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3 ram=10.7/31.9GB (34%) swap=0.0/5.0GB (0%) cpu=21% browser_rss=0.80GB
+  [capture-loop] iter=1000 t=118.0s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3 ram=10.6/31.9GB (33%) swap=0.0/5.0GB (0%) cpu=19% browser_rss=0.80GB
+  [capture-loop] iter=1050 t=123.9s state={'complete': False, 'error': None, 'executedCount': 0, 'wsState': 1} eval_ms=3 ram=10.7/31.9GB (34%) swap=0.0/5.0GB (0%) cpu=22% browser_rss=0.80GB
+  Frame 34 saved (frame_033.jpg, t=124.8s)
+  [capture-periodic] freeze=13ms shot=120ms unfreeze=5ms saved=True
+  Frame 35 saved (frame_034.jpg, t=127.1s)
+  [capture-periodic] freeze=6ms shot=95ms unfreeze=5ms saved=True
+  Node executed (1 total), capturing...
+  Frame 36 saved (frame_035.jpg, t=127.9s)
+  [capture-node] freeze=3ms shot=234ms unfreeze=45ms saved=True
+  [capture-loop] iter=1100 t=130.1s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=6 ram=13.0/31.9GB (41%) swap=0.0/5.0GB (0%) cpu=50% browser_rss=0.84GB
+  Frame 37 saved (frame_036.jpg, t=130.2s)
+  [capture-periodic] freeze=3ms shot=118ms unfreeze=2ms saved=True
+  Frame 38 saved (frame_037.jpg, t=132.5s)
+  [capture-periodic] freeze=2ms shot=93ms unfreeze=2ms saved=True
+  Frame 39 saved (frame_038.jpg, t=134.7s)
+  [capture-periodic] freeze=2ms shot=109ms unfreeze=2ms saved=True
+  [capture-loop] iter=1150 t=136.0s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=3 ram=12.9/31.9GB (40%) swap=0.0/5.0GB (0%) cpu=22% browser_rss=0.85GB
+  Frame 40 saved (frame_039.jpg, t=136.9s)
+  [capture-periodic] freeze=2ms shot=92ms unfreeze=3ms saved=True
+  Frame 41 saved (frame_040.jpg, t=139.1s)
+  [capture-periodic] freeze=2ms shot=110ms unfreeze=3ms saved=True
+  Frame 42 saved (frame_041.jpg, t=141.3s)
+  [capture-periodic] freeze=3ms shot=90ms unfreeze=3ms saved=True
+  [capture-loop] iter=1200 t=141.9s state={'complete': False, 'error': None, 'executedCount': 1, 'wsState': 1} eval_ms=4 ram=12.8/31.9GB (40%) swap=0.0/5.0GB (0%) cpu=21% browser_rss=0.84GB
+  Frame 43 saved (frame_042.jpg, t=143.5s)
+  [capture-periodic] freeze=2ms shot=100ms unfreeze=4ms saved=True
+  Node executed (2 total), capturing...
+  Frame 44 saved (frame_043.jpg, t=145.2s)
+  [capture-node] freeze=3ms shot=127ms unfreeze=5ms saved=True
+  Frame 45 saved (frame_044.jpg, t=147.5s)
+  [capture-periodic] freeze=5ms shot=115ms unfreeze=3ms saved=True
+  [capture-loop] iter=1250 t=148.0s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=6 ram=13.3/31.9GB (42%) swap=0.0/5.0GB (0%) cpu=27% browser_rss=0.88GB
+  Frame 46 saved (frame_045.jpg, t=149.7s)
+  [capture-periodic] freeze=2ms shot=105ms unfreeze=2ms saved=True
+  [capture-loop] iter=1300 t=153.7s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=3 ram=13.2/31.9GB (41%) swap=0.0/5.0GB (0%) cpu=32% browser_rss=0.81GB
+  [capture-loop] iter=1350 t=159.5s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=6 ram=16.3/31.9GB (51%) swap=0.0/5.0GB (0%) cpu=24% browser_rss=0.81GB
+  Frame 47 saved (frame_046.jpg, t=162.9s)
+  [capture-periodic] freeze=2ms shot=105ms unfreeze=2ms saved=True
+  Frame 48 saved (frame_047.jpg, t=165.1s)
+  [capture-periodic] freeze=16ms shot=106ms unfreeze=2ms saved=True
+  [capture-loop] iter=1400 t=165.4s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=7 ram=13.5/31.9GB (42%) swap=0.0/5.0GB (0%) cpu=22% browser_rss=0.82GB
+  Frame 49 saved (frame_048.jpg, t=167.4s)
+  [capture-periodic] freeze=7ms shot=103ms unfreeze=2ms saved=True
+  Frame 50 saved (frame_049.jpg, t=169.6s)
+  [capture-periodic] freeze=2ms shot=94ms unfreeze=2ms saved=True
+  [capture-loop] iter=1450 t=171.1s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=3 ram=13.4/31.9GB (42%) swap=0.0/5.0GB (0%) cpu=20% browser_rss=0.82GB
+  Frame 51 saved (frame_050.jpg, t=171.8s)
+  [capture-periodic] freeze=2ms shot=120ms unfreeze=5ms saved=True
+  Frame 52 saved (frame_051.jpg, t=174.0s)
+  [capture-periodic] freeze=2ms shot=101ms unfreeze=3ms saved=True
+  Frame 53 saved (frame_052.jpg, t=176.2s)
+  [capture-periodic] freeze=5ms shot=105ms unfreeze=2ms saved=True
+  [capture-loop] iter=1500 t=177.1s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=3 ram=13.4/31.9GB (42%) swap=0.0/5.0GB (0%) cpu=22% browser_rss=0.83GB
+  Frame 54 saved (frame_053.jpg, t=178.4s)
+  [capture-periodic] freeze=2ms shot=99ms unfreeze=2ms saved=True
+  Frame 55 saved (frame_054.jpg, t=180.6s)
+  [capture-periodic] freeze=2ms shot=96ms unfreeze=2ms saved=True
+  [capture-loop] iter=1550 t=182.8s state={'complete': False, 'error': None, 'executedCount': 2, 'wsState': 1} eval_ms=3 ram=13.5/31.9GB (42%) swap=0.0/5.0GB (0%) cpu=20% browser_rss=0.83GB
+  Frame 56 saved (frame_055.jpg, t=182.8s)
+  [capture-periodic] freeze=3ms shot=98ms unfreeze=2ms saved=True
+  Frame 57 saved (frame_056.jpg, t=185.0s)
+  [capture-periodic] freeze=2ms shot=97ms unfreeze=2ms saved=True
+  Frame 58 saved (frame_057.jpg, t=187.2s)
+  [capture-periodic] freeze=3ms shot=100ms unfreeze=2ms saved=True
+  Node executed (4 total), capturing...
+  Frame 59 saved (frame_058.jpg, t=187.6s)
+  [capture-node] freeze=12ms shot=429ms unfreeze=0ms saved=True
+  Execution complete (t=187.6s)
+  [3d-wait] Phase 1: Waiting for 'Loading 3D Model' text to disappear...
+  [3d-wait] Phase 1 exception after 60.0s: Page.wait_for_function: Timeout 60000ms exceeded.
+  [3d-wait] Phase 2: iframes=3
+  [3d-wait] iframe viewer_ready=True (matched 2 console logs)
+  [3d-wait] Unfrozen in 0.002s, rendering for 5s...
+  [3d-wait] JS halted via CDP after 5.0s
+  [3d-wait] Re-frozen in 6.0s
+  [3d-wait] Total 3D wait: 66.1s
+  Captured 59 unique frames over 254.12s
+  [debug] iframes: 3
+  [debug]   iframe[0]: src=http://127.0.0.1:41882/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=1779121, canvas=486x348, rafFrozen=True
+  [debug]   iframe[1]: src=http://127.0.0.1:41882/extensions/ComfyUI-GeometryPack/viewer_vtk.html?v=1779121, canvas=486x348, rafFrozen=True
+  [debug]   iframe[2]: src=http://127.0.0.1:41882/extensions/ComfyUI-Hunyuan3D-Part/exploded_viewer.html?v=, canvas=574x574, rafFrozen=True
+  [timing] trigger_3d_previews: 0.0s
+  Saved high-quality screenshot: H3DPART-segment-partgen_executed.png
+  [timing] final_screenshot: 0.3s
+    Captured 60 video frames
