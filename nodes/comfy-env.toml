@@ -26,6 +26,7 @@ pccm = "*"
 hf_xet = "*"
 psutil = "*"
 comfy-aimdo = "*"
+transformers = "*"
 
 [target.win-64.pypi-dependencies]
 pymeshlab = "==2023.12.post3"

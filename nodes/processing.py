@@ -1127,7 +1127,11 @@ class XPartGenerateParts(io.ComfyNode):
                     part_mesh.visual.face_colors = random_color
                     parts_list.append(part_mesh)
                 except Exception as e:
-                    print(f"[X-Part Generate] Failed to export part {i}: {e}")
+                    import traceback
+                    print(f"[X-Part Generate] Failed to export part {i}: {type(e).__name__}: {e}")
+                    print("[X-Part Generate] === full traceback ===")
+                    traceback.print_exc()
+                    print("[X-Part Generate] === end traceback ===")
                 # Marching cubes allocates large temporary grids; release them between parts
                 comfy.model_management.soft_empty_cache()
                 alloc = torch.cuda.memory_allocated(device) / (1024**3) if device.type == "cuda" else 0
@@ -1179,6 +1183,11 @@ class XPartGenerateParts(io.ComfyNode):
             output_dir = folder_paths.get_output_directory()
 
             # Build temp Scene for saving parts GLB
+            if not parts_list:
+                raise RuntimeError(
+                    f"[X-Part Generate] All {len(latents)} part exports failed — see "
+                    f"'Failed to export part' tracebacks above. Refusing to save empty scene."
+                )
             parts_scene = trimesh.Scene()
             for p in parts_list:
                 parts_scene.add_geometry(p)
