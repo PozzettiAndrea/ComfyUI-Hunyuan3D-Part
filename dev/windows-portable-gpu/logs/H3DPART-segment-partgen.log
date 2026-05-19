@@ -1,7 +1,7 @@
 Capturing execution frames: H3DPART-segment-partgen.json
   Frame 1 saved (frame_000.jpg, t=0.0s)
   Validating workflow...
-  Validation failed: graphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [27,31,33,35,37,38,39,42,43,44,47], sample: {"inputs":{"UNKNOWN":"auto"},"_meta":{}}
+  Validation failed: graphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [33,37,38], sample: {"inputs":{"precision":"auto","attn_backend":"auto"},"class_type":"LoadP3SAMSegmentor","_meta":{"title":"(Down)Load P3-SAM Segmentor"}}
     Status: FAILED
     Error: Workflow validation failed
-    Details: graphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [27,31,33,35,37,38,39,42,43,44,47], sample: {"inputs":{"UNKNOWN":"auto"},"_meta":{}}
+    Details: graphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [33,37,38], sample: {"inputs":{"precision":"auto","attn_backend":"auto"},"class_type":"LoadP3SAMSegmentor","_meta":{"title":"(Down)Load P3-SAM Segmentor"}}
