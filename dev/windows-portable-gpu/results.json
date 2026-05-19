@@ -1,35 +1,35 @@
 {
-  "timestamp": "2026-05-19T10:16:44.969241+00:00",
+  "timestamp": "2026-05-19T18:48:47.678270+00:00",
   "platform": "windows_portable",
   "hardware": {
     "os": "Windows-11-10.0.26100-SP0",
     "cpu": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD"
   },
-  "commit_hash": "a5a182b8ecb280905d0823bc5fb47bd2e15457e4",
-  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/26090436066",
-  "success": false,
+  "commit_hash": "7be933956effacfd2b84901d7cddc1ac29e6c51b",
+  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/26108954764",
+  "success": true,
   "summary": {
     "total": 2,
-    "passed": 0,
-    "failed": 1
+    "passed": 1,
+    "failed": 0
   },
   "workflows": [
     {
       "name": "H3DPART-segment-partgen",
-      "status": "fail",
-      "duration_seconds": 7.84,
-      "error": "Workflow validation failed\n\nDetails:\ngraphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [33,37,38], sample: {\"inputs\":{\"precision\":\"auto\",\"attn_backend\":\"auto\"},\"class_type\":\"LoadP3SAMSegmentor\",\"_meta\":{\"title\":\"(Down)Load P3-SAM Segmentor\"}}",
+      "status": "pass",
+      "duration_seconds": 282.21,
+      "error": null,
       "hardware": {
         "os": "Windows-11-10.0.26100-SP0",
         "cpu": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD"
       },
       "resources": {
         "ram": {
-          "peak": 0.9,
-          "avg": 0.9
+          "peak": 14.58,
+          "avg": 6.87
         },
         "total_ram_gb": 23.9,
-        "samples": 8
+        "samples": 279
       }
     },
     {
