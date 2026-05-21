@@ -13,7 +13,7 @@ numpy = ">=1.20.0"
 scipy = "*"
 scikit-learn = "*"
 scikit-image = "*"
-fpsample = "==0.3.2"
+fpsample = "*"
 addict = "*"
 omegaconf = "*"
 huggingface-hub = "*"
@@ -28,10 +28,6 @@ transformers = "*"
 
 [target.win-64.pypi-dependencies]
 pymeshlab = "==2023.12.post3"
-
-[target.win-64.dependencies]
-c-compiler = "*"
-cxx-compiler = "*"
 
 [target.linux-64.dependencies]
 pymeshlab = "==2023.12.post3"
