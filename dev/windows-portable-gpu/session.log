@@ -1,4 +1,4 @@
-[00:00] Crash dump logging enabled: C:\logs\Hunyuan3D-Part-1412\dev\windows-portable-gpu\crash_dump.log
+[00:00] Crash dump logging enabled: C:\logs\Hunyuan3D-Part-1530\dev\windows-portable-gpu\crash_dump.log
 [00:00] 
 [00:00] [1/5] SYNTAX
 [00:00] ----------------------------------------
@@ -19,493 +19,495 @@ Setting up ComfyUI...
 [00:00] Fetching latest release version...
 [00:00] Latest version: v0.22.0
 [00:00] Downloading portable ComfyUI from https://github.com/comfyanonymous/ComfyUI/releases/download/v0.22.0/ComfyUI_windows_portable_nvidia.7z...
-[00:08]   Downloaded: 10%
-[00:22]   Downloaded: 20%
-[00:31]   Downloaded: 30%
-[00:42]   Downloaded: 40%
-[00:51]   Downloaded: 50%
-[00:55]   Downloaded: 60%
-[00:59]   Downloaded: 70%
-[01:02]   Downloaded: 80%
-[01:05]   Downloaded: 90%
-[01:08]   Downloaded: 100%
-[01:08] Downloaded to C:\Users\ContainerUser\.comfy-test\cache\portable\ComfyUI_portable_v0.22.0.7z
-[01:08] Extracting to cache: C:\Users\ContainerUser\.comfy-test\cache\portable\ComfyUI_portable_v0.22.0
-[01:08] Extracting ComfyUI_portable_v0.22.0.7z...
-[01:08] Using 7z: C:\Program Files\7-Zip\7z.exe
-[02:08] Extracted to C:\Users\ContainerUser\.comfy-test\cache\portable\ComfyUI_portable_v0.22.0
-[02:08] Copying from cache to: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui
-[02:29] Installing uv into embedded Python...
-[02:29] Running: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\python_embeded\python.exe -m pip install uv
-[02:33] Installing ComfyUI requirements...
-[02:33] Running: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\python_embeded\python.exe -m uv pip install -r C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\requirements.txt
-[02:34] 
+[00:07]   Downloaded: 10%
+[00:10]   Downloaded: 20%
+[00:13]   Downloaded: 30%
+[00:18]   Downloaded: 40%
+[00:21]   Downloaded: 50%
+[00:25]   Downloaded: 60%
+[00:28]   Downloaded: 70%
+[00:29]   Downloaded: 80%
+[00:33]   Downloaded: 90%
+[00:37]   Downloaded: 100%
+[00:37] Downloaded to C:\Users\ContainerUser\.comfy-test\cache\portable\ComfyUI_portable_v0.22.0.7z
+[00:37] Extracting to cache: C:\Users\ContainerUser\.comfy-test\cache\portable\ComfyUI_portable_v0.22.0
+[00:37] Extracting ComfyUI_portable_v0.22.0.7z...
+[00:37] Using 7z: C:\Program Files\7-Zip\7z.exe
+[01:37] Extracted to C:\Users\ContainerUser\.comfy-test\cache\portable\ComfyUI_portable_v0.22.0
+[01:37] Copying from cache to: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui
+[01:59] Installing uv into embedded Python...
+[01:59] Running: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\python_embeded\python.exe -m pip install uv
+[02:03] Installing ComfyUI requirements...
+[02:03] Running: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\python_embeded\python.exe -m uv pip install -r C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\requirements.txt
+[02:04] 
 Installing custom node...
-[02:34] Copying ComfyUI-Hunyuan3D-Part to custom_nodes/...
-[02:34] Installing node requirements...
-[02:34] Running: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\python_embeded\python.exe -m pip install -r C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\requirements.txt
-[02:38] 
+[02:04] Copying ComfyUI-Hunyuan3D-Part to custom_nodes/...
+[02:04] Installing node requirements...
+[02:04] Running: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\python_embeded\python.exe -m pip install -r C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\requirements.txt
+[02:08] 
 Running install.py...
-[02:38] Running: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\python_embeded\python.exe C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\install.py
-[02:38]   
-[02:38]   Installing 1 node dependencies...
-[02:38]     Cloning ComfyUI-GeometryPack...
-[02:41]     Installing requirements for ComfyUI-GeometryPack...
-[02:42]     Running install.py for ComfyUI-GeometryPack...
-[02:47]   [comfy-env] _discover: scanning C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes
-[02:47]   [comfy-env] _discover: ComfyUI-GeometryPack -> geometrypack-nodes (custom_nodes\ComfyUI-GeometryPack\nodes\comfy-env.toml)
-[02:47]   [comfy-env] _discover: ComfyUI-Hunyuan3D-Part -> hunyuan3d-part-nodes (custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\comfy-env.toml)
-[02:47]   [comfy-env] Workspace: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env
-[02:47]   [comfy-env] ComfyUI: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI
-[02:47]   [comfy-env] Found 2 node config(s):
-[02:47]     - geometrypack-nodes <- custom_nodes\ComfyUI-GeometryPack\nodes\comfy-env.toml (python=host)
-[02:47]     - hunyuan3d-part-nodes <- custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\comfy-env.toml (python=host)
-[02:48]   [comfy-env] Bootstrap interpreter has python 3.13 + torch 2.11.0 (cu130). Looking for cuda-only wheels matching cu130/torch2.11/cp313.
-[02:59]   [comfy-env] GPU: Detection: torch
-[02:59]   Recommended: CUDA 13.1
-[02:59]   
-[02:59]     GPU 0: NVIDIA GeForce RTX 5060 (sm_120) [Blackwell] 8150MB
-[02:59]   [comfy-env] Comfyui feature -> torch 2.11.0 from https://download.pytorch.org/whl/cu130 (CUDA 13.0 via bootstrap torch)
-[02:59]   [comfy-env] cuda-wheels: 7 package(s) need a matched (cuda, torch, python) combo: ['cumesh', 'flash-attn', 'sageattention', 'torch-scatter', 'torch-cluster', 'spconv', 'cumm']
-[02:59]   [comfy-env] cuda-wheels tier 1 (bootstrap): probing cu13.0/torch2.11/cp313
-[02:59]   [cuda-wheels] Looking up cumesh: cu130 torch2.11 cp313 win_amd64
-[03:00]   [cuda-wheels]   GH Pages index unreachable, falling back to GitHub Releases API...
-[03:03]   [cuda-wheels]   Found via API: cumesh-0.0.1+cu130torch2.11-cp313-cp313-win_amd64.whl
-[03:03]   [cuda-wheels] Looking up flash-attn: cu130 torch2.11 cp313 win_amd64
-[03:04]   [cuda-wheels]   Found: flash_attn-2.8.3+cu130torch2.11-cp313-cp313-win_amd64.whl
-[03:04]   [cuda-wheels] Looking up sageattention: cu130 torch2.11 cp313 win_amd64
-[03:04]   [cuda-wheels]   Found: sageattention-2.2.0+cu130torch2.11-cp313-cp313-win_amd64.whl
-[03:04]   [cuda-wheels] Looking up torch-scatter: cu130 torch2.11 cp313 win_amd64
-[03:04]   [cuda-wheels]   Found: torch_scatter-2.1.2+cu130torch2.11-cp313-cp313-win_amd64.whl
-[03:04]   [cuda-wheels] Looking up torch-cluster: cu130 torch2.11 cp313 win_amd64
-[03:05]   [cuda-wheels]   Found: torch_cluster-1.6.3+cu130torch2.11-cp313-cp313-win_amd64.whl
-[03:05]   [cuda-wheels] Looking up spconv: cu130 torch2.11 cp313 win_amd64
-[03:05]   [cuda-wheels]   GH Pages index unreachable, falling back to GitHub Releases API...
-[03:06]   [cuda-wheels]   No wheel found via index or API. If your network blocks
-[03:06]   [cuda-wheels]   *.github.io / fastly, set HTTPS_PROXY to a working proxy.
-[03:06]   [comfy-env] cuda-wheels tier 1 incomplete: `spconv` not built for cu13.0+torch2.11; falling back
-[03:06]   [comfy-env] cuda-wheels tier 2 (fallback): probing cu12.8/torch2.8/cp313
-[03:06]   [cuda-wheels] Looking up cumesh: cu128 torch2.8 cp313 win_amd64
-[03:06]   [cuda-wheels]   Found: cumesh-0.0.1+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:06]   [cuda-wheels] Looking up flash-attn: cu128 torch2.8 cp313 win_amd64
-[03:07]   [cuda-wheels]   Found: flash_attn-2.8.3+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:07]   [cuda-wheels] Looking up sageattention: cu128 torch2.8 cp313 win_amd64
-[03:07]   [cuda-wheels]   Found: sageattention-2.2.0+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:07]   [cuda-wheels] Looking up torch-scatter: cu128 torch2.8 cp313 win_amd64
-[03:08]   [cuda-wheels]   Found: torch_scatter-2.1.2+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:08]   [cuda-wheels] Looking up torch-cluster: cu128 torch2.8 cp313 win_amd64
-[03:08]   [cuda-wheels]   Found: torch_cluster-1.6.3+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:08]   [cuda-wheels] Looking up spconv: cu128 torch2.8 cp313 win_amd64
-[03:09]   [cuda-wheels]   Found: spconv-2.3.8+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:09]   [cuda-wheels] Looking up cumm: cu128 torch2.8 cp313 win_amd64
-[03:09]   [cuda-wheels]   Found: cumm-0.8.2+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:09]   [comfy-env] cuda-wheels combo: cu12.8/torch2.8 (fallback; per-node cuda envs will override torch to this combo while comfyui keeps bootstrap torch)
-[03:09]   [comfy-env] Writing 2 per-env manifest(s):
-[03:09]     - geometrypack-nodes: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\pixi.toml
-[03:09]   [cuda-wheels] Looking up cumesh: cu128 torch2.8 cp313 win_amd64
-[03:09]   [cuda-wheels]   Found: cumesh-0.0.1+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:09]   [comfy-env] geometrypack-nodes: cuda-wheels deferred for post-pixi install (cumesh)
-[03:09]     - hunyuan3d-part-nodes: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\pixi.toml
-[03:09]   [cuda-wheels] Looking up flash-attn: cu128 torch2.8 cp313 win_amd64
-[03:10]   [cuda-wheels]   Found: flash_attn-2.8.3+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:10]   [cuda-wheels] Looking up sageattention: cu128 torch2.8 cp313 win_amd64
-[03:10]   [cuda-wheels]   Found: sageattention-2.2.0+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:10]   [cuda-wheels] Looking up torch-scatter: cu128 torch2.8 cp313 win_amd64
-[03:11]   [cuda-wheels]   Found: torch_scatter-2.1.2+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:11]   [cuda-wheels] Looking up torch-cluster: cu128 torch2.8 cp313 win_amd64
-[03:11]   [cuda-wheels]   Found: torch_cluster-1.6.3+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:11]   [cuda-wheels] Looking up spconv: cu128 torch2.8 cp313 win_amd64
-[03:12]   [cuda-wheels]   Found: spconv-2.3.8+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:12]   [cuda-wheels] Looking up cumm: cu128 torch2.8 cp313 win_amd64
-[03:12]   [cuda-wheels]   Found: cumm-0.8.2+cu128torch2.8-cp313-cp313-win_amd64.whl
-[03:12]   [comfy-env] hunyuan3d-part-nodes: cuda-wheels deferred for post-pixi install (flash-attn, sageattention, torch-scatter, torch-cluster, spconv, cumm)
-[03:12]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.10-windows-x86_64-none\Lib\platform.py for conda-forge compat
-[03:12]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\Lib\platform.py for conda-forge compat
-[03:12]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\platform.py for conda-forge compat
-[03:12]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.11.15-windows-x86_64-none\Lib\platform.py for conda-forge compat
-[03:12]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\platform.py for conda-forge compat
-[03:12]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.12.13-windows-x86_64-none\Lib\platform.py for conda-forge compat
-[03:12]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\platform.py for conda-forge compat
-[03:12]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.13.13-windows-x86_64-none\Lib\platform.py for conda-forge compat
-[03:12]   [comfy-env] Installing 2 environment(s):
-[03:12]     - geometrypack-nodes (python=host, 14 pypi deps, 1 cuda wheels)
-[03:12]     - hunyuan3d-part-nodes (python=host, 20 pypi deps, 6 cuda wheels)
-[03:12]   [comfy-env] Running `pixi install --manifest-path C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\pixi.toml` ...
-[04:35]      WARN Skipped running the post-link scripts because `run-post-link-scripts` = `false`
-[04:35]     	- Scripts/.librsvg-pre-unlink.bat
-[04:35]     To enable them, run:
-[04:35]     	pixi config set --local run-post-link-scripts insecure
-[04:35]     More info:
-[04:35]     	https://pixi.sh/latest/reference/pixi_configuration/#run-post-link-scripts
-[05:53]     The default environment has been installed.
-[05:54]   [comfy-env] Running `pixi install --manifest-path C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\pixi.toml` ...
-[05:56]      WARN Skipped running the post-link scripts because `run-post-link-scripts` = `false`
-[05:56]     	- Scripts/.librsvg-pre-unlink.bat
-[05:56]     To enable them, run:
-[05:56]     	pixi config set --local run-post-link-scripts insecure
-[05:56]     More info:
-[05:56]     	https://pixi.sh/latest/reference/pixi_configuration/#run-post-link-scripts
-[05:58]      WARN `fpsample==0.3.2` is yanked (reason: "Bugs")
-[06:15]     Error:   Ã— Failed to update PyPI packages for environment 'default'
-[06:15]       â”œâ”€â–¶ Failed to prepare distributions
-[06:15]       â”œâ”€â–¶ Failed to download and build `fpsample==0.3.2`
-[06:15]       â”œâ”€â–¶ Failed to install requirements from `build-system.requires`
-[06:15]       â”œâ”€â–¶ Failed to build `patchelf==0.17.2.4`
-[06:15]       â”œâ”€â–¶ The build backend returned an error
-[06:15]       â•°â”€â–¶ Call to `scikit_build_core.build.build_wheel` failed (exit code: 1)
-[06:15]           [31m[stdout][39m
-[06:15]           *** scikit-build-core 0.12.2 using CMake 4.3.2 (wheel)
-[06:15]           *** Configuring CMake...
-[06:15]           loading initial cache file build\py3-none-win_amd64\CMakeInit.txt
-[06:15]           -- Building for: NMake Makefiles
-[06:15]           -- Configuring incomplete, errors occurred!
-[06:15]           [31m[stderr][39m
-[06:15]           CMake Error at CMakeLists.txt:3 (project):
-[06:15]             Running
-[06:15]              'nmake' '-?'
-[06:15]             failed with:
-[06:15]              no such file or directory
-[06:15]           CMake Error: CMAKE_C_COMPILER not set, after EnableLanguage
-[06:15]           CMake Error: CMAKE_CXX_COMPILER not set, after EnableLanguage
-[06:15]           *** CMake configuration failed
-[06:15]           [36m[1mhint[0m[39m[1m:[0m This usually indicates a problem with the package or the build
-[06:15]           environment.
-[06:15]   [comfy-env] hunyuan3d-part-nodes: pixi install FAILED (exit 1). Continuing with remaining envs.
-[06:16]     Warning: ComfyUI-GeometryPack install.py failed (exit code 1)
-[06:16]   
-[06:16]   [requirements] Re-installing main package requirements...
-[06:16]     Installing requirements for ComfyUI-Hunyuan3D-Part...
-[06:16]   [comfy-env] _discover: scanning C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes
-[06:16]   [comfy-env] _discover: ComfyUI-GeometryPack -> geometrypack-nodes (custom_nodes\ComfyUI-GeometryPack\nodes\comfy-env.toml)
-[06:16]   [comfy-env] _discover: ComfyUI-Hunyuan3D-Part -> hunyuan3d-part-nodes (custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\comfy-env.toml)
-[06:16]   [comfy-env] Workspace: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env
-[06:16]   [comfy-env] ComfyUI: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI
-[06:16]   [comfy-env] Found 2 node config(s):
-[06:16]     - geometrypack-nodes <- custom_nodes\ComfyUI-GeometryPack\nodes\comfy-env.toml (python=host)
-[06:16]     - hunyuan3d-part-nodes <- custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\comfy-env.toml (python=host)
-[06:16]   [comfy-env] Bootstrap interpreter has python 3.13 + torch 2.11.0 (cu130). Looking for cuda-only wheels matching cu130/torch2.11/cp313.
-[06:18]   [comfy-env] GPU: Detection: torch
-[06:18]   Recommended: CUDA 13.1
-[06:18]   
-[06:18]     GPU 0: NVIDIA GeForce RTX 5060 (sm_120) [Blackwell] 8150MB
-[06:18]   [comfy-env] Comfyui feature -> torch 2.11.0 from https://download.pytorch.org/whl/cu130 (CUDA 13.0 via bootstrap torch)
-[06:18]   [comfy-env] cuda-wheels: 7 package(s) need a matched (cuda, torch, python) combo: ['cumesh', 'flash-attn', 'sageattention', 'torch-scatter', 'torch-cluster', 'spconv', 'cumm']
-[06:18]   [comfy-env] cuda-wheels tier 1 (bootstrap): probing cu13.0/torch2.11/cp313
-[06:18]   [cuda-wheels] Looking up cumesh: cu130 torch2.11 cp313 win_amd64
-[06:18]   [cuda-wheels]   GH Pages index unreachable, falling back to GitHub Releases API...
-[06:22]   [cuda-wheels]   Found via API: cumesh-0.0.1+cu130torch2.11-cp313-cp313-win_amd64.whl
-[06:22]   [cuda-wheels] Looking up flash-attn: cu130 torch2.11 cp313 win_amd64
-[06:22]   [cuda-wheels]   Found: flash_attn-2.8.3+cu130torch2.11-cp313-cp313-win_amd64.whl
-[06:22]   [cuda-wheels] Looking up sageattention: cu130 torch2.11 cp313 win_amd64
-[06:22]   [cuda-wheels]   Found: sageattention-2.2.0+cu130torch2.11-cp313-cp313-win_amd64.whl
-[06:22]   [cuda-wheels] Looking up torch-scatter: cu130 torch2.11 cp313 win_amd64
-[06:23]   [cuda-wheels]   Found: torch_scatter-2.1.2+cu130torch2.11-cp313-cp313-win_amd64.whl
-[06:23]   [cuda-wheels] Looking up torch-cluster: cu130 torch2.11 cp313 win_amd64
-[06:24]   [cuda-wheels]   Found: torch_cluster-1.6.3+cu130torch2.11-cp313-cp313-win_amd64.whl
-[06:24]   [cuda-wheels] Looking up spconv: cu130 torch2.11 cp313 win_amd64
-[06:24]   [cuda-wheels]   GH Pages index unreachable, falling back to GitHub Releases API...
-[06:25]   [cuda-wheels]   No wheel found via index or API. If your network blocks
-[06:25]   [cuda-wheels]   *.github.io / fastly, set HTTPS_PROXY to a working proxy.
-[06:25]   [comfy-env] cuda-wheels tier 1 incomplete: `spconv` not built for cu13.0+torch2.11; falling back
-[06:25]   [comfy-env] cuda-wheels tier 2 (fallback): probing cu12.8/torch2.8/cp313
-[06:25]   [cuda-wheels] Looking up cumesh: cu128 torch2.8 cp313 win_amd64
-[06:25]   [cuda-wheels]   Found: cumesh-0.0.1+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:25]   [cuda-wheels] Looking up flash-attn: cu128 torch2.8 cp313 win_amd64
-[06:25]   [cuda-wheels]   Found: flash_attn-2.8.3+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:25]   [cuda-wheels] Looking up sageattention: cu128 torch2.8 cp313 win_amd64
-[06:26]   [cuda-wheels]   Found: sageattention-2.2.0+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:26]   [cuda-wheels] Looking up torch-scatter: cu128 torch2.8 cp313 win_amd64
-[06:26]   [cuda-wheels]   Found: torch_scatter-2.1.2+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:26]   [cuda-wheels] Looking up torch-cluster: cu128 torch2.8 cp313 win_amd64
-[06:27]   [cuda-wheels]   Found: torch_cluster-1.6.3+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:27]   [cuda-wheels] Looking up spconv: cu128 torch2.8 cp313 win_amd64
-[06:27]   [cuda-wheels]   Found: spconv-2.3.8+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:27]   [cuda-wheels] Looking up cumm: cu128 torch2.8 cp313 win_amd64
-[06:28]   [cuda-wheels]   Found: cumm-0.8.2+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:28]   [comfy-env] cuda-wheels combo: cu12.8/torch2.8 (fallback; per-node cuda envs will override torch to this combo while comfyui keeps bootstrap torch)
-[06:28]   [comfy-env] Writing 2 per-env manifest(s):
-[06:28]     - geometrypack-nodes: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\pixi.toml
-[06:28]   [cuda-wheels] Looking up cumesh: cu128 torch2.8 cp313 win_amd64
-[06:28]   [cuda-wheels]   Found: cumesh-0.0.1+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:28]   [comfy-env] geometrypack-nodes: cuda-wheels deferred for post-pixi install (cumesh)
-[06:28]     - hunyuan3d-part-nodes: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\pixi.toml
-[06:28]   [cuda-wheels] Looking up flash-attn: cu128 torch2.8 cp313 win_amd64
-[06:29]   [cuda-wheels]   Found: flash_attn-2.8.3+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:29]   [cuda-wheels] Looking up sageattention: cu128 torch2.8 cp313 win_amd64
-[06:29]   [cuda-wheels]   Found: sageattention-2.2.0+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:29]   [cuda-wheels] Looking up torch-scatter: cu128 torch2.8 cp313 win_amd64
-[06:29]   [cuda-wheels]   Found: torch_scatter-2.1.2+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:29]   [cuda-wheels] Looking up torch-cluster: cu128 torch2.8 cp313 win_amd64
-[06:30]   [cuda-wheels]   Found: torch_cluster-1.6.3+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:30]   [cuda-wheels] Looking up spconv: cu128 torch2.8 cp313 win_amd64
-[06:30]   [cuda-wheels]   Found: spconv-2.3.8+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:30]   [cuda-wheels] Looking up cumm: cu128 torch2.8 cp313 win_amd64
-[06:31]   [cuda-wheels]   Found: cumm-0.8.2+cu128torch2.8-cp313-cp313-win_amd64.whl
-[06:31]   [comfy-env] hunyuan3d-part-nodes: cuda-wheels deferred for post-pixi install (flash-attn, sageattention, torch-scatter, torch-cluster, spconv, cumm)
-[06:31]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\platform.py for conda-forge compat
-[06:31]   [comfy-env] Installing 2 environment(s):
-[06:31]     - geometrypack-nodes (python=host, 14 pypi deps, 1 cuda wheels)
-[06:31]     - hunyuan3d-part-nodes (python=host, 20 pypi deps, 6 cuda wheels)
-[06:31]   [comfy-env] Running `pixi install --manifest-path C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\pixi.toml` ...
-[06:31]     The default environment has been installed.
-[06:31]   [comfy-env] Running `pixi install --manifest-path C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\pixi.toml` ...
-[06:35]     Error:   Ã— Failed to update PyPI packages for environment 'default'
-[06:35]       â”œâ”€â–¶ Failed to prepare distributions
-[06:35]       â”œâ”€â–¶ Failed to download and build `fpsample==0.3.2`
-[06:35]       â”œâ”€â–¶ Failed to install requirements from `build-system.requires`
-[06:35]       â”œâ”€â–¶ Failed to build `patchelf==0.17.2.4`
-[06:35]       â”œâ”€â–¶ The build backend returned an error
-[06:35]       â•°â”€â–¶ Call to `scikit_build_core.build.build_wheel` failed (exit code: 1)
-[06:35]           [31m[stdout][39m
-[06:35]           *** scikit-build-core 0.12.2 using CMake 4.3.2 (wheel)
-[06:35]           *** Configuring CMake...
-[06:35]           loading initial cache file build\py3-none-win_amd64\CMakeInit.txt
-[06:35]           -- Building for: NMake Makefiles
-[06:35]           -- Configuring incomplete, errors occurred!
-[06:35]           [31m[stderr][39m
-[06:35]           CMake Error at CMakeLists.txt:3 (project):
-[06:35]             Running
-[06:35]              'nmake' '-?'
-[06:35]             failed with:
-[06:35]              no such file or directory
-[06:35]           CMake Error: CMAKE_C_COMPILER not set, after EnableLanguage
-[06:35]           CMake Error: CMAKE_CXX_COMPILER not set, after EnableLanguage
-[06:35]           *** CMake configuration failed
-[06:35]           [36m[1mhint[0m[39m[1m:[0m This usually indicates a problem with the package or the build
-[06:35]           environment.
-[06:35]   [comfy-env] hunyuan3d-part-nodes: pixi install FAILED (exit 1). Continuing with remaining envs.
-[06:35] Warning: install.py failed (exit code 1), continuing...
-[06:35]   [!]     install_workspace(comfyui_dir, log=log, dry_run=dry_run)
-[06:35]   [!]     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[06:35]   [!]   File "C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\python_embeded\Lib\site-packages\comfy_env\install\workspace.py", line 692, in install_workspace
-[06:35]   [!]     raise RuntimeError(
-[06:35]   [!]     ...<2 lines>...
-[06:35]   [!]     )
-[06:35]   [!] RuntimeError: pixi install failed for 1 env(s): hunyuan3d-part-nodes
-[06:35]   [!] [comfy-env] Workspace: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env
-[06:35]   [!] Traceback (most recent call last):
-[06:35]   [!]   File "C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\install.py", line 2, in <module>
-[06:35]   [!]     install()
-[06:35]   [!]     ~~~~~~~^^
-[06:35]   [!]   File "C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\python_embeded\Lib\site-packages\comfy_env\install\__init__.py", line 90, in install
-[06:35]   [!]     install_workspace(comfyui_dir, log=log, dry_run=dry_run)
-[06:35]   [!]     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[06:35]   [!]   File "C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\python_embeded\Lib\site-packages\comfy_env\install\workspace.py", line 692, in install_workspace
-[06:35]   [!]     raise RuntimeError(
-[06:35]   [!]     ...<2 lines>...
-[06:35]   [!]     )
-[06:35]   [!] RuntimeError: pixi install failed for 1 env(s): hunyuan3d-part-nodes
-[06:35] Installing 1 node dependency(ies)...
-[06:35]   ComfyUI-GeometryPack from PozzettiAndrea/ComfyUI-GeometryPack
-[06:35]   ComfyUI-GeometryPack already exists, skipping...
-[06:35] Installing validation endpoint...
-[06:35]   Cloning PozzettiAndrea/ComfyUI-validate-endpoint...
-[06:35] Running: git clone --depth 1 https://x-access-token:***@github.com/PozzettiAndrea/ComfyUI-validate-endpoint.git C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-validate-endpoint
-[06:36] CUDA packages absent (will mock): flash_attn, sageattention, torch_scatter, torch_cluster, spconv, cumm
-[06:36] [INSTALL] PASSED
-[06:36] 
-[06:36] [3/5] REGISTRATION
-[06:36] ----------------------------------------
-[06:36] 
+[02:08] Running: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\python_embeded\python.exe C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\install.py
+[02:08]   
+[02:08]   Installing 1 node dependencies...
+[02:08]     Cloning ComfyUI-GeometryPack...
+[02:12]     Installing requirements for ComfyUI-GeometryPack...
+[02:13]     Running install.py for ComfyUI-GeometryPack...
+[02:15]   [comfy-env] _discover: scanning C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes
+[02:15]   [comfy-env] _discover: ComfyUI-GeometryPack -> geometrypack-nodes (custom_nodes\ComfyUI-GeometryPack\nodes\comfy-env.toml)
+[02:15]   [comfy-env] _discover: ComfyUI-Hunyuan3D-Part -> hunyuan3d-part-nodes (custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\comfy-env.toml)
+[02:15]   [comfy-env] Workspace: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env
+[02:15]   [comfy-env] ComfyUI: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI
+[02:15]   [comfy-env] Found 2 node config(s):
+[02:15]     - geometrypack-nodes <- custom_nodes\ComfyUI-GeometryPack\nodes\comfy-env.toml (python=host)
+[02:15]     - hunyuan3d-part-nodes <- custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\comfy-env.toml (python=host)
+[02:16]   [comfy-env] Bootstrap interpreter has python 3.13 + torch 2.11.0 (cu130). Looking for cuda-only wheels matching cu130/torch2.11/cp313.
+[02:27]   [comfy-env] GPU: Detection: torch
+[02:27]   Recommended: CUDA 13.1
+[02:27]   
+[02:27]     GPU 0: NVIDIA GeForce RTX 5060 (sm_120) [Blackwell] 8150MB
+[02:27]   [comfy-env] Comfyui feature -> torch 2.11.0 from https://download.pytorch.org/whl/cu130 (CUDA 13.0 via bootstrap torch)
+[02:28]   [comfy-env] cuda-wheels: 7 package(s) need a matched (cuda, torch, python) combo: ['cumesh', 'flash-attn', 'sageattention', 'torch-scatter', 'torch-cluster', 'spconv', 'cumm']
+[02:28]   [comfy-env] cuda-wheels tier 1 (bootstrap): probing cu13.0/torch2.11/cp313
+[02:28]   [cuda-wheels] Looking up cumesh: cu130 torch2.11 cp313 win_amd64
+[02:28]   [cuda-wheels]   GH Pages index unreachable, falling back to GitHub Releases API...
+[02:31]   [cuda-wheels]   Found via API: cumesh-0.0.1+cu130torch2.11-cp313-cp313-win_amd64.whl
+[02:31]   [cuda-wheels] Looking up flash-attn: cu130 torch2.11 cp313 win_amd64
+[02:32]   [cuda-wheels]   Found: flash_attn-2.8.3+cu130torch2.11-cp313-cp313-win_amd64.whl
+[02:32]   [cuda-wheels] Looking up sageattention: cu130 torch2.11 cp313 win_amd64
+[02:32]   [cuda-wheels]   Found: sageattention-2.2.0+cu130torch2.11-cp313-cp313-win_amd64.whl
+[02:32]   [cuda-wheels] Looking up torch-scatter: cu130 torch2.11 cp313 win_amd64
+[02:32]   [cuda-wheels]   Found: torch_scatter-2.1.2+cu130torch2.11-cp313-cp313-win_amd64.whl
+[02:32]   [cuda-wheels] Looking up torch-cluster: cu130 torch2.11 cp313 win_amd64
+[02:33]   [cuda-wheels]   Found: torch_cluster-1.6.3+cu130torch2.11-cp313-cp313-win_amd64.whl
+[02:33]   [cuda-wheels] Looking up spconv: cu130 torch2.11 cp313 win_amd64
+[02:33]   [cuda-wheels]   GH Pages index unreachable, falling back to GitHub Releases API...
+[02:34]   [cuda-wheels]   No wheel found via index or API. If your network blocks
+[02:34]   [cuda-wheels]   *.github.io / fastly, set HTTPS_PROXY to a working proxy.
+[02:34]   [comfy-env] cuda-wheels tier 1 incomplete: `spconv` not built for cu13.0+torch2.11; falling back
+[02:34]   [comfy-env] cuda-wheels tier 2 (fallback): probing cu12.8/torch2.8/cp313
+[02:34]   [cuda-wheels] Looking up cumesh: cu128 torch2.8 cp313 win_amd64
+[02:34]   [cuda-wheels]   Found: cumesh-0.0.1+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:34]   [cuda-wheels] Looking up flash-attn: cu128 torch2.8 cp313 win_amd64
+[02:35]   [cuda-wheels]   Found: flash_attn-2.8.3+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:35]   [cuda-wheels] Looking up sageattention: cu128 torch2.8 cp313 win_amd64
+[02:35]   [cuda-wheels]   Found: sageattention-2.2.0+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:35]   [cuda-wheels] Looking up torch-scatter: cu128 torch2.8 cp313 win_amd64
+[02:36]   [cuda-wheels]   Found: torch_scatter-2.1.2+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:36]   [cuda-wheels] Looking up torch-cluster: cu128 torch2.8 cp313 win_amd64
+[02:36]   [cuda-wheels]   Found: torch_cluster-1.6.3+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:36]   [cuda-wheels] Looking up spconv: cu128 torch2.8 cp313 win_amd64
+[02:37]   [cuda-wheels]   Found: spconv-2.3.8+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:37]   [cuda-wheels] Looking up cumm: cu128 torch2.8 cp313 win_amd64
+[02:37]   [cuda-wheels]   Found: cumm-0.8.2+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:37]   [comfy-env] cuda-wheels combo: cu12.8/torch2.8 (fallback; per-node cuda envs will override torch to this combo while comfyui keeps bootstrap torch)
+[02:37]   [comfy-env] Writing 2 per-env manifest(s):
+[02:37]     - geometrypack-nodes: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\pixi.toml
+[02:37]   [cuda-wheels] Looking up cumesh: cu128 torch2.8 cp313 win_amd64
+[02:37]   [cuda-wheels]   Found: cumesh-0.0.1+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:37]   [comfy-env] geometrypack-nodes: cuda-wheels deferred for post-pixi install (cumesh)
+[02:37]     - hunyuan3d-part-nodes: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\pixi.toml
+[02:37]   [cuda-wheels] Looking up flash-attn: cu128 torch2.8 cp313 win_amd64
+[02:38]   [cuda-wheels]   Found: flash_attn-2.8.3+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:38]   [cuda-wheels] Looking up sageattention: cu128 torch2.8 cp313 win_amd64
+[02:38]   [cuda-wheels]   Found: sageattention-2.2.0+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:38]   [cuda-wheels] Looking up torch-scatter: cu128 torch2.8 cp313 win_amd64
+[02:39]   [cuda-wheels]   Found: torch_scatter-2.1.2+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:39]   [cuda-wheels] Looking up torch-cluster: cu128 torch2.8 cp313 win_amd64
+[02:39]   [cuda-wheels]   Found: torch_cluster-1.6.3+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:39]   [cuda-wheels] Looking up spconv: cu128 torch2.8 cp313 win_amd64
+[02:40]   [cuda-wheels]   Found: spconv-2.3.8+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:40]   [cuda-wheels] Looking up cumm: cu128 torch2.8 cp313 win_amd64
+[02:40]   [cuda-wheels]   Found: cumm-0.8.2+cu128torch2.8-cp313-cp313-win_amd64.whl
+[02:40]   [comfy-env] hunyuan3d-part-nodes: cuda-wheels deferred for post-pixi install (flash-attn, sageattention, torch-scatter, torch-cluster, spconv, cumm)
+[02:40]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.10-windows-x86_64-none\Lib\platform.py for conda-forge compat
+[02:40]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.10.20-windows-x86_64-none\Lib\platform.py for conda-forge compat
+[02:40]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\platform.py for conda-forge compat
+[02:40]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.11.15-windows-x86_64-none\Lib\platform.py for conda-forge compat
+[02:40]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.12-windows-x86_64-none\Lib\platform.py for conda-forge compat
+[02:40]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.12.13-windows-x86_64-none\Lib\platform.py for conda-forge compat
+[02:40]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\platform.py for conda-forge compat
+[02:40]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.13.13-windows-x86_64-none\Lib\platform.py for conda-forge compat
+[02:40]   [comfy-env] Installing 2 environment(s):
+[02:40]     - geometrypack-nodes (python=host, 14 pypi deps, 1 cuda wheels)
+[02:40]     - hunyuan3d-part-nodes (python=host, 20 pypi deps, 6 cuda wheels)
+[02:40]   [comfy-env] Running `pixi install --manifest-path C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\pixi.toml` ...
+[04:00]      WARN Skipped running the post-link scripts because `run-post-link-scripts` = `false`
+[04:00]     	- Scripts/.librsvg-pre-unlink.bat
+[04:00]     To enable them, run:
+[04:00]     	pixi config set --local run-post-link-scripts insecure
+[04:00]     More info:
+[04:00]     	https://pixi.sh/latest/reference/pixi_configuration/#run-post-link-scripts
+[06:05]     The default environment has been installed.
+[06:05]   [comfy-env] Running `pixi install --manifest-path C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\pixi.toml` ...
+[06:08]      WARN Skipped running the post-link scripts because `run-post-link-scripts` = `false`
+[06:08]     	- Scripts/.librsvg-pre-unlink.bat
+[06:08]     To enable them, run:
+[06:08]     	pixi config set --local run-post-link-scripts insecure
+[06:08]     More info:
+[06:08]     	https://pixi.sh/latest/reference/pixi_configuration/#run-post-link-scripts
+[06:10]      WARN `fpsample==0.3.2` is yanked (reason: "Bugs")
+[06:29]     Error:   Ã— Failed to update PyPI packages for environment 'default'
+[06:29]       â”œâ”€â–¶ Failed to prepare distributions
+[06:29]       â”œâ”€â–¶ Failed to download and build `fpsample==0.3.2`
+[06:29]       â”œâ”€â–¶ Failed to install requirements from `build-system.requires`
+[06:29]       â”œâ”€â–¶ Failed to build `patchelf==0.17.2.4`
+[06:29]       â”œâ”€â–¶ The build backend returned an error
+[06:29]       â•°â”€â–¶ Call to `scikit_build_core.build.build_wheel` failed (exit code: 1)
+[06:29]           [31m[stdout][39m
+[06:29]           *** scikit-build-core 0.12.2 using CMake 4.3.2 (wheel)
+[06:29]           *** Configuring CMake...
+[06:29]           loading initial cache file build\py3-none-win_amd64\CMakeInit.txt
+[06:29]           -- Building for: Visual Studio 17 2022
+[06:29]           -- Configuring incomplete, errors occurred!
+[06:29]           [31m[stderr][39m
+[06:29]           2026-05-21 15:37:10,760 - scikit_build_core - WARNING - Unsupported
+[06:29]           CMAKE_ARGS ignored: -DCMAKE_BUILD_TYPE=Release
+[06:29]           2026-05-21 15:37:10,762 - scikit_build_core - WARNING - Unsupported
+[06:29]           CMAKE_ARGS ignored: -DCMAKE_BUILD_TYPE=Release
+[06:29]           CMake Error at CMakeLists.txt:3 (project):
+[06:29]             Generator
+[06:29]               Visual Studio 17 2022
+[06:29]             could not find any instance of Visual Studio.
+[06:29]           *** CMake configuration failed
+[06:29]           [36m[1mhint[0m[39m[1m:[0m This usually indicates a problem with the package or the build
+[06:29]           environment.
+[06:29]   [comfy-env] hunyuan3d-part-nodes: pixi install FAILED (exit 1). Continuing with remaining envs.
+[06:30]     Warning: ComfyUI-GeometryPack install.py failed (exit code 1)
+[06:30]   
+[06:30]   [requirements] Re-installing main package requirements...
+[06:30]     Installing requirements for ComfyUI-Hunyuan3D-Part...
+[06:30]   [comfy-env] _discover: scanning C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes
+[06:30]   [comfy-env] _discover: ComfyUI-GeometryPack -> geometrypack-nodes (custom_nodes\ComfyUI-GeometryPack\nodes\comfy-env.toml)
+[06:30]   [comfy-env] _discover: ComfyUI-Hunyuan3D-Part -> hunyuan3d-part-nodes (custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\comfy-env.toml)
+[06:30]   [comfy-env] Workspace: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env
+[06:30]   [comfy-env] ComfyUI: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI
+[06:30]   [comfy-env] Found 2 node config(s):
+[06:30]     - geometrypack-nodes <- custom_nodes\ComfyUI-GeometryPack\nodes\comfy-env.toml (python=host)
+[06:30]     - hunyuan3d-part-nodes <- custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\comfy-env.toml (python=host)
+[06:30]   [comfy-env] Bootstrap interpreter has python 3.13 + torch 2.11.0 (cu130). Looking for cuda-only wheels matching cu130/torch2.11/cp313.
+[06:31]   [comfy-env] GPU: Detection: torch
+[06:31]   Recommended: CUDA 13.1
+[06:31]   
+[06:31]     GPU 0: NVIDIA GeForce RTX 5060 (sm_120) [Blackwell] 8150MB
+[06:31]   [comfy-env] Comfyui feature -> torch 2.11.0 from https://download.pytorch.org/whl/cu130 (CUDA 13.0 via bootstrap torch)
+[06:31]   [comfy-env] cuda-wheels: 7 package(s) need a matched (cuda, torch, python) combo: ['cumesh', 'flash-attn', 'sageattention', 'torch-scatter', 'torch-cluster', 'spconv', 'cumm']
+[06:31]   [comfy-env] cuda-wheels tier 1 (bootstrap): probing cu13.0/torch2.11/cp313
+[06:31]   [cuda-wheels] Looking up cumesh: cu130 torch2.11 cp313 win_amd64
+[06:32]   [cuda-wheels]   GH Pages index unreachable, falling back to GitHub Releases API...
+[06:35]   [cuda-wheels]   Found via API: cumesh-0.0.1+cu130torch2.11-cp313-cp313-win_amd64.whl
+[06:35]   [cuda-wheels] Looking up flash-attn: cu130 torch2.11 cp313 win_amd64
+[06:36]   [cuda-wheels]   Found: flash_attn-2.8.3+cu130torch2.11-cp313-cp313-win_amd64.whl
+[06:36]   [cuda-wheels] Looking up sageattention: cu130 torch2.11 cp313 win_amd64
+[06:36]   [cuda-wheels]   Found: sageattention-2.2.0+cu130torch2.11-cp313-cp313-win_amd64.whl
+[06:36]   [cuda-wheels] Looking up torch-scatter: cu130 torch2.11 cp313 win_amd64
+[06:37]   [cuda-wheels]   Found: torch_scatter-2.1.2+cu130torch2.11-cp313-cp313-win_amd64.whl
+[06:37]   [cuda-wheels] Looking up torch-cluster: cu130 torch2.11 cp313 win_amd64
+[06:37]   [cuda-wheels]   Found: torch_cluster-1.6.3+cu130torch2.11-cp313-cp313-win_amd64.whl
+[06:37]   [cuda-wheels] Looking up spconv: cu130 torch2.11 cp313 win_amd64
+[06:38]   [cuda-wheels]   GH Pages index unreachable, falling back to GitHub Releases API...
+[06:38]   [cuda-wheels]   No wheel found via index or API. If your network blocks
+[06:38]   [cuda-wheels]   *.github.io / fastly, set HTTPS_PROXY to a working proxy.
+[06:38]   [comfy-env] cuda-wheels tier 1 incomplete: `spconv` not built for cu13.0+torch2.11; falling back
+[06:38]   [comfy-env] cuda-wheels tier 2 (fallback): probing cu12.8/torch2.8/cp313
+[06:38]   [cuda-wheels] Looking up cumesh: cu128 torch2.8 cp313 win_amd64
+[06:38]   [cuda-wheels]   Found: cumesh-0.0.1+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:38]   [cuda-wheels] Looking up flash-attn: cu128 torch2.8 cp313 win_amd64
+[06:39]   [cuda-wheels]   Found: flash_attn-2.8.3+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:39]   [cuda-wheels] Looking up sageattention: cu128 torch2.8 cp313 win_amd64
+[06:39]   [cuda-wheels]   Found: sageattention-2.2.0+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:39]   [cuda-wheels] Looking up torch-scatter: cu128 torch2.8 cp313 win_amd64
+[06:40]   [cuda-wheels]   Found: torch_scatter-2.1.2+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:40]   [cuda-wheels] Looking up torch-cluster: cu128 torch2.8 cp313 win_amd64
+[06:40]   [cuda-wheels]   Found: torch_cluster-1.6.3+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:40]   [cuda-wheels] Looking up spconv: cu128 torch2.8 cp313 win_amd64
+[06:41]   [cuda-wheels]   Found: spconv-2.3.8+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:41]   [cuda-wheels] Looking up cumm: cu128 torch2.8 cp313 win_amd64
+[06:41]   [cuda-wheels]   Found: cumm-0.8.2+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:41]   [comfy-env] cuda-wheels combo: cu12.8/torch2.8 (fallback; per-node cuda envs will override torch to this combo while comfyui keeps bootstrap torch)
+[06:41]   [comfy-env] Writing 2 per-env manifest(s):
+[06:41]     - geometrypack-nodes: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\pixi.toml
+[06:41]   [cuda-wheels] Looking up cumesh: cu128 torch2.8 cp313 win_amd64
+[06:41]   [cuda-wheels]   Found: cumesh-0.0.1+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:41]   [comfy-env] geometrypack-nodes: cuda-wheels deferred for post-pixi install (cumesh)
+[06:41]     - hunyuan3d-part-nodes: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\pixi.toml
+[06:41]   [cuda-wheels] Looking up flash-attn: cu128 torch2.8 cp313 win_amd64
+[06:42]   [cuda-wheels]   Found: flash_attn-2.8.3+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:42]   [cuda-wheels] Looking up sageattention: cu128 torch2.8 cp313 win_amd64
+[06:42]   [cuda-wheels]   Found: sageattention-2.2.0+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:42]   [cuda-wheels] Looking up torch-scatter: cu128 torch2.8 cp313 win_amd64
+[06:43]   [cuda-wheels]   Found: torch_scatter-2.1.2+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:43]   [cuda-wheels] Looking up torch-cluster: cu128 torch2.8 cp313 win_amd64
+[06:43]   [cuda-wheels]   Found: torch_cluster-1.6.3+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:43]   [cuda-wheels] Looking up spconv: cu128 torch2.8 cp313 win_amd64
+[06:44]   [cuda-wheels]   Found: spconv-2.3.8+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:44]   [cuda-wheels] Looking up cumm: cu128 torch2.8 cp313 win_amd64
+[06:44]   [cuda-wheels]   Found: cumm-0.8.2+cu128torch2.8-cp313-cp313-win_amd64.whl
+[06:44]   [comfy-env] hunyuan3d-part-nodes: cuda-wheels deferred for post-pixi install (flash-attn, sageattention, torch-scatter, torch-cluster, spconv, cumm)
+[06:44]   [comfy-env] Patched C:\Users\ContainerUser\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\platform.py for conda-forge compat
+[06:44]   [comfy-env] Installing 2 environment(s):
+[06:44]     - geometrypack-nodes (python=host, 14 pypi deps, 1 cuda wheels)
+[06:44]     - hunyuan3d-part-nodes (python=host, 20 pypi deps, 6 cuda wheels)
+[06:44]   [comfy-env] Running `pixi install --manifest-path C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\pixi.toml` ...
+[06:44]     The default environment has been installed.
+[06:44]   [comfy-env] Running `pixi install --manifest-path C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\pixi.toml` ...
+[06:47]     Error:   Ã— Failed to update PyPI packages for environment 'default'
+[06:47]       â”œâ”€â–¶ Failed to prepare distributions
+[06:47]       â”œâ”€â–¶ Failed to download and build `fpsample==0.3.2`
+[06:47]       â”œâ”€â–¶ Failed to install requirements from `build-system.requires`
+[06:47]       â”œâ”€â–¶ Failed to build `patchelf==0.17.2.4`
+[06:47]       â”œâ”€â–¶ The build backend returned an error
+[06:47]       â•°â”€â–¶ Call to `scikit_build_core.build.build_wheel` failed (exit code: 1)
+[06:47]           [31m[stdout][39m
+[06:47]           *** scikit-build-core 0.12.2 using CMake 4.3.2 (wheel)
+[06:47]           *** Configuring CMake...
+[06:47]           loading initial cache file build\py3-none-win_amd64\CMakeInit.txt
+[06:47]           -- Building for: Visual Studio 17 2022
+[06:47]           -- Configuring incomplete, errors occurred!
+[06:47]           [31m[stderr][39m
+[06:47]           2026-05-21 15:37:29,226 - scikit_build_core - WARNING - Unsupported
+[06:47]           CMAKE_ARGS ignored: -DCMAKE_BUILD_TYPE=Release
+[06:47]           2026-05-21 15:37:29,228 - scikit_build_core - WARNING - Unsupported
+[06:47]           CMAKE_ARGS ignored: -DCMAKE_BUILD_TYPE=Release
+[06:47]           CMake Error at CMakeLists.txt:3 (project):
+[06:47]             Generator
+[06:47]               Visual Studio 17 2022
+[06:47]             could not find any instance of Visual Studio.
+[06:47]           *** CMake configuration failed
+[06:47]           [36m[1mhint[0m[39m[1m:[0m This usually indicates a problem with the package or the build
+[06:47]           environment.
+[06:47]   [comfy-env] hunyuan3d-part-nodes: pixi install FAILED (exit 1). Continuing with remaining envs.
+[06:48] Warning: install.py failed (exit code 1), continuing...
+[06:48]   [!]     install_workspace(comfyui_dir, log=log, dry_run=dry_run)
+[06:48]   [!]     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[06:48]   [!]   File "C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\python_embeded\Lib\site-packages\comfy_env\install\workspace.py", line 692, in install_workspace
+[06:48]   [!]     raise RuntimeError(
+[06:48]   [!]     ...<2 lines>...
+[06:48]   [!]     )
+[06:48]   [!] RuntimeError: pixi install failed for 1 env(s): hunyuan3d-part-nodes
+[06:48]   [!] [comfy-env] Workspace: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env
+[06:48]   [!] Traceback (most recent call last):
+[06:48]   [!]   File "C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\install.py", line 2, in <module>
+[06:48]   [!]     install()
+[06:48]   [!]     ~~~~~~~^^
+[06:48]   [!]   File "C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\python_embeded\Lib\site-packages\comfy_env\install\__init__.py", line 90, in install
+[06:48]   [!]     install_workspace(comfyui_dir, log=log, dry_run=dry_run)
+[06:48]   [!]     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[06:48]   [!]   File "C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\python_embeded\Lib\site-packages\comfy_env\install\workspace.py", line 692, in install_workspace
+[06:48]   [!]     raise RuntimeError(
+[06:48]   [!]     ...<2 lines>...
+[06:48]   [!]     )
+[06:48]   [!] RuntimeError: pixi install failed for 1 env(s): hunyuan3d-part-nodes
+[06:48] Installing 1 node dependency(ies)...
+[06:48]   ComfyUI-GeometryPack from PozzettiAndrea/ComfyUI-GeometryPack
+[06:48]   ComfyUI-GeometryPack already exists, skipping...
+[06:48] Installing validation endpoint...
+[06:48]   Cloning PozzettiAndrea/ComfyUI-validate-endpoint...
+[06:48] Running: git clone --depth 1 https://x-access-token:***@github.com/PozzettiAndrea/ComfyUI-validate-endpoint.git C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-validate-endpoint
+[06:49] CUDA packages absent (will mock): flash_attn, sageattention, torch_scatter, torch_cluster, spconv, cumm
+[06:49] [INSTALL] PASSED
+[06:49] 
+[06:49] [3/5] REGISTRATION
+[06:49] ----------------------------------------
+[06:49] 
 [DEBUG] server=None, api=None
-[06:36] 
+[06:49] 
 Starting ComfyUI server...
-[06:36] Starting ComfyUI server on port 41889...
-[06:36] CUDA mock packages: flash_attn, sageattention, torch_scatter, torch_cluster, spconv, cumm
-[06:36] Starting ComfyUI server on port 41889...
-[06:36] Server stdout/stderr -> C:\workspaces\Hunyuan3D-Part-1412\server.log
-[06:36] Waiting for server to be ready (timeout: 600s)...
-[06:37]   [ComfyUI] setup plugin alembic.autogenerate.schemas
-[06:37]   [ComfyUI] setup plugin alembic.autogenerate.tables
-[06:37]   [ComfyUI] setup plugin alembic.autogenerate.types
-[06:37]   [ComfyUI] setup plugin alembic.autogenerate.constraints
-[06:37]   [ComfyUI] setup plugin alembic.autogenerate.defaults
-[06:37]   [ComfyUI] setup plugin alembic.autogenerate.comments
-[06:38]   [ComfyUI] [comfy-env] ComfyUI-GeometryPack: 1 isolation env(s):
-[06:38]   [ComfyUI] [comfy-env]   nodes -> C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-GeometryPack\nodes
-[06:38]   [ComfyUI] [comfy-env] Workspace: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env
-[06:38]   [ComfyUI] [comfy-env]     env: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\.pixi\envs\default  [OK]
-[06:38]   [ComfyUI] [comfy-env] prestartup complete
-[06:38]   [ComfyUI] [comfy-env] ComfyUI-Hunyuan3D-Part: 1 isolation env(s):
-[06:38]   [ComfyUI] [comfy-env]   nodes -> C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes
-[06:38]   [ComfyUI] [comfy-env]     env: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\.pixi\envs\default  [OK]
-[06:38]   [ComfyUI] [comfy-env] prestartup complete
-[06:38]   [ComfyUI] 
-[06:38]   [ComfyUI] Prestartup times for custom nodes:
-[06:38]   [ComfyUI]    0.0 seconds: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part
-[06:38]   [ComfyUI]    0.3 seconds: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-GeometryPack
-[06:38]   [ComfyUI] 
-[06:40]   [ComfyUI] Found comfy_kitchen backend eager: {'available': True, 'disabled': False, 'unavailable_reason': None, 'capabilities': ['apply_rope', 'apply_rope1', 'dequantize_mxfp8', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'quantize_mxfp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8', 'scaled_mm_mxfp8', 'scaled_mm_nvfp4']}
-[06:40]   [ComfyUI] Found comfy_kitchen backend cuda: {'available': True, 'disabled': False, 'unavailable_reason': None, 'capabilities': ['apply_rope', 'apply_rope1', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'quantize_mxfp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8', 'scaled_mm_nvfp4']}
-[06:40]   [ComfyUI] Found comfy_kitchen backend triton: {'available': False, 'disabled': True, 'unavailable_reason': "ImportError: No module named 'triton'", 'capabilities': []}
-[06:40]   [ComfyUI] Checkpoint files will always be loaded safely.
-[06:41]   [ComfyUI] Total VRAM 8151 MB, total RAM 24466 MB
-[06:41]   [ComfyUI] pytorch version: 2.11.0+cu130
-[06:41]   [ComfyUI] Set vram state to: NORMAL_VRAM
-[06:41]   [ComfyUI] Device: cuda:0 NVIDIA GeForce RTX 5060 : cudaMallocAsync
-[06:41]   [ComfyUI] Using async weight offloading with 2 streams
-[06:41]   [ComfyUI] Enabled pinned memory 9786.0
-[06:41]   [ComfyUI] Using pytorch attention
-[06:48]   [ComfyUI] aimdo: src-win/cuda-detour.c:38:INFO:aimdo_setup_hooks: installing 6 hooks
-[06:48]   [ComfyUI] aimdo: src-win/cuda-detour.c:28:DEBUG:install_hook_entries: hooks successfully installed
-[06:48]   [ComfyUI] aimdo: src-win/shmem-detect.c:80:INFO:comfy-aimdo WDDM adapter match: NVIDIA GeForce RTX 5060 runtime_luid=00000000:0000901d dxgi_luid=00000000:0000901d
-[06:48]   [ComfyUI] aimdo: src/control.c:152:INFO:comfy-aimdo inited for GPU: NVIDIA GeForce RTX 5060 (VRAM: 8150 MB)
-[06:48]   [ComfyUI] DynamicVRAM support detected and enabled
-[06:48]   [ComfyUI] Python version: 3.13.12 (tags/v3.13.12:1cbe481, Feb  3 2026, 18:22:25) [MSC v.1944 64 bit (AMD64)]
-[06:48]   [ComfyUI] ComfyUI version: 0.22.0
-[06:48]   [ComfyUI] comfy-aimdo version: 0.3.0
-[06:48]   [ComfyUI] comfy-kitchen version: 0.2.8
-[06:48]   [ComfyUI] comfyui-frontend-package version: 1.43.18
-[06:48]   [ComfyUI] comfyui-workflow-templates version: 0.9.79
-[06:48]   [ComfyUI] comfyui-embedded-docs version: 0.5.0
-[06:48]   [ComfyUI] comfy-kitchen version: 0.2.8
-[06:48]   [ComfyUI] comfy-aimdo version: 0.3.0
-[06:48]   [ComfyUI] [Prompt Server] web root: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\python_embeded\Lib\site-packages\comfyui_frontend_package\static
-[06:48]   [ComfyUI] Asset seeder disabled
-[06:50]   [ComfyUI] loading...
-[06:50]   [ComfyUI] calling register_nodes
-[06:50]   [ComfyUI] [comfy-env] Version: 0.4.1
-[06:51]   [ComfyUI] [comfy-env] register_nodes: ComfyUI-GeometryPack
-[06:51]   [ComfyUI] [comfy-env] ComfyUI source dir: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI
-[06:51]   [ComfyUI] [comfy-env] Found 1 isolation env(s)
-[06:51]   [ComfyUI] [comfy-env] Scanning nodes metadata (isolation root)...
-[06:51]   [ComfyUI] [comfy-env] default: Library/bin has 613 DLLs
-[06:51]   [ComfyUI] [comfy-env] Metadata scan: C:\Users\ContainerUser\.pixi\bin\pixi.exe run --as-is --manifest-path C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\pixi.toml -e default python C:\Users\ContainerUser\AppData\Local\Temp\comfy_meta_jg8ufjlu.py C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-GeometryPack nodes C:\Users\ContainerUser\AppData\Local\Temp\comfy_meta_out_tirr97um.pkl
-[06:51]   [ComfyUI] [comfy-env] Scan env PATH for nodes:
-[06:51]   [ComfyUI] [comfy-env]   [0] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\.pixi\envs\default
-[06:51]   [ComfyUI] [comfy-env]   [1] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\.pixi\envs\default\Library\bin
-[06:51]   [ComfyUI] [comfy-env]   [2] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\.pixi\envs\default\Scripts
-[06:51]   [ComfyUI] [comfy-env]   [3] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\.pixi\envs\default\Lib\site-packages\bpy
-[06:51]   [ComfyUI] [comfy-env]   [4] C:\Windows\System32
-[06:51]   [ComfyUI] [comfy-env]   [5] C:\Windows
-[06:51]   [ComfyUI] [comfy-env]   [6] C:\Windows\System32\Wbem
-[07:38]   [ComfyUI] [comfy-env] Metadata scan stderr for nodes:
-[07:38]   [ComfyUI] [comfy-env]   [meta-scan] importing nodes from C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-GeometryPack
-[07:38]   [ComfyUI] [comfy-env]   ERROR:root:Failed to import comfy_kitchen, Error: No module named 'comfy_kitchen', fp8 and fp4 support will not be available.
-[07:38]   [ComfyUI] [comfy-env]   [meta-scan] import OK
-[07:38]   [ComfyUI] [comfy-env] Scanned nodes: 125 nodes (47.5s)
-[07:38]   [ComfyUI] [comfy-env] Scanned nodes root: 125 nodes (47.5s)
-[07:38]   [ComfyUI] [comfy-env] Imported nodes root: 125 nodes (isolation)
-[07:38]   [ComfyUI] [comfy-env] Registered 125 total nodes
-[07:38]   [ComfyUI] [comfy-env] Version: 0.4.1
-[07:38]   [ComfyUI] [comfy-env] register_nodes: ComfyUI-Hunyuan3D-Part
-[07:38]   [ComfyUI] [comfy-env] ComfyUI source dir: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI
-[07:38]   [ComfyUI] [comfy-env] Found 1 isolation env(s)
-[07:38]   [ComfyUI] [comfy-env] Scanning nodes metadata (isolation root)...
-[07:38]   [ComfyUI] [comfy-env] default: Library/bin has 237 DLLs
-[07:38]   [ComfyUI] [comfy-env] Metadata scan: C:\Users\ContainerUser\.pixi\bin\pixi.exe run --as-is --manifest-path C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\pixi.toml -e default python C:\Users\ContainerUser\AppData\Local\Temp\comfy_meta_9kzdt4n0.py C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part nodes C:\Users\ContainerUser\AppData\Local\Temp\comfy_meta_out__sk46nll.pkl
-[07:38]   [ComfyUI] [comfy-env] Scan env PATH for nodes:
-[07:38]   [ComfyUI] [comfy-env]   [0] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\.pixi\envs\default
-[07:38]   [ComfyUI] [comfy-env]   [1] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\.pixi\envs\default\Library\bin
-[07:38]   [ComfyUI] [comfy-env]   [2] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\.pixi\envs\default\Scripts
-[07:38]   [ComfyUI] [comfy-env]   [3] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\.pixi\envs\default\Lib\site-packages\bpy
-[07:38]   [ComfyUI] [comfy-env]   [4] C:\Windows\System32
-[07:38]   [ComfyUI] [comfy-env]   [5] C:\Windows
-[07:38]   [ComfyUI] [comfy-env]   [6] C:\Windows\System32\Wbem
-[07:39]   [ComfyUI] [comfy-env] Metadata scan stderr for nodes:
-[07:39]   [ComfyUI] [comfy-env]   [meta-scan] importing nodes from C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part
-[07:39]   [ComfyUI] [comfy-env]   Traceback (most recent call last):
-[07:39]   [ComfyUI] [comfy-env]     File "C:\Users\ContainerUser\AppData\Local\Temp\comfy_meta_9kzdt4n0.py", line 65, in <module>
-[07:39]   [ComfyUI] [comfy-env]       module = importlib.import_module(package_name)
-[07:39]   [ComfyUI] [comfy-env]     File "C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\.pixi\envs\default\Lib\importlib\__init__.py", line 88, in import_module
-[07:39]   [ComfyUI] [comfy-env]       return _bootstrap._gcd_import(name[level:], package, level)
-[07:39]   [ComfyUI] [comfy-env]              ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[07:39]   [ComfyUI] [comfy-env]     File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
-[07:39]   [ComfyUI] [comfy-env]     File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
-[07:39]   [ComfyUI] [comfy-env]     File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
-[07:39]   [ComfyUI] [comfy-env]     File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
-[07:39]   [ComfyUI] [comfy-env]     File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
-[07:39]   [ComfyUI] [comfy-env]     File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
-[07:39]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\__init__.py", line 3, in <module>
-[07:39]   [ComfyUI] [comfy-env]       from .loaders import NODE_CLASS_MAPPINGS as _loaders, NODE_DISPLAY_NAME_MAPPINGS as _loaders_d
-[07:39]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\loaders.py", line 11, in <module>
-[07:39]   [ComfyUI] [comfy-env]       from comfy_api.latest import io
-[07:39]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\comfy_api\latest\__init__.py", line 5, in <module>
-[07:39]   [ComfyUI] [comfy-env]       from comfy_api.internal import ComfyAPIBase
-[07:39]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\comfy_api\internal\__init__.py", line 2, in <module>
-[07:39]   [ComfyUI] [comfy-env]       from .api_registry import (
-[07:39]   [ComfyUI] [comfy-env]       ...<4 lines>...
-[07:39]   [ComfyUI] [comfy-env]       )
-[07:39]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\comfy_api\internal\api_registry.py", line 3, in <module>
-[07:39]   [ComfyUI] [comfy-env]       from packaging import version as packaging_version
-[07:39]   [ComfyUI] [comfy-env]   ModuleNotFoundError: No module named 'packaging'
-[07:39]   [ComfyUI] [comfy-env] Metadata scan failed for nodes (exit 1, 0.2s):
-[07:39]   [ComfyUI] [comfy-env]       from comfy_api.latest import io
-[07:39]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\comfy_api\latest\__init__.py", line 5, in <module>
-[07:39]   [ComfyUI] [comfy-env]       from comfy_api.internal import ComfyAPIBase
-[07:39]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\comfy_api\internal\__init__.py", line 2, in <module>
-[07:39]   [ComfyUI] [comfy-env]       from .api_registry import (
-[07:39]   [ComfyUI] [comfy-env]       ...<4 lines>...
-[07:39]   [ComfyUI] [comfy-env]       )
-[07:39]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\comfy_api\internal\api_registry.py", line 3, in <module>
-[07:39]   [ComfyUI] [comfy-env]       from packaging import version as packaging_version
-[07:39]   [ComfyUI] [comfy-env]   ModuleNotFoundError: No module named 'packaging'
-[07:39]   [ComfyUI] [comfy-env] Scanned nodes root: 0 nodes (0.2s)
-[07:39]   [ComfyUI] [comfy-env] Imported nodes root: 0 nodes (isolation)
-[07:39]   [ComfyUI] [comfy-env] Registered 0 total nodes
-[07:39]   [ComfyUI] 
-[07:39]   [ComfyUI] Import times for custom nodes:
-[07:39]   [ComfyUI]    0.0 seconds: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\websocket_image_save.py
-[07:39]   [ComfyUI]    0.0 seconds: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-validate-endpoint
-[07:39]   [ComfyUI]    0.3 seconds: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part
-[07:39]   [ComfyUI]   48.0 seconds: C:\workspaces\Hunyuan3D-Part-1412\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-GeometryPack
-[07:39]   [ComfyUI] 
-[07:39]   [ComfyUI] Context impl SQLiteImpl.
-[07:39]   [ComfyUI] Will assume non-transactional DDL.
-[07:39]   [ComfyUI] Context impl SQLiteImpl.
-[07:39]   [ComfyUI] Will assume non-transactional DDL.
-[07:39]   [ComfyUI] Running upgrade  -> 0001_assets, Initial assets schema
-[07:39]   [ComfyUI] Revision ID: 0001_assets
-[07:39]   [ComfyUI] Revises: None
-[07:39]   [ComfyUI] Create Date: 2025-12-10 00:00:00
-[07:39]   [ComfyUI] Running upgrade 0001_assets -> 0002_merge_to_asset_references, Merge AssetInfo and AssetCacheState into unified asset_references table.
-[07:39]   [ComfyUI] Running upgrade 0002_merge_to_asset_references -> 0003_add_metadata_job_id, Add system_metadata and job_id columns to asset_references.
-[07:39]   [ComfyUI] Change preview_id FK from assets.id to asset_references.id.
-[07:39]   [ComfyUI] Database upgraded from None to 0003_add_metadata_job_id
-[07:39]   [ComfyUI] Starting server
-[07:39]   [ComfyUI] 
-[07:39]   [ComfyUI] To see the GUI go to: http://127.0.0.1:41889
-[07:40] Server responding, waiting for nodes to load...
-[08:00] Server is ready!
-[08:00] Checking for import errors in server logs...
-[08:00] No import errors detected
-[08:00] Found 848 registered nodes
-[08:00] [REGISTRATION] PASSED
-[08:00] 
-[08:00] [4/5] INSTANTIATION
-[08:00] ----------------------------------------
-[08:00] 
-[DEBUG] server=<comfy_test.comfyui.server.ComfyUIServer object at 0x00000193FD0917F0>, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x00000193FD092510>
-[08:00] Testing node constructors...
-[08:01] All 0 node(s) instantiated successfully!
-[08:01] [INSTANTIATION] PASSED
-[08:01] 
-[08:01] [5/5] EXECUTION
-[08:01] ----------------------------------------
-[08:01] 
-[DEBUG] server=<comfy_test.comfyui.server.ComfyUIServer object at 0x00000193FD0917F0>, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x00000193FD092510>
-[08:01] GPU runner - will execute 1 workflow(s)
-[08:01] Running 2 workflow(s) (all with videos)...
-[08:01] Installing screenshot dependencies (playwright, pillow)...
-[08:02]   Packages installed, downloading chromium browser...
-[08:19]   Screenshot dependencies installed successfully
-[08:20] Starting headless browser...
-[08:20]   Downloading Mesa llvmpipe for Windows...
-[08:20]   Mesa download error: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)>
-[08:20]   Mesa unavailable -- falling back to SwiftShader
-[08:23] Capturing execution frames: H3DPART-segment-partgen.json
-[08:31]   Frame 1 saved (frame_000.jpg, t=0.0s)
-[08:31]   Validating workflow...
-[08:31]   Validation failed: graphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [27,31,35,39,42,43,44,47], sample: {"inputs":{"UNKNOWN":"auto"},"_meta":{}}
-[08:31]   [2/2] SKIPPED (not in gpu list) H3DPART-segment.json
-[08:31] Results saved to C:\logs\Hunyuan3D-Part-1412\dev\windows-portable-gpu\results.json
-[08:31] Model report: 8 files, 18.7 MB -> C:\logs\Hunyuan3D-Part-1412\dev\windows-portable-gpu\models.json
-[08:31] Saved: C:\logs\Hunyuan3D-Part-1412\dev\windows-portable-gpu\index.html
-[08:31] 
+[06:49] Starting ComfyUI server on port 41885...
+[06:49] CUDA mock packages: flash_attn, sageattention, torch_scatter, torch_cluster, spconv, cumm
+[06:49] Starting ComfyUI server on port 41885...
+[06:49] Server stdout/stderr -> C:\workspaces\Hunyuan3D-Part-1530\server.log
+[06:49] Waiting for server to be ready (timeout: 600s)...
+[06:50]   [ComfyUI] setup plugin alembic.autogenerate.schemas
+[06:50]   [ComfyUI] setup plugin alembic.autogenerate.tables
+[06:50]   [ComfyUI] setup plugin alembic.autogenerate.types
+[06:50]   [ComfyUI] setup plugin alembic.autogenerate.constraints
+[06:50]   [ComfyUI] setup plugin alembic.autogenerate.defaults
+[06:50]   [ComfyUI] setup plugin alembic.autogenerate.comments
+[06:50]   [ComfyUI] [comfy-env] ComfyUI-GeometryPack: 1 isolation env(s):
+[06:50]   [ComfyUI] [comfy-env]   nodes -> C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-GeometryPack\nodes
+[06:50]   [ComfyUI] [comfy-env] Workspace: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env
+[06:50]   [ComfyUI] [comfy-env]     env: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\.pixi\envs\default  [OK]
+[06:50]   [ComfyUI] [comfy-env] prestartup complete
+[06:50]   [ComfyUI] [comfy-env] ComfyUI-Hunyuan3D-Part: 1 isolation env(s):
+[06:50]   [ComfyUI] [comfy-env]   nodes -> C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes
+[06:50]   [ComfyUI] [comfy-env]     env: C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\.pixi\envs\default  [OK]
+[06:50]   [ComfyUI] [comfy-env] prestartup complete
+[06:50]   [ComfyUI] 
+[06:50]   [ComfyUI] Prestartup times for custom nodes:
+[06:50]   [ComfyUI]    0.0 seconds: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part
+[06:50]   [ComfyUI]    0.4 seconds: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-GeometryPack
+[06:50]   [ComfyUI] 
+[06:53]   [ComfyUI] Found comfy_kitchen backend eager: {'available': True, 'disabled': False, 'unavailable_reason': None, 'capabilities': ['apply_rope', 'apply_rope1', 'dequantize_mxfp8', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'quantize_mxfp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8', 'scaled_mm_mxfp8', 'scaled_mm_nvfp4']}
+[06:53]   [ComfyUI] Found comfy_kitchen backend cuda: {'available': True, 'disabled': False, 'unavailable_reason': None, 'capabilities': ['apply_rope', 'apply_rope1', 'dequantize_nvfp4', 'dequantize_per_tensor_fp8', 'quantize_mxfp8', 'quantize_nvfp4', 'quantize_per_tensor_fp8', 'scaled_mm_nvfp4']}
+[06:53]   [ComfyUI] Found comfy_kitchen backend triton: {'available': False, 'disabled': True, 'unavailable_reason': "ImportError: No module named 'triton'", 'capabilities': []}
+[06:53]   [ComfyUI] Checkpoint files will always be loaded safely.
+[06:53]   [ComfyUI] Total VRAM 8151 MB, total RAM 24466 MB
+[06:53]   [ComfyUI] pytorch version: 2.11.0+cu130
+[06:53]   [ComfyUI] Set vram state to: NORMAL_VRAM
+[06:53]   [ComfyUI] Device: cuda:0 NVIDIA GeForce RTX 5060 : cudaMallocAsync
+[06:53]   [ComfyUI] Using async weight offloading with 2 streams
+[06:53]   [ComfyUI] Enabled pinned memory 9786.0
+[06:54]   [ComfyUI] Using pytorch attention
+[07:01]   [ComfyUI] aimdo: src-win/cuda-detour.c:38:INFO:aimdo_setup_hooks: installing 6 hooks
+[07:01]   [ComfyUI] aimdo: src-win/cuda-detour.c:28:DEBUG:install_hook_entries: hooks successfully installed
+[07:01]   [ComfyUI] aimdo: src-win/shmem-detect.c:80:INFO:comfy-aimdo WDDM adapter match: NVIDIA GeForce RTX 5060 runtime_luid=00000000:0000901d dxgi_luid=00000000:0000901d
+[07:01]   [ComfyUI] aimdo: src/control.c:152:INFO:comfy-aimdo inited for GPU: NVIDIA GeForce RTX 5060 (VRAM: 8150 MB)
+[07:01]   [ComfyUI] DynamicVRAM support detected and enabled
+[07:01]   [ComfyUI] Python version: 3.13.12 (tags/v3.13.12:1cbe481, Feb  3 2026, 18:22:25) [MSC v.1944 64 bit (AMD64)]
+[07:01]   [ComfyUI] ComfyUI version: 0.22.0
+[07:01]   [ComfyUI] comfy-aimdo version: 0.3.0
+[07:01]   [ComfyUI] comfy-kitchen version: 0.2.8
+[07:01]   [ComfyUI] comfyui-frontend-package version: 1.43.18
+[07:01]   [ComfyUI] comfyui-workflow-templates version: 0.9.79
+[07:01]   [ComfyUI] comfyui-embedded-docs version: 0.5.0
+[07:01]   [ComfyUI] comfy-kitchen version: 0.2.8
+[07:01]   [ComfyUI] comfy-aimdo version: 0.3.0
+[07:01]   [ComfyUI] [Prompt Server] web root: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\python_embeded\Lib\site-packages\comfyui_frontend_package\static
+[07:01]   [ComfyUI] Asset seeder disabled
+[07:03]   [ComfyUI] loading...
+[07:03]   [ComfyUI] calling register_nodes
+[07:03]   [ComfyUI] [comfy-env] Version: 0.4.1
+[07:03]   [ComfyUI] [comfy-env] register_nodes: ComfyUI-GeometryPack
+[07:03]   [ComfyUI] [comfy-env] ComfyUI source dir: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI
+[07:03]   [ComfyUI] [comfy-env] Found 1 isolation env(s)
+[07:03]   [ComfyUI] [comfy-env] Scanning nodes metadata (isolation root)...
+[07:03]   [ComfyUI] [comfy-env] default: Library/bin has 613 DLLs
+[07:03]   [ComfyUI] [comfy-env] Metadata scan: C:\Users\ContainerUser\.pixi\bin\pixi.exe run --as-is --manifest-path C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\pixi.toml -e default python C:\Users\ContainerUser\AppData\Local\Temp\comfy_meta_si_57ytv.py C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-GeometryPack nodes C:\Users\ContainerUser\AppData\Local\Temp\comfy_meta_out_ju10zock.pkl
+[07:03]   [ComfyUI] [comfy-env] Scan env PATH for nodes:
+[07:03]   [ComfyUI] [comfy-env]   [0] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\.pixi\envs\default
+[07:03]   [ComfyUI] [comfy-env]   [1] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\.pixi\envs\default\Library\bin
+[07:03]   [ComfyUI] [comfy-env]   [2] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\.pixi\envs\default\Scripts
+[07:03]   [ComfyUI] [comfy-env]   [3] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\geometrypack-nodes\.pixi\envs\default\Lib\site-packages\bpy
+[07:03]   [ComfyUI] [comfy-env]   [4] C:\Windows\System32
+[07:03]   [ComfyUI] [comfy-env]   [5] C:\Windows
+[07:03]   [ComfyUI] [comfy-env]   [6] C:\Windows\System32\Wbem
+[07:52]   [ComfyUI] [comfy-env] Metadata scan stderr for nodes:
+[07:52]   [ComfyUI] [comfy-env]   [meta-scan] importing nodes from C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-GeometryPack
+[07:52]   [ComfyUI] [comfy-env]   ERROR:root:Failed to import comfy_kitchen, Error: No module named 'comfy_kitchen', fp8 and fp4 support will not be available.
+[07:52]   [ComfyUI] [comfy-env]   [meta-scan] import OK
+[07:52]   [ComfyUI] [comfy-env] Scanned nodes: 125 nodes (49.0s)
+[07:52]   [ComfyUI] [comfy-env] Scanned nodes root: 125 nodes (49.1s)
+[07:52]   [ComfyUI] [comfy-env] Imported nodes root: 125 nodes (isolation)
+[07:52]   [ComfyUI] [comfy-env] Registered 125 total nodes
+[07:52]   [ComfyUI] [comfy-env] Version: 0.4.1
+[07:52]   [ComfyUI] [comfy-env] register_nodes: ComfyUI-Hunyuan3D-Part
+[07:52]   [ComfyUI] [comfy-env] ComfyUI source dir: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI
+[07:52]   [ComfyUI] [comfy-env] Found 1 isolation env(s)
+[07:52]   [ComfyUI] [comfy-env] Scanning nodes metadata (isolation root)...
+[07:52]   [ComfyUI] [comfy-env] default: Library/bin has 237 DLLs
+[07:52]   [ComfyUI] [comfy-env] Metadata scan: C:\Users\ContainerUser\.pixi\bin\pixi.exe run --as-is --manifest-path C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\pixi.toml -e default python C:\Users\ContainerUser\AppData\Local\Temp\comfy_meta_w3ke2_h3.py C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part nodes C:\Users\ContainerUser\AppData\Local\Temp\comfy_meta_out_hyg175c6.pkl
+[07:52]   [ComfyUI] [comfy-env] Scan env PATH for nodes:
+[07:52]   [ComfyUI] [comfy-env]   [0] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\.pixi\envs\default
+[07:52]   [ComfyUI] [comfy-env]   [1] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\.pixi\envs\default\Library\bin
+[07:52]   [ComfyUI] [comfy-env]   [2] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\.pixi\envs\default\Scripts
+[07:52]   [ComfyUI] [comfy-env]   [3] C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\.pixi\envs\default\Lib\site-packages\bpy
+[07:52]   [ComfyUI] [comfy-env]   [4] C:\Windows\System32
+[07:52]   [ComfyUI] [comfy-env]   [5] C:\Windows
+[07:52]   [ComfyUI] [comfy-env]   [6] C:\Windows\System32\Wbem
+[07:53]   [ComfyUI] [comfy-env] Metadata scan stderr for nodes:
+[07:53]   [ComfyUI] [comfy-env]   [meta-scan] importing nodes from C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part
+[07:53]   [ComfyUI] [comfy-env]   Traceback (most recent call last):
+[07:53]   [ComfyUI] [comfy-env]     File "C:\Users\ContainerUser\AppData\Local\Temp\comfy_meta_w3ke2_h3.py", line 65, in <module>
+[07:53]   [ComfyUI] [comfy-env]       module = importlib.import_module(package_name)
+[07:53]   [ComfyUI] [comfy-env]     File "C:\Users\ContainerUser\AppData\Local\Programs\comfy-env\envs\hunyuan3d-part-nodes\.pixi\envs\default\Lib\importlib\__init__.py", line 88, in import_module
+[07:53]   [ComfyUI] [comfy-env]       return _bootstrap._gcd_import(name[level:], package, level)
+[07:53]   [ComfyUI] [comfy-env]              ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[07:53]   [ComfyUI] [comfy-env]     File "<frozen importlib._bootstrap>", line 1395, in _gcd_import
+[07:53]   [ComfyUI] [comfy-env]     File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+[07:53]   [ComfyUI] [comfy-env]     File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+[07:53]   [ComfyUI] [comfy-env]     File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+[07:53]   [ComfyUI] [comfy-env]     File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+[07:53]   [ComfyUI] [comfy-env]     File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+[07:53]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\__init__.py", line 3, in <module>
+[07:53]   [ComfyUI] [comfy-env]       from .loaders import NODE_CLASS_MAPPINGS as _loaders, NODE_DISPLAY_NAME_MAPPINGS as _loaders_d
+[07:53]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part\nodes\loaders.py", line 11, in <module>
+[07:53]   [ComfyUI] [comfy-env]       from comfy_api.latest import io
+[07:53]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\comfy_api\latest\__init__.py", line 5, in <module>
+[07:53]   [ComfyUI] [comfy-env]       from comfy_api.internal import ComfyAPIBase
+[07:53]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\comfy_api\internal\__init__.py", line 2, in <module>
+[07:53]   [ComfyUI] [comfy-env]       from .api_registry import (
+[07:53]   [ComfyUI] [comfy-env]       ...<4 lines>...
+[07:53]   [ComfyUI] [comfy-env]       )
+[07:53]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\comfy_api\internal\api_registry.py", line 3, in <module>
+[07:53]   [ComfyUI] [comfy-env]       from packaging import version as packaging_version
+[07:53]   [ComfyUI] [comfy-env]   ModuleNotFoundError: No module named 'packaging'
+[07:53]   [ComfyUI] [comfy-env] Metadata scan failed for nodes (exit 1, 0.6s):
+[07:53]   [ComfyUI] [comfy-env]       from comfy_api.latest import io
+[07:53]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\comfy_api\latest\__init__.py", line 5, in <module>
+[07:53]   [ComfyUI] [comfy-env]       from comfy_api.internal import ComfyAPIBase
+[07:53]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\comfy_api\internal\__init__.py", line 2, in <module>
+[07:53]   [ComfyUI] [comfy-env]       from .api_registry import (
+[07:53]   [ComfyUI] [comfy-env]       ...<4 lines>...
+[07:53]   [ComfyUI] [comfy-env]       )
+[07:53]   [ComfyUI] [comfy-env]     File "C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\comfy_api\internal\api_registry.py", line 3, in <module>
+[07:53]   [ComfyUI] [comfy-env]       from packaging import version as packaging_version
+[07:53]   [ComfyUI] [comfy-env]   ModuleNotFoundError: No module named 'packaging'
+[07:53]   [ComfyUI] [comfy-env] Scanned nodes root: 0 nodes (0.7s)
+[07:53]   [ComfyUI] [comfy-env] Imported nodes root: 0 nodes (isolation)
+[07:53]   [ComfyUI] [comfy-env] Registered 0 total nodes
+[07:53]   [ComfyUI] 
+[07:53]   [ComfyUI] Import times for custom nodes:
+[07:53]   [ComfyUI]    0.0 seconds: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\websocket_image_save.py
+[07:53]   [ComfyUI]    0.0 seconds: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-validate-endpoint
+[07:53]   [ComfyUI]    0.7 seconds: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-Hunyuan3D-Part
+[07:53]   [ComfyUI]   49.6 seconds: C:\workspaces\Hunyuan3D-Part-1530\portable-comfyui\ComfyUI_windows_portable\ComfyUI\custom_nodes\ComfyUI-GeometryPack
+[07:53]   [ComfyUI] 
+[07:53]   [ComfyUI] Context impl SQLiteImpl.
+[07:53]   [ComfyUI] Will assume non-transactional DDL.
+[07:53]   [ComfyUI] Context impl SQLiteImpl.
+[07:53]   [ComfyUI] Will assume non-transactional DDL.
+[07:53]   [ComfyUI] Running upgrade  -> 0001_assets, Initial assets schema
+[07:53]   [ComfyUI] Revision ID: 0001_assets
+[07:53]   [ComfyUI] Revises: None
+[07:53]   [ComfyUI] Create Date: 2025-12-10 00:00:00
+[07:53]   [ComfyUI] Running upgrade 0001_assets -> 0002_merge_to_asset_references, Merge AssetInfo and AssetCacheState into unified asset_references table.
+[07:53]   [ComfyUI] Running upgrade 0002_merge_to_asset_references -> 0003_add_metadata_job_id, Add system_metadata and job_id columns to asset_references.
+[07:53]   [ComfyUI] Change preview_id FK from assets.id to asset_references.id.
+[07:53]   [ComfyUI] Database upgraded from None to 0003_add_metadata_job_id
+[07:53]   [ComfyUI] Starting server
+[07:53]   [ComfyUI] 
+[07:53]   [ComfyUI] To see the GUI go to: http://127.0.0.1:41885
+[07:54] Server responding, waiting for nodes to load...
+[08:14] Server is ready!
+[08:14] Checking for import errors in server logs...
+[08:14] No import errors detected
+[08:14] Found 848 registered nodes
+[08:14] [REGISTRATION] PASSED
+[08:14] 
+[08:14] [4/5] INSTANTIATION
+[08:14] ----------------------------------------
+[08:14] 
+[DEBUG] server=<comfy_test.comfyui.server.ComfyUIServer object at 0x000001B679DC17F0>, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x000001B679DC2510>
+[08:14] Testing node constructors...
+[08:15] All 0 node(s) instantiated successfully!
+[08:15] [INSTANTIATION] PASSED
+[08:15] 
+[08:15] [5/5] EXECUTION
+[08:15] ----------------------------------------
+[08:15] 
+[DEBUG] server=<comfy_test.comfyui.server.ComfyUIServer object at 0x000001B679DC17F0>, api=<comfy_test.comfyui.api.ComfyUIAPI object at 0x000001B679DC2510>
+[08:15] GPU runner - will execute 1 workflow(s)
+[08:15] Running 2 workflow(s) (all with videos)...
+[08:15] Installing screenshot dependencies (playwright, pillow)...
+[08:16]   Packages installed, downloading chromium browser...
+[08:32]   Screenshot dependencies installed successfully
+[08:33] Starting headless browser...
+[08:33]   Downloading Mesa llvmpipe for Windows...
+[08:33]   Mesa download error: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)>
+[08:33]   Mesa unavailable -- falling back to SwiftShader
+[08:36] Capturing execution frames: H3DPART-segment-partgen.json
+[08:44]   Frame 1 saved (frame_000.jpg, t=0.0s)
+[08:44]   Validating workflow...
+[08:44]   Validation failed: graphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [27,31,35,39,42,43,44,47], sample: {"inputs":{"UNKNOWN":"auto"},"_meta":{}}
+[08:44]   [2/2] SKIPPED (not in gpu list) H3DPART-segment.json
+[08:45] Results saved to C:\logs\Hunyuan3D-Part-1530\dev\windows-portable-gpu\results.json
+[08:45] Model report: 8 files, 18.7 MB -> C:\logs\Hunyuan3D-Part-1530\dev\windows-portable-gpu\models.json
+[08:45] Saved: C:\logs\Hunyuan3D-Part-1530\dev\windows-portable-gpu\index.html
+[08:45] 
 windows_portable: FAILED
-[08:31] Error: Workflow execution failed (1 error(s))
-[08:31] Details: H3DPART-segment-partgen.json: Workflow validation failed
+[08:45] Error: Workflow execution failed (1 error(s))
+[08:45] Details: H3DPART-segment-partgen.json: Workflow validation failed
 
 Details:
 graphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [27,31,35,39,42,43,44,47], sample: {"inputs":{"UNKNOWN":"auto"},"_meta":{}}
-[08:31] Stopping ComfyUI server...
+[08:45] Stopping ComfyUI server...
