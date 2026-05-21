@@ -1,35 +1,35 @@
 {
-  "timestamp": "2026-05-19T18:48:47.678270+00:00",
+  "timestamp": "2026-05-21T12:21:03.351180+00:00",
   "platform": "windows_portable",
   "hardware": {
     "os": "Windows-11-10.0.26100-SP0",
     "cpu": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD"
   },
-  "commit_hash": "7be933956effacfd2b84901d7cddc1ac29e6c51b",
-  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/26108954764",
-  "success": true,
+  "commit_hash": "7e40c7fe8cf8c62a28161fe58750776ba87410fa",
+  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/26225142582",
+  "success": false,
   "summary": {
     "total": 2,
-    "passed": 1,
-    "failed": 0
+    "passed": 0,
+    "failed": 1
   },
   "workflows": [
     {
       "name": "H3DPART-segment-partgen",
-      "status": "pass",
-      "duration_seconds": 282.21,
-      "error": null,
+      "status": "fail",
+      "duration_seconds": 7.91,
+      "error": "Workflow validation failed\n\nDetails:\ngraphToPrompt produced nodes without class_type: graphToPrompt: 12 nodes, missing class_type: [27,31,35,39,42,43,44,47], sample: {\"inputs\":{\"UNKNOWN\":\"auto\"},\"_meta\":{}}",
       "hardware": {
         "os": "Windows-11-10.0.26100-SP0",
         "cpu": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD"
       },
       "resources": {
         "ram": {
-          "peak": 14.58,
-          "avg": 6.87
+          "peak": 0.9,
+          "avg": 0.9
         },
         "total_ram_gb": 23.9,
-        "samples": 279
+        "samples": 8
       }
     },
     {
