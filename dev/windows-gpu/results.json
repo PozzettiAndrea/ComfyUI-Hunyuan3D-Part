@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-05-20T23:06:50.568431+00:00",
+  "timestamp": "2026-05-21T08:28:46.233666+00:00",
   "platform": "windows",
   "hardware": {
     "os": "Windows-11-10.0.26100-SP0",
     "cpu": "AMD64 Family 23 Model 113 Stepping 0, AuthenticAMD"
   },
   "commit_hash": "9a1ae7980aa519271821930e48e7db4993494635",
-  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/26194684114",
+  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/26214158619",
   "success": true,
   "summary": {
     "total": 2,
@@ -17,7 +17,7 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 274.62,
+      "duration_seconds": 283.93,
       "error": null,
       "hardware": {
         "os": "Windows-11-10.0.26100-SP0",
@@ -25,11 +25,11 @@
       },
       "resources": {
         "ram": {
-          "peak": 14.05,
-          "avg": 6.63
+          "peak": 17.95,
+          "avg": 7.56
         },
         "total_ram_gb": 23.9,
-        "samples": 271
+        "samples": 280
       }
     },
     {
