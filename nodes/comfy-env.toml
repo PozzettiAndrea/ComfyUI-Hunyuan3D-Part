@@ -28,6 +28,8 @@ transformers = "*"
 
 [target.win-64.pypi-dependencies]
 pymeshlab = "==2023.12.post3"
+c-compiler = "*"
+cxx-compiler = "*"
 
 [target.linux-64.dependencies]
 pymeshlab = "==2023.12.post3"
