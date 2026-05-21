@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-05-21T13:07:59.220919+00:00",
+  "timestamp": "2026-05-21T13:38:29.943318+00:00",
   "platform": "linux",
   "hardware": {
     "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
     "cpu": "Intel(R) Xeon(R) CPU E5-2697 v4 @ 2.30GHz",
     "gpu": "NVIDIA GeForce RTX 3090"
   },
-  "commit_hash": "2aca0ff6ca8809e3929347c1c6d81fce87211d5b",
-  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/26227398934",
+  "commit_hash": "2ee4c98483416a9113ec3dc354fe5c09099de49b",
+  "run_url": "https://github.com/PozzettiAndrea/comfy-gpu-ci/actions/runs/26229077008",
   "success": true,
   "summary": {
     "total": 2,
@@ -18,7 +18,7 @@
     {
       "name": "H3DPART-segment-partgen",
       "status": "pass",
-      "duration_seconds": 255.01,
+      "duration_seconds": 208.92,
       "error": null,
       "hardware": {
         "os": "Linux-6.8.0-107-generic-x86_64-with-glibc2.35",
@@ -27,13 +27,13 @@
       },
       "resources": {
         "ram": {
-          "peak": 16.76,
-          "avg": 8.75
+          "peak": 15.9,
+          "avg": 6.4
         },
         "total_ram_gb": 31.2,
-        "samples": 248,
+        "samples": 203,
         "vram": {
-          "peak": 7.71,
+          "peak": 7.74,
           "avg": 1.63
         }
       }
