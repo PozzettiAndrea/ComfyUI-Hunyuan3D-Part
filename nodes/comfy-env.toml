@@ -5,6 +5,7 @@ packages = ["flash-attn", "sageattention", "torch-scatter", "torch-cluster", "sp
 av = "*"
 
 [pypi-dependencies]
+comfy-kitchen = "*"
 trimesh = "*"
 diffusers = "*"
 timm = "*"
