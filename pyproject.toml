@@ -10,4 +10,5 @@ Repository = "https://github.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part"
 [tool.comfy]
 PublisherId = "pznodes"
 DisplayName = "Hunyuan3D-Part"
+web = "javascript"
 Icon = "https://raw.githubusercontent.com/PozzettiAndrea/ComfyUI-Hunyuan3D-Part/main/assets/icon.png"

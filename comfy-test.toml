@@ -1,17 +1,10 @@
 [test]
-levels = ["syntax", "install", "registration", "instantiation", "execution"]
+levels = ["syntax", "javascript", "install", "registration", "instantiation", "execution"]
 publish = true
 
 [test.workflows]
 cpu = []
-gpu = ['H3DPART-segment-partgen']
+cuda = ['H3DPART-segment-partgen']
 
 [test.platforms]
-linux = false
-macos = false
-windows = false
-windows_portable = false
-linux_gpu = true
-windows_gpu = true
-windows_portable_gpu = true
-windows_desktop_gpu = true
+platforms = ["linux_cuda", "windows_cuda", "windows_portable_cuda", "windows_desktop_cuda"]

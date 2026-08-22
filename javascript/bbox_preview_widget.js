@@ -8,7 +8,7 @@ import { app } from "../../../scripts/app.js";
 console.log("[Hunyuan3D] Loading bounding box preview extension...");
 
 app.registerExtension({
-    name: "hunyuan3d.bboxpreview",
+    name: "hunyuan3dpart.bboxpreview",
 
     async beforeRegisterNodeDef(nodeType, nodeData, app) {
         if (nodeData.name === "Hunyuan3DPreviewBoundingBoxes") {
@@ -78,6 +78,9 @@ app.registerExtension({
 
                 // Listen for messages from iframe
                 window.addEventListener('message', async (event) => {
+                    // Without this check, every open viewer instance's listener
+                    // fires for every iframe's messages, not just its own.
+                    if (event.source !== iframe.contentWindow) return;
                     // Handle screenshot messages
                     if (event.data.type === 'SCREENSHOT' && event.data.image) {
                         console.log('[Hunyuan3D BBox] Received screenshot from iframe');

@@ -8,7 +8,7 @@ import { app } from "../../../scripts/app.js";
 console.log("[Hunyuan3D] Loading exploded viewer extension...");
 
 app.registerExtension({
-    name: "hunyuan3d.explodedviewer",
+    name: "hunyuan3dpart.explodedviewer",
 
     async beforeRegisterNodeDef(nodeType, nodeData, app) {
         if (nodeData.name === "ExplodedMeshViewer") {
